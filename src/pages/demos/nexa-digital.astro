@@ -1,0 +1,261 @@
+---
+import '../../styles/demo-digital.css';
+
+const contactHref = `https://wa.me/51980904787?text=${encodeURIComponent('Hola Milton, vi la demo de Nexa Digital y quisiera conversar sobre mi sitio web.')}`;
+---
+
+<!doctype html>
+<html lang="es" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a1021" />
+    <meta name="robots" content="noindex,follow" />
+    <meta name="description" content="Nexa Digital: demostración conceptual de un sitio web para un estudio de estrategia, diseño y desarrollo." />
+    <title>Nexa Digital — Demo conceptual | Milton Blaise</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <a class="nd-skip" href="#contenido">Ir al contenido</a>
+
+    <aside class="nd-rail" aria-label="Navegación principal de Nexa Digital">
+      <a class="nd-rail-brand" href="#inicio" aria-label="Nexa Digital, inicio">
+        <span class="nd-logo-symbol" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>nexa<span class="nd-logo-period">.</span></span>
+      </a>
+      <span class="nd-rail-identity">ESTUDIO DIGITAL<br />/ 2026</span>
+      <nav class="nd-rail-nav" aria-label="Secciones">
+        <a href="#inicio"><span>00</span>INICIO</a>
+        <a href="#servicios"><span>01</span>SERVICIOS</a>
+        <a href="#enfoque"><span>02</span>ENFOQUE</a>
+        <a href="#proyectos"><span>03</span>PROYECTOS</a>
+        <a href="#contacto"><span>04</span>CONTACTO</a>
+      </nav>
+      <div class="nd-rail-bottom">
+        <button class="nd-theme-toggle" type="button" aria-label="Activar modo claro" aria-pressed="false" title="Cambiar tema">
+          <span class="nd-theme-icon" aria-hidden="true">☀</span><span class="nd-theme-label">Modo claro</span>
+        </button>
+        <a class="nd-rail-contact" href={contactHref} target="_blank" rel="noopener noreferrer"><span>ESCRIBIR POR</span><strong>WHATSAPP ↗</strong></a>
+        <a class="nd-rail-back" href="/proyectos/nexa-digital/">← VOLVER AL CASO</a>
+        <small>DEMO CONCEPTUAL<br />POR MILTON BLAISE</small>
+      </div>
+    </aside>
+
+    <header class="nd-mobile-header">
+      <a class="nd-mobile-brand" href="#inicio" aria-label="Nexa Digital, inicio">nexa<span>.</span></a>
+      <div class="nd-mobile-actions">
+        <button class="nd-theme-toggle" type="button" aria-label="Activar modo claro" aria-pressed="false" title="Cambiar tema">
+          <span class="nd-theme-icon" aria-hidden="true">☀</span><span class="nd-theme-label">Modo claro</span>
+        </button>
+        <a class="nd-mobile-contact" href={contactHref} target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
+      </div>
+      <details class="nd-mobile-menu">
+        <summary>MENÚ <span aria-hidden="true">＋</span></summary>
+        <nav aria-label="Navegación móvil de Nexa Digital">
+          <a href="#inicio">Inicio</a>
+          <a href="#servicios">Servicios</a>
+          <a href="#enfoque">Enfoque</a>
+          <a href="#proyectos">Proyectos</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+      </details>
+    </header>
+    <div class="nd-mobile-context"><span>DEMO CONCEPTUAL · MILTON BLAISE</span><a href="/proyectos/nexa-digital/">← Volver al caso</a></div>
+
+    <main id="contenido">
+      <section class="nd-hero" id="inicio" aria-labelledby="nd-hero-title">
+        <div class="nd-hero-grid" aria-hidden="true"></div>
+        <div class="nd-hero-top" data-hero-animate>
+          <span>ESTRATEGIA / DISEÑO / TECNOLOGÍA</span>
+          <span>ESTUDIO DIGITAL · 2026</span>
+        </div>
+
+        <div class="nd-hero-main">
+          <div class="nd-hero-copy">
+            <p class="nd-eyebrow" data-hero-animate><span class="nd-pulse" aria-hidden="true"></span> Ideas hechas para avanzar</p>
+            <h1 id="nd-hero-title">
+              <span class="nd-title-line"><span data-hero-line>Diseño que</span></span>
+              <span class="nd-title-line"><span data-hero-line><em>mueve.</em></span></span>
+              <span class="nd-title-line"><span data-hero-line>Código que</span></span>
+              <span class="nd-title-line"><span data-hero-line>responde<span class="nd-title-period">.</span></span></span>
+            </h1>
+            <div class="nd-hero-bottom" data-hero-animate>
+              <p>Convertimos buenas ideas en experiencias web que se entienden, se disfrutan y funcionan.</p>
+              <a class="nd-round-arrow" href="#servicios" aria-label="Conocer servicios"><span aria-hidden="true">↘</span></a>
+            </div>
+          </div>
+
+          <div class="nd-hero-art" aria-hidden="true">
+            <div class="nd-orbit nd-orbit-outer"></div>
+            <div class="nd-orbit nd-orbit-mid"></div>
+            <div class="nd-orb"><span class="nd-orb-shine"></span><span class="nd-orb-core"></span></div>
+            <span class="nd-art-cross nd-art-cross-one">+</span>
+            <span class="nd-art-cross nd-art-cross-two">+</span>
+            <span class="nd-art-label">NEXA / EN MOVIMIENTO</span>
+            <span class="nd-art-coordinate">∞ / 2026<br />ESTUDIO DIGITAL</span>
+          </div>
+        </div>
+
+        <div class="nd-hero-footer" data-hero-animate>
+          <span>CREAMOS EL SIGUIENTE PASO</span>
+          <div><span>01</span><span class="nd-rule"></span><span>04</span></div>
+          <a href="#proyectos">Explorar proyectos <span aria-hidden="true">↓</span></a>
+        </div>
+      </section>
+
+      <section class="nd-intro nd-pad" id="servicios" aria-labelledby="nd-services-title">
+        <div class="nd-section-label" data-reveal><span>01 / LO QUE HACEMOS</span><span>DE LA IDEA A LA PANTALLA</span></div>
+        <div class="nd-intro-heading" data-reveal>
+          <h2 id="nd-services-title">Una idea clara<br /><em>merece una gran web.</em></h2>
+          <p>Diseñamos sistemas digitales con intención. Cada decisión tiene una razón: ayudar a una marca a conectar mejor con las personas.</p>
+        </div>
+
+        <div class="nd-services">
+          <article class="nd-service" data-reveal>
+            <div class="nd-service-top"><span>01 / DESCUBRIR</span><span class="nd-service-symbol" aria-hidden="true">✳</span></div>
+            <h3>Estrategia</h3>
+            <p>Ordenamos las ideas, entendemos a tu audiencia y encontramos una dirección que le dé sentido al proyecto.</p>
+            <span class="nd-service-tags">INVESTIGACIÓN · CONCEPTO · CONTENIDO</span>
+          </article>
+          <article class="nd-service" data-reveal>
+            <div class="nd-service-top"><span>02 / DAR FORMA</span><span class="nd-service-symbol" aria-hidden="true">◌</span></div>
+            <h3>Diseño web</h3>
+            <p>Construimos interfaces reconocibles, fáciles de usar y preparadas para que el mensaje principal destaque.</p>
+            <span class="nd-service-tags">DIRECCIÓN VISUAL · UI/UX · SISTEMAS</span>
+          </article>
+          <article class="nd-service" data-reveal>
+            <div class="nd-service-top"><span>03 / HACER REAL</span><span class="nd-service-symbol" aria-hidden="true">↗</span></div>
+            <h3>Desarrollo</h3>
+            <p>Llevamos el diseño al navegador con velocidad, movimiento útil y detalles que funcionan en cualquier pantalla.</p>
+            <span class="nd-service-tags">FRONT-END · ANIMACIÓN · RENDIMIENTO</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="nd-manifesto nd-pad" id="enfoque" aria-labelledby="nd-manifesto-title">
+        <div class="nd-section-label" data-reveal><span>02 / NUESTRO ENFOQUE</span><span>MENOS RUIDO, MÁS DIRECCIÓN</span></div>
+        <div class="nd-manifesto-layout">
+          <h2 id="nd-manifesto-title" data-reveal>Lo digital tiene que <em>sentirse tan bien</em> como funciona.</h2>
+          <div class="nd-manifesto-copy" data-reveal>
+            <span class="nd-manifesto-glyph" aria-hidden="true">↗</span>
+            <p>Nos gusta lo que sorprende, pero más lo que resuelve. Por eso unimos claridad, carácter y tecnología en experiencias que hacen fácil dar el siguiente paso.</p>
+          </div>
+        </div>
+        <div class="nd-manifesto-bottom"><span>ESTRATEGIA CON INTENCIÓN</span><span>EXPERIENCIAS CON CARÁCTER</span><span>TECNOLOGÍA CON PROPÓSITO</span></div>
+      </section>
+
+      <section class="nd-work nd-pad" id="proyectos" aria-labelledby="nd-work-title">
+        <div class="nd-section-label" data-reveal><span>03 / EXPLORACIONES</span><span>UN VISTAZO A LO POSIBLE</span></div>
+        <div class="nd-work-heading" data-reveal>
+          <h2 id="nd-work-title">Distintas ideas.<br /><em>Una misma energía.</em></h2>
+          <p>Estas piezas son ejercicios conceptuales creados para mostrar cómo un lenguaje digital puede adaptarse a cada marca.</p>
+        </div>
+        <div class="nd-work-grid">
+          <article class="nd-work-card nd-work-card-orbit" data-reveal>
+            <div class="nd-work-visual nd-orbit-visual" aria-label="Vista conceptual de una plataforma financiera Orbit">
+              <div class="nd-preview-nav"><strong>orbit<span>○</span></strong><span>Tu dinero, en movimiento ↗</span></div>
+              <span class="nd-preview-kicker">FINANZAS CON OTRA PERSPECTIVA</span>
+              <strong class="nd-preview-title">Make room<br />for more.</strong>
+              <div class="nd-orbit-disc"></div>
+              <span class="nd-preview-pill">Descubre una nueva forma ↗</span>
+            </div>
+            <div class="nd-work-meta"><div><span>01 / PLATAFORMA WEB · CONCEPTO</span><h3>Orbit Finance</h3></div><span class="nd-concept-tag">VISTA CONCEPTUAL</span></div>
+          </article>
+
+          <article class="nd-work-card nd-work-card-forma" data-reveal>
+            <div class="nd-work-visual nd-forma-visual" aria-label="Vista conceptual de una tienda de objetos Forma">
+              <div class="nd-preview-nav"><strong>forma.</strong><span>Objetos para vivir mejor ☰</span></div>
+              <strong class="nd-forma-title">menos, pero<br /><i>mejor.</i></strong>
+              <div class="nd-forma-object"><span></span></div>
+              <span class="nd-forma-caption">DISEÑO QUE HABITA CONTIGO — VOL. 01</span>
+            </div>
+            <div class="nd-work-meta"><div><span>02 / COMERCIO DIGITAL · CONCEPTO</span><h3>Forma Objects</h3></div><span class="nd-concept-tag">VISTA CONCEPTUAL</span></div>
+          </article>
+
+          <article class="nd-work-card nd-work-card-atlas" data-reveal>
+            <div class="nd-work-visual nd-atlas-visual" aria-label="Vista conceptual de una web de viajes Atlas">
+              <div class="nd-preview-nav"><strong>ATLAS<span>⁎</span></strong><span>Explora / Inspírate / Viaja</span></div>
+              <div class="nd-atlas-sun"></div>
+              <strong class="nd-atlas-title">Ve más<br /><i>allá.</i></strong>
+              <span class="nd-atlas-caption">EXPERIENCIAS QUE NO CABEN EN UN MAPA ↗</span>
+            </div>
+            <div class="nd-work-meta"><div><span>03 / EXPERIENCIA WEB · CONCEPTO</span><h3>Atlas Travel</h3></div><span class="nd-concept-tag">VISTA CONCEPTUAL</span></div>
+          </article>
+        </div>
+        <p class="nd-work-note">Todos los ejemplos de esta sección son piezas ficticias de diseño, creadas exclusivamente para esta demostración.</p>
+      </section>
+
+      <section class="nd-cta nd-pad" id="contacto" aria-labelledby="nd-cta-title">
+        <div class="nd-section-label" data-reveal><span>04 / SIGUIENTE PASO</span><span>HAGAMOS ALGO QUE IMPORTE</span></div>
+        <div class="nd-cta-content" data-reveal>
+          <h2 id="nd-cta-title">¿Listo para<br /><em>mover tu idea?</em></h2>
+          <a class="nd-cta-button" href={contactHref} target="_blank" rel="noopener noreferrer"><span>Escribir a Milton por WhatsApp</span><span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="nd-cta-note">Nexa Digital es un proyecto conceptual. Este botón abre el WhatsApp de Milton Blaise, creador de la demo.</p>
+      </section>
+    </main>
+
+    <footer class="nd-footer nd-pad">
+      <a class="nd-footer-logo" href="#inicio">nexa<span>.</span></a>
+      <span>EXPERIENCIA CONCEPTUAL / 2026</span>
+      <a href="/proyectos/nexa-digital/">Ver el caso en el portafolio ↗</a>
+      <a href="#inicio">Volver arriba ↑</a>
+    </footer>
+
+    <script>
+      import gsap from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      const themeButtons = document.querySelectorAll<HTMLButtonElement>('.nd-theme-toggle');
+
+      const setTheme = (theme: 'dark' | 'light') => {
+        document.documentElement.dataset.theme = theme;
+        themeButtons.forEach((button) => {
+          button.setAttribute('aria-pressed', String(theme === 'light'));
+          button.setAttribute('aria-label', theme === 'light' ? 'Activar modo oscuro' : 'Activar modo claro');
+          const icon = button.querySelector<HTMLElement>('.nd-theme-icon');
+          const label = button.querySelector<HTMLElement>('.nd-theme-label');
+          if (icon) icon.textContent = theme === 'light' ? '◐' : '☀';
+          if (label) label.textContent = theme === 'light' ? 'Modo oscuro' : 'Modo claro';
+        });
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#f3f5f7' : '#0a1021');
+      };
+
+      try {
+        setTheme(localStorage.getItem('nexa-demo-theme') === 'light' ? 'light' : 'dark');
+      } catch {
+        setTheme('dark');
+      }
+
+      themeButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+          setTheme(nextTheme);
+          try { localStorage.setItem('nexa-demo-theme', nextTheme); } catch { /* Storage may be unavailable. */ }
+        });
+      });
+
+      const mobileMenu = document.querySelector<HTMLDetailsElement>('.nd-mobile-menu');
+      mobileMenu?.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => { mobileMenu.open = false; });
+      });
+
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.from('[data-hero-line]', { yPercent: 115, duration: 1.15, stagger: 0.12, ease: 'power3.out', delay: 0.12 });
+        gsap.from('[data-hero-animate]', { y: 22, autoAlpha: 0, duration: 0.85, stagger: 0.1, ease: 'power2.out', delay: 0.2 });
+        gsap.from('.nd-hero-art', { autoAlpha: 0, duration: 1.3, ease: 'power3.out', delay: 0.3 });
+        gsap.from('.nd-orb', { scale: 0.77, duration: 1.6, ease: 'power3.out', delay: 0.35 });
+        gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((element) => {
+          gsap.from(element, {
+            y: 54,
+            autoAlpha: 0,
+            duration: 0.95,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: element, start: 'top 88%', once: true },
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

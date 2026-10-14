@@ -1,0 +1,200 @@
+---
+import '../../styles/demo-cafe.css';
+
+const designerWhatsapp = `https://wa.me/51980904787?text=${encodeURIComponent('Hola Milton, vi tu proyecto Senda Café y me gustaría conversar sobre mi web.')}`;
+
+const drinks = [
+  {
+    number: '01',
+    name: 'Espresso de la casa',
+    detail: 'Corto, intenso y con notas de cacao. Un comienzo que se queda contigo.',
+    price: 'S/ 9',
+    className: 'espresso',
+    tag: 'EL CLÁSICO',
+  },
+  {
+    number: '02',
+    name: 'Latte de avena',
+    detail: 'Cremoso y delicado. El equilibrio justo para bajar el ritmo.',
+    price: 'S/ 14',
+    className: 'latte',
+    tag: 'EL FAVORITO',
+  },
+  {
+    number: '03',
+    name: 'Cold brew',
+    detail: 'Extracción lenta, frescura natural y un final suave.',
+    price: 'S/ 13',
+    className: 'coldbrew',
+    tag: 'PARA LLEVAR',
+  },
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f0e5" />
+    <meta name="description" content="Senda Café: una experiencia web conceptual para un café de especialidad, creada por Milton Blaise." />
+    <meta name="robots" content="noindex" />
+    <meta property="og:title" content="Senda Café — Demo conceptual" />
+    <meta property="og:description" content="Una pausa con sabor a origen. Diseño y desarrollo web por Milton Blaise." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+    <title>Senda Café — Un ritual para cada día</title>
+  </head>
+  <body>
+    <div class="cafe-demo" id="inicio">
+      <header class="cafe-header">
+        <div class="masthead-top">
+          <a class="case-return" href="/proyectos/senda-cafe/" aria-label="Volver al detalle del proyecto Senda Café"><span aria-hidden="true">↖</span> Volver al caso<span class="case-return-sub">PORTAFOLIO DE MILTON BLAISE</span></a>
+          <a class="cafe-brand" href="#inicio" aria-label="Senda Café, volver al inicio">
+            <svg class="cafe-brand-mark" viewBox="0 0 42 42" fill="none" aria-hidden="true"><path d="M5 34c9.4-13.3 13.4-20 22.6-26M17 34c8.4-10.5 13.7-16.5 20-22" stroke="currentColor" stroke-width="3.3" stroke-linecap="round"/><circle cx="33" cy="32" r="4" fill="currentColor"/></svg>
+            <span>senda<span class="brand-dot">.</span></span>
+            <small>CAFÉ DE ORIGEN</small>
+          </a>
+          <div class="masthead-meta"><span>PROYECTO CONCEPTUAL</span><span>HECHO CON CALMA · 2026</span></div>
+        </div>
+        <nav class="cafe-nav" aria-label="Navegación de Senda Café">
+          <a href="#inicio"><span>01</span> Portada</a>
+          <a href="#ritual"><span>02</span> Nuestro ritual</a>
+          <a href="#carta"><span>03</span> La carta</a>
+          <a href="#historia"><span>04</span> Historia</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="cafe-hero" id="cafe" aria-labelledby="cafe-title">
+          <div class="hero-art" aria-label="Ilustración de una taza de café Senda">
+            <span class="art-corner art-corner-top">ORIGEN / 2026</span>
+            <span class="art-corner art-corner-bottom">HECHO PARA QUEDARTE</span>
+            <span class="art-orbit orbit-one"></span><span class="art-orbit orbit-two"></span>
+            <span class="art-sun"></span>
+            <div class="hero-cup-scene" aria-hidden="true">
+              <span class="steam steam-one"></span><span class="steam steam-two"></span><span class="steam steam-three"></span>
+              <span class="hero-saucer"></span>
+              <span class="hero-cup-handle"></span>
+              <span class="hero-cup-body"><span class="hero-cup-rim"><span class="hero-coffee"><span class="latte-art"></span></span></span><span class="cup-logo">s<span>.</span></span></span>
+            </div>
+            <span class="art-stamp">TÓMATE<br />TU TIEMPO <span>✳</span></span>
+          </div>
+          <div class="hero-content">
+            <div class="hero-topline"><span>UNA NUEVA FORMA DE HACER UNA PAUSA</span><span>CAFÉ DE ESPECIALIDAD / PERÚ</span></div>
+            <div class="hero-copy">
+              <p class="eyebrow hero-eyebrow"><span class="eyebrow-line"></span> BIENVENIDO A SENDA</p>
+              <h1 id="cafe-title">
+                <span class="hero-title-line">El café</span>
+                <span class="hero-title-line">se toma</span>
+                <span class="hero-title-line">con <i>calma.</i></span>
+              </h1>
+            </div>
+            <div class="hero-bottom">
+              <p class="hero-description">Creemos que una buena taza puede cambiar el ritmo del día. Café honesto, momentos reales y un espacio para quedarte un poco más.</p>
+              <div class="hero-actions">
+                <a class="cafe-button cafe-button-dark" href="#carta">Ver la carta <span aria-hidden="true">↗</span></a>
+                <a class="underlined-link" href="#historia">Conoce Senda <span aria-hidden="true">↓</span></a>
+              </div>
+              <div class="hero-location"><span class="location-symbol" aria-hidden="true">✳</span> TÓMATE TU TIEMPO</div>
+            </div>
+          </div>
+        </section>
+
+        <div class="cafe-values-strip" aria-label="Lo que define el ritual Senda">
+          <p><span>01 / ORIGEN</span> Cada grano tiene un camino.</p>
+          <p><span>02 / CUIDADO</span> Cada taza tiene intención.</p>
+          <p><span>03 / PAUSA</span> Un momento para quedarte.</p>
+        </div>
+
+        <section class="cafe-intro section-inset" id="ritual" aria-labelledby="ritual-title">
+          <div class="intro-topline" data-cafe-reveal><p class="eyebrow">(01 / LA ESENCIA)</p><span>UN RITUAL HECHO PARA EL PRESENTE</span></div>
+          <div class="intro-grid">
+            <h2 class="intro-statement" id="ritual-title" data-cafe-reveal>El café sabe mejor cuando <em>el momento</em> también importa<span>.</span></h2>
+            <div class="intro-aside" data-cafe-reveal>
+              <span class="intro-emblem" aria-hidden="true">s<span>.</span></span>
+              <p>En Senda, una buena taza es una invitación a bajar un poco el ritmo. Elegimos cada grano por su carácter y cuidamos la preparación para que disfrutes también el camino.</p>
+              <a href="#carta">Descubre nuestra carta <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <div class="intro-principles" aria-label="Tres principios de Senda">
+            <article data-cafe-reveal><span>01 / ORIGEN</span><h3>Conocer el camino</h3><p>Una taza especial empieza mucho antes de llegar a tus manos.</p></article>
+            <article data-cafe-reveal><span>02 / PREPARACIÓN</span><h3>Cuidar cada detalle</h3><p>El tiempo y la atención hacen espacio para encontrar nuevos matices.</p></article>
+            <article data-cafe-reveal><span>03 / ENCUENTRO</span><h3>Quedarse un momento</h3><p>La pausa se disfruta más cuando también es un lugar para compartir.</p></article>
+          </div>
+        </section>
+
+        <section class="menu-section section-inset" id="carta" aria-labelledby="menu-title">
+          <div class="section-heading" data-cafe-reveal>
+            <div><p class="eyebrow">(02 / LA CARTA)</p><h2 id="menu-title">Hechos para<br /><em>tu momento.</em></h2></div>
+            <p>Sabores que cuentan de dónde vienen. Encuentra la taza que va contigo hoy.</p>
+          </div>
+          <div class="drinks-grid">
+            {drinks.map((drink) => (
+              <article class={`drink-card drink-${drink.className}`} data-cafe-card>
+                <div class="drink-art">
+                  <span class="drink-tag">{drink.tag}</span>
+                  <span class="drink-art-circle"></span>
+                  <div class="drink-object" aria-hidden="true">
+                    <span class="drink-shadow"></span>
+                    <span class="drink-handle"></span>
+                    <span class="drink-vessel"><span class="drink-surface"></span><span class="drink-brand">s.</span></span>
+                  </div>
+                  <span class="drink-number">{drink.number} / 03</span>
+                </div>
+                <div class="drink-info"><div><h3>{drink.name}</h3><p>{drink.detail}</p></div><strong>{drink.price}</strong></div>
+              </article>
+            ))}
+          </div>
+          <p class="menu-note">Carta y precios ilustrativos para este proyecto conceptual.</p>
+        </section>
+
+        <section class="story-section" id="historia" aria-labelledby="story-title">
+          <div class="story-visual" aria-hidden="true"><span class="story-ring ring-outer"></span><span class="story-ring ring-inner"></span><span class="story-bean bean-one"></span><span class="story-bean bean-two"></span><span class="story-bean bean-three"></span><span class="story-visual-label">CADA GRANO<br />TIENE UN CAMINO</span></div>
+          <div class="story-content" data-cafe-reveal>
+            <p class="eyebrow">(03 / NUESTRA HISTORIA)</p>
+            <h2 id="story-title">Todo empieza<br />con una <em>buena</em><br />historia.</h2>
+            <p>En Senda miramos más allá de la taza. Elegimos granos con carácter, respetamos el trabajo de quienes los cultivan y cuidamos cada detalle hasta el último sorbo.</p>
+            <div class="story-steps"><div><span>01 /</span><strong>Origen</strong><small>Sabemos de dónde viene.</small></div><div><span>02 /</span><strong>Intención</strong><small>Lo preparamos con cuidado.</small></div><div><span>03 /</span><strong>Encuentro</strong><small>Lo disfrutamos contigo.</small></div></div>
+          </div>
+        </section>
+
+        <section class="closing-section section-inset" aria-labelledby="closing-title">
+          <span class="eyebrow" data-cafe-reveal>(04 / EL SIGUIENTE SORBO)</span>
+          <h2 id="closing-title" data-cafe-reveal>Haz una pausa.<br /><em>Lo demás puede esperar.</em></h2>
+          <a class="cafe-button cafe-button-light" href="#carta" data-cafe-reveal>Encuentra tu café <span aria-hidden="true">↗</span></a>
+          <span class="closing-asterisk" aria-hidden="true">✳</span>
+        </section>
+      </main>
+
+      <footer class="cafe-footer section-inset">
+        <div><a class="cafe-brand footer-brand" href="#inicio">senda<span class="brand-dot">.</span></a><p>Un ritual para cada día.</p></div>
+        <nav aria-label="Enlaces finales"><a href="#inicio">Inicio ↑</a><a href="#carta">La carta</a><a href="#historia">Nuestra historia</a></nav>
+        <div class="footer-credit"><span>PROYECTO CONCEPTUAL · 2026</span><a href="/proyectos/senda-cafe/">Volver al caso de estudio ↗</a></div>
+      </footer>
+
+      <a class="designer-cta" href={designerWhatsapp} target="_blank" rel="noopener noreferrer" aria-label="Escribir a Milton por WhatsApp para solicitar una web"><span class="designer-cta-icon" aria-hidden="true">↗</span><span>¿Quieres una web así?<strong>Escríbeme por WhatsApp</strong></span></a>
+    </div>
+    <script>
+      import { gsap } from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        gsap.registerPlugin(ScrollTrigger);
+        const intro = gsap.timeline({ defaults: { ease: 'power3.out' } });
+        intro.from('.hero-eyebrow', { y: 18, opacity: 0, duration: .65 })
+          .from('.hero-title-line', { yPercent: 105, opacity: 0, duration: .9, stagger: .12 }, '-=.3')
+          .from('.hero-description', { y: 25, opacity: 0, duration: .7 }, '-=.35')
+          .from('.hero-actions', { y: 20, opacity: 0, duration: .6 }, '-=.45')
+          .from('.hero-cup-scene', { y: 45, scale: .94, opacity: 0, duration: 1.1 }, '-=1.1');
+
+        gsap.utils.toArray<HTMLElement>('[data-cafe-reveal]').forEach((element) => {
+          gsap.from(element, { y: 46, opacity: 0, duration: .85, ease: 'power3.out', scrollTrigger: { trigger: element, start: 'top 87%', once: true } });
+        });
+        gsap.from('[data-cafe-card]', { y: 65, opacity: 0, duration: .85, stagger: .13, ease: 'power3.out', scrollTrigger: { trigger: '.drinks-grid', start: 'top 86%', once: true } });
+      }
+    </script>
+  </body>
+</html>

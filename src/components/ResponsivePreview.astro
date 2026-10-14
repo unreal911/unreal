@@ -1,0 +1,156 @@
+---
+type PreviewMode = 'desktop' | 'tablet' | 'mobile';
+
+interface Props {
+  src: string;
+  title: string;
+  initialMode?: PreviewMode;
+}
+
+const { src, title, initialMode = 'desktop' } = Astro.props;
+---
+
+<div class="responsive-preview" data-responsive-preview data-initial-mode={initialMode}>
+  <div class="responsive-preview-top">
+    <div>
+      <p class="responsive-preview-kicker">VISTAS RESPONSIVE / CONCEPTO</p>
+      <p class="responsive-preview-description">Una misma experiencia, pensada para cada pantalla.</p>
+    </div>
+    <a class="responsive-preview-link" href={src} target="_blank" rel="noopener noreferrer">
+      Explorar la demo <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+
+  <div class="responsive-preview-controls" role="group" aria-label={`Vista de ${title} por dispositivo`}>
+    <button type="button" data-preview-mode="desktop" aria-pressed={initialMode === 'desktop'}>
+      <span class="responsive-preview-control-icon" aria-hidden="true">▣</span>
+      Escritorio <small>1440 px</small>
+    </button>
+    <button type="button" data-preview-mode="tablet" aria-pressed={initialMode === 'tablet'}>
+      <span class="responsive-preview-control-icon" aria-hidden="true">▥</span>
+      Tablet <small>768 px</small>
+    </button>
+    <button type="button" data-preview-mode="mobile" aria-pressed={initialMode === 'mobile'}>
+      <span class="responsive-preview-control-icon" aria-hidden="true">▯</span>
+      Móvil <small>390 px</small>
+    </button>
+  </div>
+
+  <div class="responsive-preview-stage" data-preview-stage>
+    <div class="responsive-preview-device" data-preview-device data-mode={initialMode}>
+      <div class="responsive-preview-chrome" aria-hidden="true">
+        <span class="responsive-preview-dots"><i></i><i></i><i></i></span>
+        <span class="responsive-preview-address">Vista conceptual · {title}</span>
+        <span class="responsive-preview-phone-time">9:41</span>
+        <span class="responsive-preview-chrome-mark">↗</span>
+      </div>
+      <iframe
+        src={src}
+        title={`Vista previa de ${title}`}
+        loading="lazy"
+        tabindex="-1"
+        aria-hidden="true"
+      ></iframe>
+    </div>
+  </div>
+  <p class="responsive-preview-note">Vista de muestra sin interacción. Abre la demo para navegarla.</p>
+</div>
+
+<style>
+  .responsive-preview { color: var(--ink); }
+  .responsive-preview-top { display: flex; align-items: end; justify-content: space-between; gap: 24px; padding-bottom: 25px; }
+  .responsive-preview-kicker { margin: 0 0 11px; font-size: 10px; font-weight: 800; letter-spacing: .12em; }
+  .responsive-preview-description { margin: 0; font: 700 clamp(24px, 3.1vw, 43px)/1.12 Manrope, sans-serif; letter-spacing: -.06em; }
+  .responsive-preview-link { display: inline-flex; align-items: center; gap: 22px; flex: none; padding: 11px 0; border-bottom: 1px solid currentColor; font-size: 13px; font-weight: 800; }
+  .responsive-preview-link:hover { color: #718b0d; }
+  .responsive-preview-controls { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 16px; }
+  .responsive-preview-controls button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 41px; padding: 9px 15px; border: 1px solid var(--line); border-radius: 100px; background: transparent; color: var(--ink); cursor: pointer; font-size: 12px; font-weight: 800; transition: background .2s, border-color .2s, color .2s; }
+  .responsive-preview-controls button:hover { background: var(--surface-alt); }
+  .responsive-preview-controls button[aria-pressed='true'] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .responsive-preview-controls small { font-size: 10px; font-weight: 600; opacity: .7; }
+  .responsive-preview-control-icon { font-size: 17px; font-weight: 400; line-height: 1; }
+  .responsive-preview-stage { position: relative; min-height: 640px; overflow: hidden; padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: radial-gradient(circle at 50% 38%, var(--surface), transparent 54%), var(--surface-alt); }
+  .responsive-preview-device { width: 100%; height: 650px; overflow: hidden; border: 1px solid rgba(23, 26, 23, .18); border-radius: 13px; background: #fff; box-shadow: 0 22px 58px rgba(14, 27, 16, .2); }
+  .responsive-preview-stage.is-enhanced { padding: 0; min-height: 0; }
+  .responsive-preview-stage.is-enhanced .responsive-preview-device { position: absolute; top: 12px; transform-origin: top left; }
+  .responsive-preview-device[data-mode='tablet'] { border-radius: 25px; border: 8px solid #1b211d; }
+  .responsive-preview-device[data-mode='mobile'] { border-radius: 36px; border: 9px solid #1b211d; }
+  .responsive-preview-chrome { height: 42px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 12px; background: #202923; color: #f2f5ed; font-size: 11px; font-weight: 700; }
+  .responsive-preview-dots { display: flex; gap: 5px; }
+  .responsive-preview-dots i { width: 7px; height: 7px; border-radius: 50%; background: #d8e9a8; }
+  .responsive-preview-dots i:nth-child(2) { opacity: .62; }
+  .responsive-preview-dots i:nth-child(3) { opacity: .32; }
+  .responsive-preview-address { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; opacity: .77; }
+  .responsive-preview-phone-time { display: none; }
+  .responsive-preview-device[data-mode='mobile'] .responsive-preview-chrome { height: 39px; background: #1b211d; padding-inline: 17px; }
+  .responsive-preview-device[data-mode='mobile'] .responsive-preview-dots,
+  .responsive-preview-device[data-mode='mobile'] .responsive-preview-address,
+  .responsive-preview-device[data-mode='mobile'] .responsive-preview-chrome-mark { display: none; }
+  .responsive-preview-device[data-mode='mobile'] .responsive-preview-phone-time { display: inline; }
+  .responsive-preview-device iframe { display: block; width: 100%; height: calc(100% - 42px); border: 0; background: #fff; pointer-events: none; }
+  .responsive-preview-device[data-mode='mobile'] iframe { height: calc(100% - 39px); }
+  .responsive-preview-note { margin: 13px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+  @media (max-width: 700px) {
+    .responsive-preview-top { align-items: start; flex-direction: column; gap: 16px; }
+    .responsive-preview-controls { gap: 5px; }
+    .responsive-preview-controls button { flex: 1 1 auto; padding-inline: 10px; }
+    .responsive-preview-controls small { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .responsive-preview-controls button { transition: none; }
+  }
+</style>
+
+<script>
+  type PreviewMode = 'desktop' | 'tablet' | 'mobile';
+  const sizes: Record<PreviewMode, { width: number; height: number }> = {
+    desktop: { width: 1440, height: 760 },
+    tablet: { width: 768, height: 900 },
+    mobile: { width: 390, height: 840 },
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-responsive-preview]').forEach((root) => {
+    const stage = root.querySelector<HTMLElement>('[data-preview-stage]');
+    const device = root.querySelector<HTMLElement>('[data-preview-device]');
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-preview-mode]')];
+    if (!stage || !device) return;
+
+    let mode: PreviewMode = root.dataset.initialMode as PreviewMode || 'desktop';
+    if (mode === 'desktop' && window.matchMedia('(max-width: 620px)').matches) mode = 'mobile';
+
+    const fit = () => {
+      const { width, height } = sizes[mode];
+      const frameStyle = getComputedStyle(device);
+      const borderWidth = (Number.parseFloat(frameStyle.borderLeftWidth) || 0) + (Number.parseFloat(frameStyle.borderRightWidth) || 0);
+      const outerWidth = width + borderWidth;
+      const scale = Math.min(1, Math.max(.1, (stage.clientWidth - 24) / outerWidth));
+      device.style.width = `${outerWidth}px`;
+      device.style.height = `${height}px`;
+      device.style.left = `${Math.max(0, (stage.clientWidth - outerWidth * scale) / 2)}px`;
+      device.style.transform = `scale(${scale})`;
+      stage.style.height = `${Math.ceil(height * scale + 24)}px`;
+    };
+
+    const select = (next: PreviewMode) => {
+      mode = next;
+      device.dataset.mode = next;
+      buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.previewMode === next)));
+      fit();
+    };
+
+    buttons.forEach((button) => button.addEventListener('click', () => select(button.dataset.previewMode as PreviewMode)));
+    stage.classList.add('is-enhanced');
+    select(mode);
+    if ('ResizeObserver' in window) {
+      let observedWidth = stage.clientWidth;
+      new ResizeObserver(() => {
+        const nextWidth = stage.clientWidth;
+        if (nextWidth === observedWidth) return;
+        observedWidth = nextWidth;
+        fit();
+      }).observe(stage);
+    } else {
+      window.addEventListener('resize', fit, { passive: true });
+    }
+  });
+</script>

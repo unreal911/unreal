@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectArtwork from '../../components/ProjectArtwork.astro';
+import CaseProcess from '../../components/CaseProcess.astro';
+import ResponsivePreview from '../../components/ResponsivePreview.astro';
+import { getProjects } from '../../lib/projects';
+import { site, type Project } from '../../data/site';
+import { getProjectProcess, type ProcessProjectSlug } from '../../data/process';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project, index) => ({
+    params: { slug: project.slug },
+    props: { project, nextProject: projects[(index + 1) % projects.length] },
+  }));
+}
+
+interface Props {
+  project: Project;
+  nextProject: Project;
+}
+
+const { project, nextProject } = Astro.props;
+const demoSlugs = new Set(['senda-cafe', 'lume-beauty', 'nexa-digital']);
+const demoUrl = demoSlugs.has(project.slug) ? `/demos/${project.slug}/` : project.externalUrl;
+const contactUrl = `${site.whatsapp}?text=${encodeURIComponent(`Hola Milton, vi el proyecto ${project.title} y quiero conversar sobre una web.`)}`;
+const process = getProjectProcess(project.slug);
+---
+
+<BaseLayout title={`${project.title} — ${project.category} | Milton Blaise`} description={project.summary}>
+  <article class="case-page">
+    <section class="case-hero section-pad">
+      <a class="back-link" href="/#proyectos">← Volver a proyectos</a>
+      <div class="case-heading">
+        <div class="case-kicker"><span>PROYECTO CONCEPTUAL / {project.number}</span><span>{project.year}</span></div>
+        <h1 data-letters>{project.title}<span>.</span></h1>
+        <div class="case-heading-bottom"><p>{project.subtitle}</p><span>{project.category}</span></div>
+        <div class="case-hero-actions" data-reveal>
+          {demoUrl && <a class="primary-cta" href={demoUrl} target="_blank" rel="noopener noreferrer">Explorar sitio completo <span aria-hidden="true">↗</span></a>}
+          <a class="secondary-cta" href={contactUrl} target="_blank" rel="noopener noreferrer">Quiero una web así <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-artwork-wrap" aria-label={`Visual del concepto ${project.title}`}>
+      <ProjectArtwork project={project} priority={true} />
+    </section>
+
+    <section class="case-overview section-pad" aria-labelledby="case-overview-heading">
+      <div class="case-overview-intro"><span class="section-index">(01 / VISIÓN GENERAL)</span><h2 id="case-overview-heading" data-letters>Una idea con<br /><em>identidad propia.</em></h2></div>
+      <div class="case-overview-copy" data-reveal><p>{project.summary}</p><div class="case-facts"><div><span>SERVICIOS</span><p>{project.services.join(' · ')}</p></div><div><span>PALETA</span><p>{project.palette}</p></div><div><span>TIPO</span><p>Exploración conceptual</p></div></div></div>
+    </section>
+
+    {process && <CaseProcess process={process} slug={project.slug as ProcessProjectSlug} title={project.title} />}
+
+    {demoUrl && <section class="case-demo-section section-pad" aria-labelledby="case-demo-heading">
+      <div class="case-demo-head">
+        <div><span class="section-index">({process ? '03' : '02'} / DISEÑO RESPONSIVO)</span><h2 id="case-demo-heading" data-letters>Una idea.<br /><em>Tres pantallas.</em></h2></div>
+        <div class="case-demo-intro"><p>Elige escritorio, tablet o móvil para ver cómo se adapta la misma página. Abre la demo completa para recorrer sus secciones e interacciones.</p></div>
+      </div>
+      <ResponsivePreview src={demoUrl} title={project.title} />
+    </section>}
+
+    <section class="case-story section-pad" aria-label="Resultado del proyecto">
+      {process ? (
+        <div class="case-story-row" data-reveal><span>04 / RESULTADO</span><h2>De la idea<br />a la pantalla.</h2><p>{project.outcome}</p></div>
+      ) : (
+        <>
+          <div class="case-story-row" data-reveal><span>03 / EL RETO</span><h2>El punto<br />de partida.</h2><p>{project.challenge}</p></div>
+          <div class="case-story-row" data-reveal><span>04 / LA DIRECCIÓN</span><h2>Dar forma<br />a la idea.</h2><p>{project.approach}</p></div>
+          <div class="case-story-row" data-reveal><span>05 / EL RESULTADO</span><h2>Una nueva<br />experiencia.</h2><p>{project.outcome}</p></div>
+        </>
+      )}
+    </section>
+
+    <a class="next-project" href={`/proyectos/${nextProject.slug}/`}>
+      <span>SIGUIENTE PROYECTO / {nextProject.number}</span>
+      <strong>{nextProject.title}<span>↗</span></strong>
+    </a>
+  </article>
+</BaseLayout>

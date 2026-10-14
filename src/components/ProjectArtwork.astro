@@ -1,0 +1,52 @@
+---
+import type { Project } from '../data/site';
+
+interface Props {
+  project: Project;
+  priority?: boolean;
+}
+
+const { project, priority = false } = Astro.props;
+---
+
+<div class:list={['project-artwork', `artwork-${project.artwork}`]}>
+  {project.coverUrl ? (
+    <img
+      class="artwork-image"
+      src={project.coverUrl}
+      alt={`Vista del proyecto conceptual ${project.title}`}
+      loading={priority ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+  ) : project.artwork === 'cafe' ? (
+    <div class="artwork-stage cafe-stage" aria-hidden="true">
+      <div class="cafe-halo"></div>
+      <div class="cafe-poster">
+        <span class="poster-eyebrow">CAFÉ DE ORIGEN · HECHO PARA DISFRUTAR</span>
+        <span class="cafe-logotype">senda<span>.</span></span>
+        <div class="cafe-cup"><span></span></div>
+        <span class="poster-bottom">UNA PAUSA<br />A TU MANERA</span>
+        <span class="poster-bottom poster-bottom-right">EST. 2026<br />PERÚ</span>
+      </div>
+      <span class="cafe-side-label">SABOR QUE ACOMPAÑA</span>
+    </div>
+  ) : project.artwork === 'beauty' ? (
+    <div class="artwork-stage beauty-stage" aria-hidden="true">
+      <span class="beauty-topline">EVERYDAY GLOW / EVERYDAY YOU</span>
+      <span class="beauty-wordmark">lumé<span>®</span></span>
+      <div class="beauty-orbit orbit-one"></div>
+      <div class="beauty-orbit orbit-two"></div>
+      <div class="beauty-bottle"><div class="bottle-cap"></div><div class="bottle-body"><span>lumé</span><small>DAILY GLOW<br />SERUM</small><i>30 ML / 1.0 FL OZ</i></div></div>
+      <span class="beauty-bottomline">FEEL GOOD IN YOUR SKIN.</span>
+    </div>
+  ) : (
+    <div class="artwork-stage digital-stage" aria-hidden="true">
+      <div class="digital-grid"></div>
+      <span class="digital-topline">INDEPENDENT DIGITAL STUDIO / 2026</span>
+      <div class="digital-orb"></div>
+      <span class="digital-wordmark">nexa<span>●</span></span>
+      <span class="digital-bottomline">NEW THINKING.<br />NEXT EXPERIENCES.</span>
+      <span class="digital-mark">N/</span>
+    </div>
+  )}
+</div>
