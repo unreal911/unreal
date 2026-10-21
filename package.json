@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "astro dev --host 0.0.0.0",
     "build": "astro build",
-    "preview": "astro preview --host 0.0.0.0"
+    "preview": "astro preview --host 0.0.0.0",
+    "catalog:build": "node scripts/build-nodo-pc-catalog.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.0.0",

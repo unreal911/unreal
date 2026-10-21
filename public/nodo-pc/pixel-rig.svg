@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 112 112" shape-rendering="crispEdges" role="img" aria-labelledby="title">
+  <title id="title">Torre de PC ilustrada en pixel art</title>
+  <g fill="#17182d">
+    <path d="M30 15h48v4h6v5h4v65h-4v5H25v-5h-4V24h4v-5h5z"/>
+    <path d="M24 92h13v5H24zm46 0h13v5H70z"/>
+  </g>
+  <path fill="#8067c0" d="M30 19h47v4H29v-2h1z"/>
+  <path fill="#554492" d="M25 24h44v65H25z"/>
+  <path fill="#2d2a55" d="M69 24h15v65H69z"/>
+  <path fill="#9a7ad2" d="M30 22h43v2H30z"/>
+  <path fill="#182c47" d="M30 29h35v51H30z"/>
+  <path fill="#a7e4c0" d="M29 28h37v2H29zm0 2h2v49h-2zm0 49h37v2H29zm35-49h2v49h-2z"/>
+  <path fill="#284c62" d="M33 33h29v42H33z"/>
+  <path fill="#376681" d="M34 34h27v4H34z"/>
+  <path fill="#a7e4c0" d="M37 42h5v3h-5zm0 4h3v5h-3zm7-10h4v3h-4zm-8 22h7v2h-7zm17 7h8v2h-8z"/>
+  <path fill="#f6d96b" d="M43 41h12v12H43z"/>
+  <path fill="#17182d" d="M46 44h6v6h-6z"/>
+  <path fill="#f07d61" d="M34 58h29v8H34z"/>
+  <path fill="#17182d" d="M37 60h13v2H37zm16 0h7v2h-7z"/>
+  <path fill="#f6d96b" d="M36 68h25v2H36z"/>
+  <path fill="#a7e4c0" d="M57 37h3v17h-3zm-3 0h2v11h-2z"/>
+  <path fill="#2a244c" d="M72 29h9v47h-9z"/>
+  <g fill="#a7e4c0">
+    <path d="M74 34h5v2h-5zm-2 2h2v5h-2zm7 0h2v5h-2zm-5 5h5v2h-5z"/>
+    <path d="M74 48h5v2h-5zm-2 2h2v5h-2zm7 0h2v5h-2zm-5 5h5v2h-5z"/>
+    <path d="M74 62h5v2h-5zm-2 2h2v5h-2zm7 0h2v5h-2zm-5 5h5v2h-5z"/>
+  </g>
+  <path fill="#f6d96b" d="M75 37h3v3h-3zm0 14h3v3h-3zm0 14h3v3h-3z"/>
+  <path fill="#f07d61" d="M71 81h11v4H71z"/>
+  <path fill="#a7e4c0" d="M31 84h24v2H31z"/>
+  <path fill="#7a62bd" d="M26 89h58v3H26z"/>
+  <path fill="#17182d" d="M15 91h14v4H15zm69 1h13v4H84z"/>
+  <g fill="#f6d96b">
+    <path d="M16 23h3v3h-3zm-3 3h3v3h-3zm6 0h3v3h-3zm-3 3h3v3h-3z"/>
+    <path d="M92 14h2v3h-2zm-3 3h3v3h-3zm5 0h3v3h-3zm-2 3h2v3h-2z"/>
+  </g>
+  <g fill="#a7e4c0"><path d="M11 69h3v3h-3zm3 3h3v3h-3zm-3 3h3v3h-3z"/><path d="M94 73h3v3h-3zm3 3h3v3h-3zm-3 3h3v3h-3z"/></g>
+</svg>

@@ -1,0 +1,70 @@
+---
+import TramaLayout from '../../../layouts/TramaLayout.astro';
+import { products } from '../../../data/trama';
+
+const money = (value: number) => `S/ ${value.toFixed(2)}`;
+---
+
+<TramaLayout
+  title="La colección — Trama Mayorista"
+  description="Explora la colección de Trama Mayorista, filtra prendas y prepara tu pedido de demostración en packs de seis con tallas y colores a tu elección."
+  currentPage="coleccion"
+>
+  <section class="trama-page-intro section-wrap" aria-labelledby="collection-page-title">
+    <nav class="trama-breadcrumbs" aria-label="Ruta de navegación">
+      <a href="/demos/trama-mayorista/">Inicio</a><span aria-hidden="true">/</span><span aria-current="page">La colección</span>
+    </nav>
+    <p class="eyebrow">LA COLECCIÓN / 01</p>
+    <h1 id="collection-page-title">Prendas para tu próxima colección.</h1>
+    <p>Básicos, texturas y nuevas siluetas para tu negocio. Elige tus favoritos y combina packs de seis para preparar tu pedido.</p>
+  </section>
+
+  <section class="catalog section-wrap" id="coleccion" aria-labelledby="catalog-title">
+    <div class="catalog-page-heading">
+      <h2 id="catalog-title">Encuentra tu próximo favorito.</h2>
+      <p>Filtra por categoría y elige talla y color. Cada selección se añade en un pack de 6 prendas; puedes combinar distintos packs en el mismo pedido.</p>
+    </div>
+    <div class="catalog-tools">
+      <div class="category-tabs" role="group" aria-label="Filtrar colección por categoría">
+        <button type="button" data-category="all" aria-pressed="true">Todo <span>06</span></button>
+        <button type="button" data-category="polos" aria-pressed="false">Polos</button>
+        <button type="button" data-category="camisas" aria-pressed="false">Camisas</button>
+        <button type="button" data-category="abrigos" aria-pressed="false">Abrigos</button>
+        <button type="button" data-category="pantalones" aria-pressed="false">Pantalones</button>
+      </div>
+      <label class="catalog-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+        <span class="sr-only">Buscar prendas</span>
+        <input type="search" id="trama-search" placeholder="Encuentra tu próximo favorito" />
+      </label>
+    </div>
+    <div class="catalog-meta">
+      <p id="result-count" role="status">6 prendas para tu selección</p>
+      <label>Ordenar por <select id="trama-sort"><option value="featured">Destacados</option><option value="price-asc">Menor precio</option><option value="price-desc">Mayor precio</option></select></label>
+    </div>
+    <div class="product-grid" id="product-grid">
+      {products.map((product, index) => <article class="product-card" data-product={product.id} data-category-value={product.category} data-name={product.name} data-id={product.id}>
+        <div class="product-image">
+          <img src={product.image} alt={`${product.name}, imagen de referencia de la colección`} width="800" height="1000" loading="lazy" />
+          <span class:list={['product-tag', index === 0 && 'tag-green']}>{index === 0 ? 'EL BÁSICO PERFECTO' : index === 3 ? 'NUEVA SILUETA' : 'EVERYDAY COLLECTION'}</span>
+          <span class="product-index">T / {String(index + 1).padStart(2, '0')}</span>
+        </div>
+        <div class="product-topline"><span>{product.label}</span><div class="color-dots" aria-hidden="true"><i></i><i></i><i></i></div></div>
+        <div class="product-title-row"><h3>{product.name}</h3><p>{money(product.price)}<small>/ prenda</small></p></div>
+        <p class="product-material">{product.material}</p>
+        <div class="product-options">
+          <label>Talla <select data-size aria-label={`Talla de ${product.name}`}>{product.sizes.map((size) => <option value={size}>{size}</option>)}</select></label>
+          <label>Color <select data-color aria-label={`Color de ${product.name}`}>{product.colors.map((color) => <option value={color}>{color}</option>)}</select></label>
+        </div>
+        <button class="add-product" type="button" data-add={product.id} value={product.id}>Añadir pack de 6 <span aria-hidden="true">+</span></button>
+      </article>)}
+    </div>
+    <div id="catalog-empty" class="catalog-empty" hidden><span aria-hidden="true">⌕</span><h3>No encontramos esa combinación.</h3><p>Prueba con otro nombre o cambia la categoría.</p></div>
+    <p class="catalog-note">Precios de muestra por prenda para pedidos de 6 a 23 unidades. Las fotos son referenciales; elige talla y color para armar tu selección.</p>
+  </section>
+
+  <section class="trama-next-section section-wrap" aria-labelledby="next-section-title">
+    <div><p class="eyebrow">EL PRECIO TAMBIÉN IMPORTA</p><h2 id="next-section-title">Tu pedido crece. Tu precio mejora.</h2></div>
+    <a class="trama-button" href="/demos/trama-mayorista/mayoristas/">Conoce los precios por volumen <span aria-hidden="true">↗</span></a>
+  </section>
+</TramaLayout>

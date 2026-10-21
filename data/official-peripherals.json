@@ -1,0 +1,215 @@
+[
+  {
+    "id": "caleta-4369",
+    "source_sku": "4369",
+    "source_category": "teclado",
+    "brand": "Logitech G",
+    "type": "Teclado",
+    "official_url": "https://www.logitechg.com/es-es/shop/p/g213-rgb-gaming-keyboard.920-008086",
+    "official_image_url": "https://resource.logitechg.com/w_544%2Ch_466%2Car_7%3A6%2Cc_pad%2Cq_auto%2Cf_auto%2Cdpr_1.0/d_transparent.gif/content/dam/gaming/en/non-braid/g213-finch/g213-gallery-1-nb.png"
+  },
+  {
+    "id": "caleta-6638",
+    "source_sku": "6638",
+    "source_category": "teclado",
+    "brand": "Razer",
+    "type": "Teclado",
+    "official_url": "https://www.razer.com/gaming-keyboards/razer-ornata-v3",
+    "official_image_url": "https://assets2.razerzone.com/images/pnx.assets/df5dd025d3d95c6ab915aede920586ba/ornata-v3-hero-desktop.webp"
+  },
+  {
+    "id": "caleta-8987",
+    "source_sku": "8987",
+    "source_category": "mouse",
+    "brand": "Logitech G",
+    "type": "Mouse",
+    "official_url": "https://www.logitechg.com/es-mx/shop/p/g203-lightsync-rgb-gaming-mouse.910-005795",
+    "official_image_url": "https://resource.logitechg.com/w_544%2Ch_466%2Car_7%3A6%2Cc_pad%2Cq_auto%2Cf_auto%2Cdpr_1.0/d_transparent.gif/content/dam/gaming/en/products/refreshed-g203/2025-update/g203-mouse-top-angle-blue-gallery-1.png"
+  },
+  {
+    "id": "caleta-8829",
+    "source_sku": "8829",
+    "source_category": "mouse",
+    "brand": "Razer",
+    "type": "Mouse",
+    "official_url": "https://www.razer.com/latam-es/gaming-mice/razer-deathadder-essential",
+    "official_image_url": "https://assets2.razerzone.com/images/pnx.assets/a51901df4217f1cbd57c93e233c5d984/razer-deathadder-essential-gaming-mouse-hero-desktop.jpg"
+  },
+  {
+    "id": "caleta-4367",
+    "source_sku": "4367",
+    "source_category": "audi",
+    "brand": "Logitech G",
+    "type": "Audífonos",
+    "official_url": "https://www.logitechg.com/es-mx/shop/p/g335-gaming-headset.981-000977",
+    "official_image_url": "https://resource.logitechg.com/w_544%2Ch_466%2Car_7%3A6%2Cc_pad%2Cq_auto%2Cf_auto%2Cdpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g335/g335-black-gallery-1.png"
+  },
+  {
+    "id": "caleta-10389",
+    "source_sku": "10389",
+    "source_category": "audi",
+    "brand": "Razer",
+    "type": "Audífonos",
+    "official_url": "https://www.razer.com/latam-es/gaming-headsets/razer-blackshark-v2-x/RZ04-03240100-R3U1?specs=1",
+    "official_image_url": "https://assets2.razerzone.com/images/pnx.assets/4f22a7df81358b745ece8172b97bd3c7/blackshark-v2-x-hero-mobile.jpg"
+  },
+  {
+    "id": "caleta-6080",
+    "source_sku": "6080",
+    "source_category": "parlante",
+    "brand": "Ultimate Ears",
+    "type": "Parlante",
+    "official_url": "https://www.logitech.com/en-us/shop/p/megaboom-3.984-001394",
+    "official_image_url": "https://resource.logitech.com/w_544%2Ch_466%2Car_7%3A6%2Cc_pad%2Cq_auto%2Cf_auto%2Cdpr_1.0/d_transparent.gif/content/dam/ue/products/wireless-speakers/megaboom-3/sunset-red/ue-megaboom3-sunset-red-front.png"
+  },
+  {
+    "id": "caleta-10616",
+    "source_sku": "10616",
+    "source_category": "teclado",
+    "brand": "Logitech",
+    "type": "Combo teclado y mouse",
+    "official_url": "https://www.logitech.com/es-mx/shop/p/mk120-usb-keyboard-mouse",
+    "official_image_url": "https://resource.logitech.com/w_544%2Ch_466%2Car_7%3A6%2Cc_pad%2Cq_auto%2Cf_auto%2Cdpr_1.0/d_transparent.gif/content/dam/logitech/en/products/combos/mk120/gallery/mk120-gallery-1-new.png"
+  },
+  {
+    "id": "caleta-5608",
+    "source_sku": "5608",
+    "source_category": "teclado",
+    "brand": "Logitech G",
+    "type": "Teclado",
+    "official_url": "https://www.logitechg.com/es-mx/shop/p/g413-se-gaming-keyboard.920-010433",
+    "official_image_url": "https://resource.logitechg.com/w_544%2Ch_466%2Car_7%3A6%2Cc_pad%2Cq_auto%2Cf_auto%2Cdpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g413-se/g413-se-gallery-4-new.png"
+  },
+  {
+    "id": "caleta-8680",
+    "source_sku": "8680",
+    "source_category": "teclado",
+    "brand": "Logitech G",
+    "type": "Teclado",
+    "official_url": "https://www.logitechg.com/es-mx/shop/p/g515-tkl-gaming-keyboard",
+    "official_image_url": "https://resource.logitechg.com/w_544%2Ch_466%2Car_7%3A6%2Cc_pad%2Cq_auto%2Cf_auto%2Cdpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g515-tkl-wired/gallery/g515-wired-keyboard-black-gallery-1-us.png"
+  },
+  {
+    "id": "caleta-8054",
+    "source_sku": "8054",
+    "source_category": "teclado",
+    "brand": "Razer",
+    "type": "Teclado",
+    "official_url": "https://www.razer.com/latam-es/gaming-keyboards/razer-ornata-v3-tenkeyless",
+    "official_image_url": "https://assets2.razerzone.com/images/pnx.assets/34d5beb43c515f5142effebac5df03db/razer-ornata-v3-tenkeyless-hero-desktop.webp"
+  },
+  {
+    "id": "caleta-8988",
+    "source_sku": "8988",
+    "source_category": "mouse",
+    "brand": "Logitech G",
+    "type": "Mouse",
+    "official_url": "https://www.logitechg.com/es-mx/shop/p/g203-lightsync-rgb-gaming-mouse.910-005791",
+    "official_image_url": "https://resource.logitechg.com/w_544%2Ch_466%2Car_7%3A6%2Cc_pad%2Cq_auto%2Cf_auto%2Cdpr_1.0/d_transparent.gif/content/dam/gaming/en/products/refreshed-g203/2025-update/g203-mouse-top-angle-lilac-gallery-1.png"
+  },
+  {
+    "id": "caleta-5723",
+    "source_sku": "5723",
+    "source_category": "mouse",
+    "brand": "Logitech G",
+    "type": "Mouse",
+    "official_url": "https://www.logitechg.com/es-mx/shop/p/g305-lightspeed-wireless-gaming-mouse.910-005281",
+    "official_image_url": "https://resource.logitechg.com/w_544%2Ch_466%2Car_7%3A6%2Cc_pad%2Cq_auto%2Cf_auto%2Cdpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g305/2025-update/g305-lightspeed-mouse-top-angle-black-gallery-1.png"
+  },
+  {
+    "id": "caleta-6506",
+    "source_sku": "6506",
+    "source_category": "mouse",
+    "brand": "Logitech G",
+    "type": "Mouse",
+    "official_url": "https://www.logitechg.com/es-mx/shop/p/g502-hero-gaming-mouse.910-005550",
+    "official_image_url": "https://resource.logitechg.com/w_544%2Ch_466%2Car_7%3A6%2Cc_pad%2Cq_auto%2Cf_auto%2Cdpr_1.0/d_transparent.gif/content/dam/gaming/en/non-braid/hyjal-g502-hero/2025/g502-hero-mouse-top-angle-gallery-1.png"
+  },
+  {
+    "id": "caleta-7006",
+    "source_sku": "7006",
+    "source_category": "mouse",
+    "brand": "Razer",
+    "type": "Mouse",
+    "official_url": "https://www.razer.com/es-es/gaming-mice/razer-cobra/RZ01-04650100-R3M1",
+    "official_image_url": "https://assets3.razerzone.com/-otk-4hatmPYbiHph4cjPdAfX_w=/767x511/https%3A%2F%2Fmedias-p1.phoenix.razer.com%2Fsys-master-phoenix-images-container%2Fhc4%2Fhc2%2F9591467704350%2F230629-cobra-1500x1000-1.jpg"
+  },
+  {
+    "id": "caleta-7322",
+    "source_sku": "7322",
+    "source_category": "audi",
+    "brand": "Logitech G",
+    "type": "Audífonos",
+    "official_url": "https://www.logitechg.com/es-mx/shop/p/g535-wireless-headset.981-000971",
+    "official_image_url": "https://resource.logitechg.com/w_544%2Ch_466%2Car_7%3A6%2Cc_pad%2Cq_auto%2Cf_auto%2Cdpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g535-wireless/g535-wireless-gallery-1.png"
+  },
+  {
+    "id": "caleta-10190",
+    "source_sku": "10190",
+    "source_category": "audi",
+    "brand": "Logitech G",
+    "type": "Audífonos",
+    "official_url": "https://www.logitechg.com/es-es/shop/p/g321",
+    "official_image_url": "https://resource.logitechg.com/w_544%2Ch_466%2Car_7%3A6%2Cc_pad%2Cq_auto%2Cf_auto%2Cdpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g321-pdp/gallery/g321-lightspeed-3qtr-front-left-angle-black-gallery-1.png"
+  },
+  {
+    "id": "caleta-9979",
+    "source_sku": "9979",
+    "source_category": "audi",
+    "brand": "Logitech G",
+    "type": "Audífonos",
+    "official_url": "https://www.logitechg.com/es-mx/shop/p/g522-lightspeed.981-001543",
+    "official_image_url": "https://resource.logitechg.com/w_544%2Ch_466%2Car_7%3A6%2Cc_pad%2Cq_auto%2Cf_auto%2Cdpr_1.0/d_transparent.gif/content/dam/gaming/en/products/g522-lightspeed-pdp/gallery-images/g522-midnight-black-3qtr-front-left-gallery-1.png"
+  },
+  {
+    "id": "caleta-9980",
+    "source_sku": "9980",
+    "source_category": "audi",
+    "brand": "Logitech G",
+    "type": "Audífonos",
+    "official_url": "https://www.logitechg.com/es-mx/shop/p/pro-x-2-wireless-headset.981-001262",
+    "official_image_url": "https://resource.logitechg.com/w_544%2Ch_466%2Car_7%3A6%2Cc_pad%2Cq_auto%2Cf_auto%2Cdpr_1.0/d_transparent.gif/content/dam/gaming/en/products/pro-x-2-lightspeed/gallery/gallery-1-pro-x-2-lightspeed-gaming-headset-black.png"
+  },
+  {
+    "id": "caleta-9897",
+    "brand": "Redragon",
+    "official_url": "https://redragon.es/products/best-seller/s145/",
+    "official_image_url": "https://redragon.es/content/uploads/2025/05/S145-1.jpg"
+  },
+  {
+    "id": "caleta-9895",
+    "brand": "Redragon",
+    "official_url": "https://redragon.es/products/best-seller/s146/",
+    "official_image_url": "https://redragon.es/content/uploads/2025/05/S146-1.jpg"
+  },
+  {
+    "id": "caleta-9266",
+    "brand": "Redragon",
+    "official_url": "https://redragon.es/products/best-seller/s145/",
+    "official_image_url": "https://redragon.es/content/uploads/2025/05/S145-1.jpg"
+  },
+  {
+    "id": "caleta-9896",
+    "brand": "Redragon",
+    "official_url": "https://redragonshop.com/products/trundle-k668",
+    "official_image_url": "https://redragonshop.com/cdn/shop/files/RedragonTRUNDLEK668Hot-swappableGamingKeyboard_1.png?v=1762461144&width=1946"
+  },
+  {
+    "id": "caleta-5168",
+    "brand": "Redragon",
+    "official_url": "https://redragon.es/products/best-seller/teclado-low-profile-horus-tkl-fullsize-60/",
+    "official_image_url": "https://redragon.es/content/uploads/2022/06/HORUS-K618-k621.png"
+  },
+  {
+    "id": "caleta-5162",
+    "brand": "Redragon",
+    "official_url": "https://redragonshop.com/products/k621-tkl-wireless-keyboard",
+    "official_image_url": "https://redragonshop.com/cdn/shop/products/tklwirelesskeybaord_1.png?v=1762457850&width=1946"
+  },
+  {
+    "id": "caleta-7554",
+    "brand": "Redragon",
+    "official_url": "https://redragon.es/products/best-seller/ire-pro-h848/",
+    "official_image_url": "https://redragon.es/content/uploads/2023/06/ire-848-blue.png"
+  }
+]

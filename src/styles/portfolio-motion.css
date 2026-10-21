@@ -1,0 +1,30 @@
+/* The base page stays visible. These variables are only driven after JS starts. */
+.portfolio-home .pf-project-cover .project-artwork {
+  transform: translate3d(0, var(--pf-art-y, 0px), 0) scale(calc(var(--pf-art-scale, 1) + var(--pf-art-hover, 0)));
+  transform-origin: center;
+}
+
+.portfolio-home .pf-project-cover:hover .project-artwork,
+.portfolio-home .pf-project-cover:focus-visible .project-artwork {
+  --pf-art-hover: .025;
+}
+
+.portfolio-home .pf-heading .letter-mask,
+.portfolio-home .pp-intro h2 .letter-mask {
+  perspective: 600px;
+}
+
+.portfolio-home .pf-manifesto h2 .animated-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.portfolio-home .pf-manifesto h2 .letter-mask {
+  overflow: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-home .pf-project-cover .project-artwork {
+    transform: none;
+  }
+}

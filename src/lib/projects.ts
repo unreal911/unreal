@@ -33,7 +33,7 @@ async function fetchProjects(): Promise<Project[]> {
     if (error) throw error;
     if (!data?.length) return sampleProjects;
 
-    return (data as ProjectRow[])
+    const remoteProjects = (data as ProjectRow[])
       .filter((row) => row.slug && row.title)
       .map((row, index): Project => ({
         slug: row.slug!,
@@ -48,13 +48,24 @@ async function fetchProjects(): Promise<Project[]> {
         outcome: row.outcome ?? '',
         services: Array.isArray(row.services) ? row.services : [],
         palette: row.palette ?? '',
-        artwork: ['cafe', 'beauty', 'digital'].includes(row.artwork ?? '')
+        artwork: ['cafe', 'beauty', 'digital', 'pc', 'fashion'].includes(row.artwork ?? '')
           ? row.artwork!
           : 'digital',
         coverUrl: row.cover_url ?? row.coverUrl ?? null,
         externalUrl: row.external_url ?? row.externalUrl ?? null,
         sortOrder: row.sort_order ?? row.sortOrder ?? index + 1,
       }));
+
+    const localDemos = sampleProjects.filter((project) =>
+      ['nodo-pc', 'trama-mayorista'].includes(project.slug),
+    );
+    const localDemoSlugs = new Set(localDemos.map((project) => project.slug));
+    const projects = [
+      ...remoteProjects.filter((project) => !localDemoSlugs.has(project.slug)),
+      ...localDemos,
+    ];
+
+    return projects.sort((a, b) => a.sortOrder - b.sortOrder);
   } catch (error) {
     console.warn('No se pudieron cargar los proyectos de Supabase; se usan los conceptos locales.', error);
     return sampleProjects;

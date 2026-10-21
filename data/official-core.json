@@ -1,0 +1,50 @@
+{
+  "caleta-6718": {
+    "official_url": "https://www.amd.com/en/products/processors/desktops/ryzen/8000-series/amd-ryzen-5-8500g.html",
+    "official_image_url": "https://www.amd.com/content/dam/amd/en/images/products/processors/ryzen/2505503-ryzen-5-8500g-og.jpg",
+    "brand": "AMD",
+    "verified_at": "2026-10-15T23:24:58Z"
+  },
+  "caleta-9763": {
+    "official_url": "https://www.asus.com/motherboards-components/motherboards/prime/prime-b650m-f/",
+    "official_image_url": "https://dlcdnwebimgs.asus.com/gain/0f2a16f5-f72b-4bcd-b29c-d1226ddae2dd/",
+    "brand": "ASUS",
+    "verified_at": "2026-10-15T23:24:58Z"
+  },
+  "caleta-10635": {
+    "official_url": "https://www.xpg.com/us/xpg/dram-modules-spectrix-d35g-rgb-ddr4",
+    "official_image_url": "https://webapi3.adata.com/storage/product/d35g_2000x2000_1_black.png",
+    "brand": "XPG",
+    "verified_at": "2026-10-15T23:24:58Z"
+  },
+  "caleta-8145": {
+    "official_url": "https://www.adata.com/ec/consumer/category/3/solid-state-drives-legend-860/",
+    "official_image_url": "https://webapi3.adata.com/storage/product/legend_860_pd_2000x2000_01.png",
+    "brand": "ADATA",
+    "verified_at": "2026-10-15T23:24:58Z"
+  },
+  "caleta-8731": {
+    "official_url": "https://www.asus.com/us/motherboards-components/graphics-cards/dual/dual-rtx5060-o8g/",
+    "official_image_url": "https://dlcdnwebimgs.asus.com/gain/35710ce7-7a2b-42ab-aa48-63c448e6c047/",
+    "brand": "ASUS",
+    "verified_at": "2026-10-15T23:24:58Z"
+  },
+  "caleta-8870": {
+    "official_url": "https://lian-li.com/product/o11-vision-compact/",
+    "official_image_url": "https://lian-li.com/wp-content/uploads/2024/10/O11VP_X01.jpg",
+    "brand": "LIAN LI",
+    "verified_at": "2026-10-15T23:24:58Z"
+  },
+  "caleta-7903": {
+    "official_url": "https://www.xpg.com/en/xpg/pc-components-fusion",
+    "official_image_url": "https://webapi3.adata.com/storage/product/xpg_fusion_product_01.png",
+    "brand": "XPG",
+    "verified_at": "2026-10-15T23:24:58Z"
+  },
+  "caleta-7044": {
+    "official_url": "https://www.deepcool.com/products/Cooling/cpuaircoolers/AK400-Performance-CPU-Cooler/2021/15222.shtml",
+    "official_image_url": "https://cdn.deepcool.com/public/ProductFile/DEEPCOOL/Cooling/CPUAirCoolers/AK400/Gallery/800X800/01.jpg?auto=format,compress&q=90",
+    "brand": "DEEPCOOL",
+    "verified_at": "2026-10-15T23:24:58Z"
+  }
+}

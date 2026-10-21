@@ -1,151 +1,68 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PortfolioHero from '../components/PortfolioHero.astro';
+import PortfolioProcess from '../components/PortfolioProcess.astro';
+import PortfolioFaq from '../components/PortfolioFaq.astro';
 import ProjectArtwork from '../components/ProjectArtwork.astro';
 import { getProjects } from '../lib/projects';
+import { getProjectPresentation } from '../lib/project-presentation';
 import { site } from '../data/site';
+import '../styles/portfolio-home.css';
 
 const projects = await getProjects();
-const demoSlugs = new Set(['senda-cafe', 'lume-beauty', 'nexa-digital']);
 const contactUrl = `${site.whatsapp}?text=${encodeURIComponent('Hola Milton, quiero conversar sobre una página web.')}`;
+const services = [
+  { number: '01', title: 'Landing pages', text: 'Una página para presentar tu producto o servicio y recibir consultas.', icon: '↗' },
+  { number: '02', title: 'Sitios web', text: 'Tus servicios, la información de tu negocio y el contacto, en un solo lugar.', icon: '◈' },
+  { number: '03', title: 'Web a medida', text: 'Interfaces y funciones específicas para lo que necesita tu proyecto.', icon: '⌘' },
+];
 ---
 
 <BaseLayout>
-  <section class="hero hero-client" aria-labelledby="hero-title">
-    <div class="hero-kicker" data-hero-fade><span>DESARROLLO WEB + DISEÑO ESTRATÉGICO</span><span>PORTAFOLIO / 2026</span></div>
-    <div class="hero-content">
-      <div class="hero-copy">
-        <p class="hero-eyebrow" data-hero-fade><span class="status-dot" aria-hidden="true"></span> HOLA, SOY MILTON BLAISE</p>
-        <h1 id="hero-title" class="hero-client-title" data-letters>Creo sitios web<br />que hacen <em>fácil<br />conectar.</em></h1>
-        <p class="hero-client-intro" data-hero-fade>Diseño y desarrollo tu página web para que tus clientes entiendan lo que ofreces, confíen en tu marca y puedan contactarte sin complicaciones.</p>
-        <div class="hero-actions" data-hero-fade>
-          <a class="primary-cta" href={contactUrl} target="_blank" rel="noopener noreferrer">Cuéntame tu proyecto <span aria-hidden="true">↗</span></a>
-          <a class="secondary-cta" href="#proyectos">Ver sitios creados <span aria-hidden="true">↓</span></a>
-        </div>
-        <div class="hero-capabilities" data-hero-fade><span>Diseño web</span><span>Desarrollo a medida</span><span>Animación</span></div>
+  <div class="portfolio-home">
+    <PortfolioHero contactUrl={contactUrl} />
+    <div class="pf-discipline-strip" aria-label="Diseño, desarrollo y estrategia">
+      <span>BUENAS IDEAS, BIEN CONSTRUIDAS.</span>
+      <div><span>ESTRATEGIA</span><i aria-hidden="true">✳</i><span>DISEÑO</span><i aria-hidden="true">✳</i><span>DESARROLLO</span><i aria-hidden="true">✳</i><span>DETALLE</span></div>
+    </div>
+    <section class="pf-work work-section" id="proyectos" aria-labelledby="work-heading">
+      <div class="pf-work-heading">
+        <h2 class="pf-heading" id="work-heading" data-letters>Proyectos.</h2>
+        <p data-reveal>Conceptos de diseño y desarrollo web.</p>
       </div>
-      <div class="hero-showcase" data-hero-visual aria-label="Representación de un sitio web diseñado y desarrollado por Milton">
-        <div class="showcase-note note-top"><span>01 / DISEÑO</span><span>Experiencia clara</span></div>
-        <div class="showcase-browser">
-          <div class="showcase-chrome"><span class="showcase-dots"><i></i><i></i><i></i></span><span>miltonblaise.dev / proyecto</span><span>↗</span></div>
-          <div class="showcase-screen">
-            <div class="showcase-screen-nav"><strong>forma<span>.</span></strong><span>Menú&nbsp;&nbsp;↗</span></div>
-            <div class="showcase-screen-body"><small>IDEAS QUE COBRAN VIDA</small><strong>Diseño que<br /><em>se vive.</em></strong><span class="showcase-screen-button">Descubrir proyecto ↗</span></div>
-            <div class="showcase-screen-grid"><span></span><span></span><span></span></div>
-          </div>
-        </div>
-        <div class="showcase-code"><span class="code-green">&lt;section</span> class=<span class="code-yellow">"experiencia"</span><span class="code-green">&gt;</span><br />&nbsp;&nbsp;diseño + desarrollo<br /><span class="code-green">&lt;/section&gt;</span></div>
-        <div class="showcase-note note-bottom"><span>02 / DESARROLLO</span><span>Detalles que funcionan</span></div>
+      <div class="pf-project-grid">
+        {projects.map((project, index) => {
+          const presentation = getProjectPresentation(project);
+          return (
+            <article class:list={['pf-project', `pf-project-${project.artwork}`]} data-project-card aria-labelledby={`project-${project.slug}`}>
+              <a class="pf-project-link" href={`/proyectos/${project.slug}/`} aria-labelledby={`project-${project.slug} project-action-${project.slug}`}>
+                <div class="pf-project-cover" data-project-visual>
+                  <div class="pf-project-browser" aria-hidden="true"><span><i></i><i></i><i></i></span><span>{project.slug.replaceAll('-', '')}.concept</span><span>↗</span></div>
+                  <ProjectArtwork project={project} priority={index === 0} />
+                </div>
+                <div class="pf-project-info" data-project-meta>
+                  <div class="pf-project-copy"><h3 class="pf-project-name" id={`project-${project.slug}`}>{project.title}</h3><p class="pf-project-type">{presentation.shortCategory}</p></div>
+                  <span class="pf-project-action" id={`project-action-${project.slug}`}>Ver proyecto <span aria-hidden="true">↗</span></span>
+                </div>
+              </a>
+            </article>
+          );
+        })}
       </div>
-    </div>
-    <div class="hero-footer" data-hero-fade><span>PERÚ · TRABAJO EN REMOTO</span><a href="#proyectos">DESLIZA PARA EXPLORAR <span aria-hidden="true">↓</span></a></div>
-  </section>
-
-  <section class="work-section section-pad" id="proyectos" aria-labelledby="work-heading">
-    <div class="section-heading" data-reveal>
-      <span class="section-index">(01 / PROYECTOS)</span>
-      <h2 id="work-heading" data-letters>Sitios que<br /><em>puedes explorar.</em></h2>
-      <p>Abre cada caso, revisa el proceso y navega la demo. Así puedes ver cómo trabajo una página más allá de una imagen.</p>
-    </div>
-
-    <div class="project-grid">
-      {projects.map((project, index) => (
-        <article class:list={['project-card', { 'project-card-featured': index === 0 }]} data-project-card>
-          <a class="project-card-main" href={`/proyectos/${project.slug}/`} aria-label={`Ver el caso de ${project.title}`}>
-            <div class="project-visual" data-project-visual>
-              <ProjectArtwork project={project} priority={index === 0} />
-              <span class="project-view" aria-hidden="true">VER EL CASO ↗</span>
-              {demoSlugs.has(project.slug) && <span class="demo-badge">SITIO NAVEGABLE</span>}
-            </div>
-            <div class="project-card-meta" data-project-meta>
-              <div><span class="project-number">/{project.number} — CONCEPTO WEB</span><h3>{project.title}</h3></div>
-              <span class="project-category">{project.category}</span>
-              <span class="project-arrow" aria-hidden="true">↗</span>
-            </div>
-          </a>
-          {demoSlugs.has(project.slug) && <a class="project-demo-link" href={`/demos/${project.slug}/`} target="_blank" rel="noopener noreferrer">Explorar sitio en vivo <span aria-hidden="true">↗</span></a>}
-        </article>
-      ))}
-    </div>
-    <p class="concept-note">Los proyectos presentados son conceptos de portafolio creados para mostrar enfoque visual y capacidades.</p>
-  </section>
-
-  <section class="statement-section" aria-label="Enfoque de diseño">
-    <div class="statement-topline"><span>EL PUNTO DE PARTIDA</span><span>DISEÑO + CÓDIGO + CURIOSIDAD</span></div>
-    <p data-letters>Una web debe verse bien.<br />Y ayudar a tu cliente <span>a decidir.</span></p>
-    <div class="statement-bottomline"><span>FORMA Y FUNCIÓN, EN EQUILIBRIO.</span><span class="statement-star" aria-hidden="true">✳</span></div>
-  </section>
-
-  <section class="process-section section-pad" id="proceso" aria-labelledby="process-heading">
-    <div class="process-intro">
-      <span class="section-index">(02 / CÓMO TRABAJO)</span>
-      <h2 id="process-heading" data-letters>Primero entiendo.<br /><em>Luego diseño.</em></h2>
-      <p>Una web útil comienza con preguntas sobre tu negocio y las personas que quieres alcanzar. Cada etapa deja una decisión clara antes de pasar a la siguiente.</p>
-    </div>
-    <div class="process-grid">
-      <article class="process-card" data-reveal>
-        <div class="process-card-top"><span>01 / ESCUCHAR</span><span aria-hidden="true">↘</span></div>
-        <div class="process-art process-art-questions" aria-hidden="true"><span>¿A quién ayudas?</span><span>¿Qué necesita saber?</span><span>¿Qué acción buscas?</span></div>
-        <h3>Entrevista y brief</h3>
-        <p>En la primera conversación pregunto por tus clientes, sus dudas frecuentes, tus objetivos y lo que hace distinta a tu marca.</p>
-      </article>
-      <article class="process-card" data-reveal>
-        <div class="process-card-top"><span>02 / ORDENAR</span><span aria-hidden="true">↘</span></div>
-        <div class="process-art process-art-wireframe" aria-hidden="true"><span class="wf-top"></span><span class="wf-title"></span><span class="wf-copy"></span><span class="wf-copy short"></span><span class="wf-button"></span><span class="wf-cards"><i></i><i></i><i></i></span></div>
-        <h3>Mapa y bocetos</h3>
-        <p>Organizo el contenido y dibujo wireframes para probar el recorrido antes de definir colores o animaciones.</p>
-      </article>
-      <article class="process-card" data-reveal>
-        <div class="process-card-top"><span>03 / DISEÑAR</span><span aria-hidden="true">↘</span></div>
-        <div class="process-art process-art-figma" aria-hidden="true"><span class="figma-frame"><strong>Aa</strong><span class="figma-swatches"><i></i><i></i><i></i></span><span class="figma-lines"><i></i><i></i></span></span></div>
-        <h3>Mockup y prototipo</h3>
-        <p>Desarrollo la interfaz en Figma para revisar jerarquía, identidad visual y estados antes de construirla.</p>
-      </article>
-      <article class="process-card" data-reveal>
-        <div class="process-card-top"><span>04 / CONSTRUIR</span><span aria-hidden="true">↗</span></div>
-        <div class="process-art process-art-devices" aria-hidden="true"><span class="device-desktop"><i></i></span><span class="device-tablet"><i></i></span><span class="device-mobile"><i></i></span></div>
-        <h3>Web adaptable</h3>
-        <p>Desarrollo y ajusto la experiencia en móvil, tablet y escritorio, incluyendo interacción y acceso al contacto.</p>
-      </article>
-    </div>
-    <div class="process-outro"><p>En los casos conceptuales puedes ver cómo se aplicó este razonamiento a cada tipo de página.</p><a class="text-link" href="/proyectos/senda-cafe/#proceso">Ver un proceso de ejemplo <span aria-hidden="true">↗</span></a></div>
-  </section>
-
-  <section class="about-section section-pad" id="sobre-mi" aria-labelledby="about-heading">
-    <div class="about-label"><span class="section-index">(03 / SOBRE MÍ)</span><span class="about-cross" aria-hidden="true">✳</span></div>
-    <div class="about-content">
-      <div class="about-lead">
-        <p class="about-overline">DISEÑO + CÓDIGO / TODO EL RECORRIDO</p>
-        <h2 id="about-heading" data-letters>Una web bien pensada,<br /><em>de principio a fin.</em></h2>
-        <div class="about-copy" data-reveal>
-          <p>Soy <strong>{site.fullName}</strong>, diseñador y desarrollador web en Perú. Trabajo contigo desde ordenar la idea y el contenido hasta publicar el sitio.</p>
-          <p>Combino estrategia, diseño y código para que la experiencia sea clara en móvil, fácil de recorrer y simple de usar para tus clientes.</p>
-          <a class="text-link" href={contactUrl} target="_blank" rel="noopener noreferrer">Conversemos por WhatsApp <span aria-hidden="true">↗</span></a>
-        </div>
-      </div>
-      <div class="about-card" data-reveal>
-        <div class="about-card-heading"><span>ASÍ CONSTRUYO TU WEB</span><span aria-hidden="true">✳</span></div>
-        <ol>
-          <li><span>01</span><div><strong>Primero, claridad</strong><small>Contenido y recorrido</small></div></li>
-          <li><span>02</span><div><strong>Después, diseño</strong><small>Una interfaz hecha para tu marca</small></div></li>
-          <li><span>03</span><div><strong>Lista para usarse</strong><small>Desarrollo para móvil y escritorio</small></div></li>
-        </ol>
-        <div class="about-card-footer"><span>PERÚ · TRABAJO EN REMOTO</span><span>MB. / 2026</span></div>
-      </div>
-    </div>
-    <div class="skills-line" data-reveal>
-      <span>ESTRUCTURA Y CONTENIDO</span><span>DISEÑO WEB</span><span>DESARROLLO FRONT-END</span><span>ANIMACIÓN</span>
-    </div>
-  </section>
-
-  <section class="services-section section-pad" id="servicios" aria-labelledby="services-heading">
-    <div class="services-intro" data-reveal>
-      <span class="section-index">(04 / QUÉ HAGO)</span>
-      <h2 id="services-heading" data-letters>Tu web,<br /><em>de principio a fin.</em></h2>
-    </div>
-    <div class="service-list">
-      <div class="service-row" data-reveal><span>01</span><h3>Landing pages</h3><p>Una página enfocada en explicar tu propuesta y facilitar el contacto.</p><span aria-hidden="true">↗</span></div>
-      <div class="service-row" data-reveal><span>02</span><h3>Sitios para negocios</h3><p>Servicios, proyectos y contenido organizados para que sea fácil encontrarte.</p><span aria-hidden="true">↗</span></div>
-      <div class="service-row" data-reveal><span>03</span><h3>Desarrollo a medida</h3><p>Diseño responsivo, código limpio e interacciones que aportan claridad.</p><span aria-hidden="true">↗</span></div>
-    </div>
-  </section>
+    </section>
+    <section class="pf-manifesto" aria-labelledby="manifesto-heading">
+      <h2 id="manifesto-heading" data-letters>Diseño claro.<br /><em>En cada pantalla.</em></h2>
+      <div class="pf-manifesto-bottom"><a href="#proceso" aria-label="Descubrir cómo trabajo">↓</a></div>
+    </section>
+    <PortfolioProcess />
+    <section class="pf-services" id="servicios" aria-labelledby="services-heading">
+      <div class="pf-services-heading"><h2 class="pf-heading" id="services-heading" data-letters>Servicios<em>.</em></h2></div>
+      <div class="pf-service-grid">{services.map((service) => <article class="pf-service" data-reveal><div class="pf-service-top"><span>{service.number} /</span><span aria-hidden="true">{service.icon}</span></div><h3>{service.title}</h3><p>{service.text}</p><a href={`${site.whatsapp}?text=${encodeURIComponent(`Hola Milton, me interesa conversar sobre ${service.title.toLowerCase()}.`)}`} target="_blank" rel="noopener noreferrer" aria-label={`Consultar sobre ${service.title.toLowerCase()}`}>Consultar <span aria-hidden="true">↗</span></a></article>)}</div>
+    </section>
+    <section class="pf-about" id="sobre-mi" aria-labelledby="about-heading">
+      <div class="pf-about-art" aria-hidden="true"><span class="pf-about-art-label">MILTON BLAISE</span><div class="pf-monogram">mb<span>.</span></div><div class="pf-about-art-bottom"><span>DISEÑO & DESARROLLO</span><span>↗</span></div></div>
+      <div class="pf-about-copy"><h2 class="pf-heading" id="about-heading" data-letters>Sobre mí<em>.</em></h2><p>Soy <strong>{site.fullName}</strong>, diseñador y desarrollador web. Te acompaño desde la idea hasta la publicación.</p><p><span class="pf-remote"><i></i> Perú · En remoto</span></p><a class="pf-text-link" href={contactUrl} target="_blank" rel="noopener noreferrer">Hablemos <span aria-hidden="true">↗</span></a></div>
+    </section>
+    <PortfolioFaq />
+  </div>
 </BaseLayout>

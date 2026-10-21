@@ -1,0 +1,89 @@
+---
+import '../styles/demo-pc-shop.css';
+import '../styles/demo-pc-shared.css';
+import '../styles/demo-pc-modern.css';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  active: 'home' | 'catalog' | 'builder';
+}
+
+const { title, description, active } = Astro.props;
+const homeHref = '/demos/nodo-pc/';
+const catalogHref = '/demos/nodo-pc/componentes/';
+const builderHref = '/demos/nodo-pc/armar/';
+const popularCategories = [
+  { id: 'gpu', label: 'Gráficas' },
+  { id: 'cpu', label: 'Procesadores' },
+  { id: 'ram', label: 'Memoria' },
+  { id: 'ssd', label: 'Almacenamiento' },
+  { id: 'board', label: 'Placas madre' },
+  { id: 'power', label: 'Fuentes' },
+  { id: 'case', label: 'Cases' },
+  { id: 'cooling', label: 'Refrigeración' },
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111315" />
+    <meta name="robots" content="noindex,follow" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body data-shop-page={active} data-whatsapp-base={site.whatsapp}>
+    <a class="shop-skip" href="#contenido">Ir al contenido</a>
+    <div class="shop-demo-bar"><span><i></i> EXPERIENCIA CONCEPTUAL <b>/</b> CATÁLOGO REFERENCIAL</span><a href="/proyectos/nodo-pc/">CONOCE EL PROYECTO <span>↗</span></a></div>
+    <header class="shop-header">
+      <a class="shop-brand" href={homeHref} aria-label="Nodo PC, inicio"><span class="shop-brand-mark" aria-hidden="true">N</span><span>NODO<span class="brand-pc">PC</span><small>HARDWARE CON CRITERIO</small></span></a>
+      <nav class="shop-nav" aria-label="Navegación principal">
+        <a href={homeHref} class:list={{ 'is-active': active === 'home' }} aria-current={active === 'home' ? 'page' : undefined}>Inicio</a>
+        <a href={catalogHref} class:list={{ 'is-active': active === 'catalog' }} aria-current={active === 'catalog' ? 'page' : undefined}>Componentes</a>
+        <a href={builderHref} class:list={{ 'is-active': active === 'builder' }} aria-current={active === 'builder' ? 'page' : undefined}>Arma tu PC <span>↗</span></a>
+      </nav>
+      <div class="shop-actions">
+        <button class="cart-trigger" id="open-cart" type="button" aria-haspopup="dialog" aria-controls="cart-dialog"><svg class="cart-icon" aria-hidden="true" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16l-1.4 13H5.4L4 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg><span>Mi selección <small data-cart-preview>Empieza tu lista</small></span><span class="cart-count" data-cart-count>0</span></button>
+      </div>
+    </header>
+
+    <nav class="shop-category-nav" aria-label="Explorar componentes por categoría">
+      <span class="shop-category-label">Explora por categoría</span>
+      <div class="shop-category-links">
+        {popularCategories.map((category) => <a href={`${catalogHref}?categoria=${category.id}#catalogo`}>{category.label}<span aria-hidden="true">↗</span></a>)}
+      </div>
+      <a class="shop-category-all" href={catalogHref}>Ver todo <span aria-hidden="true">→</span></a>
+    </nav>
+
+    <main id="contenido"><slot /></main>
+
+    <footer class="shop-footer">
+      <div class="footer-top"><a class="shop-brand" href={homeHref}><span class="shop-brand-mark" aria-hidden="true">N</span><span>NODO<span class="brand-pc">PC</span><small>HARDWARE CON CRITERIO</small></span></a><p>EL SIGUIENTE NIVEL<br />SE ARMA<span>.</span></p><a href="#contenido" class="footer-up" aria-label="Volver arriba">↑</a></div>
+      <div class="footer-directory">
+        <div class="footer-directory-intro"><span class="footer-directory-kicker">NODO PC / TIENDA CONCEPTUAL</span><p>Una experiencia para explorar componentes y preparar un armado a tu medida.</p></div>
+        <nav aria-label="Enlaces de la tienda"><strong>La tienda</strong><a href={homeHref}>Inicio</a><a href={catalogHref}>Todos los componentes</a><a href={builderHref}>Configurador de PC</a></nav>
+        <nav aria-label="Categorías de componentes"><strong>Componentes</strong>{popularCategories.slice(0, 4).map((category) => <a href={`${catalogHref}?categoria=${category.id}#catalogo`}>{category.label}</a>)}</nav>
+        <div class="footer-demo-note"><strong>Acerca de esta demo</strong><p>Los productos, precios y existencias son referenciales. Aquí no se venden componentes ni se procesan pagos.</p><a href="/proyectos/nodo-pc/">Conoce el caso en el portafolio <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="footer-bottom"><span>DEMO CONCEPTUAL / 2026 / LIMA, PERÚ</span><span>Diseño y desarrollo por Milton Blaise</span><a href="/proyectos/nodo-pc/">Ver el proyecto en el portafolio ↗</a></div>
+    </footer>
+
+    <dialog class="cart-dialog" id="cart-dialog" aria-labelledby="cart-title">
+      <div class="cart-head"><div><span class="mini-kicker">NODO PC / INVENTARIO PERSONAL</span><h2 id="cart-title">TU SELECCIÓN<span>.</span></h2></div><form method="dialog"><button class="cart-close" aria-label="Cerrar selección">×</button></form></div>
+      <div class="cart-progress"><span><b>1</b> Revisa tu selección</span><i></i><span><b>2</b> Habla con Milton</span></div>
+      <div class="cart-items" id="cart-items"></div>
+      <div class="cart-bottom"><label class="cart-order-note" for="order-note">¿Qué te gustaría crear para tu negocio? <span>Opcional</span><textarea id="order-note" rows="2" maxlength="500" placeholder="Ej. Me interesa un catálogo y configurador como este para mi marca."></textarea></label><div class="cart-total"><span>TOTAL REFERENCIAL<small>Precios capturados de Caleta; sujetos a cambio</small></span><strong id="cart-total" aria-live="polite">S/ 0</strong></div><a class="shop-button shop-button-bright cart-send is-disabled" id="send-order" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Hablar con Milton por WhatsApp <span>↗</span></a><p class="cart-demo-note"><b>Estás probando una demo.</b> El mensaje llegará a Milton Blaise, autor del portafolio, para conversar sobre una web como esta. Nodo PC es una marca conceptual; aquí no se procesan compras ni pagos.</p></div>
+    </dialog>
+    <div class="shop-toast" id="shop-toast" role="status" aria-live="polite"><span id="shop-toast-message"></span><button type="button" id="toast-open-cart">Ver selección ↗</button></div>
+
+    <script>import '../scripts/nodo-pc-shop.js';</script>
+  </body>
+</html>

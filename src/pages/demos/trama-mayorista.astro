@@ -1,0 +1,56 @@
+---
+import TramaLayout from '../../layouts/TramaLayout.astro';
+
+const collectionUrl = '/demos/trama-mayorista/coleccion/';
+const categories = [
+  { name: 'Polos', description: 'El punto de partida de cada look.', category: 'polos', image: '/images/trama/polo-basico.jpg', alt: 'Polo de algodón en tono crudo' },
+  { name: 'Camisas', description: 'Texturas ligeras. Más posibilidades.', category: 'camisas', image: '/images/trama/camisa-lino.jpg', alt: 'Camisa de lino crudo de la colección' },
+  { name: 'Pantalones', description: 'Siluetas para todos los días.', category: 'pantalones', image: '/images/trama/denim-clasico.jpg', alt: 'Jeans de corte recto y azul lavado' },
+];
+---
+
+<TramaLayout title="Trama — Ropa al por mayor, ideas en grande." currentPage="inicio">
+  <section class="trama-hero" id="inicio" aria-labelledby="hero-title">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="tiny-star" aria-hidden="true">✳</span> BUENAS PRENDAS. GRANDES IDEAS.</p>
+      <h1 id="hero-title">Tu próximo<br /><em>bestseller</em><br />empieza aquí.</h1>
+      <p class="hero-description">Ropa que conecta con tu estilo y con tu negocio. Básicos, nuevas siluetas y precios que crecen contigo.</p>
+      <a class="trama-button" href={collectionUrl}>Explorar la colección <span aria-hidden="true">↗</span></a>
+      <div class="hero-footnote"><span class="hero-line" aria-hidden="true"></span><p>Tú pones la visión.<br /><strong>Nosotros, las prendas.</strong></p></div>
+    </div>
+    <div class="hero-image">
+      <img src="/images/trama/hero-editorial.jpg" alt="Modelo con chaqueta crema y pantalón beige sobre un fondo terracota" width="1400" height="2100" fetchpriority="high" />
+      <div class="collection-label"><span>EL ARTE DE VESTIR LO COTIDIANO</span><strong>Everyday<br />essentials.</strong><a href={collectionUrl} aria-label="Explorar Everyday essentials">↗</a></div>
+      <span class="hero-image-caption">COLECCIÓN 01 — MENOS RUIDO, MÁS ESTILO</span>
+    </div>
+    <div class="hero-stamp" aria-hidden="true"><span>HECHO PARA<br />TU PRÓXIMO</span><b>gran paso.</b><i>↗</i></div>
+  </section>
+
+  <div class="value-strip" aria-label="Ventajas de compra"><span><i aria-hidden="true">↗</i> Desde 6 prendas combinadas</span><span><i aria-hidden="true">✳</i> Tallas y colores a tu elección</span><span><i aria-hidden="true">↓</i> Mejor precio por volumen</span><span><i aria-hidden="true">◇</i> Una colección, muchas posibilidades</span></div>
+
+  <section class="section-wrap" aria-labelledby="category-title">
+    <div class="section-heading"><div><p class="eyebrow">ENCUENTRA TU ESTILO</p><h2 id="category-title">Una colección.<br /><em>Tu punto de partida.</em></h2></div><a class="text-link" href={collectionUrl}>Ver todas las prendas <span aria-hidden="true">↗</span></a></div>
+    <div class="trama-category-grid">
+      {categories.map((category) => <a class="trama-category-card" href={`${collectionUrl}?categoria=${category.category}`}><div class="trama-category-image"><img src={category.image} alt={category.alt} width="1000" height="1250" loading="lazy" /></div><div class="trama-category-copy"><div><h3>{category.name}</h3><p>{category.description}</p></div><span aria-hidden="true">↗</span></div></a>)}
+    </div>
+  </section>
+
+  <section class="trama-home-wholesale" aria-labelledby="home-wholesale-title">
+    <div><p class="eyebrow">PARA NEGOCIOS QUE QUIEREN MÁS</p><h2 id="home-wholesale-title">Piensa en grande.<br />Compra mejor.</h2><p>Descubre cómo combinar tus packs y conseguir un mejor precio cuando crece tu selección.</p><a class="text-link" href="/demos/trama-mayorista/mayoristas/">Conoce los precios mayoristas <span aria-hidden="true">↗</span></a></div>
+    <div class="trama-home-discount"><span>DESCUENTO POR VOLUMEN</span><strong>−15%</strong><p>En tu pedido de muestra desde 48 prendas.<br />Conoce todas las condiciones.</p></div>
+  </section>
+
+  <section class="closing"><p class="eyebrow">TU PRIMER PEDIDO, PASO A PASO.</p><h2>Todo empieza<br /><em>con una buena elección.</em></h2><a class="trama-button" href="/demos/trama-mayorista/como-comprar/">Así funciona <span aria-hidden="true">↗</span></a></section>
+  <script is:inline>
+    (() => {
+      const legacyRoutes = {
+        '#coleccion': 'coleccion/',
+        '#mayoristas': 'mayoristas/',
+        '#como-comprar': 'como-comprar/',
+        '#preguntas': 'como-comprar/#preguntas',
+      };
+      const destination = legacyRoutes[window.location.hash];
+      if (destination) window.location.replace(`/demos/trama-mayorista/${destination}`);
+    })();
+  </script>
+</TramaLayout>

@@ -22,7 +22,7 @@ export type Project = {
   outcome: string;
   services: string[];
   palette: string;
-  artwork: 'cafe' | 'beauty' | 'digital';
+  artwork: 'cafe' | 'beauty' | 'digital' | 'pc' | 'fashion';
   coverUrl?: string | null;
   externalUrl?: string | null;
   sortOrder: number;
@@ -38,15 +38,15 @@ export const sampleProjects: Project[] = [
     year: '2026',
     number: '01',
     summary:
-      'Una experiencia digital para una marca de café de especialidad que convierte cada visita en una pausa sensorial.',
+      'Una experiencia web conceptual para una cafetería de especialidad, con fotografía, carta filtrable y una invitación a conocer su espacio.',
     challenge:
-      'Construir una presencia digital cálida y reconocible para un café que quería mostrar su origen, su producto y su forma de ver las pequeñas pausas.',
+      'Imaginar una presencia digital cálida y reconocible que conecte el producto, el origen del café y la experiencia de visitar Senda.',
     approach:
-      'Combiné una estructura editorial, una paleta inspirada en el café tostado y una navegación sencilla. La tipografía y el ritmo visual hacen que el producto sea protagonista.',
+      'Combiné una portada fotográfica, composiciones editoriales y movimiento para presentar la esencia de Senda, sus favoritos y el proceso del café. La carta por categorías y la galería permiten explorar el producto y el ambiente.',
     outcome:
-      'Un concepto de sitio que presenta la marca, el menú y su historia con una identidad consistente en cada pantalla.',
+      'El visitante puede filtrar la carta, ampliar las fotografías del espacio, conocer el origen del café y probar una reserva de demostración desde cualquier pantalla.',
     services: ['Dirección visual', 'Diseño web', 'Desarrollo front-end'],
-    palette: 'Cacao / Crema / Terracota',
+    palette: 'Espresso / Crema / Cobre',
     artwork: 'cafe',
     sortOrder: 1,
   },
@@ -64,7 +64,7 @@ export const sampleProjects: Project[] = [
     approach:
       'Diseñé un universo visual suave pero expresivo: titulares elegantes, producto en primer plano, espacios amplios y llamadas a la acción precisas.',
     outcome:
-      'Un concepto de landing page preparado para contar el producto desde la primera impresión hasta el contacto final.',
+      'Una página de ejemplo que permite conocer el sérum, entender sus beneficios y consultar cómo usarlo.',
     services: ['Dirección de arte', 'UI/UX', 'Desarrollo front-end'],
     palette: 'Lavanda / Marfil / Ciruela',
     artwork: 'beauty',
@@ -84,10 +84,50 @@ export const sampleProjects: Project[] = [
     approach:
       'Usé una grilla modular, contrastes fuertes y movimiento funcional para ordenar el contenido y hacer tangible la energía del estudio.',
     outcome:
-      'Un concepto de plataforma que deja crecer el portafolio y los servicios dentro de un mismo lenguaje visual.',
+      'Una página que reúne los servicios y los trabajos del estudio, con un acceso claro al contacto.',
     services: ['Estrategia visual', 'Diseño web', 'Desarrollo front-end'],
     palette: 'Azul eléctrico / Negro / Plata',
     artwork: 'digital',
     sortOrder: 3,
+  },
+  {
+    slug: 'nodo-pc',
+    title: 'Nodo PC',
+    subtitle: 'El siguiente nivel se arma pieza a pieza.',
+    category: 'Tienda de pedidos & configurador de PC',
+    year: '2026',
+    number: '04',
+    summary:
+      'Una tienda de hardware diseñada alrededor de una decisión: elegir una pieza o construir el equipo completo. Catálogo, configurador y pedido comparten una misma experiencia.',
+    challenge:
+      'El hardware exige comparar modelos, entender qué falta y revisar el presupuesto. El reto era ordenar esa información para quien busca un componente y para quien empieza a armar su primera PC.',
+    approach:
+      'Separé la exploración por pieza del armado completo, di prioridad a categoría, descripción y precio, y mantuve la selección a un paso. Una paleta de grafito, blanco y rojo pone el hardware en primer plano.',
+    outcome:
+      'Una tienda de ejemplo donde puedes buscar piezas, armar una computadora y revisar el pedido antes de pedir una cotización por WhatsApp. Los precios son de referencia: antes de comprar, la tienda tendría que confirmar que las piezas funcionan juntas, que están disponibles y cómo realizar el pago.',
+    services: ['Arquitectura de catálogo', 'Diseño UI/UX', 'Desarrollo front-end'],
+    palette: 'Grafito / Blanco / Rojo',
+    artwork: 'pc',
+    sortOrder: 4,
+  },
+  {
+    slug: 'trama-mayorista',
+    title: 'Trama Mayorista',
+    subtitle: 'Buenas prendas. Grandes oportunidades.',
+    category: 'Tienda de ropa al por mayor',
+    year: '2026',
+    number: '05',
+    summary:
+      'Una tienda conceptual de ropa al por mayor que reúne un catálogo por categorías, precios por volumen y un pedido fácil de revisar.',
+    challenge:
+      'Comprar para un negocio requiere elegir prendas, comparar precios según la cantidad y entender el mínimo de compra. El reto era hacer visible esa información sin interrumpir la exploración del catálogo.',
+    approach:
+      'Combiné una dirección editorial en blanco y naranja, con detalles en carbón y temas claro y oscuro, filtros de catálogo y un pedido editable. Las prendas se agregan en bloques de seis unidades y el precio se ajusta al volumen total seleccionado.',
+    outcome:
+      'Una demo donde puedes filtrar prendas, preparar un pedido desde seis unidades, ajustar cantidades en bloques de seis y copiar su resumen. Los tramos de 6–23, 24–47 y 48 o más unidades permiten explorar los precios por volumen; el pedido es de demostración y no genera una compra real.',
+    services: ['Arquitectura de catálogo', 'Diseño de tienda', 'Desarrollo front-end'],
+    palette: 'Blanco / Naranja / Carbón',
+    artwork: 'fashion',
+    sortOrder: 5,
   },
 ];

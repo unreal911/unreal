@@ -10,31 +10,32 @@ interface Props {
 }
 
 const { process, slug, title, number = '02' } = Astro.props;
+const isHardware = slug === 'nodo-pc';
 ---
 
 <section class="case-process section-pad" id="proceso" data-project={slug} aria-labelledby="case-process-title">
   <div class="cp-heading" data-reveal>
     <span class="section-index">({number} / PROCESO)</span>
     <div>
-      <h2 id="case-process-title" data-letters>De la pregunta<br /><em>a la experiencia.</em></h2>
-      <p>Así se organiza una idea antes de convertirla en una web navegable. Este caso es una exploración conceptual; el brief y las preguntas son hipótesis de diseño.</p>
+      <h2 id="case-process-title" data-letters>De la idea<br /><em>a la página.</em></h2>
+      <p>{isHardware ? 'Así organicé Nodo PC para ayudar a encontrar una pieza o preparar un equipo. Es un ejemplo creado para mi portafolio: el objetivo y las preguntas imaginan lo que necesitaría una tienda.' : 'Así organicé la idea y el contenido antes de crear la página. Es un ejemplo para mi portafolio: el objetivo y las preguntas imaginan lo que necesitaría este negocio.'}</p>
     </div>
   </div>
 
   <div class="cp-discovery" data-reveal>
     <article class="cp-brief">
-      <span class="cp-step">01 / BRIEF CONCEPTUAL</span>
+      <span class="cp-step">01 / IDEA INICIAL</span>
       <h3>Primero, entender<br />el objetivo.</h3>
       <p class="cp-context">{process.brief.context}</p>
       <dl>
         <div><dt>Objetivo</dt><dd>{process.brief.goal}</dd></div>
         <div><dt>Para quién</dt><dd>{process.brief.audience}</dd></div>
-        <div><dt>Acción principal</dt><dd>{process.brief.primaryAction}</dd></div>
+        <div><dt>Qué puede hacer el visitante</dt><dd>{process.brief.primaryAction}</dd></div>
       </dl>
     </article>
 
     <article class="cp-questions">
-      <span class="cp-step">DESCUBRIMIENTO / PREGUNTAS GUÍA</span>
+      <span class="cp-step">PREGUNTAS PARA EMPEZAR</span>
       <h3>Antes de dibujar,<br />hay que preguntar.</h3>
       <ol>
         {process.discovery.questions.map((question, index) => (
@@ -49,14 +50,14 @@ const { process, slug, title, number = '02' } = Astro.props;
     <span class="cp-client-note-icon" aria-hidden="true">↗</span>
     <div>
       <strong>Cuando trabajo contigo</strong>
-      <p>Empezamos con una conversación sobre tu negocio, tus clientes y la acción que esperas de la web. Revisamos juntos la estructura y el diseño antes de pasar al desarrollo. En este caso conceptual, esas decisiones se muestran como hipótesis.</p>
+      <p>Empezamos conversando sobre tu negocio, tus clientes y lo que quieres que hagan en tu página. Después revisamos juntos cómo se ordena la información y cómo se verá. En este ejemplo, imaginé esas necesidades para mostrarte cómo trabajo.</p>
     </div>
   </aside>
 
   <div class="cp-map" data-reveal>
     <div class="cp-map-intro">
-      <span class="cp-step">02 / MAPA DEL SITIO</span>
-      <h3>Un recorrido<br /><em>con intención.</em></h3>
+      <span class="cp-step">02 / SECCIONES DE LA PÁGINA</span>
+      <h3>La información,<br /><em>en orden.</em></h3>
       <p>Las secciones siguen el orden en que una persona necesita descubrir la propuesta y decidir qué hacer.</p>
     </div>
     <ol class="cp-map-list" aria-label={`Mapa de secciones de ${title}`}>
@@ -69,7 +70,7 @@ const { process, slug, title, number = '02' } = Astro.props;
   <div class="cp-wireframe-stage" data-reveal>
     <div class="cp-wireframe-copy">
       <span class="cp-step">03 / BOCETO DE ESTRUCTURA</span>
-      <h3>Primero la jerarquía.<br /><em>Luego los detalles.</em></h3>
+      <h3>Primero ordeno<br /><em>el contenido.</em></h3>
       <p>{process.wireframe.idea}</p>
       <ul>
         {process.wireframe.decisions.map((decision) => <li>{decision}</li>)}
@@ -78,7 +79,7 @@ const { process, slug, title, number = '02' } = Astro.props;
 
     <figure class="cp-wireframe-figure">
       <div class:list={['cp-wireframe', `cp-wireframe--${slug}`]} aria-hidden="true">
-        <div class="cp-wireframe-toolbar"><span class="cp-wireframe-dots"><i></i><i></i><i></i></span><span>wireframe / {title.toLowerCase()}</span><span>↗</span></div>
+        <div class="cp-wireframe-toolbar"><span class="cp-wireframe-dots"><i></i><i></i><i></i></span><span>boceto / {title.toLowerCase()}</span><span>↗</span></div>
         {slug === 'senda-cafe' && (
           <div class="cp-wf-cafe">
             <div class="cp-wf-cafe-logo"><b></b><span></span><b></b></div>
@@ -100,24 +101,33 @@ const { process, slug, title, number = '02' } = Astro.props;
             <div class="cp-wf-digital-main"><div class="cp-wf-digital-meta"><i></i><i></i></div><div class="cp-wf-digital-hero"><i></i><i></i><i></i><b></b></div><div class="cp-wf-digital-cards"><i></i><i></i><i></i></div></div>
           </div>
         )}
+        {isHardware && (
+          <div class="cp-wf-shop">
+            <div class="cp-wf-shop-nav"><b>NODO / PC</b><div><i></i><i></i></div><span>Pedido</span></div>
+            <div class="cp-wf-shop-hero"><div><i></i><i></i><i></i><span></span><small></small></div><b><i></i><i></i><i></i></b></div>
+            <div class="cp-wf-shop-catalog"><span>COMPONENTES</span><div class="cp-wf-shop-filters"><i></i><i></i><i></i><i></i></div><div class="cp-wf-shop-products">{[1, 2, 3].map(() => <div><b></b><i></i><small></small></div>)}</div></div>
+            <div class="cp-wf-shop-builder"><span>ARMA TU PC</span><div><i></i><i></i></div><b>→</b></div>
+          </div>
+        )}
       </div>
-      <figcaption>Esquema de composición: un boceto de bloques, antes de color y tipografía.</figcaption>
+      <figcaption>Este boceto muestra dónde van los textos, las imágenes y los botones antes de elegir colores y letras.</figcaption>
     </figure>
   </div>
 
   <div class="cp-visual-stage" data-reveal>
     <div class:list={['cp-visual-board', `cp-visual-board--${slug}`]} aria-hidden="true">
-      <div class="cp-board-top"><span>ESTUDIO VISUAL / {title.toUpperCase()}</span><span>01 — 03</span></div>
+      <div class="cp-board-top"><span>COLORES Y DISEÑO / {title.toUpperCase()}</span><span>01 — 03</span></div>
       <div class="cp-board-center">
         <span class="cp-board-orbit"></span>
-        <strong>{title}<span>.</span></strong>
-        <span class="cp-board-caption">Una dirección visual que acompaña el contenido.</span>
+        {isHardware ? <strong>NODO<span>PC</span></strong> : <strong>{title}<span>.</span></strong>}
+        <span class="cp-board-caption">{isHardware ? 'Precisión en las piezas. Claridad al elegir.' : 'Colores y letras que acompañan la información.'}</span>
+        {isHardware && <div class="cp-board-specs"><span>01 / CATÁLOGO</span><span>02 / CONFIGURADOR</span><span>03 / PEDIDO</span></div>}
       </div>
-      <div class="cp-board-bottom"><i></i><i></i><i></i><span>TIPOGRAFÍA / COLOR / RITMO</span></div>
+      <div class="cp-board-bottom"><i></i><i></i><i></i><span>{isHardware ? 'GRAFITO / BLANCO / ROJO' : 'LETRAS / COLORES / ESPACIO'}</span></div>
     </div>
     <div class="cp-visual-copy">
-      <span class="cp-step">04 / DIRECCIÓN VISUAL Y PROTOTIPO</span>
-      <h3>Dar forma<br /><em>a la experiencia.</em></h3>
+      <span class="cp-step">04 / COLORES Y DISEÑO</span>
+      <h3>Así toma forma<br /><em>la página.</em></h3>
       <p>{process.visual.direction}</p>
       <ul>
         {process.visual.decisions.map((decision) => <li>{decision}</li>)}
@@ -125,7 +135,7 @@ const { process, slug, title, number = '02' } = Astro.props;
       {process.visual.figmaUrl ? (
         <a class="cp-figma-link" href={process.visual.figmaUrl} target="_blank" rel="noopener noreferrer">Ver archivo de Figma <span aria-hidden="true">↗</span></a>
       ) : (
-        <p class="cp-prototype-note">En un encargo real revisaría este mockup contigo en Figma antes de desarrollarlo. En este ejercicio conceptual, la demo navegable funciona como prototipo final.</p>
+        <p class="cp-prototype-note">Cuando trabajamos juntos, revisamos el diseño antes de construir la página. Puedes visitar este ejemplo para recorrer sus secciones y probar sus botones.</p>
       )}
     </div>
   </div>

@@ -1,0 +1,1447 @@
+{
+  "source": "Caleta",
+  "captured_at": "2026-10-15T12:00:00-05:00",
+  "currency": "PEN",
+  "products": [
+    {
+      "id": "caleta-10663",
+      "source_sku": "10663",
+      "source_category": "teclado",
+      "name": "TECLADO, FIDDLER FD-K689 UNIVERSAL USB NEGRO",
+      "price_pen": 12,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10663"
+    },
+    {
+      "id": "caleta-10023",
+      "source_sku": "10023",
+      "source_category": "teclado",
+      "name": "HUB USB 4 EN 1 H3400 4 PUERTOS ASTROM",
+      "price_pen": 19,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10023"
+    },
+    {
+      "id": "caleta-7786",
+      "source_sku": "7786",
+      "source_category": "teclado",
+      "name": "KIT TECLADO OFICINA, MICRONIC, NORTON BLACK T100",
+      "price_pen": 30,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7786"
+    },
+    {
+      "id": "caleta-10680",
+      "source_sku": "10680",
+      "source_category": "teclado",
+      "name": "KIT TECLADO Y MOUSE OFICINA, MICRONIC, NORTON WHITE T100W USB",
+      "price_pen": 30,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10680"
+    },
+    {
+      "id": "caleta-10623",
+      "source_sku": "10623",
+      "source_category": "teclado",
+      "name": "TECLADO OFICINA GENIUS KM-100SE TECLADO Y MOUSE",
+      "price_pen": 35,
+      "stock_label": "7",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10623"
+    },
+    {
+      "id": "caleta-8969",
+      "source_sku": "8969",
+      "source_category": "teclado",
+      "name": "TECLADO GAMER MENBRANA, CYBERTEL, XTREME BLACK K505W",
+      "price_pen": 35,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8969"
+    },
+    {
+      "id": "caleta-7163",
+      "source_sku": "7163",
+      "source_category": "teclado",
+      "name": "TECLADO GAMER MENBRANA, CYBERTEL, XTREME WHITE K505W gpr-001/000546",
+      "price_pen": 38,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7163"
+    },
+    {
+      "id": "caleta-6399",
+      "source_sku": "6399",
+      "source_category": "teclado",
+      "name": "TECLADO ENKORE BRAIN GAMER USB RAINBOW",
+      "price_pen": 45,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=6399"
+    },
+    {
+      "id": "caleta-10616",
+      "source_sku": "10616",
+      "source_category": "teclado",
+      "name": "TECLADO OFICINA LOGITECH MK120 TECLADO Y MOUSE",
+      "price_pen": 49,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10616"
+    },
+    {
+      "id": "caleta-9409",
+      "source_sku": "9409",
+      "source_category": "teclado",
+      "name": "TECLADO, HALION, MECANICO KM201 COMANCHE 62 TECLAS RAINBOW RED SWITCH",
+      "price_pen": 49,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9409"
+    },
+    {
+      "id": "caleta-10356",
+      "source_sku": "10356",
+      "source_category": "teclado",
+      "name": "KIT TECLADO + MOUSE OFICINA, MICRONICS, SHELBY BLACK MIC WT805 WIFI RECARGABLE",
+      "price_pen": 50,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10356"
+    },
+    {
+      "id": "caleta-10522",
+      "source_sku": "10522",
+      "source_category": "teclado",
+      "name": "KIT GAMER TEROS TE-5014S 4 ENT 1 TECLADO + MOUSE + AURICULAR + PAD",
+      "price_pen": 59,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10522"
+    },
+    {
+      "id": "caleta-10675",
+      "source_sku": "10675",
+      "source_category": "teclado",
+      "name": "TECLADO Y MOUSE TEROS INALAMBRICO TE-5016S WHITE",
+      "price_pen": 59,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10675"
+    },
+    {
+      "id": "caleta-9407",
+      "source_sku": "9407",
+      "source_category": "teclado",
+      "name": "TECLADO, HALION, MECANICO KM203 COMANCHE 105 TECLAS RAINBOW RED SWITCH GPR-000615 de karina",
+      "price_pen": 59,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9407"
+    },
+    {
+      "id": "caleta-9392",
+      "source_sku": "9392",
+      "source_category": "teclado",
+      "name": "TECLADO OFICINA, LOGITECH, K250 WIRELESS BLUETOOTH BLANCO TECLADO",
+      "price_pen": 59,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9392"
+    },
+    {
+      "id": "caleta-7919",
+      "source_sku": "7919",
+      "source_category": "teclado",
+      "name": "KIT 3 EN 1, AUDIFONO+MOUSE+PAD ENT G1005-3",
+      "price_pen": 60,
+      "stock_label": "4",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7919"
+    },
+    {
+      "id": "caleta-9410",
+      "source_sku": "9410",
+      "source_category": "teclado",
+      "name": "KIT 2 EN 1 HALION TECLADO Y MOUSE, HARRIER K201C BK RAIMBOW RMA 01/1029",
+      "price_pen": 69,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9410"
+    },
+    {
+      "id": "caleta-10412",
+      "source_sku": "10412",
+      "source_category": "teclado",
+      "name": "TECLADO Y MOUSE ANTRYX WS-970 WIRELESS GREEN HOLDER",
+      "price_pen": 69,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10412"
+    },
+    {
+      "id": "caleta-6990",
+      "source_sku": "6990",
+      "source_category": "teclado",
+      "name": "TECLADO OFICINA, LOGITECH, MK235 WIRELESS USB SP TECLADO Y MOUSE",
+      "price_pen": 70,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=6990"
+    },
+    {
+      "id": "caleta-8954",
+      "source_sku": "8954",
+      "source_category": "teclado",
+      "name": "TECLADO MECANICO GAMER, MICRONICS, MIRAGE GK1003 BLACK RGB USB",
+      "price_pen": 79,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8954"
+    },
+    {
+      "id": "caleta-9012",
+      "source_sku": "9012",
+      "source_category": "teclado",
+      "name": "AUDIFONO GAMER, ANTRYX, IRIS-W 7.1 WHITE - YELLOW",
+      "price_pen": 80,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9012"
+    },
+    {
+      "id": "caleta-7338",
+      "source_sku": "7338",
+      "source_category": "teclado",
+      "name": "KIT OFFICE INALAMBRICO, HAVIT, KB831WB-SP BLACK",
+      "price_pen": 85,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7338"
+    },
+    {
+      "id": "caleta-6284",
+      "source_sku": "6284",
+      "source_category": "teclado",
+      "name": "TECLADO MECANICO ENKORE ROYALE ENK1003 RGB",
+      "price_pen": 85,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=6284"
+    },
+    {
+      "id": "caleta-6748",
+      "source_sku": "6748",
+      "source_category": "teclado",
+      "name": "KIT OFFICE INALAMBRICO, HAVIT, KB831WB-SP ROSA",
+      "price_pen": 89,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=6748"
+    },
+    {
+      "id": "caleta-8231",
+      "source_sku": "8231",
+      "source_category": "teclado",
+      "name": "TECLADO MECANICO GAMER, CYBERTEL, COMMANDER 3 K1013-3M RGB WIFI BT",
+      "price_pen": 89,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8231"
+    },
+    {
+      "id": "caleta-4830",
+      "source_sku": "4830",
+      "source_category": "teclado",
+      "name": "TECLADO + MOUSE , LOGITECH, MK270 WIRELESS USB BLACK",
+      "price_pen": 92,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=4830"
+    },
+    {
+      "id": "caleta-6749",
+      "source_sku": "6749",
+      "source_category": "teclado",
+      "name": "KIT OFFICE INALAMBRICO, HAVIT, KB830WB-SP BLANCO-ROJO -AZUL",
+      "price_pen": 93,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=6749"
+    },
+    {
+      "id": "caleta-6751",
+      "source_sku": "6751",
+      "source_category": "teclado",
+      "name": "KIT OFFICE INALAMBRICO, HAVIT, KB832GC-SP STARLIGTH",
+      "price_pen": 93,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=6751"
+    },
+    {
+      "id": "caleta-7510",
+      "source_sku": "7510",
+      "source_category": "teclado",
+      "name": "TECLADO MECANICO GAMER, CYBERTEL, COMMANDER 3 K1013-3M RGB BT WIFI",
+      "price_pen": 95,
+      "stock_label": "6",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7510"
+    },
+    {
+      "id": "caleta-6750",
+      "source_sku": "6750",
+      "source_category": "teclado",
+      "name": "KIT OFFICE INALAMBRICO, HAVIT, KB832GCM-SP RAINBOW",
+      "price_pen": 95,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=6750"
+    },
+    {
+      "id": "caleta-9408",
+      "source_sku": "9408",
+      "source_category": "teclado",
+      "name": "TECLADO, HALION, MECANICO KM202 COMANCHE 88 TECLAS RAINBOW RED SWITCH",
+      "price_pen": 99,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9408"
+    },
+    {
+      "id": "caleta-5332",
+      "source_sku": "5332",
+      "source_category": "teclado",
+      "name": "TECLADO + MOUSE, LOGITECH, MK295 WIRELESS USB BLACK",
+      "price_pen": 99,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=5332"
+    },
+    {
+      "id": "caleta-8689",
+      "source_sku": "8689",
+      "source_category": "teclado",
+      "name": "TECLADO GAMER, HAVIT, KB893L-SP BLACKLITE RGB NEGRO-VERDE",
+      "price_pen": 99,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8689"
+    },
+    {
+      "id": "caleta-8229",
+      "source_sku": "8229",
+      "source_category": "teclado",
+      "name": "TECLADO WARRIOR MICRONICS GK1000 BLACK RGB USB MECANICO",
+      "price_pen": 119,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8229"
+    },
+    {
+      "id": "caleta-7883",
+      "source_sku": "7883",
+      "source_category": "teclado",
+      "name": "KIT GAMING HALION DAMON HA-863C WH, TECLADO Y MOUSE SWITCH RED RGB CAJA",
+      "price_pen": 120,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7883"
+    },
+    {
+      "id": "caleta-10103",
+      "source_sku": "10103",
+      "source_category": "teclado",
+      "name": "COMBO GAMER MECANICO 3 EN 1 ICECOOL K431C WHITE MOUSE 7200DPI",
+      "price_pen": 125,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10103"
+    },
+    {
+      "id": "caleta-7579",
+      "source_sku": "7579",
+      "source_category": "teclado",
+      "name": "KIT 2 EN 1 GAMING, ANTRYX GC-3100 X2 BLACK, BLUE SWITCH",
+      "price_pen": 135,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7579"
+    },
+    {
+      "id": "caleta-7144",
+      "source_sku": "7144",
+      "source_category": "teclado",
+      "name": "TECLADO GAMER, HAVIT, KB512L-SP TRICOLOR RGB 87KEYS",
+      "price_pen": 136,
+      "stock_label": "4",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7144"
+    },
+    {
+      "id": "caleta-8955",
+      "source_sku": "8955",
+      "source_category": "teclado",
+      "name": "KIT 3 EN 1 GAMING, MIC MIRAGE GTX2003-3K BLACK, RED SWITCH RMA01/1044",
+      "price_pen": 140,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8955"
+    },
+    {
+      "id": "caleta-8956",
+      "source_sku": "8956",
+      "source_category": "teclado",
+      "name": "KIT 3 EN 1 GAMING, MIC MIRAGE GTX2003-3W WHITE, RED SWITCH",
+      "price_pen": 145,
+      "stock_label": "8",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8956"
+    },
+    {
+      "id": "caleta-4369",
+      "source_sku": "4369",
+      "source_category": "teclado",
+      "name": "TECLADO GAMER, LOGITECH, G213 PRODIGY RGB GAMING",
+      "price_pen": 180,
+      "stock_label": "5",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=4369"
+    },
+    {
+      "id": "caleta-7171",
+      "source_sku": "7171",
+      "source_category": "teclado",
+      "name": "KIT 3 EN 1 GAMING, ANTRYX GC-3100 X3 BLACK, RED SWITCH",
+      "price_pen": 180,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7171"
+    },
+    {
+      "id": "caleta-6728",
+      "source_sku": "6728",
+      "source_category": "teclado",
+      "name": "KIT 3 EN 1 GAMING, ANTRYX GC-3100 X3 BLACK, BLUE SWITCH",
+      "price_pen": 189,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=6728"
+    },
+    {
+      "id": "caleta-9897",
+      "source_sku": "9897",
+      "source_category": "teclado",
+      "name": "COMBO REDRAGON S145-SP KUMARA RGB + M724",
+      "price_pen": 209,
+      "stock_label": "8",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9897"
+    },
+    {
+      "id": "caleta-6638",
+      "source_sku": "6638",
+      "source_category": "teclado",
+      "name": "TECLADO, RAZER ORNATA V3 MECHA-MEMBRANE US LOW PROFILE CHROMA BLACK",
+      "price_pen": 219,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=6638"
+    },
+    {
+      "id": "caleta-9895",
+      "source_sku": "9895",
+      "source_category": "teclado",
+      "name": "COMBO REDRAGON S146-SP TRUNDLE + K1NG M724 TECLADO + MOUSE NEGRO",
+      "price_pen": 229,
+      "stock_label": "7",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9895"
+    },
+    {
+      "id": "caleta-9896",
+      "source_sku": "9896",
+      "source_category": "teclado",
+      "name": "TECLADO GAMER REDRAGON TRUNDLE ( K668WBO-RGB )",
+      "price_pen": 239,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9896"
+    },
+    {
+      "id": "caleta-9266",
+      "source_sku": "9266",
+      "source_category": "teclado",
+      "name": "KIT REDRAGON ESSENTIALS TECLADO+MOUSE (KUMARA+M724)",
+      "price_pen": 249,
+      "stock_label": "4",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9266"
+    },
+    {
+      "id": "caleta-8054",
+      "source_sku": "8054",
+      "source_category": "teclado",
+      "name": "TECLADO, RAZER ORNATA V3 TKL MECHA-MEMBRANE US LOW PROFILE CHROMA BLACK",
+      "price_pen": 255,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8054"
+    },
+    {
+      "id": "caleta-5608",
+      "source_sku": "5608",
+      "source_category": "teclado",
+      "name": "TECLADO MECANICO, LOGITECH, G413 SE BLACKLIGHT",
+      "price_pen": 255,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=5608"
+    },
+    {
+      "id": "caleta-5168",
+      "source_sku": "5168",
+      "source_category": "teclado",
+      "name": "TECLADO, REDRAGON, HORUS TKL WIRELESS K621-RGB-SP RED SWITCH",
+      "price_pen": 299,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=5168"
+    },
+    {
+      "id": "caleta-5162",
+      "source_sku": "5162",
+      "source_category": "teclado",
+      "name": "TECLADO, REDRAGON, HORUS TKL WIRELESS K621-RGB-SP WHITE RED SWITCH",
+      "price_pen": 309,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=5162"
+    },
+    {
+      "id": "caleta-9032",
+      "source_sku": "9032",
+      "source_category": "teclado",
+      "name": "TECLADO, RAZER, HUNTSMAN V2 TKL MINI OPTO MECANICO USC SWITCH PURPLE",
+      "price_pen": 329,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9032"
+    },
+    {
+      "id": "caleta-8680",
+      "source_sku": "8680",
+      "source_category": "teclado",
+      "name": "TECLADO GAMER, LOGITECH, G515 TKL WIRED LIGHTSYNC RGB BLACK",
+      "price_pen": 390,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8680"
+    },
+    {
+      "id": "caleta-9328",
+      "source_sku": "9328",
+      "source_category": "teclado",
+      "name": "TECLADO THUNDEROBOT VIC68 SILVER",
+      "price_pen": 426,
+      "stock_label": "4",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9328"
+    },
+    {
+      "id": "caleta-10617",
+      "source_sku": "10617",
+      "source_category": "teclado",
+      "name": "TECLADO GAMER LOGITECH G515 TKL LIGHTSPEED BT LIGHTSYNC RGB WHITE",
+      "price_pen": 495,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10617"
+    },
+    {
+      "id": "caleta-8791",
+      "source_sku": "8791",
+      "source_category": "teclado",
+      "name": "TECLADO GAMER, RAZER, BLACKWIDOW V4 MECHANICAL USB - C SWITCH GREEN US CHROMA",
+      "price_pen": 549,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8791"
+    },
+    {
+      "id": "caleta-9610",
+      "source_sku": "9610",
+      "source_category": "teclado",
+      "name": "TECLADO , LOGITECH, PRO X 60 LIGHTSPEED BT RGB WHITE OPTICO",
+      "price_pen": 689,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9610"
+    },
+    {
+      "id": "caleta-9609",
+      "source_sku": "9609",
+      "source_category": "teclado",
+      "name": "TECLADO , LOGITECH, PRO X 60 LIGHTSPEED BT RGB BLACK OPTICO",
+      "price_pen": 689,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9609"
+    },
+    {
+      "id": "caleta-9611",
+      "source_sku": "9611",
+      "source_category": "teclado",
+      "name": "TECLADO , LOGITECH, PRO X 60 TKL LIGHTSPEED USB BLACK",
+      "price_pen": 705,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9611"
+    },
+    {
+      "id": "caleta-9612",
+      "source_sku": "9612",
+      "source_category": "teclado",
+      "name": "TECLADO , LOGITECH, PRO X 60 TKL LIGHTSPEED USB WHITE",
+      "price_pen": 709,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9612"
+    },
+    {
+      "id": "caleta-5114",
+      "source_sku": "5114",
+      "source_category": "teclado",
+      "name": "TECLADO GAMER, LOGITECH, G915 TKL LIGHTSPEED RGB MECANICO",
+      "price_pen": 727,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=5114"
+    },
+    {
+      "id": "caleta-9499",
+      "source_sku": "9499",
+      "source_category": "mouse",
+      "name": "MOUSE OFICINA, ENKORE, SPRINT EKM200 AZUL WIFI",
+      "price_pen": 15,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9499"
+    },
+    {
+      "id": "caleta-8844",
+      "source_sku": "8844",
+      "source_category": "mouse",
+      "name": "MOUSE , LOGITECH , M90 USB BLACK",
+      "price_pen": 19,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8844"
+    },
+    {
+      "id": "caleta-8040",
+      "source_sku": "8040",
+      "source_category": "mouse",
+      "name": "MOUSE OFICINA, ENKORE, URBAN NEGRO INALAMBRICO",
+      "price_pen": 20,
+      "stock_label": "4",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8040"
+    },
+    {
+      "id": "caleta-9364",
+      "source_sku": "9364",
+      "source_category": "mouse",
+      "name": "MOUSE OFICINA, ENKORE, XCARET 3 ROSA INALAMBRICO RECARGABLE BT WIFI",
+      "price_pen": 25,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9364"
+    },
+    {
+      "id": "caleta-8039",
+      "source_sku": "8039",
+      "source_category": "mouse",
+      "name": "MOUSE OFICINA, ENKORE, URBAN ROSADO INALAMBRICO",
+      "price_pen": 25,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8039"
+    },
+    {
+      "id": "caleta-8041",
+      "source_sku": "8041",
+      "source_category": "mouse",
+      "name": "MOUSE OFICINA, ENKORE, URBAN BLANCO INALAMBRICO",
+      "price_pen": 25,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8041"
+    },
+    {
+      "id": "caleta-9380",
+      "source_sku": "9380",
+      "source_category": "mouse",
+      "name": "MOUSE GAMER CYBERTEL KILLER M600 USB RGB 7200DPI 8 BOTONES",
+      "price_pen": 29,
+      "stock_label": "4",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9380"
+    },
+    {
+      "id": "caleta-10179",
+      "source_sku": "10179",
+      "source_category": "mouse",
+      "name": "MOUSE, HP 235 SLIM WIRELESS",
+      "price_pen": 30,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10179"
+    },
+    {
+      "id": "caleta-5990",
+      "source_sku": "5990",
+      "source_category": "mouse",
+      "name": "MOUSE MICRONIC INALAMBRICO C/PILA DISEÑOS VARIADOS",
+      "price_pen": 31,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=5990"
+    },
+    {
+      "id": "caleta-10662",
+      "source_sku": "10662",
+      "source_category": "mouse",
+      "name": "MOUSE, CYBERTEL, DIAMOND 3 M521 MOUSE VERTICAL BT WIFI RECARGABLE",
+      "price_pen": 35,
+      "stock_label": "4",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10662"
+    },
+    {
+      "id": "caleta-10661",
+      "source_sku": "10661",
+      "source_category": "mouse",
+      "name": "MOUSE, MICRONICS, BRICKELL M755 MOUSE VERTICAL BT WIFI RECARGABLE",
+      "price_pen": 39,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10661"
+    },
+    {
+      "id": "caleta-10271",
+      "source_sku": "10271",
+      "source_category": "mouse",
+      "name": "MOUSE MICRONICS KRIPTON 3 GM801-3M BT WIFI RGB 4800DPI RECARGABLE",
+      "price_pen": 40,
+      "stock_label": "9",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10271"
+    },
+    {
+      "id": "caleta-7285",
+      "source_sku": "7285",
+      "source_category": "mouse",
+      "name": "MOUSE GAMER, T-DAGER, IMPERIAL WHITE 7200DPI 6 BOTONES",
+      "price_pen": 75,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7285"
+    },
+    {
+      "id": "caleta-8986",
+      "source_sku": "8986",
+      "source_category": "mouse",
+      "name": "MOUSE GAMING, LOGITECH, G203 LIGHTSYNC WHITE 8000DPI",
+      "price_pen": 79,
+      "stock_label": "4",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8986"
+    },
+    {
+      "id": "caleta-8829",
+      "source_sku": "8829",
+      "source_category": "mouse",
+      "name": "MOUSE GAMER, RAZER, DEATHADDER ESSENTIAL 6400DPI BLACK",
+      "price_pen": 79,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8829"
+    },
+    {
+      "id": "caleta-8987",
+      "source_sku": "8987",
+      "source_category": "mouse",
+      "name": "MOUSE GAMING, LOGITECH, G203 LIGHTSYNC BLUE 8000DPI",
+      "price_pen": 79,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8987"
+    },
+    {
+      "id": "caleta-8988",
+      "source_sku": "8988",
+      "source_category": "mouse",
+      "name": "MOUSE GAMING, LOGITECH, G203 LIGHTSYNC LILA 8000DPI",
+      "price_pen": 79,
+      "stock_label": "4",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8988"
+    },
+    {
+      "id": "caleta-8989",
+      "source_sku": "8989",
+      "source_category": "mouse",
+      "name": "MOUSE GAMING, LOGITECH, G203 LIGHTSYNC NEGRO 8000DPI",
+      "price_pen": 79,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8989"
+    },
+    {
+      "id": "caleta-8086",
+      "source_sku": "8086",
+      "source_category": "mouse",
+      "name": "MOUSE GAMING, ANTRYX, CHROME STORM 250 V2 DPI 8000 2.4GHZ BT",
+      "price_pen": 89,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8086"
+    },
+    {
+      "id": "caleta-3425",
+      "source_sku": "3425",
+      "source_category": "mouse",
+      "name": "MOUSE GAMING ANTRYX CHROME STORN XCALIBURDPI 16400, RGB (AGM-CS7500K)//12",
+      "price_pen": 99,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=3425"
+    },
+    {
+      "id": "caleta-8087",
+      "source_sku": "8087",
+      "source_category": "mouse",
+      "name": "MOUSE GAMING, ANTRYX, CHROME STORM 350 V2 DPI 8000 2.4GHZ BT TYPE C",
+      "price_pen": 119,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8087"
+    },
+    {
+      "id": "caleta-7006",
+      "source_sku": "7006",
+      "source_category": "mouse",
+      "name": "MOUSE GAMER, RAZER, COBRA 8.5K DPI SWITCH OPTICO 90M CHROMA BLACK",
+      "price_pen": 120,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7006"
+    },
+    {
+      "id": "caleta-5723",
+      "source_sku": "5723",
+      "source_category": "mouse",
+      "name": "MOUSE LOGITECH G305 LIGHTSPEED WIRELESS BLACK",
+      "price_pen": 125,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=5723"
+    },
+    {
+      "id": "caleta-7009",
+      "source_sku": "7009",
+      "source_category": "mouse",
+      "name": "MOUSE LOGITECH G305 LIGHTSPEED WIRELESS BLUE",
+      "price_pen": 130,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7009"
+    },
+    {
+      "id": "caleta-7008",
+      "source_sku": "7008",
+      "source_category": "mouse",
+      "name": "MOUSE LOGITECH G305 LIGHTSPEED WIRELESS LILA",
+      "price_pen": 130,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7008"
+    },
+    {
+      "id": "caleta-6505",
+      "source_sku": "6505",
+      "source_category": "mouse",
+      "name": "MOUSE LOGITECH G305 LIGTSPEED WIRELESS WHITE",
+      "price_pen": 130,
+      "stock_label": "7",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=6505"
+    },
+    {
+      "id": "caleta-6506",
+      "source_sku": "6506",
+      "source_category": "mouse",
+      "name": "MOUSE LOGITECH G502 HERO 25000 DPI RGB BLACK",
+      "price_pen": 180,
+      "stock_label": "9",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=6506"
+    },
+    {
+      "id": "caleta-8789",
+      "source_sku": "8789",
+      "source_category": "mouse",
+      "name": "MOUSE GAMER, RAZER, DEATHADDER V2 X HYPERSPEED 14K MULTI-DISPOSITIVO",
+      "price_pen": 193,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8789"
+    },
+    {
+      "id": "caleta-7468",
+      "source_sku": "7468",
+      "source_category": "mouse",
+      "name": "MOUSE GAMER, RAZER, OROCHI V2 18K DPI 425H WIRELESS/BT BLACK",
+      "price_pen": 209,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7468"
+    },
+    {
+      "id": "caleta-7588",
+      "source_sku": "7588",
+      "source_category": "mouse",
+      "name": "MOUSE GAMER, LOGITECH-G, G309 LIGHTSPEED WIRELESS/BT 25K DPI BLACK",
+      "price_pen": 210,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7588"
+    },
+    {
+      "id": "caleta-8028",
+      "source_sku": "8028",
+      "source_category": "mouse",
+      "name": "AJAZZ X ATTACK SHARK AJ159P WHITE",
+      "price_pen": 215,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8028"
+    },
+    {
+      "id": "caleta-10286",
+      "source_sku": "10286",
+      "source_category": "mouse",
+      "name": "MOUSE GAMER, RAZER, COBRA H. WIRELESS 26K DPI SENSOR OPTICO FOCUS CHROMA BLACK",
+      "price_pen": 329,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10286"
+    },
+    {
+      "id": "caleta-8702",
+      "source_sku": "8702",
+      "source_category": "audi",
+      "name": "AUDIFONO, HAVIT, TW-931 STEREO BLANCO/NARANJA WIRELESS",
+      "price_pen": 39,
+      "stock_label": "4",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8702"
+    },
+    {
+      "id": "caleta-7920",
+      "source_sku": "7920",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER BRAIN 5.1 EKHG1009U USB RAIMBOW C MICRO",
+      "price_pen": 39,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7920"
+    },
+    {
+      "id": "caleta-7208",
+      "source_sku": "7208",
+      "source_category": "audi",
+      "name": "AUDIFONO TWS, HAVIT, TW-969 LITE STEREO BEIGE",
+      "price_pen": 39,
+      "stock_label": "4",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7208"
+    },
+    {
+      "id": "caleta-10608",
+      "source_sku": "10608",
+      "source_category": "audi",
+      "name": "AUDIFONO HUNTER HG521 USB LED CYB",
+      "price_pen": 39,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10608"
+    },
+    {
+      "id": "caleta-8705",
+      "source_sku": "8705",
+      "source_category": "audi",
+      "name": "AUDIFONO, HAVIT, TW-982 STEREO BLANCO",
+      "price_pen": 45,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8705"
+    },
+    {
+      "id": "caleta-7521",
+      "source_sku": "7521",
+      "source_category": "audi",
+      "name": "AUDIFONO COMMANDER CB HG508 GAMER RGB USB",
+      "price_pen": 49,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7521"
+    },
+    {
+      "id": "caleta-7495",
+      "source_sku": "7495",
+      "source_category": "audi",
+      "name": "AUDIFONO WIRELESS, TRANSFORMER, TF-G06 BLACK",
+      "price_pen": 49,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7495"
+    },
+    {
+      "id": "caleta-7206",
+      "source_sku": "7206",
+      "source_category": "audi",
+      "name": "AUDIFONO TWS, HAVIT, TW-910 STEREO NEGRO",
+      "price_pen": 53,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7206"
+    },
+    {
+      "id": "caleta-7498",
+      "source_sku": "7498",
+      "source_category": "audi",
+      "name": "AUDIFONO WIRELESS, TRANSFORMER, TF-T12 YELLOW",
+      "price_pen": 55,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7498"
+    },
+    {
+      "id": "caleta-7500",
+      "source_sku": "7500",
+      "source_category": "audi",
+      "name": "AUDIFONO EARPHONES, TRANSFORMER, TF-T12 SILVER",
+      "price_pen": 57,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7500"
+    },
+    {
+      "id": "caleta-9855",
+      "source_sku": "9855",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER CYBERTEL EXPLORER H800-3 WIFI BT",
+      "price_pen": 58,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9855"
+    },
+    {
+      "id": "caleta-7494",
+      "source_sku": "7494",
+      "source_category": "audi",
+      "name": "AUDIFONO EARPHONES, TRANSFORMER, TF-T02 BLACK",
+      "price_pen": 63,
+      "stock_label": "4",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7494"
+    },
+    {
+      "id": "caleta-7493",
+      "source_sku": "7493",
+      "source_category": "audi",
+      "name": "AUDIFONO EARPHONES, TRANSFORMER, TF-T02 SILVER",
+      "price_pen": 63,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7493"
+    },
+    {
+      "id": "caleta-10098",
+      "source_sku": "10098",
+      "source_category": "audi",
+      "name": "AUDIFONO TWS HAVIT OWS915 OPEN EAR GANCHO BLANCO/VERDE",
+      "price_pen": 69,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10098"
+    },
+    {
+      "id": "caleta-7497",
+      "source_sku": "7497",
+      "source_category": "audi",
+      "name": "AUDIFONO WIRELESS, TRANSFORMER, TF-T06 SILVER",
+      "price_pen": 69,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7497"
+    },
+    {
+      "id": "caleta-7501",
+      "source_sku": "7501",
+      "source_category": "audi",
+      "name": "AUDIFONO EARPHONES, TRANSFORMER, TF-T12 BLACK",
+      "price_pen": 70,
+      "stock_label": "7",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7501"
+    },
+    {
+      "id": "caleta-7504",
+      "source_sku": "7504",
+      "source_category": "audi",
+      "name": "FAST CHARGER, TRANSFORMER HASBRO, TF-K11 NEGRO",
+      "price_pen": 79,
+      "stock_label": "8",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7504"
+    },
+    {
+      "id": "caleta-10403",
+      "source_sku": "10403",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER HAVIT H2038U BLANCO RGB 7.1 RGB USB",
+      "price_pen": 79,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10403"
+    },
+    {
+      "id": "caleta-10404",
+      "source_sku": "10404",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER HAVIT H2038U NEGRO RGB 7.1 RGB USB",
+      "price_pen": 79,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10404"
+    },
+    {
+      "id": "caleta-7478",
+      "source_sku": "7478",
+      "source_category": "audi",
+      "name": "AUDIFONO BLUETOOTH, UGREEN, HITUNE T3 ACTIVE NOISE-CANCELLING BLANCO",
+      "price_pen": 79,
+      "stock_label": "7",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7478"
+    },
+    {
+      "id": "caleta-7479",
+      "source_sku": "7479",
+      "source_category": "audi",
+      "name": "AUDIFONO BLUETOOTH, UGREEN, HITUNE T3 ACTIVE NOISE-CANCELLING NEGRO",
+      "price_pen": 79,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7479"
+    },
+    {
+      "id": "caleta-7749",
+      "source_sku": "7749",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER, ANTRYX, IRIS K GRAY 7.1 VIRTUAL USB",
+      "price_pen": 80,
+      "stock_label": "5",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7749"
+    },
+    {
+      "id": "caleta-7499",
+      "source_sku": "7499",
+      "source_category": "audi",
+      "name": "AUDIFONO EARPHONES, TRANSFORMER, TF-T11 BLACK RMA 01/989",
+      "price_pen": 81,
+      "stock_label": "4",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7499"
+    },
+    {
+      "id": "caleta-7210",
+      "source_sku": "7210",
+      "source_category": "audi",
+      "name": "AUDIFONO TWS, HAVIT, TW-958 PRO STEREO BEIGE",
+      "price_pen": 89,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7210"
+    },
+    {
+      "id": "caleta-7490",
+      "source_sku": "7490",
+      "source_category": "audi",
+      "name": "AUDIFONO EARPHONES, TRANSFORMER, TF-T01 BLACK",
+      "price_pen": 90,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7490"
+    },
+    {
+      "id": "caleta-7212",
+      "source_sku": "7212",
+      "source_category": "audi",
+      "name": "AUDIFONO TWS, HAVIT, TW-970 GAMER RGB NEGRO",
+      "price_pen": 95,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7212"
+    },
+    {
+      "id": "caleta-7150",
+      "source_sku": "7150",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER, HAVIT, GAMENOTE FUXI - H3 QUADMODE 7.1",
+      "price_pen": 105,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7150"
+    },
+    {
+      "id": "caleta-8688",
+      "source_sku": "8688",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER, HAVIT, GAMENOTE FUXI - H3 QUADMODE GRIS 7.1 BLUETOOTH",
+      "price_pen": 110,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8688"
+    },
+    {
+      "id": "caleta-5267",
+      "source_sku": "5267",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER, ANTRYX, ENIGMA SE WHITE 7.1 VIBRADOR",
+      "price_pen": 115,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=5267"
+    },
+    {
+      "id": "caleta-7553",
+      "source_sku": "7553",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER, T-DAGGER, SONA ROSA 7.1",
+      "price_pen": 115,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7553"
+    },
+    {
+      "id": "caleta-7149",
+      "source_sku": "7149",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER, HAVIT, GAMENOTE FUXI - H3 QUADMODE BLANCO 7.1",
+      "price_pen": 115,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7149"
+    },
+    {
+      "id": "caleta-4367",
+      "source_sku": "4367",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER, LOGITECH, G335 NEGRO",
+      "price_pen": 130,
+      "stock_label": "5",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=4367"
+    },
+    {
+      "id": "caleta-10390",
+      "source_sku": "10390",
+      "source_category": "audi",
+      "name": "AUDIFONO RAZER BLACKSHARK V2 X 7.1 WHITE",
+      "price_pen": 135,
+      "stock_label": "6",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10390"
+    },
+    {
+      "id": "caleta-6636",
+      "source_sku": "6636",
+      "source_category": "audi",
+      "name": "AUDIFONO, RAZER, BLACKSHARK V2 X 7.1 GREEN",
+      "price_pen": 135,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=6636"
+    },
+    {
+      "id": "caleta-10389",
+      "source_sku": "10389",
+      "source_category": "audi",
+      "name": "AUDIFONO RAZER BLACKSHARK V2 X 7.1 BLACK",
+      "price_pen": 135,
+      "stock_label": ">10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10389"
+    },
+    {
+      "id": "caleta-10543",
+      "source_sku": "10543",
+      "source_category": "audi",
+      "name": "AUDIFONOS GAMMER CORSAIR HS35 V3 CARBON",
+      "price_pen": 139,
+      "stock_label": "7",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10543"
+    },
+    {
+      "id": "caleta-9723",
+      "source_sku": "9723",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER ANTRYX APOLO 500 TRIX RGB BLACK WIFI BT",
+      "price_pen": 179,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9723"
+    },
+    {
+      "id": "caleta-7554",
+      "source_sku": "7554",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER, REDRAGON, IRE PRO",
+      "price_pen": 185,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7554"
+    },
+    {
+      "id": "caleta-10100",
+      "source_sku": "10100",
+      "source_category": "audi",
+      "name": "AUDIFONO BLUETOOTH HAVIT SPACE S1 H670BT PLATA C STUCHE",
+      "price_pen": 199,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10100"
+    },
+    {
+      "id": "caleta-10620",
+      "source_sku": "10620",
+      "source_category": "audi",
+      "name": "AUDIFONO C/MICROF LOGITECH G321 BT LIGHTSPEED WHITE",
+      "price_pen": 209,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10620"
+    },
+    {
+      "id": "caleta-10190",
+      "source_sku": "10190",
+      "source_category": "audi",
+      "name": "AUDIFONO C/MICROF LOGITECH G321 BT LIGHTSPEED BLACK",
+      "price_pen": 209,
+      "stock_label": "5",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10190"
+    },
+    {
+      "id": "caleta-10102",
+      "source_sku": "10102",
+      "source_category": "audi",
+      "name": "AUDIFONO BLUETOOTH HAVIT SPACE S1 H670BT DORADO C STUCHE",
+      "price_pen": 219,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10102"
+    },
+    {
+      "id": "caleta-8194",
+      "source_sku": "8194",
+      "source_category": "audi",
+      "name": "AUDIFONO, REDRAGON, ZEUS X H510-RGB 7.1 NEGRO RGB",
+      "price_pen": 230,
+      "stock_label": "4",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8194"
+    },
+    {
+      "id": "caleta-8196",
+      "source_sku": "8196",
+      "source_category": "audi",
+      "name": "AUDIFONO, REDRAGON, ZEUS X H510-RGB 7.1 BLANCO RGB",
+      "price_pen": 269,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8196"
+    },
+    {
+      "id": "caleta-8195",
+      "source_sku": "8195",
+      "source_category": "audi",
+      "name": "AUDIFONO, REDRAGON, ZEUS X H510-RGB 7.1 ROSADO RGB",
+      "price_pen": 269,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8195"
+    },
+    {
+      "id": "caleta-10080",
+      "source_sku": "10080",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER ASUS H1 GEN2 MIKU",
+      "price_pen": 295,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10080"
+    },
+    {
+      "id": "caleta-7322",
+      "source_sku": "7322",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER, LOGITECH, G535 LIGTHSPEED PS5/PS4/PC WIRELESS BLACK",
+      "price_pen": 329,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7322"
+    },
+    {
+      "id": "caleta-10618",
+      "source_sku": "10618",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER LOGITECH G PRO X BLACK",
+      "price_pen": 405,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10618"
+    },
+    {
+      "id": "caleta-8669",
+      "source_sku": "8669",
+      "source_category": "audi",
+      "name": "MICROFONO, RAZER, SEIREN V3 CHROMA SUPERCRDIOIDE WHITE",
+      "price_pen": 425,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8669"
+    },
+    {
+      "id": "caleta-10539",
+      "source_sku": "10539",
+      "source_category": "audi",
+      "name": "AUDIFONOS GAMMER CORSAIR HS80 MAX WIRELESS GRIS",
+      "price_pen": 459,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10539"
+    },
+    {
+      "id": "caleta-10540",
+      "source_sku": "10540",
+      "source_category": "audi",
+      "name": "AUDIFONOS GAMMER CORSAIR HS80 MAX WIRELESS WHITE",
+      "price_pen": 459,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10540"
+    },
+    {
+      "id": "caleta-9979",
+      "source_sku": "9979",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER LOGITECH G522 LIGHTSPEED WIRELESS BT USB-C RGB BLACK",
+      "price_pen": 540,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9979"
+    },
+    {
+      "id": "caleta-10622",
+      "source_sku": "10622",
+      "source_category": "audi",
+      "name": "AUDIFONO GAMER LOGITECH G522 LIGHTSPEED WIRELESS BT USB-C RGB WHITE",
+      "price_pen": 549,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10622"
+    },
+    {
+      "id": "caleta-10619",
+      "source_sku": "10619",
+      "source_category": "audi",
+      "name": "AUDIFONO LOGITECH G PRO X LIGHTSPEED WIRELESS BLACK",
+      "price_pen": 590,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10619"
+    },
+    {
+      "id": "caleta-9683",
+      "source_sku": "9683",
+      "source_category": "audi",
+      "name": "AUDIFONO, LOGITECH-G, G735 LIGHTSYNC/BLUETOOTH RGB BLACK",
+      "price_pen": 610,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9683"
+    },
+    {
+      "id": "caleta-9980",
+      "source_sku": "9980",
+      "source_category": "audi",
+      "name": "AUDIFONO LOGITECH G PRO X 2 LIGHTSPEED WIRELESS BLACK PS4 PS5",
+      "price_pen": 809,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=9980"
+    },
+    {
+      "id": "caleta-7211",
+      "source_sku": "7211",
+      "source_category": "audi",
+      "name": "AUDIFONO TWS, HAVIT, TW-952 PRO GAMER STEREO RGB NEGRO",
+      "price_pen": 999,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7211"
+    },
+    {
+      "id": "caleta-5319",
+      "source_sku": "5319",
+      "source_category": "audi",
+      "name": "AUDIFONO, ASTRO, A50 BLACK PS4 GEN 4 + BASE",
+      "price_pen": 1035,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=5319"
+    },
+    {
+      "id": "caleta-10353",
+      "source_sku": "10353",
+      "source_category": "parlante",
+      "name": "PARLANTE, MICRONIC, BOSS S305 2.0",
+      "price_pen": 33,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10353"
+    },
+    {
+      "id": "caleta-8214",
+      "source_sku": "8214",
+      "source_category": "parlante",
+      "name": "PARLANTE MICRONICS S313 CHALLENGER RGB",
+      "price_pen": 35,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8214"
+    },
+    {
+      "id": "caleta-10606",
+      "source_sku": "10606",
+      "source_category": "parlante",
+      "name": "PARLANTE MICRONICS SATURN 2.0 MICS334 2",
+      "price_pen": 35,
+      "stock_label": "6",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10606"
+    },
+    {
+      "id": "caleta-10665",
+      "source_sku": "10665",
+      "source_category": "parlante",
+      "name": "PARLANTE, PULSE SPLASH 2 SP605 TWS IPX6",
+      "price_pen": 35,
+      "stock_label": "10",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=10665"
+    },
+    {
+      "id": "caleta-8216",
+      "source_sku": "8216",
+      "source_category": "parlante",
+      "name": "PARLANTE, MICRONICS, S310 2.0 RGB MILANO",
+      "price_pen": 45,
+      "stock_label": "3",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=8216"
+    },
+    {
+      "id": "caleta-7462",
+      "source_sku": "7462",
+      "source_category": "parlante",
+      "name": "PARLANTE , TEROS, TE-6044N BLUETOOTH RGB 5W BLACK RESISTENTE AL AGUA",
+      "price_pen": 55,
+      "stock_label": "1",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7462"
+    },
+    {
+      "id": "caleta-7615",
+      "source_sku": "7615",
+      "source_category": "parlante",
+      "name": "Parlante Portátil Nomad 6.5",
+      "price_pen": 349,
+      "stock_label": "2",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=7615"
+    },
+    {
+      "id": "caleta-6080",
+      "source_sku": "6080",
+      "source_category": "parlante",
+      "name": "PARLANTE UE MEGABOOM 3 BT SUNSET RED",
+      "price_pen": 463.59,
+      "stock_label": "6",
+      "source_url": "https://www.caleta.pe/detalleprod.php?prod=6080"
+    }
+  ]
+}

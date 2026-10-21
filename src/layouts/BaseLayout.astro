@@ -3,6 +3,7 @@ import { site } from '../data/site';
 import '../styles/global.css';
 import '../styles/refinements.css';
 import '../styles/process.css';
+import '../styles/portfolio-shell.css';
 
 interface Props {
   title?: string;
@@ -18,7 +19,7 @@ const contactUrl = `${site.whatsapp}?text=${encodeURIComponent('Hola Milton, qui
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#151917" />
+    <meta name="theme-color" content="#101713" />
     <meta name="description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -41,7 +42,7 @@ const contactUrl = `${site.whatsapp}?text=${encodeURIComponent('Hola Milton, qui
           const isDark = root.dataset.theme === 'dark';
           const action = isDark ? 'Modo claro' : 'Modo oscuro';
           const toggle = document.getElementById('theme-toggle');
-          document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#151917' : '#f2f2ec');
+          document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#101713' : '#f6f6ef');
           if (!toggle) return;
           toggle.setAttribute('aria-pressed', String(isDark));
           toggle.setAttribute('aria-label', `Cambiar a ${action.toLowerCase()}`);
@@ -67,15 +68,16 @@ const contactUrl = `${site.whatsapp}?text=${encodeURIComponent('Hola Milton, qui
     <title>{title}</title>
   </head>
   <body>
+    <a class="pf-skip-link" href="#contenido">Saltar al contenido</a>
     <div class="page-shell">
       <header class="site-header" id="top">
         <a class="wordmark" href="/" aria-label="Milton Blaise, inicio">
-          <span class="wordmark-symbol">m<span class="wordmark-dot">.</span></span>
+          <span class="wordmark-symbol">mb<span class="wordmark-dot">.</span></span>
           <span class="wordmark-text">milton<br />blaise</span>
         </a>
         <nav class="site-nav" id="site-navigation" aria-label="Navegación principal">
           <a href="/#proyectos">Proyectos</a>
-          <a href="/#proceso">Proceso</a>
+          <a href="/#proceso">Cómo trabajo</a>
           <a href="/#servicios">Servicios</a>
           <a href="/#sobre-mi">Sobre mí</a>
         </nav>
@@ -88,20 +90,20 @@ const contactUrl = `${site.whatsapp}?text=${encodeURIComponent('Hola Milton, qui
           </button>
           <a href={contactUrl} class="nav-contact" target="_blank" rel="noopener noreferrer" aria-label="Hablemos por WhatsApp">
             <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 .9A14.9 14.9 0 0 0 3.2 23.5L1 31l7.7-2A15.1 15.1 0 1 0 16 .9Zm0 27.2a12 12 0 0 1-6.1-1.7l-.5-.3-4.5 1.2 1.2-4.4-.3-.5A12.2 12.2 0 1 1 16 28.1Zm6.7-9.1c-.4-.2-2.2-1.1-2.5-1.2-.3-.1-.6-.2-.8.2-.2.4-1 1.2-1.2 1.4-.2.2-.4.3-.8.1a10 10 0 0 1-3-1.8 11 11 0 0 1-2.1-2.6c-.2-.4 0-.6.2-.8l.6-.7.4-.7c.1-.2 0-.5 0-.7l-1.1-2.7c-.3-.7-.6-.6-.8-.6h-.7c-.3 0-.7.1-1 .5s-1.3 1.3-1.3 3.1 1.4 3.9a14 14 0 0 0 5.4 4.3 4.3 0 0 0 2.9.9c1.2-.2 2.2-1 2.5-1.9.3-.9.3-1.7.2-1.9-.1-.2-.3-.3-.7-.5Z"/></svg>
-            <span>Hablemos por WhatsApp</span>
+            <span>Hablemos <span aria-hidden="true">↗</span></span>
           </a>
         </div>
       </header>
 
-      <main><slot /></main>
+      <main id="contenido"><slot /></main>
 
       <footer class="site-footer" id="contacto">
         <div class="footer-topline">
-          <span>¿TIENES UNA IDEA EN MENTE?</span>
+          <span>EL PRÓXIMO PROYECTO PODRÍA SER EL TUYO.</span>
           <span>DISPONIBLE PARA NUEVOS PROYECTOS <span class="status-dot" aria-hidden="true"></span></span>
         </div>
         <div class="footer-main">
-          <p>Hagamos que<br /><em>suceda.</em></p>
+          <p>¿Le damos forma<br /><em>a tu idea?</em></p>
           <a class="footer-arrow" href={contactUrl} target="_blank" rel="noopener noreferrer" aria-label="Escribir a Milton por WhatsApp">↗</a>
         </div>
         <a class="footer-contact-link" href={contactUrl} target="_blank" rel="noopener noreferrer">Escríbeme por WhatsApp <span aria-hidden="true">↗</span></a>
@@ -113,6 +115,7 @@ const contactUrl = `${site.whatsapp}?text=${encodeURIComponent('Hola Milton, qui
         </div>
       </footer>
     </div>
+    <div class="pf-scroll-progress" data-scroll-progress aria-hidden="true"></div>
     <a class="quick-contact" href={contactUrl} target="_blank" rel="noopener noreferrer" aria-label="Cotiza tu web por WhatsApp">
       <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16 .9A14.9 14.9 0 0 0 3.2 23.5L1 31l7.7-2A15.1 15.1 0 1 0 16 .9Zm0 27.2a12 12 0 0 1-6.1-1.7l-.5-.3-4.5 1.2 1.2-4.4-.3-.5A12.2 12.2 0 1 1 16 28.1Zm6.7-9.1c-.4-.2-2.2-1.1-2.5-1.2-.3-.1-.6-.2-.8.2-.2.4-1 1.2-1.2 1.4-.2.2-.4.3-.8.1a10 10 0 0 1-3-1.8 11 11 0 0 1-2.1-2.6c-.2-.4 0-.6.2-.8l.6-.7.4-.7c.1-.2 0-.5 0-.7l-1.1-2.7c-.3-.7-.6-.6-.8-.6h-.7c-.3 0-.7.1-1 .5s-1.3 1.3-1.3 3.1 1.4 3.9a14 14 0 0 0 5.4 4.3 4.3 0 0 0 2.9.9c1.2-.2 2.2-1 2.5-1.9.3-.9.3-1.7.2-1.9-.1-.2-.3-.3-.7-.5Z"/></svg>
       <span>Cotiza tu web</span>
@@ -121,6 +124,7 @@ const contactUrl = `${site.whatsapp}?text=${encodeURIComponent('Hola Milton, qui
       import '../scripts/animations';
       import '../scripts/mobile-nav';
       import '../scripts/quick-contact';
+      import '../scripts/portfolio';
     </script>
   </body>
 </html>

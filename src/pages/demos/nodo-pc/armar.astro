@@ -1,0 +1,129 @@
+---
+import NodoPcLayout from '../../../layouts/NodoPcLayout.astro';
+import '../../../styles/demo-pc-builder.css';
+import { products, builderGroups, presets, defaultPreset, money, presetTotal } from '../../../data/nodoPc';
+
+const steps = [
+  { number: 1, title: 'Uso', detail: 'Tu punto de partida' },
+  { number: 2, title: 'Piezas', detail: 'Hazla a tu medida' },
+  { number: 3, title: 'Servicio', detail: 'Un extra de muestra' },
+  { number: 4, title: 'Revisión', detail: 'Todo en su lugar' },
+];
+const chosenPart = (category: string) => products.find((product) => defaultPreset.ids.includes(product.id) && product.category === category);
+const starterIds = new Set(presets.flatMap((preset) => preset.ids));
+const starterProducts = products.filter((product) => starterIds.has(product.id));
+---
+
+<NodoPcLayout title="Arma tu PC — Nodo PC" description="Explora una demo de configurador PC: elige un perfil, ajusta ocho componentes y descubre una experiencia de tienda a medida." active="builder">
+  <section class="pc-builder" id="armado" aria-labelledby="builder-title">
+    <div class="pc-builder-container">
+      <nav class="pc-builder-breadcrumb" aria-label="Ruta de navegación"><a href="/demos/nodo-pc/">Nodo PC</a><span aria-hidden="true">/</span><span aria-current="page">Arma tu PC</span></nav>
+
+      <div class="pc-builder-intro">
+        <div class="pc-builder-intro-main">
+          <p class="shop-eyebrow"><i></i> CONFIGURADOR NODO PC</p>
+          <h1 id="builder-title">TU EQUIPO.<br /><span>TUS REGLAS.</span></h1>
+          <p class="pc-builder-intro-lead">Elige un perfil, ajusta los componentes y revisa tu configuración en tiempo real. Ocho piezas, una PC hecha a tu medida.</p>
+          <div class="pc-intro-chips" aria-label="Así funciona"><span>01 / Elige</span><span>02 / Personaliza</span><span>03 / Revisa</span></div>
+        </div>
+        <div class="pc-builder-intro-copy" aria-hidden="true">
+          <span class="pc-hero-art-label">CONFIGURACIÓN / 001</span>
+          <div class="pc-builder-showcase"><span class="pc-showcase-ring pc-showcase-ring-one"></span><span class="pc-showcase-ring pc-showcase-ring-two"></span><span class="pc-showcase-core">N<span>·</span></span><span class="pc-showcase-tick tick-one"></span><span class="pc-showcase-tick tick-two"></span><span class="pc-showcase-tick tick-three"></span></div>
+          <span class="pc-builder-intro-meta">4 PASOS <b>·</b> 8 COMPONENTES</span>
+        </div>
+      </div>
+
+      <nav class="pc-builder-steps" aria-label="Pasos para configurar tu PC">
+        <ol>{steps.map((step) => <li><button type="button" class:list={['pc-builder-step', { 'is-active': step.number === 1 }]} data-builder-step={String(step.number)} aria-current={step.number === 1 ? 'step' : undefined} aria-controls={`builder-panel-${step.number}`}><span class="pc-step-number">{String(step.number).padStart(2, '0')}</span><span><strong>{step.title}</strong><small>{step.detail}</small></span><span class="pc-step-arrow" aria-hidden="true">↗</span></button></li>)}</ol>
+      </nav>
+      <div class="pc-builder-progress"><span id="builder-progress-text" role="status" aria-live="polite">Paso 1 de 4</span><span class="pc-builder-progress-track" aria-hidden="true"><i></i></span><span>AVANZA A TU RITMO</span></div>
+
+      <div class="pc-builder-layout">
+        <form id="builder-form" class="builder-form pc-builder-form">
+          <section class="pc-builder-panel" id="builder-panel-1" data-builder-panel="1" aria-labelledby="builder-use-title" tabindex="-1">
+            <div class="pc-panel-heading"><span class="pc-panel-kicker">NIVEL 01 / ELIGE TU PERFIL</span><h2 id="builder-use-title">¿Para qué la<br />vas a usar?</h2><p>Comienza con un equipo de muestra. Después puedes cambiar cada pieza y ver el total demo al instante.</p></div>
+
+            <div class="build-presets pc-build-presets" role="group" aria-label="Configuraciones iniciales por uso">
+              {presets.map((preset) => <button type="button" class:list={['build-preset', { 'is-active': preset.id === defaultPreset.id }]} data-select-preset={preset.id} aria-pressed={preset.id === defaultPreset.id}>
+                <span class="pc-preset-top"><span class="preset-label">{preset.id === 'essential' ? 'EL DÍA A DÍA' : preset.id === 'gaming' ? 'UNA PARTIDA MÁS' : 'TU PRÓXIMO PROYECTO'}</span><span class="pc-preset-check" aria-hidden="true">✓</span></span>
+                <span class:list={['pc-preset-art', `pc-preset-art-${preset.id}`]} aria-hidden="true"><span class="pc-preset-art-ring"></span><span class="pc-preset-art-number">{preset.id === 'essential' ? '01' : preset.id === 'gaming' ? '02' : '03'}</span></span>
+                <span class="preset-name">{preset.name}<i aria-hidden="true">↗</i></span>
+                <span class="preset-use">{preset.use}</span>
+                <span class="preset-note">{preset.note}</span>
+                <span class="preset-price"><small>Total demo</small><strong>{money(presetTotal(preset.ids))}</strong></span>
+              </button>)}
+            </div>
+
+            <div class="pc-builder-guidance"><span aria-hidden="true">↳</span><p><strong>Una base completa desde el primer paso.</strong> Cada perfil incluye ocho productos del catálogo de Caleta. El armado es un extra ilustrativo.</p></div>
+            <div class="pc-panel-actions"><a href="/demos/nodo-pc/componentes/" class="pc-builder-text-link">Prefiero buscar una pieza <span aria-hidden="true">↗</span></a><button class="shop-button shop-button-bright" type="button" data-builder-next>Personalizar piezas <span aria-hidden="true">→</span></button></div>
+          </section>
+
+          <section class="pc-builder-panel" id="builder-panel-2" data-builder-panel="2" aria-labelledby="builder-parts-title" tabindex="-1" hidden>
+            <div class="pc-panel-heading"><span class="pc-panel-kicker">NIVEL 02 / PERSONALIZA LAS PIEZAS</span><h2 id="builder-parts-title">Hazla tuya,<br /><span>pieza por pieza.</span></h2><p>Elige una pieza por categoría y sigue el total referencial. Puedes buscar más modelos en cada selector.</p></div>
+            <div class="pc-parts-toolbar"><span><i aria-hidden="true"></i> 8 COMPONENTES DE MUESTRA</span><button type="button" data-builder-reset>Empezar de nuevo <span aria-hidden="true">↺</span></button></div>
+            <div class="builder-parts pc-builder-parts">
+              {builderGroups.map((group, index) => <div class="builder-select-row pc-part-card">
+                <div class="builder-part-heading"><span class="builder-select-number">{String(index + 1).padStart(2, '0')}</span><h3 class="pc-part-heading-label" id={`build-${group.category}-label`}><span>{group.label}</span><strong>{group.type}</strong></h3><span class="builder-part-price" data-part-price={group.category}>{money(chosenPart(group.category)?.price || 0)}</span></div>
+                <p class="pc-part-tip" id={`build-${group.category}-tip`}>{group.tip}</p>
+                <select id={`build-${group.category}`} name={group.category} data-build-select data-category={group.category} aria-label={group.type} aria-describedby={`build-${group.category}-detail build-${group.category}-tip`} tabindex="-1" aria-hidden="true" hidden>{starterProducts.filter((product) => product.category === group.category).map((product) => <option value={product.id} selected={defaultPreset.ids.includes(product.id)}>{product.name} · {money(product.price)}</option>)}</select>
+                <span class="builder-part-detail sr-only" id={`build-${group.category}-detail`} data-part-detail={group.category}>{chosenPart(group.category)?.detail}</span>
+                <div class="pc-part-options" role="group" aria-labelledby={`build-${group.category}-label`} aria-describedby={`build-${group.category}-tip`}>
+                  {starterProducts.filter((product) => product.category === group.category).map((product) => starterProducts.filter((item) => item.category === group.category).length === 1 ?
+                    <div class="pc-part-option pc-part-option-fixed">
+                      <span class="pc-option-top"><span class="pc-option-brand">{product.brand}</span><span class="pc-option-check" aria-hidden="true">✓</span></span>
+                      <strong class="pc-option-name">{product.name}</strong><span class="pc-option-detail">{product.detail}</span>
+                      <span class="pc-option-bottom"><strong class="pc-option-price">{money(product.price)}</strong><span class="pc-option-state">Incluida en tu equipo</span></span>
+                    </div> :
+                    <button class="pc-part-option" type="button" data-build-option={product.id} data-build-category={group.category} aria-pressed={defaultPreset.ids.includes(product.id)}>
+                      <span class="pc-option-top"><span class="pc-option-brand">{product.brand}</span><span class="pc-option-check" aria-hidden="true">✓</span></span>
+                      <strong class="pc-option-name">{product.name}</strong><span class="pc-option-detail">{product.detail}</span>
+                      <span class="pc-option-bottom"><strong class="pc-option-price">{money(product.price)}</strong><span class="pc-option-state"><span class="pc-option-state-selected">Seleccionado</span><span class="pc-option-state-available">Elegir <span aria-hidden="true">＋</span></span></span></span>
+                    </button>)}
+                </div>
+              </div>)}
+            </div>
+            <div class="pc-platform-note"><span aria-hidden="true">⌘</span><p><strong>Comprueba la compatibilidad antes de comprar.</strong> Socket, memoria, conectores, potencia y medidas pueden variar entre modelos.</p></div>
+            <div class="pc-panel-actions"><button class="pc-builder-back" type="button" data-builder-back><span aria-hidden="true">←</span> Volver al uso</button><button class="shop-button shop-button-bright" type="button" data-builder-next>Ver extra de muestra <span aria-hidden="true">→</span></button></div>
+          </section>
+
+          <section class="pc-builder-panel" id="builder-panel-3" data-builder-panel="3" aria-labelledby="builder-service-title" tabindex="-1" hidden>
+            <div class="pc-panel-heading"><span class="pc-panel-kicker">NIVEL 03 / EXTRA DE MUESTRA</span><h2 id="builder-service-title">¿Lista para<br /><span>encender?</span></h2><p>Simula un servicio de armado por S/ 180. Es parte de la demo y actualiza el total de muestra.</p></div>
+            <div class="pc-parts-only"><span class="pc-service-symbol" aria-hidden="true">08</span><div><span class="pc-panel-kicker">OPCIÓN BASE</span><h3>Solo componentes</h3><p>Las ocho piezas de muestra, sin el extra de armado.</p></div><span class="pc-service-base">BASE</span></div>
+            <label class="assembly-option pc-assembly-option"><input type="checkbox" id="assembly-option" name="assembly" /><span class="fake-check" aria-hidden="true">✓</span><span><strong>Añadir armado simulado</strong><small>Activa este extra de ejemplo y mira el nuevo total.</small></span><b>+ S/ 180</b></label>
+            <div class="pc-service-includes"><p>ASÍ SE PRESENTA UN EXTRA EN LA DEMO</p><ul><li><span aria-hidden="true">01</span><div><strong>Elección opcional</strong><span>El visitante decide si lo suma.</span></div></li><li><span aria-hidden="true">02</span><div><strong>Precio visible</strong><span>El costo aparece antes de avanzar.</span></div></li><li><span aria-hidden="true">03</span><div><strong>Total actualizado</strong><span>El resumen cambia al marcar la casilla.</span></div></li></ul></div>
+            <div class="pc-builder-guidance"><span aria-hidden="true">↳</span><p>La tarifa de S/ 180 es ilustrativa. Muestra cómo una tienda puede presentar extras y actualizar precios al instante.</p></div>
+            <div class="pc-panel-actions"><button class="pc-builder-back" type="button" data-builder-back><span aria-hidden="true">←</span> Volver a piezas</button><button class="shop-button shop-button-bright" type="button" data-builder-next>Revisar mi PC <span aria-hidden="true">→</span></button></div>
+          </section>
+
+          <section class="pc-builder-panel" id="builder-panel-4" data-builder-panel="4" aria-labelledby="builder-review-title" tabindex="-1" hidden>
+            <div class="pc-panel-heading"><span class="pc-panel-kicker">NIVEL 04 / REVISIÓN FINAL</span><h2 id="builder-review-title">Tu próxima PC.<br /><span>Ya tiene forma.</span></h2><p>Revisa las piezas, el extra y el total de muestra. Después guarda este equipo en tu selección demo.</p></div>
+            <div class="pc-review-stamp" aria-hidden="true"><span class="pc-review-graphic"><i></i><b>N</b></span><span>UNA IDEA.<br />OCHO PIEZAS.<br /><em>TU EQUIPO.</em></span><span class="pc-review-stamp-code">NODO / BUILD</span></div>
+            <dl class="pc-review-specs" data-build-review-specs>{builderGroups.map((group) => <div><dt>{group.type}</dt><dd>{chosenPart(group.category)?.name}</dd></div>)}</dl>
+            <div class="pc-review-service"><span>Armado simulado</span><strong data-build-review-assembly>No incluido</strong></div>
+            <div class="pc-review-total"><span>TOTAL REFERENCIAL<small>Precios de Caleta capturados / PEN</small></span><strong data-mobile-build-total>{money(presetTotal(defaultPreset.ids))}</strong></div>
+            <p class="pc-review-compatibility" data-build-review-compatibility role="status">Esta configuración de muestra usa AM5 + DDR5. El aviso ilustra una revisión técnica.</p>
+            <button class="pc-builder-recommendation pc-review-recommendation" type="button" data-recommend-psu hidden>Elegir fuente de 850 W <span aria-hidden="true">→</span></button>
+            <div class="pc-review-checklist"><h3>¿Te imaginas una web así para tu negocio?</h3><ul><li><span aria-hidden="true">✓</span><p>Tu PC se guarda como <strong>un equipo completo</strong> en la selección de esta demo.</p></li><li><span aria-hidden="true">✓</span><p>Puedes revisar la selección y <strong>escribir a Milton por WhatsApp sobre una web como esta.</strong></p></li><li><span aria-hidden="true">↳</span><p>Los productos y precios proceden de una captura de Caleta y pueden cambiar. <strong>Nodo PC es una demo, no una tienda real.</strong></p></li></ul></div>
+            <button class="shop-button shop-button-bright builder-add pc-review-submit" type="submit">Añadir PC a mi selección <span aria-hidden="true">＋</span></button>
+            <p class="pc-review-footnote">Demo de portafolio · precios de muestra · sin compras reales.</p>
+            <div class="pc-panel-actions pc-review-actions"><button class="pc-builder-back" type="button" data-builder-back><span aria-hidden="true">←</span> Volver al servicio</button><button class="pc-builder-text-link" type="button" data-builder-step="2">Editar piezas <span aria-hidden="true">↗</span></button></div>
+          </section>
+        </form>
+
+        <aside class="build-summary pc-build-summary" aria-labelledby="summary-title">
+          <div class="summary-top"><span class="mini-kicker">TU CONFIGURACIÓN DEMO</span><span class="summary-status"><i></i> 8 PIEZAS</span></div>
+          <h3 id="summary-title">Nodo <span id="build-name">{defaultPreset.name}.</span></h3>
+          <div class="summary-rig" aria-hidden="true"><span class="summary-rig-grid"></span><span class="summary-rig-mark">N<span>·</span></span><span class="summary-rig-label">HECHA<br />PARA TI.</span></div>
+          <dl class="summary-specs" id="build-summary-specs">{builderGroups.map((group) => <div><dt>{group.type}</dt><dd>{chosenPart(group.category)?.name}</dd></div>)}</dl>
+          <div class="summary-cost"><span>Componentes <strong id="build-parts-total">{money(presetTotal(defaultPreset.ids))}</strong></span><span>Armado simulado <strong id="build-assembly-total">No incluido</strong></span></div>
+          <div class="pc-summary-actionbar"><div class="builder-total"><span>TOTAL DEMO <small>Precios de muestra / PEN</small></span><strong id="build-total" aria-live="polite" aria-atomic="true">{money(presetTotal(defaultPreset.ids))}</strong></div><button class="pc-summary-review" type="button" data-builder-step="4" aria-controls="builder-panel-4">Revisar mi PC <span aria-hidden="true">↗</span></button></div>
+          <p class="build-compatibility" id="build-compatibility" role="status"><span aria-hidden="true">↳</span> Esta configuración de muestra usa AM5 + DDR5. El aviso ilustra una revisión técnica.</p>
+          <button class="pc-builder-recommendation" type="button" data-recommend-psu hidden>Elegir fuente de 850 W <span aria-hidden="true">→</span></button>
+          <button class="builder-cancel-edit" id="cancel-edit-build" type="button" hidden>Cancelar cambios y conservar el armado anterior</button>
+          <p class="builder-footnote">Tu selección se guarda en este navegador.<br />Puedes volver y seguir donde la dejaste.</p>
+        </aside>
+      </div>
+      <div class="pc-builder-bottom-note"><span>NODO PC / HECHO PIEZA POR PIEZA.</span><p>Una muestra de lo que una web hecha a medida puede hacer por tu negocio.</p></div>
+    </div>
+  </section>
+</NodoPcLayout>

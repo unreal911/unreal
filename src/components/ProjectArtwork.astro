@@ -1,5 +1,6 @@
 ---
 import type { Project } from '../data/site';
+import catalogRows from '../data/nodoPcCatalog.json';
 
 interface Props {
   project: Project;
@@ -7,10 +8,11 @@ interface Props {
 }
 
 const { project, priority = false } = Astro.props;
+const pcArtwork = catalogRows.find((product) => product.id === 'caleta-8731');
 ---
 
 <div class:list={['project-artwork', `artwork-${project.artwork}`]}>
-  {project.coverUrl ? (
+  {project.coverUrl && !['nodo-pc', 'trama-mayorista'].includes(project.slug) ? (
     <img
       class="artwork-image"
       src={project.coverUrl}
@@ -19,16 +21,12 @@ const { project, priority = false } = Astro.props;
       decoding="async"
     />
   ) : project.artwork === 'cafe' ? (
-    <div class="artwork-stage cafe-stage" aria-hidden="true">
-      <div class="cafe-halo"></div>
-      <div class="cafe-poster">
-        <span class="poster-eyebrow">CAFÉ DE ORIGEN · HECHO PARA DISFRUTAR</span>
-        <span class="cafe-logotype">senda<span>.</span></span>
-        <div class="cafe-cup"><span></span></div>
-        <span class="poster-bottom">UNA PAUSA<br />A TU MANERA</span>
-        <span class="poster-bottom poster-bottom-right">EST. 2026<br />PERÚ</span>
-      </div>
-      <span class="cafe-side-label">SABOR QUE ACOMPAÑA</span>
+    <div class="artwork-stage senda-cover" aria-hidden="true">
+      <img src="/images/senda/hero-coffee.webp" alt="" loading={priority ? 'eager' : 'lazy'} decoding="async" />
+      <div class="senda-cover-top"><span>CAFÉ DE ESPECIALIDAD</span><span>LIMA, PERÚ</span></div>
+      <span class="senda-cover-brand">senda<i>.</i></span>
+      <span class="senda-cover-copy">Las cosas buenas<br />toman <em>su tiempo.</em></span>
+      <span class="senda-cover-bottom">CAFÉ DE ORIGEN · HECHO CON CALMA <i>✳</i></span>
     </div>
   ) : project.artwork === 'beauty' ? (
     <div class="artwork-stage beauty-stage" aria-hidden="true">
@@ -39,7 +37,7 @@ const { project, priority = false } = Astro.props;
       <div class="beauty-bottle"><div class="bottle-cap"></div><div class="bottle-body"><span>lumé</span><small>DAILY GLOW<br />SERUM</small><i>30 ML / 1.0 FL OZ</i></div></div>
       <span class="beauty-bottomline">FEEL GOOD IN YOUR SKIN.</span>
     </div>
-  ) : (
+  ) : project.artwork === 'digital' ? (
     <div class="artwork-stage digital-stage" aria-hidden="true">
       <div class="digital-grid"></div>
       <span class="digital-topline">INDEPENDENT DIGITAL STUDIO / 2026</span>
@@ -48,5 +46,95 @@ const { project, priority = false } = Astro.props;
       <span class="digital-bottomline">NEW THINKING.<br />NEXT EXPERIENCES.</span>
       <span class="digital-mark">N/</span>
     </div>
+  ) : project.artwork === 'fashion' ? (
+    <div class="artwork-stage fashion-stage" aria-hidden="true">
+      <div class="fashion-art-topline"><span>ROPA AL POR MAYOR</span><span>COLECCIÓN ESENCIAL / 2026</span></div>
+      <div class="fashion-art-brand">trama<span>MAYORISTA</span></div>
+      <span class="fashion-art-copy">Buenas prendas.<br /><em>Grandes<br />oportunidades.</em></span>
+      <div class="fashion-art-studio">
+        <span class="fashion-art-studio-label">ESENCIALES QUE SE VENDEN BIEN.</span>
+        <div class="fashion-art-sun"></div>
+        <svg class="fashion-art-shirt" viewBox="0 0 350 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="trama-shirt-knit" x1="100" y1="100" x2="310" y2="330" gradientUnits="userSpaceOnUse"><stop stop-color="#f8f1e4" /><stop offset=".45" stop-color="#e8dcc6" /><stop offset="1" stop-color="#c6b898" /></linearGradient>
+          </defs>
+          <path d="M176 64v-9c0-16 24-16 24-30 0-14-22-16-26-3" stroke="#c4aa7e" stroke-width="4" stroke-linecap="round" />
+          <path d="m177 57-95 53c-8 5-5 13 4 13h182c9 0 12-8 4-13l-95-53Z" stroke="#c4aa7e" stroke-width="4" stroke-linejoin="round" />
+          <path d="m130 85-49 22-49 73 53 35 24-34-9 177c43 14 109 14 153 0l-9-177 24 34 53-35-49-73-48-22c-8 29-85 29-94 0Z" fill="url(#trama-shirt-knit)" stroke="#bcb093" stroke-width="1.3" />
+          <path d="M130 85c7 42 87 42 94 0l-12-5c-7 28-65 28-70 0l-12 5Z" fill="#c4b79b" />
+          <path d="m81 107 28 74M272 107l-28 74M100 348c44 12 109 12 153 0M37 173l53 35M263 208l53-35" stroke="#c3b69a" stroke-width="2" />
+          <path d="m119 175-6 162M234 169l7 168M150 133l-7 88M201 133l8 87" stroke="#c8ba9d" stroke-opacity=".65" stroke-width="1.3" />
+          <path d="m184 126 18 11-5 46-27-4 1-45 13-8Z" fill="#f4ecd9" stroke="#b4a384" />
+          <circle cx="182" cy="139" r="2.6" fill="#958363" />
+          <path d="m183 138-2-26" stroke="#8f7c5d" />
+          <path d="m177 151 14 2M176 157l14 2M176 163l10 1" stroke="#9a634a" stroke-width="1.5" />
+        </svg>
+        <span class="fashion-art-product">01 / POLO ESENCIAL<br /><strong>ALGODÓN · TALLAS S–XL</strong></span>
+      </div>
+      <div class="fashion-art-minimum"><strong>06</strong><span>UNIDADES<br />PARA EMPEZAR</span></div>
+      <div class="fashion-art-bottomline"><span>CATÁLOGO / PRECIO POR VOLUMEN / TU PEDIDO</span><span>DEMO WEB — 05 ↗</span></div>
+    </div>
+  ) : (
+    <div class="artwork-stage pc-stage" aria-hidden="true">
+      <div class="pc-art-topline"><span>NODO PC / COMPONENTES CON PROPÓSITO</span><span>DESIGN STUDY — 04</span></div>
+      <span class="pc-art-wordmark">NODO<span>PC</span></span>
+      <span class="pc-art-caption">El siguiente nivel<br />se arma pieza a pieza.</span>
+      <div class="pc-art-build">
+        <span class="pc-art-build-label">EXPLORA. ARMA. REVISA.</span>
+        <div><span><i>01</i> Catálogo</span><span><i>02</i> Tu equipo</span><span><i>03</i> Pedido ↗</span></div>
+      </div>
+      <img class="pc-art-machine" src={pcArtwork?.official_image_url} alt="" loading={priority ? 'eager' : 'lazy'} decoding="async" referrerpolicy="no-referrer" />
+      <div class="pc-art-bottomline"><span>HARDWARE / DISEÑO & DESARROLLO</span><span>CONCEPTO WEB — 2026 ↗</span></div>
+    </div>
   )}
 </div>
+
+<style>
+  .senda-cover{background:#172016;color:#f2eddf;isolation:isolate;font-family:Georgia,serif}
+  .senda-cover:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#0e170edb,#101a0e55 65%,#101a0e11);z-index:-1}
+  .senda-cover>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2}
+  .senda-cover-top{position:absolute;left:5%;right:5%;top:7%;display:flex;justify-content:space-between;font:500 1.05cqw Manrope,Arial,sans-serif;letter-spacing:.12em;padding-bottom:2cqw;border-bottom:1px solid #f1e6d32b}
+  .senda-cover-brand{position:absolute;left:5%;top:18%;font-size:8cqw;letter-spacing:-.08em;line-height:1}
+  .senda-cover-brand i{font-style:normal;color:#c28e64}
+  .senda-cover-copy{position:absolute;left:5%;top:43%;font-size:6.2cqw;line-height:1.02;letter-spacing:-.055em}
+  .senda-cover-copy em{font-weight:400;color:#d3a67f}
+  .senda-cover-bottom{position:absolute;left:5%;right:5%;bottom:7%;font:500 .95cqw Manrope,Arial,sans-serif;letter-spacing:.13em;display:flex;align-items:center;justify-content:space-between}
+  .senda-cover-bottom i{font-size:4.5cqw;color:#d3a67f;font-style:normal}
+  .fashion-stage{background:#ffffff;color:#29211c;font-family:Manrope,Arial,sans-serif}
+  .fashion-art-topline,.fashion-art-bottomline{position:absolute;left:5%;right:5%;z-index:4;display:flex;justify-content:space-between;align-items:center;gap:3cqw;font-size:.85cqw;line-height:1.3;letter-spacing:.13em;font-weight:700}
+  .fashion-art-topline{top:6%;padding-bottom:1.7cqw;border-bottom:1px solid #29211c33}
+  .fashion-art-topline>span:last-child{color:#fff8f2}
+  .fashion-art-brand{position:absolute;left:5%;top:19%;font:400 11cqw/.75 Georgia,serif;letter-spacing:-.075em}
+  .fashion-art-brand span{display:block;margin-top:1.7cqw;font:700 .9cqw/1 Manrope,Arial,sans-serif;letter-spacing:.5em;padding-left:.4cqw;color:#c84b08}
+  .fashion-art-copy{position:absolute;z-index:3;left:5%;top:44%;font:400 3.5cqw/1.04 Georgia,serif;letter-spacing:-.04em}
+  .fashion-art-copy em{color:#b7460c;font-weight:400}
+  .fashion-art-studio{position:absolute;inset:0 0 0 48%;background:#9e3c0a;color:#fff8f2;overflow:hidden}
+  .fashion-art-studio-label{position:absolute;z-index:3;left:10%;top:19%;font-size:.65cqw;letter-spacing:.18em}
+  .fashion-art-sun{position:absolute;width:40cqw;height:40cqw;border-radius:50%;left:9%;top:25%;background:#ed7b2d}
+  .fashion-art-shirt{position:absolute;width:86%;height:81%;left:9%;top:13%;filter:drop-shadow(.9cqw 1.3cqw .8cqw #3b1a0b66);transform:rotate(9deg)}
+  .fashion-art-product{position:absolute;right:10%;bottom:16%;text-align:right;font-size:.75cqw;line-height:1.6;letter-spacing:.13em}
+  .fashion-art-product strong{font-size:.65cqw;font-weight:400;opacity:.65}
+  .fashion-art-minimum{position:absolute;z-index:3;left:5%;bottom:16%;display:flex;align-items:center;gap:1.3cqw}
+  .fashion-art-minimum strong{font:400 5cqw/.8 Georgia,serif;letter-spacing:-.06em}
+  .fashion-art-minimum>span{font-size:.7cqw;font-weight:700;line-height:1.5;letter-spacing:.1em}
+  .fashion-art-bottomline{bottom:6%;font-size:.65cqw;padding-top:1.4cqw}
+  .fashion-art-bottomline:before{content:'';position:absolute;top:0;left:0;width:44%;border-top:1px solid #29211c33}
+  .fashion-art-bottomline>span:last-child{color:#fff8f2}
+  @media(max-width:620px){
+    .fashion-art-topline{font-size:1.2cqw;top:5%;align-items:start}
+    .fashion-art-topline>span:last-child{max-width:42%;text-align:right}
+    .fashion-art-brand{top:20%;font-size:13cqw}
+    .fashion-art-brand span{font-size:1.3cqw;margin-top:2.2cqw;letter-spacing:.3em}
+    .fashion-art-copy{font-size:4.5cqw;top:44%}
+    .fashion-art-studio-label{top:19%;font-size:.95cqw;line-height:1.4;max-width:70%}
+    .fashion-art-shirt{width:98%;left:4%;top:20%;height:70%}
+    .fashion-art-sun{width:47cqw;height:47cqw;left:7%;top:33%}
+    .fashion-art-product{font-size:1cqw;bottom:15%;right:8%}
+    .fashion-art-product strong{font-size:.85cqw}
+    .fashion-art-minimum{bottom:16%;gap:1.7cqw}
+    .fashion-art-minimum strong{font-size:7cqw}
+    .fashion-art-minimum>span{font-size:1cqw}
+    .fashion-art-bottomline{font-size:.9cqw;align-items:start;bottom:5%;padding-top:2.5cqw}
+    .fashion-art-bottomline>span{max-width:40%;line-height:1.6}
+  }
+</style>

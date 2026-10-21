@@ -1,0 +1,113 @@
+---
+import NodoPcLayout from '../../../../layouts/NodoPcLayout.astro';
+import catalog from '../../../../data/nodoPcCatalog.json';
+import { builderGroups, categories, money } from '../../../../data/nodoPc';
+import '../../../../styles/demo-pc-detail.css';
+
+export function getStaticPaths() {
+  return catalog.filter((product) => product.published).map((product) => ({
+    params: { id: product.id },
+    props: {
+      product,
+      related: catalog.filter((candidate) => candidate.published && candidate.category === product.category && candidate.id !== product.id).slice(0, 4),
+    },
+  }));
+}
+
+const { product, related } = Astro.props;
+const category = categories.find((item) => item.id === product.category);
+const categoryLabel = category?.label ?? product.type;
+const categoryHref = '/demos/nodo-pc/componentes/?categoria=' + encodeURIComponent(product.category) + '#catalogo';
+const hasBuilder = builderGroups.some((group) => group.category === product.category);
+const capturedAt = product.captured_at ? new Intl.DateTimeFormat('es-PE', { timeZone: 'America/Lima' }).format(new Date(product.captured_at)) : 'fecha por confirmar';
+const specValue = (value: unknown): string => Array.isArray(value) ? value.join(', ') : value && typeof value === 'object' ? Object.values(value).join(', ') : String(value ?? '');
+const specification = Object.entries(product.specs ?? {}).map(([key, value]) => ({
+  label: key.replaceAll('_', ' ').replace(/([a-z])([A-Z])/g, '$1 $2').replace(/^./, (letter) => letter.toUpperCase()),
+  value: specValue(value),
+})).filter((item) => item.value);
+const officialImage = (item: typeof product) => {
+  if (!item.official_url || !item.official_image_url) return null;
+  try {
+    const url = new URL(item.official_image_url);
+    if (url.protocol !== 'https:' || /(^|\.)caleta\.(pe|com)$/i.test(url.hostname)) return null;
+    return url.href;
+  } catch { return null; }
+};
+const imageUrl = officialImage(product);
+const artCode: Record<string, string> = { board: 'MB', power: 'PSU', cooling: 'COOL', keyboard: 'KEY', mouse: 'MOUSE', headset: 'AUDIO', speaker: 'SPK' };
+const visualCode = artCode[product.category] ?? product.category.toUpperCase();
+const productHref = (id: string) => '/demos/nodo-pc/producto/' + encodeURIComponent(id) + '/';
+---
+
+<NodoPcLayout title={product.name + ' — Nodo PC / Demo'} description={'Ficha de ' + product.name + '. Datos y precio referenciales de Caleta; imagen de la marca cuando está verificada.'} active="catalog">
+  <article class="pc-detail-page" data-detail-id={product.id}>
+    <nav class="pc-detail-breadcrumb" aria-label="Ruta de navegación">
+      <a href="/demos/nodo-pc/">Inicio</a><span aria-hidden="true">/</span>
+      <a href="/demos/nodo-pc/componentes/">Componentes</a><span aria-hidden="true">/</span>
+      <a href={categoryHref}>{categoryLabel}</a><span aria-hidden="true">/</span>
+      <span aria-current="page">{product.brand || product.type}</span>
+    </nav>
+
+    <div class="pc-detail-hero">
+      <div class:list={['pc-detail-visual', 'pc-detail-visual--' + product.category]} data-detail-visual>
+        <div class="pc-detail-visual-top"><span>VISTA DE PRODUCTO</span><span data-detail-code>{product.id.replace('caleta-', '#')}</span></div>
+        <div class="pc-detail-stage">
+          <div class="pc-detail-fallback" aria-hidden="true"><span data-detail-pixel-code>{visualCode}</span><small>{product.brand || 'NODO PC'}</small></div>
+          <img data-detail-image src={imageUrl ?? undefined} alt={'Imagen oficial de ' + product.name} hidden={!imageUrl} referrerpolicy="no-referrer" decoding="async" />
+        </div>
+        <div class="pc-detail-visual-bottom"><span data-detail-image-caption>{imageUrl ? 'IMAGEN DE LA MARCA' : 'SIN IMAGEN OFICIAL VERIFICADA'}</span><span>NODO PC / PRODUCTO</span></div>
+      </div>
+
+      <div class="pc-detail-main-info">
+        <p class="pc-detail-kicker" data-detail-kicker>{categoryLabel.toUpperCase()} / {product.id.toUpperCase()}</p>
+        <div class="pc-detail-identifiers"><span data-detail-brand>{product.brand || 'Marca por confirmar'}</span><span data-detail-type>{product.type}</span><span data-detail-quantity data-product-quantity={product.id} hidden></span></div>
+        <h1 data-detail-name>{product.name}</h1>
+        <p class="pc-detail-intro" data-detail-description>{product.description || 'Descripción de Caleta pendiente para este producto.'}</p>
+        <div class="pc-detail-price-panel">
+          <div><small>PRECIO REFERENCIAL EN CALETA</small><strong data-detail-price>{product.price_pen ? money(product.price_pen) : 'Por confirmar'}</strong><span data-detail-captured>Capturado el {capturedAt}</span></div>
+          <p data-detail-stock>{product.stock_text ? 'Stock reportado: ' + product.stock_text : 'Stock por confirmar en Caleta'}</p>
+        </div>
+        <div class="pc-detail-actions">
+          <button type="button" data-add-product={product.id} disabled><span data-detail-add-label>Añadir a mi selección</span><span aria-hidden="true">＋</span></button>
+          <a data-detail-builder href={'/demos/nodo-pc/armar/?pieza=' + encodeURIComponent(product.id)} hidden={!hasBuilder}>Probar en configurador <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="pc-detail-demo-note">Demo de portafolio. La selección no procesa compras ni pagos.</p>
+      </div>
+    </div>
+
+    <div class="pc-detail-lower">
+      <section class="pc-detail-section" aria-labelledby="detail-specs-title">
+        <p class="pc-detail-section-index">INFORMACIÓN DEL PRODUCTO</p>
+        <h2 id="detail-specs-title">Detalles de la pieza</h2>
+        <div data-detail-specs>
+          {specification.length ? <dl class="pc-detail-specs">{specification.map((item) => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl> : <p class="pc-detail-pending">La ficha de Caleta no publica más especificaciones de este modelo.</p>}
+        </div>
+        <dl class="pc-detail-basics">
+          <div><dt>Categoría</dt><dd data-detail-category>{categoryLabel}</dd></div>
+          <div><dt>Marca</dt><dd data-detail-brand-basic>{product.brand || 'Por confirmar'}</dd></div>
+          <div><dt>Código en Caleta</dt><dd data-detail-sku>{product.source_sku}</dd></div>
+        </dl>
+      </section>
+
+      <section class="pc-detail-section pc-detail-section--sources" aria-labelledby="detail-sources-title">
+        <p class="pc-detail-section-index">ORIGEN DE LA INFORMACIÓN</p>
+        <h2 id="detail-sources-title">Consulta las fuentes</h2>
+        <p>Producto, descripción, precio y disponibilidad referenciales de Caleta. Cuando existe una imagen oficial verificada, se muestra en esta ficha desde la web de la marca.</p>
+        <div class="pc-detail-source-list">
+          <a data-detail-official href={product.official_url ?? undefined} target="_blank" rel="noopener noreferrer" hidden={!product.official_url}><span>01</span><strong>Ver ficha oficial de la marca</strong><span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="pc-detail-source-date" data-detail-date>Datos de Caleta capturados el {capturedAt}. Pueden cambiar en la tienda de origen.</p>
+      </section>
+    </div>
+
+    <section class="pc-detail-related" aria-labelledby="detail-related-title">
+      <div class="pc-detail-related-heading"><div><p class="pc-detail-section-index">CONTINÚA EXPLORANDO</p><h2 id="detail-related-title">Más en {categoryLabel}</h2></div><a class="pc-detail-back" href={categoryHref}>Ver toda la categoría <span aria-hidden="true">↗</span></a></div>
+      <div class="pc-detail-related-grid">{related.map((item) => <a data-related-id={item.id} href={productHref(item.id)}>
+        <span class="pc-detail-related-art"><b>{artCode[item.category] ?? item.category.toUpperCase()}</b>{officialImage(item) && <img src={officialImage(item)} alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()" />}</span>
+        <span data-related-type>{item.type}</span>
+        <strong data-related-name>{item.name}</strong>
+        <small><span data-related-price>{item.price_pen ? money(item.price_pen) : 'Por confirmar'}</span><b aria-hidden="true">↗</b></small>
+      </a>)}</div>
+    </section>
+  </article>
+</NodoPcLayout>

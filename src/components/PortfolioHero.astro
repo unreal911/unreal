@@ -1,0 +1,58 @@
+---
+import '../styles/portfolio-hero.css';
+interface Props { contactUrl: string; }
+const { contactUrl } = Astro.props;
+const slides = [
+  { label: 'IDEAS CON IDENTIDAD', first: 'Tu idea.', second: 'Una web', accent: 'con carácter.', copy: 'Diseño y desarrollo una presencia digital que expresa tu marca y conecta con las personas.', name: 'Identidad', theme: 'identity' },
+  { label: 'PRIMERO, UNA BUENA PREGUNTA', first: 'Menos ruido.', second: 'Más sentido.', accent: 'Más conexión.', copy: 'Entiendo tu negocio, ordeno tus ideas y diseño un recorrido que hace fácil dar el siguiente paso.', name: 'Estrategia', theme: 'strategy' },
+  { label: 'DEL PRIMER BOCETO AL ÚLTIMO DETALLE', first: 'Diseño vivo.', second: 'Código que', accent: 'lo hace real.', copy: 'De un primer boceto a una web ágil, adaptable y llena de detalles que se sienten al usarla.', name: 'Desarrollo', theme: 'development' },
+];
+---
+<script is:inline>
+  (() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 780px)').matches) return;
+    const root = document.documentElement;
+    root.dataset.pfHero = 'pending';
+    // Keep the first paint stable, and reveal the content if the module cannot load.
+    window.setTimeout(() => {
+      if (root.dataset.pfHero === 'pending') root.dataset.pfHero = 'visible';
+    }, 1500);
+  })();
+</script>
+<section class="pf-hero" aria-label="Diseño y desarrollo web de Milton Blaise" aria-roledescription="carrusel" data-portfolio-slider data-scene="identity">
+  <h1 class="sr-only" id="hero-title">Milton Blaise — Diseño y desarrollo de experiencias web con carácter</h1>
+  <div class="pf-hero-ambient" aria-hidden="true"><div></div><div></div><svg viewBox="0 0 1440 850" preserveAspectRatio="xMidYMid slice"><path d="M640 -80C1150 20 400 450 980 910M830 -80C1360 120 600 400 1170 910M1080 -80C1560 130 830 580 1450 910" /></svg></div>
+  <div class="pf-scene-wipe" aria-hidden="true">{Array.from({ length: 5 }, () => <span></span>)}</div>
+  <div class="pf-hero-top"><span><span class="pf-online-dot"></span> MILTON BLAISE · DISEÑADOR & DESARROLLADOR</span><span>INDEPENDIENTE. DESDE PERÚ, PARA TU MUNDO.</span></div>
+  <div class="pf-hero-grid">
+    <div class="pf-hero-content">
+      <div class="pf-slides" aria-live="off">
+        {slides.map((slide, index) => <div class="pf-slide" data-slide={index} data-theme-name={slide.theme} role="group" aria-roledescription="diapositiva" aria-label={`${index + 1} de 3: ${slide.name}`} hidden={index !== 0}><p class="pf-hero-eyebrow"><span></span>{slide.label}</p><h2 class="pf-hero-title" aria-label={`${slide.first} ${slide.second} ${slide.accent}`}><span class="pf-title-line" aria-hidden="true">{Array.from(slide.first).map((letter) => <span class="pf-title-letter" data-space={letter === " " ? "true" : undefined}>{letter === " " ? "\u00a0" : letter}</span>)}</span><span class="pf-title-line" aria-hidden="true">{Array.from(slide.second).map((letter) => <span class="pf-title-letter" data-space={letter === " " ? "true" : undefined}>{letter === " " ? "\u00a0" : letter}</span>)}</span><em class="pf-title-type" aria-hidden="true">{Array.from(slide.accent).map((letter) => <span class="pf-type-letter" data-space={letter === " " ? "true" : undefined}>{letter === " " ? "\u00a0" : letter}</span>)}<span class="pf-type-caret"></span></em></h2><p class="pf-hero-description">{slide.copy}</p></div>)}
+      </div>
+      <div class="pf-hero-actions"><a class="pf-button pf-button-primary" href={contactUrl} target="_blank" rel="noopener noreferrer">Cuéntame tu idea <span aria-hidden="true">↗</span></a><a class="pf-hero-projects" href="#proyectos">Ver proyectos <span aria-hidden="true">↓</span></a></div>
+
+    </div>
+    <div class="pf-hero-art" aria-hidden="true"><span class="pf-art-wordmark">create.</span>
+      <div class="pf-orbit" aria-hidden="true"><div class="pf-orbit-core"></div><span class="pf-orbit-line"></span><span class="pf-orbit-dot"></span></div>
+      <div class="pf-art-label" aria-hidden="true"><span>DE LA IDEA</span><span>↘</span><span>A LA EXPERIENCIA</span></div>
+      <div class="pf-art-stage pf-art-identity" data-art="identity">
+        <div class="pf-art-browser"><div class="pf-art-chrome"><span><i></i><i></i><i></i></span><span>una buena idea / hecha web</span><span>↗</span></div><div class="pf-art-screen"><div class="pf-art-nav"><span>mb<span>®</span></span><span>ESTUDIO<br />CREATIVO ↗</span></div><small>ESTRATEGIA. DISEÑO. OTRA MIRADA.</small><strong>Tu marca.<br />Su propia<br /><em>forma.</em></strong><div class="pf-art-screen-bottom"><span>DISEÑO QUE HABLA DE TI ↗</span><span>01 — 03</span></div><div class="pf-art-sculpture" aria-hidden="true"><span></span><span></span><span></span></div></div></div>
+        <div class="pf-art-coffee"><img src="/images/senda/hero-coffee.webp" alt="" width="220" height="180" /><div><span>SENDA CAFÉ</span><span>UN CONCEPTO. SU PROPIO MUNDO. ↗</span></div></div>
+        <div class="pf-art-chip"><span class="pf-chip-symbol" aria-hidden="true">✳</span><span>DISEÑADO PARA TU MARCA.<br /><strong>Construido para las personas.</strong></span></div>
+      </div>
+      <div class="pf-art-stage pf-art-strategy" data-art="strategy" hidden><div class="pf-plan-card"><div class="pf-plan-top"><span>01 / EL PUNTO DE PARTIDA</span><span>↘</span></div><h3>Una buena web<br />empieza <em>aquí.</em></h3><div class="pf-plan-question"><span>01</span> ¿Qué hace única a tu marca?</div><div class="pf-plan-question"><span>02</span> ¿A quién quieres llegar?</div><div class="pf-plan-question"><span>03</span> ¿Qué sigue después de visitar?</div><div class="pf-plan-bottom">ENTENDER → ORDENAR → DISEÑAR</div></div><div class="pf-plan-wireframe"><span>MAPA DE LA EXPERIENCIA</span><div class="pf-wire-line"></div><div class="pf-wire-title"></div><div class="pf-wire-text"></div><div class="pf-wire-text short"></div><div class="pf-wire-button"></div><div class="pf-wire-grid"><i></i><i></i><i></i></div></div></div>
+      <div class="pf-art-stage pf-art-development" data-art="development" hidden><div class="pf-dev-window"><div class="pf-art-chrome"><span><i></i><i></i><i></i></span><span>de la idea al navegador</span><span>↗</span></div><div class="pf-dev-copy"><small>CONSTRUIR CON INTENCIÓN</small><strong>Se ve bien.<br /><em>Se siente mejor.</em></strong><div class="pf-dev-lines"><span>&lt;experiencia&gt;</span><span>&nbsp;&nbsp;diseño + código + detalle</span><span>&lt;/experiencia&gt;</span></div><div class="pf-dev-tags"><span>ADAPTABLE</span><span>ACCESIBLE</span><span>CON IDENTIDAD</span></div></div></div><div class="pf-dev-phone"><div></div><small>DISEÑO QUE SE ADAPTA</small><strong>En cada<br /><em>pantalla.</em></strong><span>↓</span><i></i><i></i><i></i></div></div>
+      <span class="pf-art-coordinate" aria-hidden="true">DISEÑO + DESARROLLO / SIN PERDER LA ESENCIA</span>
+    </div>
+  </div>
+  <div class="pf-hero-bottom">
+    <a class="pf-scroll-link" href="#proyectos"><span class="pf-scroll-mouse" aria-hidden="true"><i></i></span><span>DESLIZA PARA EXPLORAR <span aria-hidden="true">↓</span></span></a>
+    <div class="pf-slider-controls" aria-label="Controles de portada">
+      <span class="pf-slide-counter" aria-hidden="true"><strong data-slide-number>01</strong><span> / 03</span></span>
+      <div class="pf-slide-tabs">{slides.map((slide, index) => <button type="button" data-slide-to={index} aria-label={`Mostrar ${slide.name}`} aria-pressed={index === 0}><span class="pf-tab-number">0{index + 1}</span><span class="pf-tab-name">{slide.name}</span><span class="pf-tab-track" aria-hidden="true"><i></i></span></button>)}</div>
+      <div class="pf-slide-arrows"><button type="button" data-slide-prev aria-label="Diapositiva anterior">←</button><button type="button" data-slide-next aria-label="Diapositiva siguiente">→</button></div>
+      <button class="pf-slider-play" type="button" data-slide-play aria-label="Pausar cambio automático" title="Pausar cambio automático" aria-pressed="false"><span data-play-icon aria-hidden="true">Ⅱ</span><span class="pf-play-label" aria-hidden="true">Pausar</span></button>
+    </div>
+  </div>
+  <p class="sr-only" role="status" data-slide-status></p>
+</section>

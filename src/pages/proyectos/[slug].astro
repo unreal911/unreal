@@ -4,6 +4,7 @@ import ProjectArtwork from '../../components/ProjectArtwork.astro';
 import CaseProcess from '../../components/CaseProcess.astro';
 import ResponsivePreview from '../../components/ResponsivePreview.astro';
 import { getProjects } from '../../lib/projects';
+import { getProjectPresentation } from '../../lib/project-presentation';
 import { site, type Project } from '../../data/site';
 import { getProjectProcess, type ProcessProjectSlug } from '../../data/process';
 
@@ -21,24 +22,27 @@ interface Props {
 }
 
 const { project, nextProject } = Astro.props;
-const demoSlugs = new Set(['senda-cafe', 'lume-beauty', 'nexa-digital']);
-const demoUrl = demoSlugs.has(project.slug) ? `/demos/${project.slug}/` : project.externalUrl;
+const presentation = getProjectPresentation(project);
+const { demoUrl } = presentation;
 const contactUrl = `${site.whatsapp}?text=${encodeURIComponent(`Hola Milton, vi el proyecto ${project.title} y quiero conversar sobre una web.`)}`;
 const process = getProjectProcess(project.slug);
+const isHardware = project.slug === 'nodo-pc';
 ---
 
-<BaseLayout title={`${project.title} — ${project.category} | Milton Blaise`} description={project.summary}>
-  <article class="case-page">
+<BaseLayout title={`${project.title} — ${presentation.category} | Milton Blaise`} description={presentation.description}>
+  <article class="case-page" data-project={project.slug}>
     <section class="case-hero section-pad">
       <a class="back-link" href="/#proyectos">← Volver a proyectos</a>
       <div class="case-heading">
-        <div class="case-kicker"><span>PROYECTO CONCEPTUAL / {project.number}</span><span>{project.year}</span></div>
-        <h1 data-letters>{project.title}<span>.</span></h1>
-        <div class="case-heading-bottom"><p>{project.subtitle}</p><span>{project.category}</span></div>
+        <div class="case-kicker"><span>{presentation.isExample ? 'PROYECTO DE EJEMPLO' : 'PROYECTO'} / {project.number}</span><span>{project.year}</span></div>
+        <h1 data-letters>{project.title}<span class="case-title-dot">.</span></h1>
+        <div class="case-heading-bottom"><p>{project.subtitle}</p><span>{presentation.category}</span></div>
+        <p class="case-plain-summary">{presentation.description}</p>
         <div class="case-hero-actions" data-reveal>
-          {demoUrl && <a class="primary-cta" href={demoUrl} target="_blank" rel="noopener noreferrer">Explorar sitio completo <span aria-hidden="true">↗</span></a>}
-          <a class="secondary-cta" href={contactUrl} target="_blank" rel="noopener noreferrer">Quiero una web así <span aria-hidden="true">↗</span></a>
+          {demoUrl && <a class="primary-cta" href={demoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Visitar página de ${project.title} (se abre en otra pestaña)`}>Visitar página <span aria-hidden="true">↗</span></a>}
+          <a class="secondary-cta" href={process ? '#proceso' : '#resultado'}>Ver cómo lo hice <span aria-hidden="true">↓</span></a>
         </div>
+        {demoUrl && <p class="case-action-note">Se abre en otra pestaña para que puedas recorrer la página y volver aquí cuando quieras.</p>}
       </div>
     </section>
 
@@ -46,22 +50,34 @@ const process = getProjectProcess(project.slug);
       <ProjectArtwork project={project} priority={true} />
     </section>
 
-    <section class="case-overview section-pad" aria-labelledby="case-overview-heading">
-      <div class="case-overview-intro"><span class="section-index">(01 / VISIÓN GENERAL)</span><h2 id="case-overview-heading" data-letters>Una idea con<br /><em>identidad propia.</em></h2></div>
-      <div class="case-overview-copy" data-reveal><p>{project.summary}</p><div class="case-facts"><div><span>SERVICIOS</span><p>{project.services.join(' · ')}</p></div><div><span>PALETA</span><p>{project.palette}</p></div><div><span>TIPO</span><p>Exploración conceptual</p></div></div></div>
+    <section class="case-overview section-pad" id="descripcion" aria-labelledby="case-overview-heading">
+      <div class="case-overview-intro"><span class="section-index">(01 / EL PROYECTO)</span><h2 id="case-overview-heading" data-letters>Qué puedes<br /><em>encontrar aquí.</em></h2></div>
+      <div class="case-overview-copy" data-reveal>
+        <p>{presentation.description}</p>
+        <div class="case-facts">
+          <div><span>{presentation.features.length ? 'QUÉ INCLUYE' : 'QUÉ HICE'}</span><ul>{(presentation.features.length ? presentation.features : project.services).map((feature) => <li>{feature}</li>)}</ul></div>
+          <div><span>PARA VER EN</span><p>Computadora, tablet y celular.</p></div>
+          <div><span>{presentation.isExample ? 'EJEMPLO DE PORTAFOLIO' : 'AÑO'}</span><p>{presentation.isExample ? 'Creado para mostrar cómo podría funcionar una página para este tipo de negocio.' : project.year}</p></div>
+        </div>
+      </div>
     </section>
 
-    {process && <CaseProcess process={process} slug={project.slug as ProcessProjectSlug} title={project.title} />}
-
-    {demoUrl && <section class="case-demo-section section-pad" aria-labelledby="case-demo-heading">
+    {demoUrl && <section class="case-demo-section section-pad" id="pantallas" aria-labelledby="case-demo-heading">
       <div class="case-demo-head">
-        <div><span class="section-index">({process ? '03' : '02'} / DISEÑO RESPONSIVO)</span><h2 id="case-demo-heading" data-letters>Una idea.<br /><em>Tres pantallas.</em></h2></div>
-        <div class="case-demo-intro"><p>Elige escritorio, tablet o móvil para ver cómo se adapta la misma página. Abre la demo completa para recorrer sus secciones e interacciones.</p></div>
+        <div><span class="section-index">(02 / ASÍ SE VE)</span><h2 id="case-demo-heading" data-letters>Tu página,<br /><em>en cada pantalla.</em></h2></div>
+        <div class="case-demo-intro"><p>Elige un dispositivo para cambiar la vista de muestra. Para usar los menús y botones de la página, pulsa <strong>Visitar página</strong>.</p></div>
       </div>
       <ResponsivePreview src={demoUrl} title={project.title} />
+      {isHardware && <ol class="case-pc-demo-guide" aria-label="Recorrido de la demo Nodo PC" data-reveal>
+        <li><span>01 / EXPLORA</span><strong>Encuentra tu pieza.</strong><p>Filtra el catálogo y revisa los datos clave de cada componente.</p><a href="/demos/nodo-pc/componentes/" target="_blank" rel="noopener noreferrer">Ver el catálogo <span aria-hidden="true">↗</span></a></li>
+        <li><span>02 / ELIGE LAS PIEZAS</span><strong>Prepara tu equipo.</strong><p>Elige las piezas de una computadora y revisa cuánto costaría.</p><a href="/demos/nodo-pc/armar/" target="_blank" rel="noopener noreferrer">Armar una computadora <span aria-hidden="true">↗</span></a></li>
+        <li><span>03 / REVISA</span><strong>Todo en un pedido.</strong><p>Ajusta cantidades y prepara una solicitud de ejemplo para conversar con Milton.</p><a href={demoUrl} target="_blank" rel="noopener noreferrer">Probar la tienda <span aria-hidden="true">↗</span></a></li>
+      </ol>}
     </section>}
 
-    <section class="case-story section-pad" aria-label="Resultado del proyecto">
+    {process && <CaseProcess process={process} slug={project.slug as ProcessProjectSlug} title={project.title} number={demoUrl ? '03' : '02'} />}
+
+    <section class="case-story section-pad" id="resultado" aria-label="Resultado del proyecto">
       {process ? (
         <div class="case-story-row" data-reveal><span>04 / RESULTADO</span><h2>De la idea<br />a la pantalla.</h2><p>{project.outcome}</p></div>
       ) : (
@@ -71,6 +87,11 @@ const process = getProjectProcess(project.slug);
           <div class="case-story-row" data-reveal><span>05 / EL RESULTADO</span><h2>Una nueva<br />experiencia.</h2><p>{project.outcome}</p></div>
         </>
       )}
+    </section>
+
+    <section class="case-contact section-pad" aria-labelledby="case-contact-heading">
+      <div><h2 id="case-contact-heading">Tu negocio también puede tener su página.</h2><p>Cuéntame qué necesitas y vemos cómo darle forma.</p></div>
+      <a class="primary-cta" href={contactUrl} target="_blank" rel="noopener noreferrer">Hablemos por WhatsApp <span aria-hidden="true">↗</span></a>
     </section>
 
     <a class="next-project" href={`/proyectos/${nextProject.slug}/`}>

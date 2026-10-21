@@ -1,10 +1,12 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import '../styles/portfolio-motion.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
 let animationContext: gsap.Context | undefined;
 const splitHeadings = new WeakSet<HTMLElement>();
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 function splitLetters(heading: HTMLElement) {
   if (splitHeadings.has(heading)) return;
@@ -50,25 +52,101 @@ function splitLetters(heading: HTMLElement) {
 
 function startAnimations() {
   animationContext?.revert();
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (motionPreference.matches) return;
 
   animationContext = gsap.context(() => {
-    gsap.utils.toArray<HTMLElement>('[data-letters]').forEach((heading) => {
+    const home = document.querySelector<HTMLElement>('.portfolio-home');
+    const compact = window.matchMedia('(max-width: 780px)').matches;
+
+    gsap.utils.toArray<HTMLElement>('[data-letters], .portfolio-home .pp-intro h2').forEach((heading) => {
+      // The hero owns its slide transitions; the manifesto follows the scroll below.
+      if (heading.closest('.portfolio-home .pf-hero, .portfolio-home .pf-manifesto')) return;
       splitLetters(heading);
       const letters = heading.querySelectorAll<HTMLElement>('.animated-letter');
       if (!letters.length) return;
+      const isHome = Boolean(heading.closest('.portfolio-home'));
       gsap.from(letters, {
-        yPercent: 115,
+        yPercent: isHome ? 125 : 115,
         autoAlpha: 0,
-        rotateX: -35,
+        rotateX: isHome ? -60 : -35,
+        rotation: isHome ? 5 : 0,
         transformOrigin: 'center bottom',
-        duration: heading.tagName === 'H1' ? 0.9 : 0.75,
-        stagger: { amount: heading.tagName === 'H1' ? 0.48 : 0.32 },
-        ease: 'power3.out',
+        duration: isHome ? 1.05 : heading.tagName === 'H1' ? 0.9 : 0.75,
+        stagger: { amount: isHome ? 0.68 : heading.tagName === 'H1' ? 0.48 : 0.32 },
+        ease: isHome ? 'power4.out' : 'power3.out',
         clearProps: 'all',
-        scrollTrigger: { trigger: heading, start: 'top 88%', once: true },
+        scrollTrigger: { trigger: heading, start: isHome ? 'top 86%' : 'top 88%', once: true },
       });
     });
+
+    if (home) {
+      const manifesto = home.querySelector<HTMLElement>('.pf-manifesto h2');
+      if (manifesto) {
+        splitLetters(manifesto);
+        const words = manifesto.querySelectorAll<HTMLElement>('.animated-word');
+        gsap.fromTo(words, { opacity: 0.32, y: compact ? 7 : 14 }, {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          stagger: 0.4,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: manifesto,
+            start: 'top 80%',
+            end: 'bottom 43%',
+            scrub: 0.65,
+          },
+        });
+      }
+
+      home.querySelectorAll<HTMLElement>('.pf-project').forEach((card, index) => {
+        const visual = card.querySelector<HTMLElement>('[data-project-visual]');
+        const art = card.querySelector<HTMLElement>('.project-artwork');
+        const meta = card.querySelector<HTMLElement>('[data-project-meta]');
+        if (!visual || !art || !meta) return;
+
+        const artScale = compact ? 1.1 : 1.14;
+        const parallaxDistance = compact ? 10 : 22;
+        gsap.set(art, { transition: 'none', '--pf-art-scale': artScale });
+        const reveal = gsap.timeline({
+          delay: compact ? 0 : (index % 2) * 0.12,
+          scrollTrigger: { trigger: card, start: 'top 91%', once: true },
+        });
+        reveal.fromTo(visual, {
+          y: compact ? 46 : 78,
+          clipPath: 'inset(12% 0% 88% 0% round 7px)',
+        }, {
+          y: 0,
+          clipPath: 'inset(0% 0% 0% 0% round 7px)',
+          duration: compact ? 1.05 : 1.3,
+          ease: 'power4.inOut',
+          clearProps: 'clipPath,transform',
+        });
+        reveal.fromTo(art, { '--pf-art-scale': artScale + 0.16 }, {
+          '--pf-art-scale': artScale,
+          duration: 1.65,
+          ease: 'power3.out',
+        }, 0.08);
+        reveal.from(meta, {
+          y: compact ? 25 : 38,
+          opacity: 0,
+          duration: 0.85,
+          ease: 'power3.out',
+          clearProps: 'opacity,transform',
+        }, 0.4);
+
+        gsap.fromTo(art, { '--pf-art-y': `${parallaxDistance}px` }, {
+          '--pf-art-y': `${-parallaxDistance}px`,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: visual,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.1,
+          },
+        });
+      });
+    }
 
     const heroDetails = document.querySelectorAll('[data-hero-fade]');
     if (heroDetails.length) {
@@ -87,30 +165,28 @@ function startAnimations() {
     }
 
     gsap.utils.toArray<HTMLElement>('[data-project-card]').forEach((card) => {
+      if (card.closest('.portfolio-home')) return;
       const visual = card.querySelector<HTMLElement>('[data-project-visual]');
       const meta = card.querySelector<HTMLElement>('[data-project-meta]');
-      const demo = card.querySelector<HTMLElement>('.project-demo-link');
       if (!visual || !meta) return;
 
       const timeline = gsap.timeline({
         scrollTrigger: { trigger: card, start: 'top 83%', once: true },
       });
       timeline.from(visual, {
-        autoAlpha: 0, y: 54, clipPath: 'inset(16% 0 0 0)',
-        duration: 1.05, ease: 'power3.out', clearProps: 'all',
+        y: 24, duration: 0.7, ease: 'power3.out', clearProps: 'all',
       });
       timeline.from(meta, {
-        autoAlpha: 0, y: 24, duration: 0.64,
+        y: 24, duration: 0.64,
         ease: 'power3.out', clearProps: 'all',
       }, '-=0.55');
-      if (demo) timeline.from(demo, {
-        autoAlpha: 0, y: 12, duration: 0.45, clearProps: 'all',
-      }, '-=0.4');
     });
 
     gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((element) => {
+      if (element.closest('.portfolio-home .pp-stage')) return;
+      const isHome = Boolean(element.closest('.portfolio-home'));
       gsap.from(element, {
-        autoAlpha: 0, y: 38, duration: 0.8, ease: 'power3.out',
+        autoAlpha: 0, y: isHome ? 52 : 38, duration: isHome ? 1 : 0.8, ease: 'power3.out',
         clearProps: 'all',
         scrollTrigger: { trigger: element, start: 'top 88%', once: true },
       });
@@ -128,3 +204,4 @@ if (document.readyState === 'loading') {
 
 document.addEventListener('astro:before-swap', () => animationContext?.revert());
 document.addEventListener('astro:after-swap', startAnimations);
+motionPreference.addEventListener('change', startAnimations);

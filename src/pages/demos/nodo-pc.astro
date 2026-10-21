@@ -1,0 +1,121 @@
+---
+import NodoPcLayout from '../../layouts/NodoPcLayout.astro';
+import '../../styles/demo-pc-home.css';
+import { money, presetTotal, presets, products } from '../../data/nodoPc';
+
+const heroProduct = products.find((product) => product.id === 'caleta-8731')!;
+const featuredIds = ['caleta-8731', 'caleta-8680', 'caleta-6506', 'caleta-9979'];
+const featuredProducts = featuredIds.map((id) => products.find((product) => product.id === id)).filter(Boolean);
+const homeCategories = [
+  { id: 'gpu', name: 'Tarjetas gráficas', number: '01', note: 'Potencia visual', glyph: 'GPU' },
+  { id: 'cpu', name: 'Procesadores', number: '02', note: 'El corazón del equipo', glyph: 'CPU' },
+  { id: 'ram', name: 'Memoria RAM', number: '03', note: 'Más margen para crear', glyph: 'RAM' },
+  { id: 'ssd', name: 'Almacenamiento', number: '04', note: 'Velocidad y espacio', glyph: 'SSD' },
+  { id: 'board', name: 'Placas madre', number: '05', note: 'La base de cada armado', glyph: 'MB' },
+  { id: 'case', name: 'Cases', number: '06', note: 'Forma y flujo de aire', glyph: 'CASE' },
+  { id: 'power', name: 'Fuentes de poder', number: '07', note: 'Energía para avanzar', glyph: 'PSU' },
+  { id: 'cooling', name: 'Refrigeración', number: '08', note: 'Temperatura bajo control', glyph: 'COOL' },
+  { id: 'keyboard', name: 'Teclados', number: '09', note: 'Tu punto de contacto', glyph: 'KEY' },
+  { id: 'mouse', name: 'Mouse', number: '10', note: 'Precisión en cada clic', glyph: 'MOUSE' },
+  { id: 'headset', name: 'Audífonos', number: '11', note: 'Entra en el juego', glyph: 'AUDIO' },
+  { id: 'speaker', name: 'Parlantes', number: '12', note: 'Sonido para tu espacio', glyph: 'SOUND' },
+];
+---
+
+<NodoPcLayout title="Nodo PC — Hardware para crear y jugar / Demo" description="Descubre componentes, explora modelos de Caleta y configura tu próxima PC en una experiencia conceptual." active="home">
+  <section class="store-hero" id="inicio" aria-labelledby="store-hero-title">
+    <div class="store-hero-copy">
+      <p class="store-kicker"><span></span> NODO PC / HARDWARE CON CRITERIO</p>
+      <h1 id="store-hero-title">ELEVA<br />TU <em>SETUP.</em></h1>
+      <p class="store-hero-lede">Cada componente cuenta. Descubre las piezas, compara modelos y arma una selección que responda a lo que quieres hacer.</p>
+      <div class="store-hero-actions">
+        <a class="shop-button shop-button-bright" href="/demos/nodo-pc/componentes/">Explorar componentes <span aria-hidden="true">↗</span></a>
+        <a class="store-text-link" href="/demos/nodo-pc/armar/">Armar mi PC <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="store-hero-meta"><span><b>01</b> ELIGE TUS PIEZAS</span><span><b>02</b> CONFIGURA TU EQUIPO</span><span><b>03</b> GUARDA TU SELECCIÓN</span></div>
+    </div>
+    <div class="store-hero-visual">
+      <div class="store-hero-orbit" aria-hidden="true"></div>
+      <span class="store-hero-side-label" aria-hidden="true">PERFORMANCE / SIN LÍMITES</span>
+      <span class="store-hero-watermark" aria-hidden="true">5060</span>
+      {heroProduct.officialImageUrl && <img class="store-hero-product-image" src={heroProduct.officialImageUrl} alt={`Imagen oficial de ${heroProduct.name}`} width="670" height="540" referrerpolicy="no-referrer" data-official-product-image />}
+      <a class="store-hero-product-panel" href={`/demos/nodo-pc/producto/${heroProduct.id}/`}>
+        <span class="store-hero-panel-category">PRODUCTO DESTACADO / {heroProduct.brand}</span>
+        <strong>{heroProduct.name}</strong>
+        <span class="store-hero-panel-bottom"><span>Referencia Caleta <b data-home-product-price={heroProduct.id}>{money(heroProduct.price)}</b></span><span class="store-hero-panel-arrow" aria-hidden="true">↗</span></span>
+      </a>
+      <span class="store-hero-photo-credit">FOTOGRAFÍA OFICIAL DE LA MARCA</span>
+    </div>
+  </section>
+
+  <div class="store-value-strip" aria-label="Explora Nodo PC"><span>HARDWARE PARA CADA OBJETIVO</span><span>·</span><span>PRECIOS REFERENCIALES DE CALETA</span><span>·</span><span>CONFIGURA A TU MEDIDA</span></div>
+
+  <section class="store-category-section" id="categorias" aria-labelledby="store-categories-title">
+    <div class="store-section-heading">
+      <div><p class="shop-eyebrow">EXPLORA / 12 CATEGORÍAS</p><h2 id="store-categories-title">ENCUENTRA<br /><em>TU PRÓXIMA PIEZA.</em></h2></div>
+      <div class="store-section-heading-side"><p>Un inventario para buscar justo lo que necesita tu equipo, desde su base hasta el último detalle de tu setup.</p><a href="/demos/nodo-pc/componentes/">Ver <span data-catalog-home-count>{products.length}</span> productos <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="store-category-grid">
+      {homeCategories.map((category) => <a class="store-category-card" href={`/demos/nodo-pc/componentes/?categoria=${category.id}#catalogo`}>
+        <span class="store-category-top"><small>{category.number} / {products.filter((item) => item.category === category.id).length} PRODUCTOS</small><span aria-hidden="true">↗</span></span>
+        <span class="store-category-glyph" aria-hidden="true">{category.glyph}</span>
+        <span class="store-category-bottom"><strong>{category.name}</strong><small>{category.note}</small></span>
+      </a>)}
+    </div>
+  </section>
+
+  <section class="store-featured" aria-labelledby="store-featured-title">
+    <div class="store-section-heading">
+      <div><p class="shop-eyebrow">EN PRIMER PLANO / COMPONENTES Y PERIFÉRICOS</p><h2 id="store-featured-title">PIEZAS QUE<br /><em>DESTACAN.</em></h2></div>
+      <div class="store-section-heading-side"><p>Modelos disponibles en el inventario de referencia. Las fotografías proceden de las páginas oficiales de cada marca.</p><a href="/demos/nodo-pc/componentes/">Ver el catálogo <span aria-hidden="true">↗</span></a></div>
+    </div>
+    <div class="store-product-grid">
+      {featuredProducts.map((product, index) => <article class="store-product-card">
+        <a class="store-product-media" href={`/demos/nodo-pc/producto/${product.id}/`} aria-label={`Ver detalles de ${product.name}`}>
+          <span class="store-product-media-index">0{index + 1} / {product.type}</span>
+          {product.officialImageUrl ? <img src={product.officialImageUrl} alt={`Imagen oficial de ${product.name}`} loading="lazy" decoding="async" referrerpolicy="no-referrer" data-official-product-image /> : <span class="store-product-no-image">{product.brand}</span>}
+          <span class="store-product-media-arrow" aria-hidden="true">↗</span>
+        </a>
+        <div class="store-product-info">
+          <span class="store-product-brand">{product.brand}</span>
+          <h3><a href={`/demos/nodo-pc/producto/${product.id}/`}>{product.name}</a></h3>
+          <p>{product.description}</p>
+          <div class="store-product-buy"><span><small>PRECIO REFERENCIAL</small><strong data-home-product-price={product.id}>{money(product.price)}</strong></span><button type="button" data-add-product={product.id} aria-label={`Añadir ${product.name} a mi selección`}>Añadir <span aria-hidden="true">＋</span></button></div>
+        </div>
+      </article>)}
+    </div>
+    <p class="store-pricing-note">Productos y precios tomados de Caleta. Información referencial sujeta a cambios; esta demo no procesa compras.</p>
+  </section>
+
+  <section class="store-profiles" id="perfiles" aria-labelledby="store-profiles-title">
+    <div class="store-section-heading">
+      <div><p class="shop-eyebrow">CONFIGURADOR / TRES PUNTOS DE PARTIDA</p><h2 id="store-profiles-title">TU EQUIPO.<br /><em>TUS REGLAS.</em></h2></div>
+      <div class="store-section-heading-side"><p>Elige una base con piezas del catálogo de referencia. En el configurador podrás cambiar cada componente y ver cómo varía el total.</p></div>
+    </div>
+    <div class="store-profile-grid">
+      {presets.map((preset, index) => <button class="store-profile-card" type="button" data-select-preset={preset.id} data-jump-builder aria-label={`Empezar con perfil ${preset.name}`}>
+        <span class="store-profile-top"><span>0{index + 1} / CONFIGURACIÓN</span><span aria-hidden="true">↗</span></span>
+        <span class="store-profile-number" aria-hidden="true">0{index + 1}</span>
+        <strong>Nodo {preset.name}</strong>
+        <span class="store-profile-use">{preset.use}</span>
+        <span class="store-profile-parts">{preset.note}</span>
+        <span class="store-profile-bottom"><span>Desde <b data-home-preset-total={preset.id}>{money(presetTotal(preset.ids))}</b><small>Total referencial</small></span><span aria-hidden="true">→</span></span>
+      </button>)}
+    </div>
+  </section>
+
+  <section class="store-builder-banner" id="como-funciona" aria-labelledby="store-builder-title">
+    <div class="store-builder-art" aria-hidden="true"><span class="store-builder-art-small">BUILD YOUR SYSTEM / NODO PC</span><span class="store-builder-art-n">N</span><span class="store-builder-art-line"></span><span class="store-builder-art-bottom">01 / 08 COMPONENTES</span></div>
+    <div class="store-builder-copy"><p class="shop-eyebrow">ARMADO PERSONALIZADO</p><h2 id="store-builder-title">HAZ QUE CADA<br /><em>PIEZA CUENTE.</em></h2><p>Selecciona un perfil, modifica los componentes y revisa el costo referencial de tu próxima PC en tiempo real.</p><ol><li><b>01</b><span>Elige una base</span></li><li><b>02</b><span>Ajusta las piezas</span></li><li><b>03</b><span>Guarda tu armado</span></li></ol><a class="shop-button shop-button-bright" href="/demos/nodo-pc/armar/">Abrir configurador <span aria-hidden="true">↗</span></a></div>
+  </section>
+
+  <section class="store-help" aria-label="Sigue explorando Nodo PC">
+    <a href="/demos/nodo-pc/componentes/"><span>01 / COMPONENTES</span><strong>¿BUSCAS UNA PIEZA?</strong><p>Filtra el inventario por categoría, marca o modelo.</p><b aria-hidden="true">↗</b></a>
+    <a href="/demos/nodo-pc/armar/"><span>02 / CONFIGURADOR</span><strong>¿PREFIERES ARMARLA?</strong><p>Comienza con una base y ajusta cada componente.</p><b aria-hidden="true">↗</b></a>
+  </section>
+  <script is:inline>
+    document.querySelectorAll('[data-official-product-image]').forEach((image) => {
+      image.addEventListener('error', () => { image.style.display = 'none'; image.parentElement?.classList.add('image-unavailable'); }, { once: true });
+    });
+  </script>
+</NodoPcLayout>

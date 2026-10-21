@@ -1,0 +1,133 @@
+---
+import NodoPcLayout from '../../../layouts/NodoPcLayout.astro';
+import catalog from '../../../data/nodoPcCatalog.json';
+import { categories, builderGroups, money } from '../../../data/nodoPc';
+import '../../../styles/demo-pc-catalog.css';
+
+const available = catalog.filter((product) => product.published);
+const firstPage = available.slice(0, 24);
+const countFor = (id: string) => id === 'all' ? available.length : available.filter((product) => product.category === id).length;
+const officialImage = (product: (typeof available)[number]) => {
+  if (!product.official_url || !product.official_image_url) return null;
+  try {
+    const url = new URL(product.official_image_url);
+    if (url.protocol !== 'https:' || /(^|\.)caleta\.(pe|com)$/i.test(url.hostname)) return null;
+    return url.href;
+  } catch { return null; }
+};
+const heroProduct = available.find((product) => officialImage(product)) ?? available[0];
+const heroImage = heroProduct ? officialImage(heroProduct) : null;
+const categoryCode: Record<string, string> = {
+  gpu: 'GPU', cpu: 'CPU', ram: 'RAM', ssd: 'SSD', board: 'MB',
+  power: 'PSU', case: 'CASE', cooling: 'COOL', keyboard: 'KEY',
+  mouse: 'MOUSE', headset: 'AUDIO', speaker: 'SPK',
+};
+const productSpecs = (product: (typeof available)[number]) => {
+  const entries = Object.entries(product.specs ?? {}).slice(0, 2).map(([label, value]) => ({
+    label: label.replaceAll('_', ' '),
+    value: Array.isArray(value) ? value.join(', ') : String(value),
+  }));
+  return entries.length ? entries : [
+    { label: 'Marca', value: product.brand || 'Por confirmar' },
+    { label: 'Origen', value: 'Caleta' },
+  ];
+};
+const hasBuilder = (category: string) => builderGroups.some((group) => group.category === category);
+const productHref = (id: string) => '/demos/nodo-pc/producto/' + encodeURIComponent(id) + '/';
+const builderHref = (id: string) => '/demos/nodo-pc/armar/?pieza=' + encodeURIComponent(id);
+---
+
+<NodoPcLayout title="Componentes — Nodo PC / Demo" description="Explora los componentes del inventario referencial de Caleta y arma una selección para tu PC." active="catalog">
+  <div class="pc-catalog-page">
+    <section class="pc-catalog-intro" aria-labelledby="catalog-page-title">
+      <div class="pc-catalog-intro-copy">
+        <nav class="pc-catalog-breadcrumb" aria-label="Ruta de navegación">
+          <a href="/demos/nodo-pc/">Inicio</a><span aria-hidden="true">/</span><span aria-current="page">Componentes</span>
+        </nav>
+        <p class="shop-eyebrow">NODO PC <span aria-hidden="true">/</span> COMPONENTES</p>
+        <h1 id="catalog-page-title">Hardware para<br /><em>jugar en serio.</em></h1>
+        <p class="pc-catalog-intro-lede">Encuentra las piezas de tu próximo setup. Explora el catálogo por categoría y revisa precio, descripción y origen de cada producto.</p>
+        <div class="pc-catalog-intro-actions">
+          <a class="pc-catalog-primary-link" href="#catalogo">Explorar catálogo <span aria-hidden="true">↗</span></a>
+          <a class="pc-catalog-builder-link" href="/demos/nodo-pc/armar/">Armar mi PC <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="pc-catalog-intro-meta">
+          <span><strong data-catalog-total>{available.length}</strong> productos</span>
+          <span><strong>{categories.length - 1}</strong> categorías</span>
+          <span data-catalog-origin>Inventario referencial de Caleta</span>
+        </div>
+      </div>
+      {heroProduct && <div class="pc-catalog-hero-visual">
+        <span class="pc-catalog-hero-index">NODO / SELECCIÓN 01</span>
+        <div class="pc-catalog-hero-image">
+          {heroImage ? <img src={heroImage} alt={'Imagen oficial de ' + heroProduct.name} decoding="async" referrerpolicy="no-referrer" /> : <span>{categoryCode[heroProduct.category] ?? 'PC'}</span>}
+        </div>
+        <div class="pc-catalog-hero-caption">
+          <div><span>{heroProduct.brand}</span><strong>{heroProduct.name}</strong></div>
+          <span>{heroProduct.price_pen ? money(heroProduct.price_pen) : 'Precio por confirmar'}</span>
+        </div>
+      </div>}
+    </section>
+
+    <section class="pc-catalog" id="catalogo" aria-labelledby="inventory-title">
+      <div class="pc-catalog-search-heading">
+        <div><span class="mini-kicker">EL CATÁLOGO</span><h2 id="inventory-title">Encuentra tu próxima pieza.</h2></div>
+        <p>Usa los filtros para explorar el inventario y abre cada ficha para ver sus datos y fuentes.</p>
+      </div>
+      <div class="catalog-controls">
+        <label class="catalog-search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="1.7" /><path d="m15 15 5 5" stroke="currentColor" stroke-width="1.7" /></svg>
+          <span class="sr-only">Buscar por pieza, marca, modelo o especificación</span>
+          <input id="catalog-search" type="search" placeholder="Busca por producto, marca o modelo" autocomplete="off" />
+        </label>
+        <label class="catalog-sort"><span>Ordenar</span><select id="catalog-sort" aria-label="Ordenar componentes"><option value="featured">Destacados</option><option value="price-asc">Menor precio</option><option value="price-desc">Mayor precio</option><option value="name">Nombre A–Z</option></select></label>
+      </div>
+
+      <div class="pc-catalog-layout">
+        <aside class="pc-catalog-categories" aria-labelledby="categories-title">
+          <h3 id="categories-title">Categorías</h3>
+          <div class="catalog-filters" role="group" aria-label="Filtrar componentes por categoría">
+            {categories.map((category) => <button type="button" class:list={['filter-chip', { 'is-active': category.id === 'all' }]} data-filter={category.id} aria-pressed={category.id === 'all'}>{category.id === 'all' ? 'Todos los productos' : category.label}<span>{countFor(category.id)}</span></button>)}
+          </div>
+          <div class="pc-catalog-sidebar-note"><span>NODO CONFIGURADOR</span><p>Tu próxima PC empieza con una elección.</p><a href="/demos/nodo-pc/armar/">Armar mi equipo <span aria-hidden="true">↗</span></a></div>
+        </aside>
+
+        <div class="pc-catalog-inventory">
+          <div class="catalog-result-line"><span id="catalog-count" role="status" aria-live="polite">{available.length} componentes encontrados</span><span data-catalog-price-caption>Precios referenciales de Caleta · PEN</span></div>
+          <div class="product-grid" id="product-grid">
+            {firstPage.map((product, index) => {
+              const image = officialImage(product);
+              const href = productHref(product.id);
+              return <article class:list={['product-card', { 'product-card-featured': index === 0 }]} data-product-card data-category={product.category} data-product-id={product.id} data-index={index}>
+                <div class:list={['product-art', 'product-art--' + product.category, { 'has-official-image': !!image }]}>
+                  <span class="product-art-code">NODO / {String(index + 1).padStart(3, '0')}</span>
+                  <span class="product-art-word">{categoryCode[product.category] ?? product.category.toUpperCase()}</span>
+                  <div class="product-object"><b>{product.brand || 'NODO PC'}</b></div>
+                  <span class="product-art-tag">{product.tag || ''}</span>
+                  <span class="product-art-brand">{product.brand}</span>
+                  {image && <img class="product-official-image" src={image} alt={'Imagen oficial de ' + product.name} loading={index < 3 ? 'eager' : 'lazy'} decoding="async" referrerpolicy="no-referrer" onerror="this.remove();this.parentElement.classList.remove('has-official-image')" />}
+                </div>
+                <div class="product-info">
+                  <div class="product-topline"><span class="product-type">{product.type}</span><span class="product-in-cart" data-product-quantity={product.id} hidden></span></div>
+                  <h3><a href={href}>{product.name}</a></h3>
+                  <dl class="pc-catalog-specs">{productSpecs(product).map((spec) => <div><dt>{spec.label}</dt><dd>{spec.value}</dd></div>)}</dl>
+                  <a class="product-detail-link" href={href}>Ver detalles <span aria-hidden="true">↗</span></a>
+                  <div class="product-buy"><div><small>Precio referencial en Caleta</small><strong>{product.price_pen ? money(product.price_pen) : 'Por confirmar'}</strong></div><button type="button" data-add-product={product.id} disabled={product.price_needs_review || !product.price_pen} aria-label={'Añadir ' + product.name + ' a mi selección'}><span class="add-label">Añadir a selección</span><span class="add-icon" aria-hidden="true">＋</span></button></div>
+                  {hasBuilder(product.category) && <a class="pc-catalog-use-part" href={builderHref(product.id)} aria-label={'Probar ' + product.name + ' en el configurador'}>Probar en configurador <span aria-hidden="true">↗</span></a>}
+                </div>
+              </article>;
+            })}
+          </div>
+          <button class="catalog-more" id="catalog-more" type="button" hidden>Cargar más productos ↓</button>
+          <div class="catalog-empty" id="catalog-empty" hidden><span aria-hidden="true">⌕</span><h3>Sin resultados</h3><p>Prueba con otra marca, modelo o categoría.</p><button type="button" id="reset-catalog">Ver todos los productos <span aria-hidden="true">↗</span></button></div>
+          <p class="catalog-note" data-catalog-note>Demo de portafolio. Productos y precios referenciales de Caleta; confirma precio y disponibilidad con la tienda. La selección no procesa compras ni pagos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="pc-catalog-next" aria-labelledby="catalog-next-title">
+      <div class="pc-catalog-next-copy"><p class="shop-eyebrow">CONFIGURA TU EQUIPO</p><h2 id="catalog-next-title">Elige cada pieza.<br /><span>Hazlo tuyo.</span></h2><p>Selecciona componentes, revisa un total referencial y guarda tu configuración.</p><a class="shop-button shop-button-bright" href="/demos/nodo-pc/armar/">Ir al configurador <span aria-hidden="true">↗</span></a></div>
+      <div class="pc-catalog-next-mark" aria-hidden="true"><span>N</span><small>NODO PC / BUILD YOUR SETUP</small></div>
+    </section>
+  </div>
+</NodoPcLayout>

@@ -1,0 +1,109 @@
+---
+import '../../../styles/nodo-pc-admin.css';
+
+const categories = [
+  ['cpu', 'Procesadores'], ['board', 'Placas madre'], ['ram', 'Memoria'], ['ssd', 'Almacenamiento'],
+  ['gpu', 'Tarjetas gráficas'], ['case', 'Cases'], ['power', 'Fuentes'], ['cooling', 'Refrigeración'],
+  ['keyboard', 'Teclados'], ['mouse', 'Mouse'], ['headset', 'Audífonos'], ['speaker', 'Parlantes'],
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#15171c" />
+    <title>Administración — Nodo PC</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <section class="admin-login" id="login-view" aria-labelledby="login-title">
+      <a class="login-back" href="/demos/nodo-pc/">← Volver a Nodo PC</a>
+      <div class="login-card">
+        <a class="admin-brand" href="/demos/nodo-pc/" aria-label="Nodo PC, inicio"><span class="brand-mark">N<span>·</span></span><span>NODO PC<small>CONTROL DE INVENTARIO</small></span></a>
+        <div class="login-intro"><span class="eyebrow">ÁREA PRIVADA / 01</span><h1 id="login-title">Hola de nuevo<span>.</span></h1><p>Inicia sesión para administrar el catálogo de hardware.</p></div>
+        <form id="login-form" class="login-form">
+          <label for="login-email">Correo electrónico</label>
+          <input id="login-email" name="email" type="email" autocomplete="username" placeholder="tu@correo.com" required />
+          <label for="login-password">Contraseña</label>
+          <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Tu contraseña" required />
+          <button class="button button-primary" type="submit"><span>Entrar al panel</span><b aria-hidden="true">↗</b></button>
+          <p class="form-message" id="login-message" role="status" aria-live="polite"></p>
+        </form>
+        <div class="login-foot"><span class="security-dot"></span> Acceso protegido por Supabase Auth</div>
+      </div>
+      <p class="login-note">NODO PC <span>/</span> ADMINISTRACIÓN DE CATÁLOGO</p>
+    </section>
+
+    <section class="admin-denied" id="denied-view" hidden aria-labelledby="denied-title">
+      <div class="denied-card"><span class="denied-icon">!</span><p class="eyebrow">ACCESO RESTRINGIDO</p><h1 id="denied-title">Esta cuenta no tiene permisos<span>.</span></h1><p>La cuenta inició sesión, pero no está asignada como administradora del catálogo.</p><button class="button button-secondary" id="denied-signout" type="button">Cerrar sesión</button></div>
+    </section>
+
+    <div class="admin-app" id="admin-view" hidden>
+      <aside class="admin-sidebar">
+        <a class="admin-brand sidebar-brand" href="/demos/nodo-pc/"><span class="brand-mark">N<span>·</span></span><span>NODO PC<small>CONTROL DE INVENTARIO</small></span></a>
+        <div class="sidebar-label">ESPACIO DE TRABAJO</div>
+        <a class="sidebar-link" href="#resumen" aria-current="page"><span>◫</span> Resumen</a>
+        <a class="sidebar-link" href="#catalogo"><span>▤</span> Catálogo <small id="sidebar-count">—</small></a>
+        <div class="sidebar-bottom"><span class="sidebar-online"><i></i> Conectado</span><a href="/demos/nodo-pc/" target="_blank" rel="noopener noreferrer">Ver tienda <span>↗</span></a><div class="account-row"><span class="account-avatar" id="account-avatar">N</span><span class="account-copy"><strong id="account-email">Administrador</strong><small>ADMINISTRADOR</small></span><button id="signout-button" class="icon-button signout-button" type="button" aria-label="Cerrar sesión" title="Cerrar sesión">↗</button></div></div>
+      </aside>
+
+      <main class="admin-main" id="resumen">
+        <header class="admin-topbar"><div class="breadcrumbs"><span>NODO PC</span><b>/</b><span>ADMINISTRACIÓN</span></div><div class="topbar-right"><span class="topbar-date" id="today-label"></span><button class="icon-button refresh-button" id="refresh-button" type="button" aria-label="Actualizar catálogo" title="Actualizar catálogo">↻</button></div></header>
+        <div class="dashboard-content">
+          <section class="welcome-row"><div><p class="eyebrow">PANEL DE CONTROL <span>·</span> 01</p><h1>Inventario<span>.</span></h1><p class="welcome-copy">Revisa precios, existencias y visibilidad de tus componentes.</p></div><a class="button button-secondary view-store-button" href="/demos/nodo-pc/" target="_blank" rel="noopener noreferrer">Ver tienda <span>↗</span></a></section>
+
+          <section class="stats-grid" aria-label="Resumen del inventario">
+            <article class="stat-card"><div class="stat-top"><span>PRODUCTOS TOTALES</span><i class="stat-icon icon-purple">▤</i></div><strong id="stat-total">—</strong><small>En el catálogo</small></article>
+            <article class="stat-card"><div class="stat-top"><span>VISIBLES EN TIENDA</span><i class="stat-icon icon-green">↗</i></div><strong id="stat-published">—</strong><small>Publicados</small></article>
+            <article class="stat-card"><div class="stat-top"><span>REVISAR</span><i class="stat-icon icon-amber">!</i></div><strong id="stat-review">—</strong><small>Precio pendiente de revisión</small></article>
+            <article class="stat-card"><div class="stat-top"><span>SIN EXISTENCIAS</span><i class="stat-icon icon-coral">⌁</i></div><strong id="stat-empty">—</strong><small>Stock agotado</small></article>
+          </section>
+
+          <section class="catalog-panel" id="catalogo" aria-labelledby="catalog-title">
+            <div class="catalog-heading"><div><div class="title-line"><h2 id="catalog-title">Catálogo de productos</h2><span class="total-pill" id="result-count">0 productos</span></div><p>Busca una pieza y actualiza su ficha al instante.</p></div><span class="catalog-sync-note">Los cambios se guardan en Supabase</span></div>
+            <div class="filter-row"><label class="search-box"><span aria-hidden="true">⌕</span><input id="search-input" type="search" placeholder="Buscar nombre, marca o código…" autocomplete="off" /><kbd>Ctrl K</kbd></label><label class="select-wrap"><span class="sr-only">Categoría</span><select id="category-filter"><option value="all">Todas las categorías</option>{categories.map(([id, label]) => <option value={id}>{label}</option>)}</select></label><label class="select-wrap status-filter-wrap"><span class="sr-only">Estado</span><select id="status-filter"><option value="all">Todos los estados</option><option value="published">Publicado</option><option value="draft">Borrador</option><option value="review">Revisar precio</option></select></label></div>
+            <div class="table-wrap"><table><thead><tr><th>PRODUCTO</th><th>CATEGORÍA</th><th>PRECIO</th><th>STOCK</th><th>ESTADO</th><th><span class="sr-only">Acciones</span></th></tr></thead><tbody id="products-body"><tr><td colspan="6" class="table-loading"><span class="loader"></span> Cargando catálogo…</td></tr></tbody></table></div>
+            <div class="table-footer"><span id="page-summary">Mostrando —</span><div class="pagination"><button id="prev-page" class="page-button" type="button" aria-label="Página anterior" disabled>←</button><span id="page-current">1 / 1</span><button id="next-page" class="page-button" type="button" aria-label="Página siguiente" disabled>→</button></div></div>
+          </section>
+          <footer class="admin-footer"><span>DATOS DE INVENTARIO / NODO PC</span><span id="last-updated">Esperando conexión segura</span></footer>
+        </div>
+      </main>
+    </div>
+
+    <dialog class="edit-dialog" id="edit-dialog" aria-labelledby="edit-title">
+      <form id="edit-form" class="edit-form">
+        <header class="dialog-header"><div><p class="eyebrow">EDITAR FICHA / <span id="edit-product-id"></span></p><h2 id="edit-title">Producto<span>.</span></h2></div><button class="icon-button dialog-close" id="close-dialog" type="button" aria-label="Cerrar">×</button></header>
+        <div class="dialog-scroll">
+          <div class="form-grid">
+            <div class="field-section-title field-wide">Datos principales</div>
+            <label class="field field-wide">Nombre del producto<input name="name" required maxlength="220" /></label>
+            <label class="field">Marca<input name="brand" maxlength="100" /></label>
+            <label class="field">Categoría<select name="category">{categories.map(([id, label]) => <option value={id}>{label}</option>)}</select></label>
+            <label class="field">Tipo<input name="type" maxlength="120" /></label>
+            <label class="field">Etiqueta<input name="label" maxlength="80" /></label>
+            <div class="field-section-title field-wide">Precio y disponibilidad</div>
+            <label class="field">Precio (S/)<input name="price_pen" type="number" min="0" step="0.01" placeholder="Sin precio" /></label>
+            <label class="field">Stock visible<input name="stock_text" maxlength="40" placeholder="Ej. 4, >10, Agotado" /></label>
+            <label class="field">Unidades exactas<input name="stock_quantity" type="number" min="0" step="1" placeholder="Sin dato exacto" /></label>
+            <label class="field">Etiqueta promocional<input name="tag" maxlength="80" /></label>
+            <div class="field-section-title field-wide">Contenido y fuentes</div>
+            <label class="field field-wide">Detalle breve<input name="detail" maxlength="240" /></label>
+            <label class="field field-wide">Descripción<textarea name="description" rows="3" maxlength="1200"></textarea></label>
+            <label class="field field-wide">Página oficial del fabricante<input name="official_url" type="url" placeholder="https://…" /></label>
+            <label class="field field-wide">Imagen oficial<input name="official_image_url" type="url" placeholder="https://…" /></label>
+          </div>
+          <div class="publish-options"><label class="check-row"><input name="published" type="checkbox" /><span><strong>Visible en la tienda</strong><small>El producto aparece en el catálogo público.</small></span></label><label class="check-row check-warning"><input name="price_needs_review" type="checkbox" /><span><strong>Precio pendiente de revisión</strong><small>Marca esta ficha si el precio necesita validación.</small></span></label></div>
+        </div>
+        <div class="dialog-actions"><span class="form-message" id="edit-message" role="status" aria-live="polite"></span><button class="button button-secondary" id="cancel-edit" type="button">Cancelar</button><button class="button button-primary" id="save-button" type="submit">Guardar cambios <span>↗</span></button></div>
+      </form>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script>import '../../../scripts/nodo-pc-admin.js';</script>
+  </body>
+</html>

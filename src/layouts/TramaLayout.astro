@@ -1,0 +1,99 @@
+---
+import '../styles/demo-trama.css';
+import '../styles/trama-pages.css';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;
+  description?: string;
+  currentPage?: 'inicio' | 'coleccion' | 'mayoristas' | 'como-comprar';
+}
+const {
+  title,
+  description = 'Trama Mayorista. Explora la colección, conoce los precios por volumen y arma tu pedido desde 6 prendas.',
+  currentPage = 'inicio',
+} = Astro.props;
+const home = '/demos/trama-mayorista/';
+const designerContact = `${site.whatsapp}?text=${encodeURIComponent('Hola Milton, vi la demo Trama Mayorista y quiero una web para mi negocio de ropa.')}`;
+const navigation = [
+  { key: 'inicio', label: 'Inicio', href: home },
+  { key: 'coleccion', label: 'La colección', href: `${home}coleccion/` },
+  { key: 'mayoristas', label: 'Mayoristas', href: `${home}mayoristas/` },
+  { key: 'como-comprar', label: 'Cómo comprar', href: `${home}como-comprar/` },
+];
+---
+
+<!doctype html>
+<html lang="es" data-trama-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <script is:inline>
+      (() => {
+        let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        try {
+          const saved = localStorage.getItem('trama-theme-v1');
+          if (saved === 'light' || saved === 'dark') theme = saved;
+        } catch { /* System preference remains available when storage is blocked. */ }
+        document.documentElement.dataset.tramaTheme = theme;
+        document.documentElement.style.colorScheme = theme;
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#181513' : '#ffffff');
+      })();
+    </script>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=Manrope:wght@400;500;600;650;700;750;800&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+  </head>
+  <body data-trama-page={currentPage}>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <div class="demo-bar"><a href="/proyectos/trama-mayorista/">← Volver al portafolio</a><span>UN CONCEPTO DE MILTON BLAISE</span><a href={designerContact} target="_blank" rel="noopener noreferrer">Quiero una web así ↗</a></div>
+    <div class="announcement">Ideas en grande. Pedidos desde <strong>6 prendas.</strong><span> / </span>Combina modelos, tallas y colores.</div>
+    <header class="trama-header">
+      <a class="trama-brand" href={home} aria-label="Trama Mayorista, inicio">trama<span class="brand-mark" aria-hidden="true">✳</span><small>MAYORISTA</small></a>
+      <nav id="trama-nav" class="trama-nav" aria-label="Navegación de Trama">
+        {navigation.map((item) => <a href={item.href} aria-current={currentPage === item.key ? 'page' : undefined}>{item.label}</a>)}
+      </nav>
+      <div class="header-actions">
+        <button type="button" class="trama-theme-toggle" data-trama-theme-toggle aria-label="Activar modo oscuro" aria-pressed="false" title="Activar modo oscuro">
+          <span class="trama-theme-sun" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42m0-14.14-1.42 1.42m-11.3 11.3-1.42 1.42"/></svg></span>
+          <span class="trama-theme-moon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 13.1A8.8 8.8 0 0 1 10.9 3.2 8.8 8.8 0 1 0 20.8 13.1Z"/></svg></span>
+          <span class="trama-theme-label">Modo oscuro</span>
+        </button>
+        <button type="button" class="order-trigger" data-open-order aria-label="Ver mi pedido"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 7h14l1 14H4L5 7Z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/></svg><span>Mi pedido</span><b data-order-count>0</b></button>
+        <button type="button" class="menu-toggle" data-menu-toggle aria-controls="trama-nav" aria-expanded="false" aria-label="Abrir menú"><span></span><span></span></button>
+      </div>
+    </header>
+
+    <main id="contenido"><slot /></main>
+
+    <footer class="trama-footer">
+      <div class="footer-top">
+        <a class="trama-brand" href={home}>trama<span class="brand-mark" aria-hidden="true">✳</span><small>MAYORISTA</small></a>
+        <p>Ropa al por mayor.<br />Ideas en grande.</p>
+        <nav aria-label="Navegación del pie de página">{navigation.map((item) => <a href={item.href} aria-current={currentPage === item.key ? 'page' : undefined}>{item.label}</a>)}</nav>
+        <button type="button" class="text-link" data-open-order>Ver mi pedido <span aria-hidden="true">↗</span></button>
+      </div>
+      <div class="footer-bottom"><span>© {new Date().getFullYear()} Trama · Marca conceptual</span><p>Diseño y desarrollo por <a href={designerContact} target="_blank" rel="noopener noreferrer">Milton Blaise ↗</a></p><a href="/proyectos/trama-mayorista/">Volver al caso de estudio ↗</a></div>
+    </footer>
+
+    <dialog id="order-dialog" aria-labelledby="order-title">
+      <div class="order-heading"><div><p class="eyebrow">TU PRÓXIMA COLECCIÓN</p><h2 id="order-title">Mi pedido<span>.</span></h2></div><button type="button" id="close-order" aria-label="Cerrar mi pedido">×</button></div>
+      <p class="order-demo-note">Pedido de demostración · No se realizan compras.</p>
+      <div id="order-empty"><span aria-hidden="true">✳</span><h3>Tu próxima colección empieza con una prenda.</h3><p>Explora el catálogo y añade tu primer pack de 6.</p><a class="text-link" href={`${home}coleccion/`}>Ir a la colección <span aria-hidden="true">↗</span></a></div>
+      <div id="order-items"></div>
+      <div id="order-summary" hidden>
+        <div class="order-tier-note" id="order-tier-note"></div>
+        <dl class="order-totals"><div><dt>Subtotal</dt><dd id="order-subtotal">S/ 0.00</dd></div><div><dt>Descuento por volumen</dt><dd id="order-discount">S/ 0.00</dd></div><div class="order-grand-total"><dt>Total de muestra</dt><dd id="order-total">S/ 0.00</dd></div></dl>
+        <button type="button" id="order-copy" class="trama-button">Copiar resumen del pedido <span aria-hidden="true">↗</span></button><p class="order-copy-note">Guarda tu selección como texto. Los precios y productos son ilustrativos.</p>
+      </div>
+      <p id="order-feedback" role="status" aria-live="polite"></p><label class="sr-only" for="order-export">Resumen del pedido para copiar manualmente</label><textarea id="order-export" readonly hidden></textarea>
+    </dialog>
+    <div id="trama-toast" role="status" aria-live="polite"></div>
+    <script>import '../scripts/trama-mayorista';</script>
+  </body>
+</html>

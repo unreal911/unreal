@@ -1,0 +1,179 @@
+.pf-faq {
+  padding: clamp(76px, 8.6vw, 138px) var(--pad, clamp(22px, 4.6vw, 76px));
+  color: var(--pf-text, var(--ink));
+  background: var(--pf-bg, var(--paper));
+  border-top: 1px solid var(--pf-line, var(--line));
+  scroll-margin-top: 100px;
+}
+
+.pf-faq-inner {
+  display: grid;
+  grid-template-columns: minmax(0, .87fr) minmax(0, 1.13fr);
+  gap: clamp(36px, 7.3vw, 118px);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.pf-faq-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 24px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: .16em;
+}
+
+.pf-faq-eyebrow > span {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--pf-accent, var(--lime));
+}
+
+.pf-faq-intro h2 {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(38px, 4.3vw, 68px);
+  font-weight: 600;
+  line-height: 1.07;
+  letter-spacing: -.065em;
+}
+
+.pf-faq-intro h2 em {
+  color: inherit;
+  font-weight: 400;
+}
+
+.pf-faq-description {
+  max-width: 350px;
+  margin: 26px 0 0;
+  color: var(--pf-muted, var(--muted));
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.pf-faq-mark {
+  display: inline-block;
+  margin-top: 32px;
+  font-family: Arial, sans-serif;
+  font-size: 56px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.pf-faq-list {
+  align-self: start;
+  border-top: 1px solid var(--pf-line, var(--line));
+}
+
+.pf-faq-item {
+  border-bottom: 1px solid var(--pf-line, var(--line));
+  transition: background-color .2s;
+}
+
+.pf-faq-item summary {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 28px;
+  gap: 16px;
+  align-items: center;
+  min-height: 96px;
+  padding: 23px 12px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.pf-faq-item summary::-webkit-details-marker { display: none; }
+.pf-faq-item summary::marker { content: ''; }
+.pf-faq-item summary:hover { background: var(--pf-surface, var(--surface)); }
+.pf-faq-item summary:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.pf-faq-number {
+  align-self: start;
+  margin-top: 6px;
+  color: var(--pf-muted, var(--muted));
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: .06em;
+}
+
+.pf-faq-question {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(17px, 1.6vw, 22px);
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -.035em;
+}
+
+.pf-faq-toggle {
+  position: relative;
+  display: block;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--pf-line, var(--line));
+  border-radius: 50%;
+  transition: background-color .2s, border-color .2s;
+}
+
+.pf-faq-toggle::before,
+.pf-faq-toggle::after {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  display: block;
+  width: 10px;
+  height: 1px;
+  background: currentColor;
+  content: '';
+  transform: translate(-50%, -50%);
+}
+
+.pf-faq-toggle::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.pf-faq-item[open] .pf-faq-toggle {
+  border-color: var(--pf-accent, var(--lime));
+  background: var(--pf-accent, var(--lime));
+  color: var(--pf-bg, var(--paper));
+}
+
+.pf-faq-item[open] .pf-faq-toggle::after { display: none; }
+
+.pf-faq-answer {
+  padding: 0 56px 28px;
+  color: var(--pf-muted, var(--muted));
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.pf-faq-answer p { max-width: 490px; margin: 0; }
+
+@media (max-width: 900px) {
+  .pf-faq-inner { grid-template-columns: 1fr; gap: 38px; }
+  .pf-faq-description { max-width: 480px; }
+  .pf-faq-mark { display: none; }
+}
+
+@media (max-width: 500px) {
+  .pf-faq { scroll-margin-top: 78px; }
+  .pf-faq-eyebrow { margin-bottom: 19px; }
+  .pf-faq-intro h2 { font-size: clamp(35px, 9.2vw, 46px); }
+  .pf-faq-description { margin-top: 22px; font-size: 14px; }
+  .pf-faq-item summary { grid-template-columns: 19px minmax(0, 1fr) 26px; gap: 11px; min-height: 90px; padding: 22px 0; }
+  .pf-faq-question { font-size: 17px; }
+  .pf-faq-toggle { width: 26px; height: 26px; }
+  .pf-faq-answer { padding: 0 37px 26px 30px; font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-faq-item,
+  .pf-faq-toggle { transition: none; }
+}

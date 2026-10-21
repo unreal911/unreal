@@ -13,34 +13,39 @@ const { src, title, initialMode = 'desktop' } = Astro.props;
 <div class="responsive-preview" data-responsive-preview data-initial-mode={initialMode}>
   <div class="responsive-preview-top">
     <div>
-      <p class="responsive-preview-kicker">VISTAS RESPONSIVE / CONCEPTO</p>
-      <p class="responsive-preview-description">Una misma experiencia, pensada para cada pantalla.</p>
+      <p class="responsive-preview-kicker">VISTA DE LA PÁGINA</p>
+      <p class="responsive-preview-description">Así se ve en cada pantalla.</p>
     </div>
-    <a class="responsive-preview-link" href={src} target="_blank" rel="noopener noreferrer">
-      Explorar la demo <span aria-hidden="true">↗</span>
-    </a>
+    <div class="responsive-preview-action">
+      <a class="responsive-preview-link" href={src} target="_blank" rel="noopener noreferrer" aria-label={`Visitar página de ${title} (se abre en otra pestaña)`}>
+        Visitar página <span aria-hidden="true">↗</span>
+      </a>
+      <p class="responsive-preview-new-tab">Se abre en otra pestaña</p>
+    </div>
   </div>
 
   <div class="responsive-preview-controls" role="group" aria-label={`Vista de ${title} por dispositivo`}>
     <button type="button" data-preview-mode="desktop" aria-pressed={initialMode === 'desktop'}>
       <span class="responsive-preview-control-icon" aria-hidden="true">▣</span>
-      Escritorio <small>1440 px</small>
+      Computadora
     </button>
     <button type="button" data-preview-mode="tablet" aria-pressed={initialMode === 'tablet'}>
       <span class="responsive-preview-control-icon" aria-hidden="true">▥</span>
-      Tablet <small>768 px</small>
+      Tablet
     </button>
     <button type="button" data-preview-mode="mobile" aria-pressed={initialMode === 'mobile'}>
       <span class="responsive-preview-control-icon" aria-hidden="true">▯</span>
-      Móvil <small>390 px</small>
+      Celular
     </button>
   </div>
+
+  <p class="responsive-preview-note">Elige una pantalla para cambiar la vista. La imagen de abajo es una muestra sin interacción. Pulsa «Visitar página» para recorrerla y probar sus botones.</p>
 
   <div class="responsive-preview-stage" data-preview-stage>
     <div class="responsive-preview-device" data-preview-device data-mode={initialMode}>
       <div class="responsive-preview-chrome" aria-hidden="true">
         <span class="responsive-preview-dots"><i></i><i></i><i></i></span>
-        <span class="responsive-preview-address">Vista conceptual · {title}</span>
+        <span class="responsive-preview-address">Vista de muestra · {title}</span>
         <span class="responsive-preview-phone-time">9:41</span>
         <span class="responsive-preview-chrome-mark">↗</span>
       </div>
@@ -53,7 +58,6 @@ const { src, title, initialMode = 'desktop' } = Astro.props;
       ></iframe>
     </div>
   </div>
-  <p class="responsive-preview-note">Vista de muestra sin interacción. Abre la demo para navegarla.</p>
 </div>
 
 <style>
@@ -61,13 +65,16 @@ const { src, title, initialMode = 'desktop' } = Astro.props;
   .responsive-preview-top { display: flex; align-items: end; justify-content: space-between; gap: 24px; padding-bottom: 25px; }
   .responsive-preview-kicker { margin: 0 0 11px; font-size: 10px; font-weight: 800; letter-spacing: .12em; }
   .responsive-preview-description { margin: 0; font: 700 clamp(24px, 3.1vw, 43px)/1.12 Manrope, sans-serif; letter-spacing: -.06em; }
-  .responsive-preview-link { display: inline-flex; align-items: center; gap: 22px; flex: none; padding: 11px 0; border-bottom: 1px solid currentColor; font-size: 13px; font-weight: 800; }
-  .responsive-preview-link:hover { color: #718b0d; }
+  .responsive-preview-action { flex: none; }
+  .responsive-preview-link { display: inline-flex; align-items: center; justify-content: center; gap: 22px; min-height: 48px; padding: 12px 20px; border: 1px solid var(--lime); border-radius: 9px; background: var(--lime); color: #161b12; font-size: 14px; font-weight: 800; transition: transform .2s, box-shadow .2s; }
+  .responsive-preview-link:hover { transform: translateY(-2px); box-shadow: 0 5px 0 var(--line); }
+  .responsive-preview-link:focus-visible,
+  .responsive-preview-controls button:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+  .responsive-preview-new-tab { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; text-align: center; }
   .responsive-preview-controls { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 16px; }
-  .responsive-preview-controls button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 41px; padding: 9px 15px; border: 1px solid var(--line); border-radius: 100px; background: transparent; color: var(--ink); cursor: pointer; font-size: 12px; font-weight: 800; transition: background .2s, border-color .2s, color .2s; }
+  .responsive-preview-controls button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 10px 15px; border: 1px solid var(--muted); border-radius: 9px; background: var(--surface); color: var(--ink); cursor: pointer; font-size: 13px; font-weight: 800; transition: background .2s, border-color .2s, color .2s; }
   .responsive-preview-controls button:hover { background: var(--surface-alt); }
   .responsive-preview-controls button[aria-pressed='true'] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
-  .responsive-preview-controls small { font-size: 10px; font-weight: 600; opacity: .7; }
   .responsive-preview-control-icon { font-size: 17px; font-weight: 400; line-height: 1; }
   .responsive-preview-stage { position: relative; min-height: 640px; overflow: hidden; padding: 16px; border: 1px solid var(--line); border-radius: 16px; background: radial-gradient(circle at 50% 38%, var(--surface), transparent 54%), var(--surface-alt); }
   .responsive-preview-device { width: 100%; height: 650px; overflow: hidden; border: 1px solid rgba(23, 26, 23, .18); border-radius: 13px; background: #fff; box-shadow: 0 22px 58px rgba(14, 27, 16, .2); }
@@ -89,15 +96,15 @@ const { src, title, initialMode = 'desktop' } = Astro.props;
   .responsive-preview-device[data-mode='mobile'] .responsive-preview-phone-time { display: inline; }
   .responsive-preview-device iframe { display: block; width: 100%; height: calc(100% - 42px); border: 0; background: #fff; pointer-events: none; }
   .responsive-preview-device[data-mode='mobile'] iframe { height: calc(100% - 39px); }
-  .responsive-preview-note { margin: 13px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+  .responsive-preview-note { margin: 0 0 18px; padding: 13px 16px; border-left: 3px solid var(--ink); background: var(--surface-alt); color: var(--muted); font-size: 13px; line-height: 1.6; }
   @media (max-width: 700px) {
     .responsive-preview-top { align-items: start; flex-direction: column; gap: 16px; }
     .responsive-preview-controls { gap: 5px; }
     .responsive-preview-controls button { flex: 1 1 auto; padding-inline: 10px; }
-    .responsive-preview-controls small { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .responsive-preview-controls button { transition: none; }
+    .responsive-preview-controls button,
+    .responsive-preview-link { transition: none; }
   }
 </style>
 
