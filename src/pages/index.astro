@@ -66,3 +66,17 @@ const services = [
     <PortfolioFaq />
   </div>
 </BaseLayout>
+
+<script>
+  // Show the static, fully styled page before initializing motion and its layout probes.
+  // Navigation and contact controls are initialized separately by BaseLayout.
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    void Promise.all([
+      import('../scripts/animations'),
+      import('../scripts/portfolio'),
+    ]).catch((error) => {
+      delete document.documentElement.dataset.pfHero;
+      console.error('No se pudo iniciar el movimiento de la portada.', error);
+    });
+  }));
+</script>

@@ -246,14 +246,16 @@ function startAnimations() {
       if (initialized) refreshSoon();
     }, { rootMargin: '400px 0px', threshold: 0 }) : undefined;
     // Read positions together before any deferred initializer mutates the layout.
+    const pageAlreadyMoved = window.scrollY > 0 || Boolean(window.location.hash);
     const positions = [...deferred].map(([element, initialize]) => ({ element, initialize, top: element.getBoundingClientRect().top }));
     for (const { element, initialize, top } of positions) {
       if (!observer || top <= window.innerHeight + 400) {
         deferred.delete(element);
-        initialize(true);
+        // A delayed module can finish while an anchor jump is already in progress.
+        initialize(!pageAlreadyMoved || top > window.innerHeight * 0.95);
       } else observer.observe(element);
     }
-    ScrollTrigger.refresh();
+    refreshSoon();
     return () => {
       disposed = true;
       observer?.disconnect();
