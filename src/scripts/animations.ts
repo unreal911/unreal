@@ -51,51 +51,76 @@ function splitLetters(heading: HTMLElement) {
 }
 
 function startAnimations() {
-  animationContext?.revert();
+  stopAnimations();
   if (motionPreference.matches) return;
 
-  animationContext = gsap.context(() => {
+  const context: gsap.Context = gsap.context(() => {
     const home = document.querySelector<HTMLElement>('.portfolio-home');
     const compact = window.matchMedia('(max-width: 780px)').matches;
+    const deferred = new Map<HTMLElement, (animate: boolean) => void>();
+    let disposed = false;
+    let refreshTimer = 0;
+    const deferNear = (element: HTMLElement, initialize: (animate: boolean) => void) => {
+      const previous = deferred.get(element);
+      deferred.set(element, previous ? (animate) => { previous(animate); initialize(animate); } : initialize);
+    };
+    const refreshSoon = () => {
+      if (refreshTimer) window.clearTimeout(refreshTimer);
+      // A refresh can reset native smooth scrolling; wait until scrolling settles.
+      refreshTimer = window.setTimeout(() => {
+        refreshTimer = 0;
+        if (!disposed) ScrollTrigger.refresh();
+      }, 180);
+    };
+    const onScroll = () => {
+      if (refreshTimer) refreshSoon();
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     gsap.utils.toArray<HTMLElement>('[data-letters], .portfolio-home .pp-intro h2').forEach((heading) => {
       // The hero owns its slide transitions; the manifesto follows the scroll below.
       if (heading.closest('.portfolio-home .pf-hero, .portfolio-home .pf-manifesto')) return;
-      splitLetters(heading);
-      const letters = heading.querySelectorAll<HTMLElement>('.animated-letter');
-      if (!letters.length) return;
-      const isHome = Boolean(heading.closest('.portfolio-home'));
-      gsap.from(letters, {
-        yPercent: isHome ? 125 : 115,
-        autoAlpha: 0,
-        rotateX: isHome ? -60 : -35,
-        rotation: isHome ? 5 : 0,
-        transformOrigin: 'center bottom',
-        duration: isHome ? 1.05 : heading.tagName === 'H1' ? 0.9 : 0.75,
-        stagger: { amount: isHome ? 0.68 : heading.tagName === 'H1' ? 0.48 : 0.32 },
-        ease: isHome ? 'power4.out' : 'power3.out',
-        clearProps: 'all',
-        scrollTrigger: { trigger: heading, start: isHome ? 'top 86%' : 'top 88%', once: true },
+      deferNear(heading, (animate) => {
+        if (!animate) return;
+        splitLetters(heading);
+        const letters = heading.querySelectorAll<HTMLElement>('.animated-letter');
+        if (!letters.length) return;
+        const isHome = Boolean(heading.closest('.portfolio-home'));
+        gsap.from(letters, {
+          yPercent: isHome ? 125 : 115,
+          autoAlpha: 0,
+          rotateX: isHome ? -60 : -35,
+          rotation: isHome ? 5 : 0,
+          transformOrigin: 'center bottom',
+          duration: isHome ? 1.05 : heading.tagName === 'H1' ? 0.9 : 0.75,
+          stagger: { amount: isHome ? 0.68 : heading.tagName === 'H1' ? 0.48 : 0.32 },
+          ease: isHome ? 'power4.out' : 'power3.out',
+          clearProps: 'all',
+          scrollTrigger: { trigger: heading, start: isHome ? 'top 86%' : 'top 88%', once: true },
+        });
       });
     });
 
     if (home) {
       const manifesto = home.querySelector<HTMLElement>('.pf-manifesto h2');
       if (manifesto) {
-        splitLetters(manifesto);
-        const words = manifesto.querySelectorAll<HTMLElement>('.animated-word');
-        gsap.fromTo(words, { opacity: 0.32, y: compact ? 7 : 14 }, {
-          opacity: 1,
-          y: 0,
-          duration: 0.65,
-          stagger: 0.4,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: manifesto,
-            start: 'top 80%',
-            end: 'bottom 43%',
-            scrub: 0.65,
-          },
+        deferNear(manifesto, (animate) => {
+          if (!animate) return;
+          splitLetters(manifesto);
+          const words = manifesto.querySelectorAll<HTMLElement>('.animated-word');
+          gsap.fromTo(words, { opacity: 0.32, y: compact ? 7 : 14 }, {
+            opacity: 1,
+            y: 0,
+            duration: 0.65,
+            stagger: 0.4,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: manifesto,
+              start: 'top 80%',
+              end: 'bottom 43%',
+              scrub: 0.65,
+            },
+          });
         });
       }
 
@@ -105,45 +130,49 @@ function startAnimations() {
         const meta = card.querySelector<HTMLElement>('[data-project-meta]');
         if (!visual || !art || !meta) return;
 
-        const artScale = compact ? 1.1 : 1.14;
-        const parallaxDistance = compact ? 10 : 22;
-        gsap.set(art, { transition: 'none', '--pf-art-scale': artScale });
-        const reveal = gsap.timeline({
-          delay: compact ? 0 : (index % 2) * 0.12,
-          scrollTrigger: { trigger: card, start: 'top 91%', once: true },
-        });
-        reveal.fromTo(visual, {
-          y: compact ? 46 : 78,
-          clipPath: 'inset(12% 0% 88% 0% round 7px)',
-        }, {
-          y: 0,
-          clipPath: 'inset(0% 0% 0% 0% round 7px)',
-          duration: compact ? 1.05 : 1.3,
-          ease: 'power4.inOut',
-          clearProps: 'clipPath,transform',
-        });
-        reveal.fromTo(art, { '--pf-art-scale': artScale + 0.16 }, {
-          '--pf-art-scale': artScale,
-          duration: 1.65,
-          ease: 'power3.out',
-        }, 0.08);
-        reveal.from(meta, {
-          y: compact ? 25 : 38,
-          opacity: 0,
-          duration: 0.85,
-          ease: 'power3.out',
-          clearProps: 'opacity,transform',
-        }, 0.4);
+        deferNear(card, (animate) => {
+          const artScale = compact ? 1.1 : 1.14;
+          const parallaxDistance = compact ? 10 : 22;
+          gsap.set(art, { transition: 'none', '--pf-art-scale': artScale });
+          if (animate) {
+            const reveal = gsap.timeline({
+              delay: compact ? 0 : (index % 2) * 0.12,
+              scrollTrigger: { trigger: card, start: 'top 91%', once: true },
+            });
+            reveal.fromTo(visual, {
+              y: compact ? 46 : 78,
+              clipPath: 'inset(12% 0% 88% 0% round 7px)',
+            }, {
+              y: 0,
+              clipPath: 'inset(0% 0% 0% 0% round 7px)',
+              duration: compact ? 1.05 : 1.3,
+              ease: 'power4.inOut',
+              clearProps: 'clipPath,transform',
+            });
+            reveal.fromTo(art, { '--pf-art-scale': artScale + 0.16 }, {
+              '--pf-art-scale': artScale,
+              duration: 1.65,
+              ease: 'power3.out',
+            }, 0.08);
+            reveal.from(meta, {
+              y: compact ? 25 : 38,
+              opacity: 0,
+              duration: 0.85,
+              ease: 'power3.out',
+              clearProps: 'opacity,transform',
+            }, 0.4);
+          }
 
-        gsap.fromTo(art, { '--pf-art-y': `${parallaxDistance}px` }, {
-          '--pf-art-y': `${-parallaxDistance}px`,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: visual,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 1.1,
-          },
+          gsap.fromTo(art, { '--pf-art-y': `${parallaxDistance}px` }, {
+            '--pf-art-y': `${-parallaxDistance}px`,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: visual,
+              start: 'top bottom',
+              end: 'bottom top',
+              scrub: 1.1,
+            },
+          });
         });
       });
     }
@@ -170,30 +199,75 @@ function startAnimations() {
       const meta = card.querySelector<HTMLElement>('[data-project-meta]');
       if (!visual || !meta) return;
 
-      const timeline = gsap.timeline({
-        scrollTrigger: { trigger: card, start: 'top 83%', once: true },
+      deferNear(card, (animate) => {
+        if (!animate) return;
+        const timeline = gsap.timeline({
+          scrollTrigger: { trigger: card, start: 'top 83%', once: true },
+        });
+        timeline.from(visual, {
+          y: 24, duration: 0.7, ease: 'power3.out', clearProps: 'all',
+        });
+        timeline.from(meta, {
+          y: 24, duration: 0.64,
+          ease: 'power3.out', clearProps: 'all',
+        }, '-=0.55');
       });
-      timeline.from(visual, {
-        y: 24, duration: 0.7, ease: 'power3.out', clearProps: 'all',
-      });
-      timeline.from(meta, {
-        y: 24, duration: 0.64,
-        ease: 'power3.out', clearProps: 'all',
-      }, '-=0.55');
     });
 
     gsap.utils.toArray<HTMLElement>('[data-reveal]').forEach((element) => {
       if (element.closest('.portfolio-home .pp-stage')) return;
-      const isHome = Boolean(element.closest('.portfolio-home'));
-      gsap.from(element, {
-        autoAlpha: 0, y: isHome ? 52 : 38, duration: isHome ? 1 : 0.8, ease: 'power3.out',
-        clearProps: 'all',
-        scrollTrigger: { trigger: element, start: 'top 88%', once: true },
+      deferNear(element, (animate) => {
+        if (!animate) return;
+        const isHome = Boolean(element.closest('.portfolio-home'));
+        gsap.from(element, {
+          autoAlpha: 0, y: isHome ? 52 : 38, duration: isHome ? 1 : 0.8, ease: 'power3.out',
+          clearProps: 'all',
+          scrollTrigger: { trigger: element, start: 'top 88%', once: true },
+        });
       });
     });
 
+    const observer = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
+      if (disposed) return;
+      let initialized = false;
+      context.add(() => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const element = entry.target as HTMLElement;
+          const initialize = deferred.get(element);
+          if (!initialize) continue;
+          deferred.delete(element);
+          observer?.unobserve(element);
+          initialized = true;
+          // Anchor jumps and fast scroll must never hide content already being read.
+          initialize(entry.boundingClientRect.top > window.innerHeight * 0.95);
+        }
+      });
+      if (initialized) refreshSoon();
+    }, { rootMargin: '400px 0px', threshold: 0 }) : undefined;
+    // Read positions together before any deferred initializer mutates the layout.
+    const positions = [...deferred].map(([element, initialize]) => ({ element, initialize, top: element.getBoundingClientRect().top }));
+    for (const { element, initialize, top } of positions) {
+      if (!observer || top <= window.innerHeight + 400) {
+        deferred.delete(element);
+        initialize(true);
+      } else observer.observe(element);
+    }
     ScrollTrigger.refresh();
+    return () => {
+      disposed = true;
+      observer?.disconnect();
+      deferred.clear();
+      if (refreshTimer) window.clearTimeout(refreshTimer);
+      window.removeEventListener('scroll', onScroll);
+    };
   });
+  animationContext = context;
+}
+
+function stopAnimations() {
+  animationContext?.revert();
+  animationContext = undefined;
 }
 
 if (document.readyState === 'loading') {
@@ -202,6 +276,16 @@ if (document.readyState === 'loading') {
   startAnimations();
 }
 
-document.addEventListener('astro:before-swap', () => animationContext?.revert());
+document.addEventListener('astro:before-swap', stopAnimations);
 document.addEventListener('astro:after-swap', startAnimations);
 motionPreference.addEventListener('change', startAnimations);
+
+if (import.meta.hot) {
+  import.meta.hot.dispose(() => {
+    stopAnimations();
+    document.removeEventListener('DOMContentLoaded', startAnimations);
+    document.removeEventListener('astro:before-swap', stopAnimations);
+    document.removeEventListener('astro:after-swap', startAnimations);
+    motionPreference.removeEventListener('change', startAnimations);
+  });
+}

@@ -31,14 +31,14 @@ const services = [
         <p data-reveal>Casos conceptuales para explorar cómo resolvemos distintas necesidades de negocio con diseño y desarrollo web.</p>
       </div>
       <div class="pf-project-grid">
-        {projects.map((project, index) => {
+        {projects.map((project) => {
           const presentation = getProjectPresentation(project);
           return (
             <article class:list={['pf-project', `pf-project-${project.artwork}`]} data-project-card aria-labelledby={`project-${project.slug}`}>
               <a class="pf-project-link" href={`/proyectos/${project.slug}/`} aria-labelledby={`project-${project.slug} project-action-${project.slug}`}>
                 <div class="pf-project-cover" data-project-visual>
                   <div class="pf-project-browser" aria-hidden="true"><span><i></i><i></i><i></i></span><span>{project.slug.replaceAll('-', '')}.concept</span><span>↗</span></div>
-                  <ProjectArtwork project={project} priority={index === 0} />
+                  <ProjectArtwork project={project} />
                 </div>
                 <div class="pf-project-info" data-project-meta>
                   <div class="pf-project-copy"><h3 class="pf-project-name" id={`project-${project.slug}`}>{project.title}</h3><p class="pf-project-type">{presentation.shortCategory}</p></div>

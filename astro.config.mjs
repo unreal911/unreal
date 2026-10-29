@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import { loadEnv } from 'vite';
-import { rm } from 'node:fs/promises';
+import { readFile, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 const projectRoot = fileURLToPath(new URL('.', import.meta.url));
@@ -21,6 +21,25 @@ export default defineConfig({
   trailingSlash: 'always',
   ...(siteUrl ? { site: siteUrl } : {}),
   integrations: [
+    {
+      name: 'inline-home-styles',
+      hooks: {
+        'astro:build:done': async ({ dir }) => {
+          // The landing page can paint without waiting for separate CSS requests.
+          // Other routes keep their stylesheets available for normal browser caching.
+          const home = new URL('index.html', dir);
+          let html = await readFile(home, 'utf8');
+          const links = [...html.matchAll(/<link\b[^>]*rel="stylesheet"[^>]*>/g)];
+          for (const [tag] of links) {
+            const href = tag.match(/\bhref="([^"]+)"/)?.[1];
+            if (!href || !/^\/_astro\/[\w.-]+\.css$/.test(href)) continue;
+            const css = await readFile(new URL(href.slice(1), dir), 'utf8');
+            html = html.replace(tag, `<style>${css.replace(/<\/style/gi, '<\\/style')}</style>`);
+          }
+          await writeFile(home, html);
+        },
+      },
+    },
     {
       name: 'exclude-portfolio-qa',
       hooks: {
