@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+  SITE_URL = ""
+
+[context.production.environment]
+  SITE_URL = "https://nubicore.digital"

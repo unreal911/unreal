@@ -33,7 +33,7 @@ Los cinco casos actuales son **conceptuales**: Senda Café, Lumé Beauty, Nexa D
 
 ## SEO y dominio
 
-El dominio todavía no está registrado. No se presupone la propiedad de `codigoimpulso.pe` ni de otro dominio. Consulta `docs/seo.md` para configurar `SITE_URL` cuando tengas el dominio definitivo y volver a generar la web.
+El dominio registrado es `nubicore.digital`, administrado en Hostinger. `netlify.toml` configura la compilación con Node.js 24, publica `dist/` y establece `SITE_URL=https://nubicore.digital` en producción. Las vistas previas mantienen `SITE_URL` vacío. Consulta `docs/seo.md` para los pasos de conexión y verificación del dominio.
 
 La base SEO incluye títulos, descripciones, tarjetas sociales y generación de URLs del sitio. El archivo editable de la tarjeta social es `public/images/codigo-impulso-social.svg`; la versión compartida es el PNG del mismo nombre.
 

@@ -1,14 +1,16 @@
 # SEO de Código Impulso
 
-El proyecto aún no tiene un dominio registrado. No se presupone la propiedad ni disponibilidad de ningún dominio.
+El dominio registrado es `nubicore.digital`, administrado en Hostinger. La publicación se prepara en Netlify; registrar el dominio no confirma por sí solo que el DNS ni el despliegue estén conectados.
 
-## Antes de registrar el dominio
+`netlify.toml` establece `SITE_URL=https://nubicore.digital` únicamente en el contexto de producción. En otros contextos usa una cadena vacía para mantener las vistas previas fuera de la indexación. Para compilar localmente con el dominio, configura `SITE_URL` en `.env` o en el entorno del proceso.
+
+## Vistas previas y compilaciones locales sin dominio
 
 Mantén `SITE_URL` vacío en `.env` y en el entorno del hosting. Las páginas que usan `SeoHead` incluyen `noindex,follow`; no generan canonical, `og:url`, imagen social absoluta ni URLs de identidad en JSON-LD. El sitemap contiene un conjunto vacío de URLs y `robots.txt` no lo anuncia.
 
 `robots.txt` permite el rastreo también en esta etapa, para que los buscadores puedan leer `noindex`. Un bloqueo `Disallow: /` impediría leer esa instrucción y no garantiza que una URL desaparezca de los resultados. Esta configuración no sustituye autenticación si una vista previa debe ser privada.
 
-## Al registrar y conectar el dominio
+## Al conectar el dominio
 
 1. Configura `SITE_URL` con el origen público definitivo, incluido `https://`, sin rutas, parámetros ni fragmentos. Usa el dominio que realmente se haya registrado y conectado; no una URL de ejemplo.
 2. Ejecuta `npm run build` y despliega el nuevo `dist/`. El sitio es estático: cambiar la variable en el hosting sin recompilar no actualiza el HTML.
