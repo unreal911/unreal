@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>Nubicore — Diseño y desarrollo web para empresas</title>
+  <defs>
+    <radialGradient id="glow"><stop stop-color="#456631" stop-opacity=".45"/><stop offset="1" stop-color="#131a16" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0v48" fill="none" stroke="#ecf0e5" stroke-opacity=".035"/></pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#131a16"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <ellipse cx="1080" cy="290" rx="600" ry="520" fill="url(#glow)"/>
+  <g font-family="Arial, sans-serif">
+    <text x="66" y="100" font-size="34" font-weight="700" fill="#ecf0e5">nubi<tspan fill="#ddf77b">core.</tspan></text>
+    <text x="66" y="190" font-size="15" letter-spacing="2.5" fill="#b3bea9">DISEÑO Y DESARROLLO WEB PARA EMPRESAS</text>
+    <g font-size="68" font-weight="700" letter-spacing="-2" fill="#ecf0e5">
+      <text x="62" y="290">La web para el</text>
+      <text x="62" y="370">siguiente paso</text>
+      <text x="62" y="450" fill="#ddf77b">de tu negocio.</text>
+    </g>
+    <path d="M66 521h1068" stroke="#354031"/>
+    <text x="66" y="570" font-size="17" fill="#b3bea9">Estrategia. Diseño. Desarrollo a medida.</text>
+    <text x="1134" y="570" text-anchor="end" font-size="17" fill="#b3bea9">Desde Perú.</text>
+  </g>
+  <g transform="translate(840 220)">
+    <rect x="0" y="0" width="294" height="246" rx="18" fill="#1a231c" stroke="#4b5d3e"/>
+    <path d="M0 42h294" stroke="#4b5d3e"/>
+    <g fill="#7c8e6f"><circle cx="24" cy="21" r="4"/><circle cx="40" cy="21" r="4"/><circle cx="56" cy="21" r="4"/></g>
+    <path d="m72 112-29 29 29 29m150-58 29 29-29 29" fill="none" stroke="#ecf0e5" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M113 177l67-67m-55 0h55v55" fill="none" stroke="#ddf77b" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

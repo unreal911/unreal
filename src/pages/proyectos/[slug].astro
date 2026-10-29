@@ -29,7 +29,11 @@ const process = getProjectProcess(project.slug);
 const isHardware = project.slug === 'nodo-pc';
 ---
 
-<BaseLayout title={`${project.title} — ${presentation.category} | ${site.name}`} description={`${presentation.description} Proyecto de diseño y desarrollo web de ${site.name}.`}>
+<BaseLayout
+  title={`${presentation.seoTitle} | ${site.name}`}
+  description={presentation.seoDescription}
+  breadcrumbs={[{ name: 'Inicio', path: '/' }, { name: project.title, path: `/proyectos/${project.slug}/` }]}
+>
   <article class="case-page" data-project={project.slug}>
     <section class="case-hero section-pad">
       <a class="back-link" href="/#proyectos">← Volver a proyectos</a>
@@ -71,7 +75,7 @@ const isHardware = project.slug === 'nodo-pc';
       {isHardware && <ol class="case-pc-demo-guide" aria-label="Recorrido de la demo Nodo PC" data-reveal>
         <li><span>01 / EXPLORA</span><strong>Encuentra tu pieza.</strong><p>Filtra el catálogo y revisa los datos clave de cada componente.</p><a href="/demos/nodo-pc/componentes/" target="_blank" rel="noopener noreferrer">Ver el catálogo <span aria-hidden="true">↗</span></a></li>
         <li><span>02 / ELIGE LAS PIEZAS</span><strong>Prepara tu equipo.</strong><p>Elige las piezas de una computadora y revisa cuánto costaría.</p><a href="/demos/nodo-pc/armar/" target="_blank" rel="noopener noreferrer">Armar una computadora <span aria-hidden="true">↗</span></a></li>
-        <li><span>03 / REVISA</span><strong>Todo en un pedido.</strong><p>Ajusta cantidades y prepara una selección de ejemplo para conversar sobre una web con Código Impulso.</p><a href={demoUrl} target="_blank" rel="noopener noreferrer">Probar la tienda <span aria-hidden="true">↗</span></a></li>
+        <li><span>03 / REVISA</span><strong>Todo en un pedido.</strong><p>Ajusta cantidades y prepara una selección de ejemplo para conversar sobre una web con Nubicore.</p><a href={demoUrl} target="_blank" rel="noopener noreferrer">Probar la tienda <span aria-hidden="true">↗</span></a></li>
       </ol>}
     </section>}
 

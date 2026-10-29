@@ -1,6 +1,6 @@
-# SEO de Código Impulso
+# SEO de Nubicore
 
-El dominio registrado es `nubicore.digital`, administrado en Hostinger. La publicación se prepara en Netlify; registrar el dominio no confirma por sí solo que el DNS ni el despliegue estén conectados.
+El sitio está publicado en `https://nubicore.digital/`, con DNS administrado en Hostinger y alojamiento en Netlify. `www` redirige al dominio principal y Netlify gestiona el certificado HTTPS.
 
 `netlify.toml` establece `SITE_URL=https://nubicore.digital` únicamente en el contexto de producción. En otros contextos usa una cadena vacía para mantener las vistas previas fuera de la indexación. Para compilar localmente con el dominio, configura `SITE_URL` en `.env` o en el entorno del proceso.
 
@@ -28,11 +28,17 @@ Dentro del `<head>` del layout, usa `SeoHead` una sola vez:
 <SeoHead title={title} description={description} />
 ```
 
-El componente produce `<title>`, descripción, robots, canonical cuando existe dominio, Open Graph, Twitter Card y JSON-LD. Retira del layout las etiquetas equivalentes para evitar duplicados. `image` es una propiedad opcional; por defecto usa `/images/codigo-impulso-social.png`, de 1200 × 630 píxeles. Las imágenes compartidas se publican como URLs absolutas solo cuando existe `SITE_URL`.
+El componente produce `<title>`, descripción, robots, canonical cuando existe dominio, Open Graph, Twitter Card y JSON-LD. Retira del layout las etiquetas equivalentes para evitar duplicados. `image` es una propiedad opcional; por defecto usa `/images/nubicore-social.png`, de 1200 × 630 píxeles. Las imágenes compartidas se publican como URLs absolutas solo cuando existe `SITE_URL`.
 
-Los datos estructurados describen `Organization` y `WebSite`, con el fundador identificado mediante `site.fullName`. No se declaran dirección física, reseñas, premios, perfiles sociales ni datos comerciales sin confirmar. El JSON se escapa para impedir que el contenido cierre el elemento `script`.
+Los datos estructurados describen `Organization`, `WebSite` y `WebPage`, con el fundador identificado mediante `site.fullName`, el teléfono de contacto público y el logotipo de Nubicore. Los casos incluyen `BreadcrumbList`. No se declaran dirección física, reseñas, premios, perfiles sociales ni datos comerciales sin confirmar. El JSON se escapa para impedir que el contenido cierre el elemento `script`.
 
 Todas las demos conservan sus propias etiquetas `noindex`. `SeoHead` se reserva a la web de la empresa y los casos. El archivo local `public/__portfolio-qa.html` se conserva para desarrollo, pero un hook de Astro retira exclusivamente su copia del resultado de compilación.
+
+## Comprobación reproducible
+
+Después de una compilación con `SITE_URL=https://nubicore.digital`, ejecuta `node scripts/audit-seo.mjs`. Revisa títulos y descripciones únicos, idioma, viewport, H1, canonical, tarjetas sociales, JSON-LD, breadcrumbs, textos alternativos, recursos internos, exclusión de demos y correspondencia del sitemap. Guarda el informe detallado en `artifacts/nubicore-seo-audit.json` (carpeta excluida de Git).
+
+La auditoría local comprueba la preparación técnica, no la presencia real en el índice de Google ni los Core Web Vitals de usuarios reales. Para esos datos se utiliza Google Search Console y PageSpeed Insights.
 
 ## Referencias
 

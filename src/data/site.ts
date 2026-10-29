@@ -1,17 +1,18 @@
 export const site = {
-  name: 'Código Impulso',
+  name: 'Nubicore',
   fullName: 'Milton Blaise Cañari Oscco',
   founderName: 'Milton Blaise',
-  monogram: 'ci',
+  monogram: 'n',
   role: 'Estudio de diseño y desarrollo web',
   tagline: 'La web para el siguiente paso de tu negocio.',
-  title: 'Diseño y desarrollo web para empresas | Código Impulso',
+  title: 'Diseño y desarrollo web en Perú | Nubicore',
   location: 'Perú · Disponible en remoto',
   whatsapp: 'https://wa.me/51980904787',
   whatsappLabel: '+51 980 904 787',
+  phone: '+51980904787',
   description:
     'Diseño y desarrollo web a medida para emprendimientos, mypes, pymes y empresas. Landing pages, webs corporativas y catálogos digitales desde Perú.',
-  contactMessage: 'Hola, Código Impulso. Quiero conversar sobre una web para mi negocio.',
+  contactMessage: 'Hola, Nubicore. Quiero conversar sobre una web para mi negocio.',
 };
 
 export function createContactUrl(message: string = site.contactMessage) {

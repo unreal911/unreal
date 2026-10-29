@@ -6,13 +6,21 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  breadcrumbs?: { name: string; path: string }[];
 }
 
-const { title, description, image = '/images/codigo-impulso-social.png' } = Astro.props;
+const { title, description, image = '/images/nubicore-social.png', breadcrumbs = [] } = Astro.props;
 const canonical = canonicalUrl(Astro.url.pathname, Astro.site);
 const socialImage = socialImageUrl(image, Astro.site);
 const homepage = Astro.site ? new URL('/', Astro.site).href : undefined;
 const organizationId = homepage ? `${homepage}#organization` : undefined;
+const logo = socialImageUrl('/images/nubicore-logo.png', Astro.site);
+const breadcrumbItems = Astro.site ? breadcrumbs.map((item, index) => ({
+  '@type': 'ListItem',
+  position: index + 1,
+  name: item.name,
+  item: canonicalUrl(item.path, Astro.site),
+})) : [];
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -21,7 +29,13 @@ const structuredData = {
       name: site.name,
       description: site.description,
       founder: { '@type': 'Person', name: site.fullName },
-      ...(homepage ? { '@id': organizationId, url: homepage } : {}),
+      telephone: site.phone,
+      areaServed: { '@type': 'Country', name: 'Perú' },
+      ...(homepage ? {
+        '@id': organizationId,
+        url: homepage,
+        logo: { '@type': 'ImageObject', url: logo, width: 512, height: 512 },
+      } : {}),
     },
     {
       '@type': 'WebSite',
@@ -33,6 +47,25 @@ const structuredData = {
         publisher: { '@id': organizationId },
       } : {}),
     },
+    {
+      '@type': 'WebPage',
+      name: title,
+      description,
+      inLanguage: 'es-PE',
+      ...(canonical && homepage ? {
+        '@id': `${canonical}#webpage`,
+        url: canonical,
+        isPartOf: { '@id': `${homepage}#website` },
+        about: { '@id': organizationId },
+        ...(socialImage ? { primaryImageOfPage: { '@type': 'ImageObject', url: socialImage } } : {}),
+        ...(breadcrumbItems.length > 1 ? { breadcrumb: { '@id': `${canonical}#breadcrumb` } } : {}),
+      } : {}),
+    },
+    ...(canonical && breadcrumbItems.length > 1 ? [{
+      '@type': 'BreadcrumbList',
+      '@id': `${canonical}#breadcrumb`,
+      itemListElement: breadcrumbItems,
+    }] : []),
   ],
 };
 ---
@@ -49,7 +82,7 @@ const structuredData = {
 {canonical && <meta property="og:url" content={canonical} />}
 {socialImage && <meta property="og:image" content={socialImage} />}
 {socialImage && <meta property="og:image:alt" content={`${site.name} — ${site.role}`} />}
-{socialImage && image === '/images/codigo-impulso-social.png' && <>
+{socialImage && image === '/images/nubicore-social.png' && <>
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:type" content="image/png" />

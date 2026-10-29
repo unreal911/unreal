@@ -1,6 +1,6 @@
-# Código Impulso
+# Nubicore
 
-Web de Código Impulso, estudio de diseño y desarrollo web dirigido por Milton Blaise Cañari Oscco. La propuesta atiende a emprendimientos, mypes, pymes y empresas que quieren lanzar o renovar su presencia digital: «La web para el siguiente paso de tu negocio».
+Web de Nubicore, estudio de diseño y desarrollo web dirigido por Milton Blaise Cañari Oscco. La propuesta atiende a emprendimientos, mypes, pymes y empresas que quieren lanzar o renovar su presencia digital: «La web para el siguiente paso de tu negocio».
 
 Construida con Astro y GSAP. Incluye contacto por WhatsApp, modo claro/oscuro, cinco casos conceptuales con demos navegables y una integración opcional con Supabase para gestionar los proyectos.
 
@@ -29,13 +29,13 @@ El resultado queda en `dist/` y puede alojarse en cualquier hosting estático.
 - Tema claro/oscuro: `src/layouts/BaseLayout.astro` y `src/styles/refinements.css`.
 - Demos completas: `src/pages/demos/` y sus hojas `src/styles/demo-*.css`.
 
-Los cinco casos actuales son **conceptuales**: Senda Café, Lumé Beauty, Nexa Digital, Nodo PC y Trama Mayorista. Las demos conservan sus propias marcas ficticias y se atribuyen a Código Impulso. No representan encargos ni resultados comerciales de clientes reales.
+Los cinco casos actuales son **conceptuales**: Senda Café, Lumé Beauty, Nexa Digital, Nodo PC y Trama Mayorista. Las demos conservan sus propias marcas ficticias y se atribuyen a Nubicore. No representan encargos ni resultados comerciales de clientes reales.
 
 ## SEO y dominio
 
 El dominio registrado es `nubicore.digital`, administrado en Hostinger. `netlify.toml` configura la compilación con Node.js 24, publica `dist/` y establece `SITE_URL=https://nubicore.digital` en producción. Las vistas previas mantienen `SITE_URL` vacío. Consulta `docs/seo.md` para los pasos de conexión y verificación del dominio.
 
-La base SEO incluye títulos, descripciones, tarjetas sociales y generación de URLs del sitio. El archivo editable de la tarjeta social es `public/images/codigo-impulso-social.svg`; la versión compartida es el PNG del mismo nombre.
+La base SEO incluye títulos, descripciones, tarjetas sociales y generación de URLs del sitio. El archivo editable de la tarjeta social es `public/images/nubicore-social.svg`; la versión compartida es el PNG del mismo nombre.
 
 ## Conectar Supabase
 

@@ -1,6 +1,5 @@
 ---
 import type { Project } from '../data/site';
-import catalogRows from '../data/nodoPcCatalog.json';
 
 interface Props {
   project: Project;
@@ -8,7 +7,6 @@ interface Props {
 }
 
 const { project, priority = false } = Astro.props;
-const pcArtwork = catalogRows.find((product) => product.id === 'caleta-8731');
 ---
 
 <div class:list={['project-artwork', `artwork-${project.artwork}`]}>
@@ -83,7 +81,7 @@ const pcArtwork = catalogRows.find((product) => product.id === 'caleta-8731');
         <span class="pc-art-build-label">EXPLORA. ARMA. REVISA.</span>
         <div><span><i>01</i> Catálogo</span><span><i>02</i> Tu equipo</span><span><i>03</i> Pedido ↗</span></div>
       </div>
-      <img class="pc-art-machine" src={pcArtwork?.official_image_url} alt="" loading={priority ? 'eager' : 'lazy'} decoding="async" referrerpolicy="no-referrer" />
+      <img class="pc-art-machine" src="/images/nodo-pc-cover.webp" width="720" height="720" alt="" loading={priority ? 'eager' : 'lazy'} decoding="async" />
       <div class="pc-art-bottomline"><span>HARDWARE / DISEÑO & DESARROLLO</span><span>CONCEPTO WEB — 2026 ↗</span></div>
     </div>
   )}
