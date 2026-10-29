@@ -1,5 +1,6 @@
 ---
-import { site } from '../data/site';
+import { createContactUrl, site } from '../data/site';
+import SeoHead from '../components/SeoHead.astro';
 import '../styles/global.css';
 import '../styles/refinements.css';
 import '../styles/process.css';
@@ -10,8 +11,8 @@ interface Props {
   description?: string;
 }
 
-const { title = `${site.name} — ${site.role}`, description = site.description } = Astro.props;
-const contactUrl = `${site.whatsapp}?text=${encodeURIComponent('Hola Milton, quiero conversar sobre una página web.')}`;
+const { title = site.title, description = site.description } = Astro.props;
+const contactUrl = createContactUrl();
 ---
 
 <!doctype html>
@@ -20,10 +21,7 @@ const contactUrl = `${site.whatsapp}?text=${encodeURIComponent('Hola Milton, qui
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#101713" />
-    <meta name="description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <SeoHead title={title} description={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -65,21 +63,20 @@ const contactUrl = `${site.whatsapp}?text=${encodeURIComponent('Hola Milton, qui
         }
       })();
     </script>
-    <title>{title}</title>
   </head>
   <body>
     <a class="pf-skip-link" href="#contenido">Saltar al contenido</a>
     <div class="page-shell">
       <header class="site-header" id="top">
-        <a class="wordmark" href="/" aria-label="Milton Blaise, inicio">
-          <span class="wordmark-symbol">mb<span class="wordmark-dot">.</span></span>
-          <span class="wordmark-text">milton<br />blaise</span>
+        <a class="wordmark" href="/" aria-label={`${site.name}, inicio`}>
+          <span class="wordmark-symbol" aria-hidden="true">{site.monogram}<span class="wordmark-dot">.</span></span>
+          <span class="wordmark-text" aria-hidden="true">código<br />impulso</span>
         </a>
         <nav class="site-nav" id="site-navigation" aria-label="Navegación principal">
           <a href="/#proyectos">Proyectos</a>
-          <a href="/#proceso">Cómo trabajo</a>
+          <a href="/#proceso">Proceso</a>
           <a href="/#servicios">Servicios</a>
-          <a href="/#sobre-mi">Sobre mí</a>
+          <a href="/#sobre-mi">El estudio</a>
         </nav>
         <div class="header-actions">
           <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar a modo claro" aria-pressed="true" title="Cambiar a modo claro">
@@ -103,10 +100,10 @@ const contactUrl = `${site.whatsapp}?text=${encodeURIComponent('Hola Milton, qui
           <span>DISPONIBLE PARA NUEVOS PROYECTOS <span class="status-dot" aria-hidden="true"></span></span>
         </div>
         <div class="footer-main">
-          <p>¿Le damos forma<br /><em>a tu idea?</em></p>
-          <a class="footer-arrow" href={contactUrl} target="_blank" rel="noopener noreferrer" aria-label="Escribir a Milton por WhatsApp">↗</a>
+          <p>Tu próximo paso.<br /><em>Hagámoslo web.</em></p>
+          <a class="footer-arrow" href={contactUrl} target="_blank" rel="noopener noreferrer" aria-label={`Escribir a ${site.name} por WhatsApp`}>↗</a>
         </div>
-        <a class="footer-contact-link" href={contactUrl} target="_blank" rel="noopener noreferrer">Escríbeme por WhatsApp <span aria-hidden="true">↗</span></a>
+        <a class="footer-contact-link" href={contactUrl} target="_blank" rel="noopener noreferrer">Conversemos por WhatsApp <span aria-hidden="true">↗</span></a>
         <div class="footer-bottom">
           <a href={contactUrl} target="_blank" rel="noopener noreferrer">WhatsApp {site.whatsappLabel} ↗</a>
           <span>{site.location}</span>

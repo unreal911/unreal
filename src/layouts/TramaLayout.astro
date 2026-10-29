@@ -1,7 +1,7 @@
 ---
 import '../styles/demo-trama.css';
 import '../styles/trama-pages.css';
-import { site } from '../data/site';
+import { createContactUrl, site } from '../data/site';
 
 interface Props {
   title: string;
@@ -14,7 +14,7 @@ const {
   currentPage = 'inicio',
 } = Astro.props;
 const home = '/demos/trama-mayorista/';
-const designerContact = `${site.whatsapp}?text=${encodeURIComponent('Hola Milton, vi la demo Trama Mayorista y quiero una web para mi negocio de ropa.')}`;
+const designerContact = createContactUrl(`Hola, ${site.name}. Vi la demo Trama Mayorista y quiero una web para mi negocio de ropa.`);
 const navigation = [
   { key: 'inicio', label: 'Inicio', href: home },
   { key: 'coleccion', label: 'La colección', href: `${home}coleccion/` },
@@ -51,7 +51,7 @@ const navigation = [
   </head>
   <body data-trama-page={currentPage}>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
-    <div class="demo-bar"><a href="/proyectos/trama-mayorista/">← Volver al portafolio</a><span>UN CONCEPTO DE MILTON BLAISE</span><a href={designerContact} target="_blank" rel="noopener noreferrer">Quiero una web así ↗</a></div>
+    <div class="demo-bar"><a href="/proyectos/trama-mayorista/">← Volver al proyecto</a><span>UN CONCEPTO DE {site.name.toUpperCase()}</span><a href={designerContact} target="_blank" rel="noopener noreferrer">Quiero una web así ↗</a></div>
     <div class="announcement">Ideas en grande. Pedidos desde <strong>6 prendas.</strong><span> / </span>Combina modelos, tallas y colores.</div>
     <header class="trama-header">
       <a class="trama-brand" href={home} aria-label="Trama Mayorista, inicio">trama<span class="brand-mark" aria-hidden="true">✳</span><small>MAYORISTA</small></a>
@@ -78,7 +78,7 @@ const navigation = [
         <nav aria-label="Navegación del pie de página">{navigation.map((item) => <a href={item.href} aria-current={currentPage === item.key ? 'page' : undefined}>{item.label}</a>)}</nav>
         <button type="button" class="text-link" data-open-order>Ver mi pedido <span aria-hidden="true">↗</span></button>
       </div>
-      <div class="footer-bottom"><span>© {new Date().getFullYear()} Trama · Marca conceptual</span><p>Diseño y desarrollo por <a href={designerContact} target="_blank" rel="noopener noreferrer">Milton Blaise ↗</a></p><a href="/proyectos/trama-mayorista/">Volver al caso de estudio ↗</a></div>
+      <div class="footer-bottom"><span>© {new Date().getFullYear()} Trama · Marca conceptual</span><p>Diseño y desarrollo por <a href={designerContact} target="_blank" rel="noopener noreferrer">{site.name} ↗</a></p><a href="/proyectos/trama-mayorista/">Volver al caso de estudio ↗</a></div>
     </footer>
 
     <dialog id="order-dialog" aria-labelledby="order-title">

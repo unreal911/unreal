@@ -42,7 +42,7 @@ export const processBySlug = {
       primaryAction: 'Explorar la carta y probar una reserva de demostración.',
     },
     discovery: {
-      label: 'Preguntas que imaginé para este ejemplo; no se hicieron entrevistas a clientes',
+      label: 'Preguntas planteadas para este concepto; no se hicieron entrevistas a clientes',
       questions: [
         '¿Qué necesita saber alguien antes de elegir su café?',
         '¿Cómo mostrar el ambiente y contar el origen sin esconder la carta?',
@@ -85,7 +85,7 @@ export const processBySlug = {
       primaryAction: 'Conocer el sérum y su ritual.',
     },
     discovery: {
-      label: 'Preguntas que imaginé para este ejemplo; no se hicieron entrevistas a clientes',
+      label: 'Preguntas planteadas para este concepto; no se hicieron entrevistas a clientes',
       questions: [
         '¿Qué dudas aparecen antes de probar un producto de cuidado personal?',
         '¿Cómo mostrar el modo de uso sin saturar la página?',
@@ -127,7 +127,7 @@ export const processBySlug = {
       primaryAction: 'Ir a contacto después de revisar servicios y proyectos.',
     },
     discovery: {
-      label: 'Preguntas que imaginé para este ejemplo; no se hicieron entrevistas a clientes',
+      label: 'Preguntas planteadas para este concepto; no se hicieron entrevistas a clientes',
       questions: [
         '¿Qué servicio necesita entender primero un cliente potencial?',
         '¿Cómo mostrar proyectos diferentes manteniendo un estilo reconocible?',
@@ -169,7 +169,7 @@ export const processBySlug = {
       primaryAction: 'Revisar la selección y solicitar una cotización por WhatsApp.',
     },
     discovery: {
-      label: 'Preguntas que imaginé para este ejemplo; no se hicieron entrevistas a clientes',
+      label: 'Preguntas planteadas para este concepto; no se hicieron entrevistas a clientes',
       questions: [
         '¿Qué datos ayudan a comparar dos componentes sin perderse entre especificaciones?',
         '¿Cómo dar un camino propio a quien compra una pieza y a quien necesita un equipo completo?',

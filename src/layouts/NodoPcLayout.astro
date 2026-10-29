@@ -40,7 +40,7 @@ const popularCategories = [
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   </head>
-  <body data-shop-page={active} data-whatsapp-base={site.whatsapp}>
+  <body data-shop-page={active} data-whatsapp-base={site.whatsapp} data-studio-name={site.name}>
     <a class="shop-skip" href="#contenido">Ir al contenido</a>
     <div class="shop-demo-bar"><span><i></i> EXPERIENCIA CONCEPTUAL <b>/</b> CATÁLOGO REFERENCIAL</span><a href="/proyectos/nodo-pc/">CONOCE EL PROYECTO <span>↗</span></a></div>
     <header class="shop-header">
@@ -73,14 +73,14 @@ const popularCategories = [
         <nav aria-label="Categorías de componentes"><strong>Componentes</strong>{popularCategories.slice(0, 4).map((category) => <a href={`${catalogHref}?categoria=${category.id}#catalogo`}>{category.label}</a>)}</nav>
         <div class="footer-demo-note"><strong>Acerca de esta demo</strong><p>Los productos, precios y existencias son referenciales. Aquí no se venden componentes ni se procesan pagos.</p><a href="/proyectos/nodo-pc/">Conoce el caso en el portafolio <span aria-hidden="true">↗</span></a></div>
       </div>
-      <div class="footer-bottom"><span>DEMO CONCEPTUAL / 2026 / LIMA, PERÚ</span><span>Diseño y desarrollo por Milton Blaise</span><a href="/proyectos/nodo-pc/">Ver el proyecto en el portafolio ↗</a></div>
+      <div class="footer-bottom"><span>DEMO CONCEPTUAL / 2026 / LIMA, PERÚ</span><span>Diseño y desarrollo por {site.name}</span><a href="/proyectos/nodo-pc/">Ver el proyecto en el portafolio ↗</a></div>
     </footer>
 
     <dialog class="cart-dialog" id="cart-dialog" aria-labelledby="cart-title">
       <div class="cart-head"><div><span class="mini-kicker">NODO PC / INVENTARIO PERSONAL</span><h2 id="cart-title">TU SELECCIÓN<span>.</span></h2></div><form method="dialog"><button class="cart-close" aria-label="Cerrar selección">×</button></form></div>
-      <div class="cart-progress"><span><b>1</b> Revisa tu selección</span><i></i><span><b>2</b> Habla con Milton</span></div>
+      <div class="cart-progress"><span><b>1</b> Revisa tu selección</span><i></i><span><b>2</b> Habla con el estudio</span></div>
       <div class="cart-items" id="cart-items"></div>
-      <div class="cart-bottom"><label class="cart-order-note" for="order-note">¿Qué te gustaría crear para tu negocio? <span>Opcional</span><textarea id="order-note" rows="2" maxlength="500" placeholder="Ej. Me interesa un catálogo y configurador como este para mi marca."></textarea></label><div class="cart-total"><span>TOTAL REFERENCIAL<small>Precios capturados de Caleta; sujetos a cambio</small></span><strong id="cart-total" aria-live="polite">S/ 0</strong></div><a class="shop-button shop-button-bright cart-send is-disabled" id="send-order" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Hablar con Milton por WhatsApp <span>↗</span></a><p class="cart-demo-note"><b>Estás probando una demo.</b> El mensaje llegará a Milton Blaise, autor del portafolio, para conversar sobre una web como esta. Nodo PC es una marca conceptual; aquí no se procesan compras ni pagos.</p></div>
+      <div class="cart-bottom"><label class="cart-order-note" for="order-note">¿Qué te gustaría crear para tu negocio? <span>Opcional</span><textarea id="order-note" rows="2" maxlength="500" placeholder="Ej. Me interesa un catálogo y configurador como este para mi marca."></textarea></label><div class="cart-total"><span>TOTAL REFERENCIAL<small>Precios capturados de Caleta; sujetos a cambio</small></span><strong id="cart-total" aria-live="polite">S/ 0</strong></div><a class="shop-button shop-button-bright cart-send is-disabled" id="send-order" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Hablar con {site.name} <span>↗</span></a><p class="cart-demo-note"><b>Estás probando una demo.</b> El mensaje llegará a {site.name} para conversar sobre una web como esta. Nodo PC es una marca conceptual; aquí no se procesan compras ni pagos.</p></div>
     </dialog>
     <div class="shop-toast" id="shop-toast" role="status" aria-live="polite"><span id="shop-toast-message"></span><button type="button" id="toast-open-cart">Ver selección ↗</button></div>
 

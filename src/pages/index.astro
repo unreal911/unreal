@@ -6,15 +6,15 @@ import PortfolioFaq from '../components/PortfolioFaq.astro';
 import ProjectArtwork from '../components/ProjectArtwork.astro';
 import { getProjects } from '../lib/projects';
 import { getProjectPresentation } from '../lib/project-presentation';
-import { site } from '../data/site';
+import { createContactUrl, site } from '../data/site';
 import '../styles/portfolio-home.css';
 
 const projects = await getProjects();
-const contactUrl = `${site.whatsapp}?text=${encodeURIComponent('Hola Milton, quiero conversar sobre una página web.')}`;
+const contactUrl = createContactUrl();
 const services = [
-  { number: '01', title: 'Landing pages', text: 'Una página para presentar tu producto o servicio y recibir consultas.', icon: '↗' },
-  { number: '02', title: 'Sitios web', text: 'Tus servicios, la información de tu negocio y el contacto, en un solo lugar.', icon: '◈' },
-  { number: '03', title: 'Web a medida', text: 'Interfaces y funciones específicas para lo que necesita tu proyecto.', icon: '⌘' },
+  { number: '01', title: 'Landing pages', text: 'Una página enfocada en presentar tu oferta, lanzar una campaña o facilitar consultas.', icon: '↗', contactSubject: 'una landing page' },
+  { number: '02', title: 'Webs corporativas', text: 'Un sitio para presentar tu empresa, explicar tus servicios y facilitar el contacto con tus clientes.', icon: '◈', contactSubject: 'una web corporativa' },
+  { number: '03', title: 'Catálogos y web a medida', text: 'Productos, pedidos por WhatsApp e interfaces con las funciones que necesita tu negocio.', icon: '⌘', contactSubject: 'un catálogo o una web a medida' },
 ];
 ---
 
@@ -28,7 +28,7 @@ const services = [
     <section class="pf-work work-section" id="proyectos" aria-labelledby="work-heading">
       <div class="pf-work-heading">
         <h2 class="pf-heading" id="work-heading" data-letters>Proyectos.</h2>
-        <p data-reveal>Conceptos de diseño y desarrollo web.</p>
+        <p data-reveal>Casos conceptuales para explorar cómo resolvemos distintas necesidades de negocio con diseño y desarrollo web.</p>
       </div>
       <div class="pf-project-grid">
         {projects.map((project, index) => {
@@ -51,17 +51,17 @@ const services = [
       </div>
     </section>
     <section class="pf-manifesto" aria-labelledby="manifesto-heading">
-      <h2 id="manifesto-heading" data-letters>Diseño claro.<br /><em>En cada pantalla.</em></h2>
-      <div class="pf-manifesto-bottom"><a href="#proceso" aria-label="Descubrir cómo trabajo">↓</a></div>
+      <h2 id="manifesto-heading" data-letters>Diseño claro.<br /><em>Código con intención.</em></h2>
+      <div class="pf-manifesto-bottom"><a href="#proceso" aria-label="Descubrir cómo trabajamos">↓</a></div>
     </section>
     <PortfolioProcess />
     <section class="pf-services" id="servicios" aria-labelledby="services-heading">
-      <div class="pf-services-heading"><h2 class="pf-heading" id="services-heading" data-letters>Servicios<em>.</em></h2></div>
-      <div class="pf-service-grid">{services.map((service) => <article class="pf-service" data-reveal><div class="pf-service-top"><span>{service.number} /</span><span aria-hidden="true">{service.icon}</span></div><h3>{service.title}</h3><p>{service.text}</p><a href={`${site.whatsapp}?text=${encodeURIComponent(`Hola Milton, me interesa conversar sobre ${service.title.toLowerCase()}.`)}`} target="_blank" rel="noopener noreferrer" aria-label={`Consultar sobre ${service.title.toLowerCase()}`}>Consultar <span aria-hidden="true">↗</span></a></article>)}</div>
+      <div class="pf-services-heading"><h2 class="pf-heading" id="services-heading" data-letters>Servicios<em>.</em></h2><p>Para negocios que comienzan y empresas que buscan renovar o ampliar su presencia digital.</p></div>
+      <div class="pf-service-grid">{services.map((service) => <article class="pf-service" data-reveal><div class="pf-service-top"><span>{service.number} /</span><span aria-hidden="true">{service.icon}</span></div><h3>{service.title}</h3><p>{service.text}</p><a href={createContactUrl(`Hola ${site.name}, me interesa conversar sobre ${service.contactSubject}.`)} target="_blank" rel="noopener noreferrer" aria-label={`Consultar sobre ${service.title.toLowerCase()}`}>Consultar <span aria-hidden="true">↗</span></a></article>)}</div>
     </section>
     <section class="pf-about" id="sobre-mi" aria-labelledby="about-heading">
-      <div class="pf-about-art" aria-hidden="true"><span class="pf-about-art-label">MILTON BLAISE</span><div class="pf-monogram">mb<span>.</span></div><div class="pf-about-art-bottom"><span>DISEÑO & DESARROLLO</span><span>↗</span></div></div>
-      <div class="pf-about-copy"><h2 class="pf-heading" id="about-heading" data-letters>Sobre mí<em>.</em></h2><p>Soy <strong>{site.fullName}</strong>, diseñador y desarrollador web. Te acompaño desde la idea hasta la publicación.</p><p><span class="pf-remote"><i></i> Perú · En remoto</span></p><a class="pf-text-link" href={contactUrl} target="_blank" rel="noopener noreferrer">Hablemos <span aria-hidden="true">↗</span></a></div>
+      <div class="pf-about-art" aria-hidden="true"><span class="pf-about-art-label">{site.name.toUpperCase()}</span><div class="pf-monogram">{site.monogram}<span>.</span></div><div class="pf-about-art-bottom"><span>DISEÑO & DESARROLLO WEB</span><span>↗</span></div></div>
+      <div class="pf-about-copy"><h2 class="pf-heading" id="about-heading" data-letters>El estudio<em>.</em></h2><p><strong>{site.name}</strong> es un estudio independiente de diseño y desarrollo web. Partimos de tu negocio para dar forma a una presencia digital clara, con identidad y fácil de usar.</p><p>Lo dirige <strong>{site.fullName}</strong>. Tienes trato directo con quien diseña y desarrolla tu proyecto, desde la primera conversación hasta la publicación.</p><p><span class="pf-remote"><i></i> Perú · Trabajo en remoto</span></p><a class="pf-text-link" href={contactUrl} target="_blank" rel="noopener noreferrer">Hablemos de tu proyecto <span aria-hidden="true">↗</span></a></div>
     </section>
     <PortfolioFaq />
   </div>

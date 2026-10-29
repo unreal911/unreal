@@ -9,10 +9,12 @@
 .pf-hero-ambient svg{width:100%;height:100%;fill:none;stroke:#d9eaaa18;stroke-width:1}
 .pf-scene-wipe{position:absolute;inset:0;display:flex;pointer-events:none;z-index:-1}.pf-scene-wipe span{flex:1;background:color-mix(in srgb,var(--scene-accent) 12%,#101713);transform:scaleY(0);transform-origin:top}
 .pf-hero-top{display:flex;justify-content:space-between;gap:20px;font-size:9px;letter-spacing:.12em;font-weight:500;color:#b2baab;position:relative;z-index:2}.pf-hero-top>span:first-child{display:flex;align-items:center;gap:10px}.pf-online-dot{width:6px;height:6px;border-radius:50%;background:var(--scene-accent);box-shadow:0 0 0 4px #ddfa7b12;display:inline-block}
+.pf-hero-top>h1{display:flex;align-items:center;gap:10px;margin:0;font:inherit;letter-spacing:inherit;text-transform:uppercase}
 .pf-hero-grid{display:grid;grid-template-columns:1.03fr 1fr;align-items:center;gap:3vw;width:100%;max-width:1720px;margin:0 auto;min-height:0;padding:20px 0}.pf-hero-content{position:relative;z-index:3;min-width:0}
 .pf-slide[hidden],.pf-art-stage[hidden]{display:none}
-.pf-hero-eyebrow{margin:0 0 clamp(15px,2.3svh,25px);display:flex;align-items:center;gap:11px;color:var(--scene-accent);font-size:10px;letter-spacing:.16em;font-weight:600}.pf-hero-eyebrow>span{height:1px;width:30px;background:currentColor}
+.pf-hero-eyebrow{margin:0 0 clamp(15px,2.3svh,25px);display:flex;align-items:center;gap:11px;color:var(--scene-accent);font-size:10px;letter-spacing:.16em;font-weight:600;text-transform:uppercase}.pf-hero-eyebrow>span{height:1px;width:30px;background:currentColor;flex-shrink:0}
 .pf-hero-title{font:500 var(--hero-type)/1.04 'Manrope',sans-serif;letter-spacing:-.055em;margin:0}
+.pf-slide[data-slide="0"] .pf-hero-title{font-size:calc(var(--hero-type)*.79)}
 .pf-hero-title .pf-title-line{display:block;overflow:hidden;white-space:nowrap;padding-block:.07em;margin-block:-.07em}
 .pf-title-letter,.pf-type-letter{display:inline-block}.pf-hero-title [data-space]{width:.25em}
 .pf-hero-title>em{display:block;position:relative;white-space:nowrap;color:var(--scene-accent)!important;font-weight:500;font-style:normal;letter-spacing:-.055em;padding-bottom:.07em}

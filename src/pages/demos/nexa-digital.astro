@@ -1,7 +1,8 @@
 ---
 import '../../styles/demo-digital.css';
+import { createContactUrl, site } from '../../data/site';
 
-const contactHref = `https://wa.me/51980904787?text=${encodeURIComponent('Hola Milton, vi la demo de Nexa Digital y quisiera conversar sobre mi sitio web.')}`;
+const contactHref = createContactUrl(`Hola, ${site.name}. Vi la demo de Nexa Digital y quisiera conversar sobre mi sitio web.`);
 ---
 
 <!doctype html>
@@ -12,7 +13,7 @@ const contactHref = `https://wa.me/51980904787?text=${encodeURIComponent('Hola M
     <meta name="theme-color" content="#0a1021" />
     <meta name="robots" content="noindex,follow" />
     <meta name="description" content="Nexa Digital: demostración conceptual de un sitio web para un estudio de estrategia, diseño y desarrollo." />
-    <title>Nexa Digital — Demo conceptual | Milton Blaise</title>
+    <title>Nexa Digital — Demo conceptual | {site.name}</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   </head>
   <body>
@@ -37,7 +38,7 @@ const contactHref = `https://wa.me/51980904787?text=${encodeURIComponent('Hola M
         </button>
         <a class="nd-rail-contact" href={contactHref} target="_blank" rel="noopener noreferrer"><span>ESCRIBIR POR</span><strong>WHATSAPP ↗</strong></a>
         <a class="nd-rail-back" href="/proyectos/nexa-digital/">← VOLVER AL CASO</a>
-        <small>DEMO CONCEPTUAL<br />POR MILTON BLAISE</small>
+        <small>DEMO CONCEPTUAL<br />POR {site.name.toUpperCase()}</small>
       </div>
     </aside>
 
@@ -60,7 +61,7 @@ const contactHref = `https://wa.me/51980904787?text=${encodeURIComponent('Hola M
         </nav>
       </details>
     </header>
-    <div class="nd-mobile-context"><span>DEMO CONCEPTUAL · MILTON BLAISE</span><a href="/proyectos/nexa-digital/">← Volver al caso</a></div>
+    <div class="nd-mobile-context"><span>DEMO CONCEPTUAL · {site.name.toUpperCase()}</span><a href="/proyectos/nexa-digital/">← Volver al caso</a></div>
 
     <main id="contenido">
       <section class="nd-hero" id="inicio" aria-labelledby="nd-hero-title">
@@ -189,9 +190,9 @@ const contactHref = `https://wa.me/51980904787?text=${encodeURIComponent('Hola M
         <div class="nd-section-label" data-reveal><span>04 / SIGUIENTE PASO</span><span>HAGAMOS ALGO QUE IMPORTE</span></div>
         <div class="nd-cta-content" data-reveal>
           <h2 id="nd-cta-title">¿Listo para<br /><em>mover tu idea?</em></h2>
-          <a class="nd-cta-button" href={contactHref} target="_blank" rel="noopener noreferrer"><span>Escribir a Milton por WhatsApp</span><span aria-hidden="true">↗</span></a>
+          <a class="nd-cta-button" href={contactHref} target="_blank" rel="noopener noreferrer"><span>Escribir a {site.name}</span><span aria-hidden="true">↗</span></a>
         </div>
-        <p class="nd-cta-note">Nexa Digital es un proyecto conceptual. Este botón abre el WhatsApp de Milton Blaise, creador de la demo.</p>
+        <p class="nd-cta-note">Nexa Digital es un proyecto conceptual de {site.name}. Este botón abre el WhatsApp del estudio para conversar sobre una web para tu negocio.</p>
       </section>
     </main>
 

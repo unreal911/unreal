@@ -72,10 +72,23 @@
   color: var(--muted);
 }
 
-[data-trama-page='coleccion'] .catalog { padding-top: 44px; }
-.catalog-page-heading { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin-bottom: 32px; }
-.catalog-page-heading h2 { font-size: clamp(24px, 2.5vw, 36px); }
-.catalog-page-heading p { max-width: 340px; font-size: 12px; line-height: 1.8; color: var(--muted); }
+[data-trama-page='coleccion'] .trama-page-intro { padding-block: 24px; }
+[data-trama-page='coleccion'] .trama-breadcrumbs { margin-bottom: 24px; }
+[data-trama-page='coleccion'] .trama-page-intro .eyebrow { margin-bottom: 10px; }
+[data-trama-page='coleccion'] .trama-page-intro h1 {
+  max-width: none;
+  font-size: clamp(32px, 3.6vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -.05em;
+}
+[data-trama-page='coleccion'] .trama-page-intro > p:not(.eyebrow) {
+  max-width: 900px;
+  margin-top: 12px;
+  line-height: 1.6;
+}
+[data-trama-page='coleccion'] .catalog { padding-top: 24px; }
+[data-trama-page='coleccion'] .catalog-tools { padding-bottom: 16px; }
+[data-trama-page='coleccion'] .catalog-meta { padding-block: 12px; align-items: center; }
 
 .trama-next-section,
 .trama-page-note {
@@ -89,6 +102,7 @@
 .trama-page-note .trama-button { margin-top: 8px; }
 .trama-page-note .text-link { margin-top: 10px; }
 
+.trama-mobile-only { display: none; }
 .trama-category-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .trama-category-card { display: block; }
 .trama-category-image { overflow: hidden; background: var(--soft); aspect-ratio: 4/4.5; }
@@ -121,7 +135,6 @@
   .trama-category-copy h3 { font-size: 17px; }
   .trama-category-copy p { font-size: 9px; }
   .trama-home-wholesale { gap: 35px; padding: 60px 6%; }
-  .catalog-page-heading { align-items: start; flex-direction: column; gap: 14px; }
 }
 
 @media (max-width: 560px) {
@@ -131,10 +144,8 @@
   .trama-breadcrumbs { margin-bottom: 31px; font-size: 10px; gap: 9px; }
   .trama-page-intro h1 { font-size: 43px; }
   .trama-page-intro > p:not(.eyebrow) { font-size: 12px; margin-top: 20px; }
-  [data-trama-page='coleccion'] .catalog { padding-top: 32px; }
-  .catalog-page-heading { margin-bottom: 25px; }
-  .catalog-page-heading h2 { font-size: 27px; }
-  .catalog-page-heading p { font-size: 11px; }
+  [data-trama-page='coleccion'] .trama-breadcrumbs { margin-bottom: 20px; }
+  [data-trama-page='coleccion'] .trama-page-intro > p:not(.eyebrow) { font-size: 13px; }
   .trama-category-grid { grid-template-columns: 1fr; gap: 30px; }
   .trama-category-image { aspect-ratio: 5/4; }
   .trama-category-image img { object-position: center 40%; }
@@ -148,6 +159,95 @@
   .trama-next-section, .trama-page-note { padding: 43px 6%; }
   .trama-next-section h2, .trama-page-note h2 { font-size: 33px; }
   .trama-page-note p:not(.eyebrow) { font-size: 12px; }
+}
+
+/* Keep the mobile campaign in one flexible composition over the photograph. */
+@media (max-width: 800px) {
+  [data-trama-page='inicio'] .trama-desktop-only { display: none; }
+  [data-trama-page='inicio'] .trama-mobile-only { display: inline; }
+
+  [data-trama-page='inicio'] .trama-hero {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: clamp(28rem, 70svh, 34rem);
+    background: #1c120c;
+  }
+
+  [data-trama-page='inicio'] .hero-copy,
+  [data-trama-page='inicio'] .hero-image { grid-area: 1 / 1; min-width: 0; }
+
+  [data-trama-page='inicio'] .hero-image {
+    height: auto;
+    min-height: 0;
+  }
+
+  [data-trama-page='inicio'] .hero-image > img { object-position: 50% 20%; }
+  [data-trama-page='inicio'] .hero-image::after { display: none; }
+
+  [data-trama-page='inicio'] .hero-copy {
+    position: relative;
+    z-index: 1;
+    justify-content: flex-end;
+    padding: 15rem 1.5rem 1.75rem;
+    color: var(--on-brand);
+    background: linear-gradient(180deg, transparent 25%, rgb(28 18 12 / .08) 40%, rgb(28 18 12 / .78) 62%, #1c120c 100%);
+  }
+
+  [data-trama-page='inicio'] .hero-copy h1 {
+    max-width: 100%;
+    font-size: clamp(2.5rem, 11vw, 3.25rem);
+    line-height: 1.04;
+    letter-spacing: -.05em;
+    overflow-wrap: anywhere;
+  }
+
+  [data-trama-page='inicio'] .hero-copy h1 em { color: inherit; }
+  [data-trama-page='inicio'] .hero-description {
+    max-width: none;
+    margin: 12px 0 20px;
+    color: var(--on-brand);
+    font-size: .875rem;
+    line-height: 1.6;
+  }
+
+  [data-trama-page='inicio'] .hero-copy > .trama-button {
+    max-width: 100%;
+    min-height: 49px;
+    padding: 14px 18px;
+    gap: 24px;
+    font-size: .8125rem;
+    background: var(--on-brand);
+    border-color: var(--on-brand);
+    color: #29211c;
+  }
+
+  [data-trama-page='inicio'] .hero-copy > .trama-button:hover { background: var(--warm); border-color: var(--warm); }
+  [data-trama-page='inicio'] .hero-copy > .trama-button:focus-visible { outline-color: var(--on-brand); }
+
+  [data-trama-page='inicio'] .hero-copy .eyebrow,
+  [data-trama-page='inicio'] .hero-footnote,
+  [data-trama-page='inicio'] .collection-label,
+  [data-trama-page='inicio'] .hero-image-caption,
+  [data-trama-page='inicio'] .hero-stamp,
+  [data-trama-page='inicio'] .value-strip { display: none; }
+
+  [data-trama-page='inicio'] .trama-home-categories { padding-block: 28px 48px; }
+  [data-trama-page='inicio'] .trama-home-categories .section-heading {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  [data-trama-page='inicio'] .trama-home-categories .eyebrow { display: none; }
+  [data-trama-page='inicio'] .trama-home-categories h2 { font-size: clamp(1.5rem, 7vw, 1.75rem); }
+  [data-trama-page='inicio'] .trama-home-categories .text-link { font-size: .6875rem; gap: 12px; white-space: nowrap; }
+  [data-trama-page='inicio'] .trama-category-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  [data-trama-page='inicio'] .trama-category-image { aspect-ratio: 4 / 5; }
+  [data-trama-page='inicio'] .trama-category-copy { display: block; padding-top: 10px; }
+  [data-trama-page='inicio'] .trama-category-copy h3 { font-size: .875rem; }
+  [data-trama-page='inicio'] .trama-category-copy p,
+  [data-trama-page='inicio'] .trama-category-copy > span { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

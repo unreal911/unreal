@@ -1,4 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#171815"/>
-  <text x="12" y="48" fill="#e3f65a" font-family="Arial,sans-serif" font-size="48" font-weight="700">m.</text>
+  <title>Código Impulso</title>
+  <rect width="64" height="64" rx="14" fill="#131a16"/>
+  <path d="M32 24a12 12 0 1 0 0 18" fill="none" stroke="#ecf0e5" stroke-width="7" stroke-linecap="round"/>
+  <path d="M44 28v20" fill="none" stroke="#ecf0e5" stroke-width="7" stroke-linecap="round"/>
+  <path d="M40 17h9v9m0-9-10 10" fill="none" stroke="#ddf77b" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

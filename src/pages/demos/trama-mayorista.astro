@@ -13,8 +13,8 @@ const categories = [
   <section class="trama-hero" id="inicio" aria-labelledby="hero-title">
     <div class="hero-copy">
       <p class="eyebrow"><span class="tiny-star" aria-hidden="true">✳</span> BUENAS PRENDAS. GRANDES IDEAS.</p>
-      <h1 id="hero-title">Tu próximo<br /><em>bestseller</em><br />empieza aquí.</h1>
-      <p class="hero-description">Ropa que conecta con tu estilo y con tu negocio. Básicos, nuevas siluetas y precios que crecen contigo.</p>
+      <h1 id="hero-title">Tu próximo<br /><em>bestseller</em><span class="trama-desktop-only"><br />empieza aquí.</span></h1>
+      <p class="hero-description"><span class="trama-desktop-only">Ropa que conecta con tu estilo y con tu negocio. Básicos, nuevas siluetas y precios que crecen contigo.</span><span class="trama-mobile-only">Ropa al por mayor desde <strong>6 prendas.</strong></span></p>
       <a class="trama-button" href={collectionUrl}>Explorar la colección <span aria-hidden="true">↗</span></a>
       <div class="hero-footnote"><span class="hero-line" aria-hidden="true"></span><p>Tú pones la visión.<br /><strong>Nosotros, las prendas.</strong></p></div>
     </div>
@@ -28,8 +28,8 @@ const categories = [
 
   <div class="value-strip" aria-label="Ventajas de compra"><span><i aria-hidden="true">↗</i> Desde 6 prendas combinadas</span><span><i aria-hidden="true">✳</i> Tallas y colores a tu elección</span><span><i aria-hidden="true">↓</i> Mejor precio por volumen</span><span><i aria-hidden="true">◇</i> Una colección, muchas posibilidades</span></div>
 
-  <section class="section-wrap" aria-labelledby="category-title">
-    <div class="section-heading"><div><p class="eyebrow">ENCUENTRA TU ESTILO</p><h2 id="category-title">Una colección.<br /><em>Tu punto de partida.</em></h2></div><a class="text-link" href={collectionUrl}>Ver todas las prendas <span aria-hidden="true">↗</span></a></div>
+  <section class="trama-home-categories section-wrap" aria-labelledby="category-title">
+    <div class="section-heading"><div><p class="eyebrow">ENCUENTRA TU ESTILO</p><h2 id="category-title"><span class="trama-desktop-only">Una colección.<br /><em>Tu punto de partida.</em></span><span class="trama-mobile-only">Elige tu estilo.</span></h2></div><a class="text-link" href={collectionUrl}>Ver colección <span aria-hidden="true">↗</span></a></div>
     <div class="trama-category-grid">
       {categories.map((category) => <a class="trama-category-card" href={`${collectionUrl}?categoria=${category.category}`}><div class="trama-category-image"><img src={category.image} alt={category.alt} width="1000" height="1250" loading="lazy" /></div><div class="trama-category-copy"><div><h3>{category.name}</h3><p>{category.description}</p></div><span aria-hidden="true">↗</span></div></a>)}
     </div>

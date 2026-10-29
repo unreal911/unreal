@@ -1,6 +1,8 @@
-# Portafolio de Milton Blaise
+# Código Impulso
 
-Sitio para clientes construido con Astro y GSAP. Incluye contacto visible por WhatsApp, modo claro/oscuro, tres casos conceptuales con demos navegables y una integración opcional con Supabase para gestionar los proyectos.
+Web de Código Impulso, estudio de diseño y desarrollo web dirigido por Milton Blaise Cañari Oscco. La propuesta atiende a emprendimientos, mypes, pymes y empresas que quieren lanzar o renovar su presencia digital: «La web para el siguiente paso de tu negocio».
+
+Construida con Astro y GSAP. Incluye contacto por WhatsApp, modo claro/oscuro, cinco casos conceptuales con demos navegables y una integración opcional con Supabase para gestionar los proyectos.
 
 ## Iniciar
 
@@ -19,14 +21,21 @@ El resultado queda en `dist/` y puede alojarse en cualquier hosting estático.
 
 ## Personalizar
 
-- Nombre, descripción y WhatsApp: `src/data/site.ts`.
+- Identidad, descripción, fundador, WhatsApp y generador de enlaces de contacto: `src/data/site.ts`.
 - Textos e información de los casos conceptuales: `src/data/site.ts`.
-- Diseño y estilos: `src/styles/global.css`.
+- Portada, servicios y estudio: `src/pages/index.astro` y `src/components/PortfolioHero.astro`.
+- Diseño y estilos: `src/styles/portfolio-*.css` y `src/styles/global.css`.
 - Movimiento: `src/scripts/animations.ts`.
-- Tema claro/oscuro: `src/scripts/theme.ts` y `src/styles/refinements.css`.
+- Tema claro/oscuro: `src/layouts/BaseLayout.astro` y `src/styles/refinements.css`.
 - Demos completas: `src/pages/demos/` y sus hojas `src/styles/demo-*.css`.
 
-Los tres casos actuales son **conceptuales**. Sus demos muestran cómo podría funcionar una web de café, belleza o estudio digital. Sustituye textos e imágenes por proyectos reales antes de presentarlos como trabajo para clientes.
+Los cinco casos actuales son **conceptuales**: Senda Café, Lumé Beauty, Nexa Digital, Nodo PC y Trama Mayorista. Las demos conservan sus propias marcas ficticias y se atribuyen a Código Impulso. No representan encargos ni resultados comerciales de clientes reales.
+
+## SEO y dominio
+
+El dominio todavía no está registrado. No se presupone la propiedad de `codigoimpulso.pe` ni de otro dominio. Consulta `docs/seo.md` para configurar `SITE_URL` cuando tengas el dominio definitivo y volver a generar la web.
+
+La base SEO incluye títulos, descripciones, tarjetas sociales y generación de URLs del sitio. El archivo editable de la tarjeta social es `public/images/codigo-impulso-social.svg`; la versión compartida es el PNG del mismo nombre.
 
 ## Conectar Supabase
 
@@ -40,4 +49,4 @@ La clave `anon` solo puede leer filas publicadas mediante la política RLS del e
 
 ## Arquitectura
 
-Astro genera la portada, una ruta `/proyectos/[slug]/` por caso y tres demos en `/demos/`. GSAP anima letras, tarjetas y secciones al hacer scroll. Con la preferencia de movimiento reducido, las animaciones se omiten. El tema claro/oscuro recuerda la preferencia del visitante. Supabase es opcional: sin credenciales, el sitio sigue funcionando con los datos locales.
+Astro genera la portada, una ruta `/proyectos/[slug]/` por caso y las demos en `/demos/`. GSAP anima letras, tarjetas y secciones al hacer scroll. Con la preferencia de movimiento reducido, las animaciones se omiten. El tema claro/oscuro recuerda la preferencia del visitante. Supabase es opcional: sin credenciales, el sitio sigue funcionando con los datos locales.

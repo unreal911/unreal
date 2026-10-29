@@ -1,6 +1,7 @@
 ---
 import '../../styles/demo-beauty.css';
-const designerWhatsapp = `https://wa.me/51980904787?text=${encodeURIComponent('Hola Milton, vi tu proyecto Lumé Beauty y quiero conversar sobre mi web.')}`;
+import { createContactUrl, site } from '../../data/site';
+const designerWhatsapp = createContactUrl(`Hola, ${site.name}. Vi el proyecto Lumé Beauty y quiero conversar sobre una web para mi negocio.`);
 ---
 
 <!doctype html>
@@ -9,7 +10,7 @@ const designerWhatsapp = `https://wa.me/51980904787?text=${encodeURIComponent('H
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#e8d5dd" />
-    <meta name="description" content="Lumé Beauty: una experiencia conceptual de cuidado personal diseñada y desarrollada por Milton Blaise." />
+    <meta name="description" content={`Lumé Beauty: una experiencia conceptual de cuidado personal diseñada y desarrollada por ${site.name}.`} />
     <meta name="robots" content="noindex" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,7 +31,7 @@ const designerWhatsapp = `https://wa.me/51980904787?text=${encodeURIComponent('H
           <div class="masthead-links masthead-right">
             <a class="desktop-link" href="#producto">El sérum</a>
             <a class="desktop-link" href="#ritual">Ritual</a>
-            <a class="contact-link" href={designerWhatsapp} target="_blank" rel="noopener noreferrer">WhatsApp Milton ↗</a>
+            <a class="contact-link" href={designerWhatsapp} target="_blank" rel="noopener noreferrer">{site.name} ↗</a>
           </div>
         </nav>
       </header>
@@ -134,7 +135,7 @@ const designerWhatsapp = `https://wa.me/51980904787?text=${encodeURIComponent('H
         <div class="footer-meta"><span>CONCEPTO DE PORTAFOLIO · 2026</span><a href="/proyectos/lume-beauty/">Volver al caso de estudio ↗</a></div>
       </footer>
     </div>
-    <a class="beauty-designer-cta" href={designerWhatsapp} target="_blank" rel="noopener noreferrer">¿Quieres una web así? <strong>Escríbeme por WhatsApp ↗</strong></a>
+    <a class="beauty-designer-cta" href={designerWhatsapp} target="_blank" rel="noopener noreferrer">¿Quieres una web así? <strong>Hablemos por WhatsApp ↗</strong></a>
     <script>
       import { gsap } from 'gsap';
       import { ScrollTrigger } from 'gsap/ScrollTrigger';

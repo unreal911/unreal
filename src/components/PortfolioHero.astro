@@ -1,11 +1,12 @@
 ---
 import '../styles/portfolio-hero.css';
+import { site } from '../data/site';
 interface Props { contactUrl: string; }
 const { contactUrl } = Astro.props;
 const slides = [
-  { label: 'IDEAS CON IDENTIDAD', first: 'Tu idea.', second: 'Una web', accent: 'con carácter.', copy: 'Diseño y desarrollo una presencia digital que expresa tu marca y conecta con las personas.', name: 'Identidad', theme: 'identity' },
-  { label: 'PRIMERO, UNA BUENA PREGUNTA', first: 'Menos ruido.', second: 'Más sentido.', accent: 'Más conexión.', copy: 'Entiendo tu negocio, ordeno tus ideas y diseño un recorrido que hace fácil dar el siguiente paso.', name: 'Estrategia', theme: 'strategy' },
-  { label: 'DEL PRIMER BOCETO AL ÚLTIMO DETALLE', first: 'Diseño vivo.', second: 'Código que', accent: 'lo hace real.', copy: 'De un primer boceto a una web ágil, adaptable y llena de detalles que se sienten al usarla.', name: 'Desarrollo', theme: 'development' },
+  { label: 'UNA WEB PENSADA PARA TU NEGOCIO', first: 'La web para', second: 'el siguiente paso', accent: 'de tu negocio.', copy: 'Diseñamos y desarrollamos sitios web para presentar tu empresa, mostrar lo que ofreces y facilitar el contacto con tus clientes.', name: 'Negocio', theme: 'identity' },
+  { label: 'PRIMERO, ENTENDER TU NEGOCIO', first: 'Tu negocio.', second: 'Un rumbo', accent: 'para tu web.', copy: 'Entendemos tus objetivos, ordenamos el contenido y diseñamos un recorrido claro para las personas que visitan tu sitio.', name: 'Estrategia', theme: 'strategy' },
+  { label: 'DEL DISEÑO A LA PUBLICACIÓN', first: 'Buen diseño.', second: 'Código que', accent: 'lo hace real.', copy: 'Convertimos el diseño en una web adaptable, con las funciones que necesitas y atención a cada detalle de uso.', name: 'Desarrollo', theme: 'development' },
 ];
 ---
 <script is:inline>
@@ -19,30 +20,29 @@ const slides = [
     }, 1500);
   })();
 </script>
-<section class="pf-hero" aria-label="Diseño y desarrollo web de Milton Blaise" aria-roledescription="carrusel" data-portfolio-slider data-scene="identity">
-  <h1 class="sr-only" id="hero-title">Milton Blaise — Diseño y desarrollo de experiencias web con carácter</h1>
+<section class="pf-hero" aria-label={`Diseño y desarrollo web de ${site.name}`} aria-roledescription="carrusel" data-portfolio-slider data-scene="identity">
   <div class="pf-hero-ambient" aria-hidden="true"><div></div><div></div><svg viewBox="0 0 1440 850" preserveAspectRatio="xMidYMid slice"><path d="M640 -80C1150 20 400 450 980 910M830 -80C1360 120 600 400 1170 910M1080 -80C1560 130 830 580 1450 910" /></svg></div>
   <div class="pf-scene-wipe" aria-hidden="true">{Array.from({ length: 5 }, () => <span></span>)}</div>
-  <div class="pf-hero-top"><span><span class="pf-online-dot"></span> MILTON BLAISE · DISEÑADOR & DESARROLLADOR</span><span>INDEPENDIENTE. DESDE PERÚ, PARA TU MUNDO.</span></div>
+  <div class="pf-hero-top"><h1 id="hero-title"><span class="pf-online-dot" aria-hidden="true"></span> {site.name} · Diseño y desarrollo web</h1><span>DESDE PERÚ. PARA EL SIGUIENTE PASO.</span></div>
   <div class="pf-hero-grid">
     <div class="pf-hero-content">
       <div class="pf-slides" aria-live="off">
-        {slides.map((slide, index) => <div class="pf-slide" data-slide={index} data-theme-name={slide.theme} role="group" aria-roledescription="diapositiva" aria-label={`${index + 1} de 3: ${slide.name}`} hidden={index !== 0}><p class="pf-hero-eyebrow"><span></span>{slide.label}</p><h2 class="pf-hero-title" aria-label={`${slide.first} ${slide.second} ${slide.accent}`}><span class="pf-title-line" aria-hidden="true">{Array.from(slide.first).map((letter) => <span class="pf-title-letter" data-space={letter === " " ? "true" : undefined}>{letter === " " ? "\u00a0" : letter}</span>)}</span><span class="pf-title-line" aria-hidden="true">{Array.from(slide.second).map((letter) => <span class="pf-title-letter" data-space={letter === " " ? "true" : undefined}>{letter === " " ? "\u00a0" : letter}</span>)}</span><em class="pf-title-type" aria-hidden="true">{Array.from(slide.accent).map((letter) => <span class="pf-type-letter" data-space={letter === " " ? "true" : undefined}>{letter === " " ? "\u00a0" : letter}</span>)}<span class="pf-type-caret"></span></em></h2><p class="pf-hero-description">{slide.copy}</p></div>)}
+        {slides.map((slide, index) => <div class="pf-slide" data-slide={index} data-theme-name={slide.theme} role="group" aria-roledescription="diapositiva" aria-label={`${index + 1} de 3: ${slide.name}`} hidden={index !== 0}><p class="pf-hero-eyebrow"><span aria-hidden="true"></span>{slide.label}</p><h2 class="pf-hero-title" aria-label={`${slide.first} ${slide.second} ${slide.accent}`}><span class="pf-title-line" aria-hidden="true">{Array.from(slide.first).map((letter) => <span class="pf-title-letter" data-space={letter === " " ? "true" : undefined}>{letter === " " ? "\u00a0" : letter}</span>)}</span><span class="pf-title-line" aria-hidden="true">{Array.from(slide.second).map((letter) => <span class="pf-title-letter" data-space={letter === " " ? "true" : undefined}>{letter === " " ? "\u00a0" : letter}</span>)}</span><em class="pf-title-type" aria-hidden="true">{Array.from(slide.accent).map((letter) => <span class="pf-type-letter" data-space={letter === " " ? "true" : undefined}>{letter === " " ? "\u00a0" : letter}</span>)}<span class="pf-type-caret"></span></em></h2><p class="pf-hero-description">{slide.copy}</p></div>)}
       </div>
-      <div class="pf-hero-actions"><a class="pf-button pf-button-primary" href={contactUrl} target="_blank" rel="noopener noreferrer">Cuéntame tu idea <span aria-hidden="true">↗</span></a><a class="pf-hero-projects" href="#proyectos">Ver proyectos <span aria-hidden="true">↓</span></a></div>
+      <div class="pf-hero-actions"><a class="pf-button pf-button-primary" href={contactUrl} target="_blank" rel="noopener noreferrer">Hablemos de tu web <span aria-hidden="true">↗</span></a><a class="pf-hero-projects" href="#proyectos">Ver proyectos <span aria-hidden="true">↓</span></a></div>
 
     </div>
-    <div class="pf-hero-art" aria-hidden="true"><span class="pf-art-wordmark">create.</span>
+    <div class="pf-hero-art" aria-hidden="true"><span class="pf-art-wordmark">impulso.</span>
       <div class="pf-orbit" aria-hidden="true"><div class="pf-orbit-core"></div><span class="pf-orbit-line"></span><span class="pf-orbit-dot"></span></div>
       <div class="pf-art-label" aria-hidden="true"><span>DE LA IDEA</span><span>↘</span><span>A LA EXPERIENCIA</span></div>
       <div class="pf-art-stage pf-art-identity" data-art="identity">
-        <div class="pf-art-browser"><div class="pf-art-chrome"><span><i></i><i></i><i></i></span><span>una buena idea / hecha web</span><span>↗</span></div><div class="pf-art-screen"><div class="pf-art-nav"><span>mb<span>®</span></span><span>ESTUDIO<br />CREATIVO ↗</span></div><small>ESTRATEGIA. DISEÑO. OTRA MIRADA.</small><strong>Tu marca.<br />Su propia<br /><em>forma.</em></strong><div class="pf-art-screen-bottom"><span>DISEÑO QUE HABLA DE TI ↗</span><span>01 — 03</span></div><div class="pf-art-sculpture" aria-hidden="true"><span></span><span></span><span></span></div></div></div>
+        <div class="pf-art-browser"><div class="pf-art-chrome"><span><i></i><i></i><i></i></span><span>código impulso / de la idea a la web</span><span>↗</span></div><div class="pf-art-screen"><div class="pf-art-nav"><span>{site.monogram}<span>.</span></span><span>DISEÑO &<br />DESARROLLO ↗</span></div><small>ESTRATEGIA. DISEÑO. CÓDIGO.</small><strong>Tu negocio.<br />Su siguiente<br /><em>paso.</em></strong><div class="pf-art-screen-bottom"><span>UNA WEB CON DIRECCIÓN ↗</span><span>01 — 03</span></div><div class="pf-art-sculpture" aria-hidden="true"><span></span><span></span><span></span></div></div></div>
         <div class="pf-art-coffee"><img src="/images/senda/hero-coffee.webp" alt="" width="220" height="180" /><div><span>SENDA CAFÉ</span><span>UN CONCEPTO. SU PROPIO MUNDO. ↗</span></div></div>
-        <div class="pf-art-chip"><span class="pf-chip-symbol" aria-hidden="true">✳</span><span>DISEÑADO PARA TU MARCA.<br /><strong>Construido para las personas.</strong></span></div>
+        <div class="pf-art-chip"><span class="pf-chip-symbol" aria-hidden="true">✳</span><span>PENSADO PARA TU NEGOCIO.<br /><strong>Construido para las personas.</strong></span></div>
       </div>
       <div class="pf-art-stage pf-art-strategy" data-art="strategy" hidden><div class="pf-plan-card"><div class="pf-plan-top"><span>01 / EL PUNTO DE PARTIDA</span><span>↘</span></div><h3>Una buena web<br />empieza <em>aquí.</em></h3><div class="pf-plan-question"><span>01</span> ¿Qué hace única a tu marca?</div><div class="pf-plan-question"><span>02</span> ¿A quién quieres llegar?</div><div class="pf-plan-question"><span>03</span> ¿Qué sigue después de visitar?</div><div class="pf-plan-bottom">ENTENDER → ORDENAR → DISEÑAR</div></div><div class="pf-plan-wireframe"><span>MAPA DE LA EXPERIENCIA</span><div class="pf-wire-line"></div><div class="pf-wire-title"></div><div class="pf-wire-text"></div><div class="pf-wire-text short"></div><div class="pf-wire-button"></div><div class="pf-wire-grid"><i></i><i></i><i></i></div></div></div>
       <div class="pf-art-stage pf-art-development" data-art="development" hidden><div class="pf-dev-window"><div class="pf-art-chrome"><span><i></i><i></i><i></i></span><span>de la idea al navegador</span><span>↗</span></div><div class="pf-dev-copy"><small>CONSTRUIR CON INTENCIÓN</small><strong>Se ve bien.<br /><em>Se siente mejor.</em></strong><div class="pf-dev-lines"><span>&lt;experiencia&gt;</span><span>&nbsp;&nbsp;diseño + código + detalle</span><span>&lt;/experiencia&gt;</span></div><div class="pf-dev-tags"><span>ADAPTABLE</span><span>ACCESIBLE</span><span>CON IDENTIDAD</span></div></div></div><div class="pf-dev-phone"><div></div><small>DISEÑO QUE SE ADAPTA</small><strong>En cada<br /><em>pantalla.</em></strong><span>↓</span><i></i><i></i><i></i></div></div>
-      <span class="pf-art-coordinate" aria-hidden="true">DISEÑO + DESARROLLO / SIN PERDER LA ESENCIA</span>
+      <span class="pf-art-coordinate" aria-hidden="true">CÓDIGO IMPULSO / DISEÑO + DESARROLLO WEB</span>
     </div>
   </div>
   <div class="pf-hero-bottom">

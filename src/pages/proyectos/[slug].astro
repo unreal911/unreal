@@ -5,7 +5,7 @@ import CaseProcess from '../../components/CaseProcess.astro';
 import ResponsivePreview from '../../components/ResponsivePreview.astro';
 import { getProjects } from '../../lib/projects';
 import { getProjectPresentation } from '../../lib/project-presentation';
-import { site, type Project } from '../../data/site';
+import { createContactUrl, site, type Project } from '../../data/site';
 import { getProjectProcess, type ProcessProjectSlug } from '../../data/process';
 
 export async function getStaticPaths() {
@@ -24,12 +24,12 @@ interface Props {
 const { project, nextProject } = Astro.props;
 const presentation = getProjectPresentation(project);
 const { demoUrl } = presentation;
-const contactUrl = `${site.whatsapp}?text=${encodeURIComponent(`Hola Milton, vi el proyecto ${project.title} y quiero conversar sobre una web.`)}`;
+const contactUrl = createContactUrl(`Hola, ${site.name}. Vi el proyecto ${project.title} y quiero conversar sobre una web para mi negocio.`);
 const process = getProjectProcess(project.slug);
 const isHardware = project.slug === 'nodo-pc';
 ---
 
-<BaseLayout title={`${project.title} — ${presentation.category} | Milton Blaise`} description={presentation.description}>
+<BaseLayout title={`${project.title} — ${presentation.category} | ${site.name}`} description={`${presentation.description} Proyecto de diseño y desarrollo web de ${site.name}.`}>
   <article class="case-page" data-project={project.slug}>
     <section class="case-hero section-pad">
       <a class="back-link" href="/#proyectos">← Volver a proyectos</a>
@@ -40,7 +40,7 @@ const isHardware = project.slug === 'nodo-pc';
         <p class="case-plain-summary">{presentation.description}</p>
         <div class="case-hero-actions" data-reveal>
           {demoUrl && <a class="primary-cta" href={demoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Visitar página de ${project.title} (se abre en otra pestaña)`}>Visitar página <span aria-hidden="true">↗</span></a>}
-          <a class="secondary-cta" href={process ? '#proceso' : '#resultado'}>Ver cómo lo hice <span aria-hidden="true">↓</span></a>
+          <a class="secondary-cta" href={process ? '#proceso' : '#resultado'}>Conocer el proceso <span aria-hidden="true">↓</span></a>
         </div>
         {demoUrl && <p class="case-action-note">Se abre en otra pestaña para que puedas recorrer la página y volver aquí cuando quieras.</p>}
       </div>
@@ -55,7 +55,7 @@ const isHardware = project.slug === 'nodo-pc';
       <div class="case-overview-copy" data-reveal>
         <p>{presentation.description}</p>
         <div class="case-facts">
-          <div><span>{presentation.features.length ? 'QUÉ INCLUYE' : 'QUÉ HICE'}</span><ul>{(presentation.features.length ? presentation.features : project.services).map((feature) => <li>{feature}</li>)}</ul></div>
+          <div><span>QUÉ INCLUYE</span><ul>{(presentation.features.length ? presentation.features : project.services).map((feature) => <li>{feature}</li>)}</ul></div>
           <div><span>PARA VER EN</span><p>Computadora, tablet y celular.</p></div>
           <div><span>{presentation.isExample ? 'EJEMPLO DE PORTAFOLIO' : 'AÑO'}</span><p>{presentation.isExample ? 'Creado para mostrar cómo podría funcionar una página para este tipo de negocio.' : project.year}</p></div>
         </div>
@@ -71,7 +71,7 @@ const isHardware = project.slug === 'nodo-pc';
       {isHardware && <ol class="case-pc-demo-guide" aria-label="Recorrido de la demo Nodo PC" data-reveal>
         <li><span>01 / EXPLORA</span><strong>Encuentra tu pieza.</strong><p>Filtra el catálogo y revisa los datos clave de cada componente.</p><a href="/demos/nodo-pc/componentes/" target="_blank" rel="noopener noreferrer">Ver el catálogo <span aria-hidden="true">↗</span></a></li>
         <li><span>02 / ELIGE LAS PIEZAS</span><strong>Prepara tu equipo.</strong><p>Elige las piezas de una computadora y revisa cuánto costaría.</p><a href="/demos/nodo-pc/armar/" target="_blank" rel="noopener noreferrer">Armar una computadora <span aria-hidden="true">↗</span></a></li>
-        <li><span>03 / REVISA</span><strong>Todo en un pedido.</strong><p>Ajusta cantidades y prepara una solicitud de ejemplo para conversar con Milton.</p><a href={demoUrl} target="_blank" rel="noopener noreferrer">Probar la tienda <span aria-hidden="true">↗</span></a></li>
+        <li><span>03 / REVISA</span><strong>Todo en un pedido.</strong><p>Ajusta cantidades y prepara una selección de ejemplo para conversar sobre una web con Código Impulso.</p><a href={demoUrl} target="_blank" rel="noopener noreferrer">Probar la tienda <span aria-hidden="true">↗</span></a></li>
       </ol>}
     </section>}
 
@@ -90,7 +90,7 @@ const isHardware = project.slug === 'nodo-pc';
     </section>
 
     <section class="case-contact section-pad" aria-labelledby="case-contact-heading">
-      <div><h2 id="case-contact-heading">Tu negocio también puede tener su página.</h2><p>Cuéntame qué necesitas y vemos cómo darle forma.</p></div>
+      <div><h2 id="case-contact-heading">Una web para el siguiente paso de tu negocio.</h2><p>Cuéntanos qué necesita tu empresa y definimos juntos el alcance del proyecto.</p></div>
       <a class="primary-cta" href={contactUrl} target="_blank" rel="noopener noreferrer">Hablemos por WhatsApp <span aria-hidden="true">↗</span></a>
     </section>
 

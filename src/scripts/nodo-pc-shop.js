@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { products, presets, builderGroups, categories, caletaCategoryMap } from '../data/nodoPc';
 const whatsappBase = document.body.dataset.whatsappBase;
+const studioName = document.body.dataset.studioName;
 let productById = Object.assign(Object.create(null), Object.fromEntries(products.map((product) => [product.id, product])));
 const catalogHref = '/demos/nodo-pc/componentes/';
 const builderHref = '/demos/nodo-pc/armar/';
@@ -94,7 +95,7 @@ const query = new URLSearchParams(window.location.search);
         const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
         const orderLines = items.map((item) => `• ${item.quantity} × ${item.name} — ${formatMoney(item.price * item.quantity)}\n  ${item.detail}`).join('\n\n');
         const note = noteInput.value.trim();
-        const message = `Hola Milton, estoy probando la demo conceptual de Nodo PC de tu portafolio. Esta es mi selección de muestra:\n\n${orderLines}\n\nTotal referencial: ${formatMoney(total)}.${note ? `\n\nSobre mi proyecto: ${note}` : ''}\n\nMe gustaría conversar sobre una web con este catálogo y configurador. Entiendo que Nodo PC es una demo, no una tienda real.`;
+        const message = `Hola, ${studioName}. Estoy probando la demo conceptual de Nodo PC. Esta es mi selección de muestra:\n\n${orderLines}\n\nTotal referencial: ${formatMoney(total)}.${note ? `\n\nSobre mi proyecto: ${note}` : ''}\n\nMe gustaría conversar sobre una web con este catálogo y configurador. Entiendo que Nodo PC es una demo, no una tienda real.`;
         const url = new URL(whatsappBase); url.searchParams.set('text', message); sendOrder.href = url.toString();
       };
       const renderCart = (persist = true) => {
