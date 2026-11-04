@@ -24,7 +24,51 @@ interface Props {
 const { project, nextProject } = Astro.props;
 const presentation = getProjectPresentation(project);
 const { demoUrl } = presentation;
-const contactUrl = createContactUrl(`Hola, ${site.name}. Vi el proyecto ${project.title} y quiero conversar sobre una web para mi negocio.`);
+const offers: Record<string, { audience: string; title: string; description: string; action: string; subject: string }> = {
+  'trama-mayorista': {
+    audience: 'PARA NEGOCIOS DE ROPA AL POR MAYOR',
+    title: 'Tu catálogo. Tus productos. Tu forma de vender.',
+    description: 'Podemos diseñar un catálogo con tus prendas, mínimos de compra y una forma clara de preparar consultas por WhatsApp. Cuéntanos cuántos productos manejas y cómo recibes los pedidos hoy.',
+    action: 'Cotizar mi catálogo',
+    subject: 'un catálogo para mi negocio de ropa al por mayor',
+  },
+  'nodo-pc': {
+    audience: 'PARA TIENDAS DE HARDWARE',
+    title: 'Tus componentes, más fáciles de explorar.',
+    description: 'Organizamos tu catálogo para que tus clientes comparen productos y preparen una cotización. Si necesitas un configurador de PC o un panel de administración, definimos esas funciones en la propuesta.',
+    action: 'Cotizar mi catálogo',
+    subject: 'un catálogo para mi tienda de hardware',
+  },
+  'lume-beauty': {
+    audience: 'PARA MARCAS CON UN PRODUCTO QUE PRESENTAR',
+    title: 'Dale a tu producto su propia página.',
+    description: 'Podemos crear una landing para explicar tu oferta, resolver dudas y facilitar el contacto. Cuéntanos qué producto quieres presentar y qué debería hacer quien visita la página.',
+    action: 'Cotizar mi landing',
+    subject: 'una landing para presentar mi producto',
+  },
+  'nexa-digital': {
+    audience: 'PARA EMPRESAS DE SERVICIOS',
+    title: 'Una web que explique lo que hace tu empresa.',
+    description: 'Damos un lugar claro a tus servicios, tu experiencia y el contacto. Cuéntanos qué ofrece tu empresa y qué información necesitan tus clientes antes de conversar contigo.',
+    action: 'Cotizar mi web',
+    subject: 'una web para mi empresa de servicios',
+  },
+  'senda-cafe': {
+    audience: 'PARA CAFETERÍAS Y NEGOCIOS GASTRONÓMICOS',
+    title: 'Tu carta y tu espacio, a un enlace.',
+    description: 'Podemos crear una web para mostrar tu carta, contar tu historia y facilitar las consultas sobre una visita. Cuéntanos qué necesitas presentar y cómo te contactan tus clientes.',
+    action: 'Cotizar mi web',
+    subject: 'una web para mi cafetería o negocio gastronómico',
+  },
+};
+const offer = offers[project.slug] ?? {
+  audience: 'UNA WEB PARA TU NEGOCIO',
+  title: 'Una web para el siguiente paso de tu negocio.',
+  description: 'Cuéntanos qué necesita tu empresa y definimos juntos el alcance del proyecto.',
+  action: 'Cotizar mi web',
+  subject: 'una web para mi negocio',
+};
+const contactUrl = createContactUrl(`Hola, ${site.name}. Vi el proyecto ${project.title} y quiero cotizar ${offer.subject}.`);
 const process = getProjectProcess(project.slug);
 const isHardware = project.slug === 'nodo-pc';
 ---
@@ -44,7 +88,8 @@ const isHardware = project.slug === 'nodo-pc';
         <p class="case-plain-summary">{presentation.description}</p>
         <div class="case-hero-actions" data-reveal>
           {demoUrl && <a class="primary-cta" href={demoUrl} target="_blank" rel="noopener noreferrer" aria-label={`Visitar página de ${project.title} (se abre en otra pestaña)`}>Visitar página <span aria-hidden="true">↗</span></a>}
-          <a class="secondary-cta" href={process ? '#proceso' : '#resultado'}>Conocer el proceso <span aria-hidden="true">↓</span></a>
+          <a class="secondary-cta" href={contactUrl} target="_blank" rel="noopener noreferrer" aria-label={`${offer.action} por WhatsApp`}>{offer.action} <span aria-hidden="true">↗</span></a>
+          <a class="case-process-link" href={process ? '#proceso' : '#resultado'}>Conocer el proceso <span aria-hidden="true">↓</span></a>
         </div>
         {demoUrl && <p class="case-action-note">Se abre en otra pestaña para que puedas recorrer la página y volver aquí cuando quieras.</p>}
       </div>
@@ -94,8 +139,8 @@ const isHardware = project.slug === 'nodo-pc';
     </section>
 
     <section class="case-contact section-pad" aria-labelledby="case-contact-heading">
-      <div><h2 id="case-contact-heading">Una web para el siguiente paso de tu negocio.</h2><p>Cuéntanos qué necesita tu empresa y definimos juntos el alcance del proyecto.</p></div>
-      <a class="primary-cta" href={contactUrl} target="_blank" rel="noopener noreferrer">Hablemos por WhatsApp <span aria-hidden="true">↗</span></a>
+      <div><span class="case-offer-audience">{offer.audience}</span><h2 id="case-contact-heading">{offer.title}</h2><p>{offer.description}</p></div>
+      <a class="primary-cta" href={contactUrl} target="_blank" rel="noopener noreferrer" aria-label={`${offer.action} por WhatsApp`}>{offer.action} <span aria-hidden="true">↗</span></a>
     </section>
 
     <a class="next-project" href={`/proyectos/${nextProject.slug}/`}>
@@ -104,6 +149,14 @@ const isHardware = project.slug === 'nodo-pc';
     </a>
   </article>
 </BaseLayout>
+
+<style>
+  .case-process-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 48px; padding: 12px 6px; font-size: 13px; color: var(--muted); text-decoration: underline; text-underline-offset: 5px; }
+  .case-process-link:hover { color: var(--ink); }
+  .case-offer-audience { display: block; margin-bottom: 18px; color: var(--muted); font-size: 10px; font-weight: 600; letter-spacing: .08em; line-height: 1.6; }
+  .case-contact p { max-width: 680px; }
+  @media (max-width: 540px) { .case-process-link { justify-self: start; } }
+</style>
 
 <script>
   import '../../scripts/animations';

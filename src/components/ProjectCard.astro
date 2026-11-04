@@ -1,0 +1,56 @@
+---
+import type { Project } from '../data/site';
+import { getProjectPresentation } from '../lib/project-presentation';
+
+interface Props { project: Project; index: number }
+const { project, index } = Astro.props;
+const samples: Record<string, [string, string]> = {
+  'trama-mayorista': ['Moda mayorista', 'Elige prendas y prepara un pedido por volumen.'],
+  'nodo-pc': ['Tecnología', 'Arma una PC pieza por pieza.'],
+  'senda-cafe': ['Cafetería', 'Explora la carta y reserva una mesa de muestra.'],
+  'lume-beauty': ['Belleza', 'Descubre un sérum y cómo usarlo.'],
+  'nexa-digital': ['Estudio creativo', 'Recorre los trabajos de un estudio digital.'],
+};
+const sample = samples[project.slug];
+const [sector, action] = sample ?? [getProjectPresentation(project).shortCategory, project.subtitle];
+const number = String(index + 1).padStart(2, '0');
+---
+<article class="folio-card" data-project-card data-studio-reveal>
+  <a href={`/proyectos/${project.slug}/`} aria-labelledby={`project-${project.slug} action-${project.slug}`}>
+    <div class:list={['folio-art', `art-${sample ? project.slug : 'custom'}`]} aria-hidden="true">
+      {project.slug === 'trama-mayorista' ? (
+        <>
+          <span class="fashion-type">trama<i>✳</i></span>
+          <div class="fabric-plate"><img src="/images/trama/camisa-lino.jpg" alt="" loading="lazy" decoding="async" /><span>01 — LINO</span></div>
+          <div class="fabric-plate fabric-front"><img src="/images/trama/sobrecamisa-salvia.jpg" alt="" loading="lazy" decoding="async" /><span>02 — SALVIA</span></div>
+        </>
+      ) : project.slug === 'nodo-pc' ? (
+        <>
+          <span class="nodo-dial"></span><span class="nodo-type">NODO<span>/ PC</span></span>
+          <img class="nodo-part" src="/images/nodo-pc-cover.webp" width="720" height="720" alt="" loading="lazy" decoding="async" />
+        </>
+      ) : project.slug === 'senda-cafe' ? (
+        <>
+          <img class="coffee-table" src="/images/senda/latte.jpg" alt="" loading="lazy" decoding="async" />
+          <div class="coffee-slip"><span>CAFÉ DE ESPECIALIDAD</span><strong>senda.</strong><i>Carta de café</i></div>
+        </>
+      ) : project.slug === 'lume-beauty' ? (
+        <>
+          <span class="beauty-type">lumé</span><span class="serum"><i></i><b>lumé<small>SÉRUM</small></b></span>
+        </>
+      ) : project.slug === 'nexa-digital' ? (
+        <>
+          <span class="nexa-type">nexa<span>®</span></span>
+          <svg class="nexa-fold" viewBox="0 0 180 180" fill="none" stroke="currentColor" stroke-width="1.6">
+            {Array.from({length: 14}, (_, i) => <rect x="32" y="32" width="116" height="116" rx="12" transform={`rotate(${i * 5} 90 90)`} />)}
+          </svg>
+        </>
+      ) : project.coverUrl ? <img class="folio-custom-img" src={project.coverUrl} alt="" loading="lazy" decoding="async" /> : <span class="custom-mark">{project.title.slice(0, 1)}</span>}
+      <span class="folio-index">{number} <i></i> {sector}</span>
+    </div>
+    <div class="folio-caption">
+      <div><h3 id={`project-${project.slug}`}>{project.title}</h3><p>{action}</p></div>
+      <span class="folio-open"><span class="sr-only" id={`action-${project.slug}`}>Ver caso</span><span aria-hidden="true">↗</span></span>
+    </div>
+  </a>
+</article>

@@ -1,0 +1,10 @@
+/* A short entrance keeps normal document navigation and works without JavaScript. */
+@keyframes portfolio-page-enter {
+  from { opacity: .92; }
+  to { opacity: 1; }
+}
+.page-shell > main { animation: portfolio-page-enter 180ms ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .page-shell > main { animation: none!important; }
+  html { scroll-behavior: auto!important; }
+}

@@ -1,0 +1,61 @@
+---
+import { createContactUrl, site } from '../data/site';
+const services = [
+  { id: 'landing-pages', format: 'Landing page', need: 'Lanzar una oferta', icon: 'launch',
+    scope: 'Una página que reúne tu oferta, sus beneficios y un botón para que te escriban por WhatsApp.',
+    example: 'Lumé Beauty', slug: 'lume-beauty', subject: 'una landing page' },
+  { id: 'webs-corporativas', format: 'Web corporativa', need: 'Presentar mi empresa', icon: 'company',
+    scope: 'Organizamos tus servicios, trabajos y contacto para que tus clientes sepan qué haces y cómo encontrarte.',
+    example: 'Nexa Digital', slug: 'nexa-digital', subject: 'una web corporativa' },
+  { id: 'catalogos-digitales', format: 'Catálogo digital', need: 'Mostrar mis productos', icon: 'catalog',
+    scope: 'Tus clientes filtran productos, eligen cantidades y preparan su consulta por WhatsApp. Si vendes al por mayor, mostramos mínimos y precios por volumen.',
+    example: 'Trama Mayorista', slug: 'trama-mayorista', subject: 'un catálogo digital' },
+];
+---
+<section class="format-section" id="servicios" aria-labelledby="services-heading">
+  <div class="folio-inner format-layout">
+    <div class="format-intro">
+      <p class="folio-kicker"><span>02</span> Lo que podemos crear</p>
+      <h2 class="folio-title" id="services-heading">¿Qué necesita <em>tu negocio?</em></h2>
+    </div>
+    <div class="format-list">
+      {services.map(service => (
+        <div id={service.icon === 'catalog' ? 'catalogos' : undefined}>
+          <details class="format-option" name="formato-web" id={service.id}>
+            <summary>
+              <svg class="format-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">
+                {service.icon === 'launch' ? <><rect x="3" y="6" width="26" height="20" rx="3" /><path d="M3 12h26M8 17h8m-8 4h5m8-1 4-4m-4 0h4v4"/></> :
+                  service.icon === 'company' ? <><rect x="10" y="3" width="12" height="8" rx="1.5"/><rect x="2" y="21" width="11" height="8" rx="1.5"/><rect x="19" y="21" width="11" height="8" rx="1.5"/><path d="M16 11v5m-9 5v-5h18v5"/></> :
+                  <><rect x="3" y="4" width="11" height="10" rx="2"/><rect x="18" y="4" width="11" height="10" rx="2"/><rect x="3" y="18" width="11" height="10" rx="2"/><rect x="18" y="18" width="11" height="10" rx="2"/></>}
+              </svg>
+              <span class="format-label"><small>{service.format}</small><strong>{service.need}</strong></span>
+              <span class="format-toggle" aria-hidden="true"></span>
+            </summary>
+            <div class="format-detail">
+              <p>{service.scope}</p>
+              <div class="format-links">
+                <a href={`/proyectos/${service.slug}/`}>Ver ejemplo: {service.example} <span aria-hidden="true">↗</span></a>
+                <a href={createContactUrl(`Hola, ${site.name}. Quiero cotizar ${service.subject} para mi negocio.`)} target="_blank" rel="noopener noreferrer">Cotizar por WhatsApp <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </details>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+<script>
+  // A link from the menu or a catalogue campaign should land on the actual offer.
+  function openLinkedFormat() {
+    const id = location.hash.slice(1);
+    const target = document.getElementById(id);
+    const option = target?.matches('details.format-option') ? target : target?.id === 'catalogos' ? target.querySelector('details') : null;
+    if (option instanceof HTMLDetailsElement) option.open = true;
+  }
+  openLinkedFormat();
+  window.addEventListener('hashchange', openLinkedFormat);
+  document.addEventListener('click', event => {
+    const link = event.target instanceof Element ? event.target.closest('a') : null;
+    if (link && location.hash && link.href === location.href) openLinkedFormat();
+  });
+</script>

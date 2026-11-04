@@ -1,5 +1,5 @@
 const quickContact = document.querySelector<HTMLElement>('.quick-contact');
-const contactZones = document.querySelectorAll<HTMLElement>('.site-footer, .pf-hero, .work-section, .responsive-preview, .case-contact');
+const contactZones = document.querySelectorAll<HTMLElement>('.site-footer, .studio-cover, .pf-hero, .case-hero, .case-contact');
 
 if (quickContact && 'IntersectionObserver' in window) {
   const visibleZones = new Set<Element>();

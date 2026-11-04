@@ -1,58 +1,58 @@
 ---
-import '../styles/portfolio-hero.css';
 import { site } from '../data/site';
+import '../styles/studio-cover.css';
+
 interface Props { contactUrl: string; }
 const { contactUrl } = Astro.props;
-const slides = [
-  { label: 'UNA WEB PENSADA PARA TU NEGOCIO', first: 'La web para', second: 'el siguiente paso', accent: 'de tu negocio.', copy: 'Diseñamos y desarrollamos sitios web para presentar tu empresa, mostrar lo que ofreces y facilitar el contacto con tus clientes.', name: 'Negocio', theme: 'identity' },
-  { label: 'PRIMERO, ENTENDER TU NEGOCIO', first: 'Tu negocio.', second: 'Un rumbo', accent: 'para tu web.', copy: 'Entendemos tus objetivos, ordenamos el contenido y diseñamos un recorrido claro para las personas que visitan tu sitio.', name: 'Estrategia', theme: 'strategy' },
-  { label: 'DEL DISEÑO A LA PUBLICACIÓN', first: 'Buen diseño.', second: 'Código que', accent: 'lo hace real.', copy: 'Convertimos el diseño en una web adaptable, con las funciones que necesitas y atención a cada detalle de uso.', name: 'Desarrollo', theme: 'development' },
+const previews = [
+  { id: 'trama', name: 'Trama', sector: 'Moda', label: 'Catálogo de moda mayorista', href: '/proyectos/trama-mayorista/', image: '/images/trama/hero-editorial.jpg', thumb: '/images/trama/camisa-lino.jpg', alt: 'Modelo con prendas de la colección Trama', width: 1400, height: 2100 },
+  { id: 'senda', name: 'Senda', sector: 'Café', label: 'Carta y reservas para una cafetería', href: '/proyectos/senda-cafe/', image: '/images/senda/hero-coffee.webp', thumb: '/images/senda/hero-coffee-thumb.webp', alt: 'Café servido en la barra de Senda', width: 1672, height: 941 },
+  { id: 'nodo', name: 'Nodo PC', sector: 'Tecnología', label: 'Catálogo y configurador de PC', href: '/proyectos/nodo-pc/', image: '/images/nodo-pc-cover.webp', thumb: '/images/nodo-pc-cover.webp', alt: 'Tarjeta gráfica del catálogo de Nodo PC', width: 720, height: 720 },
 ];
 ---
-<script is:inline>
-  (() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce), (max-width: 780px)').matches) return;
-    const root = document.documentElement;
-    root.dataset.pfHero = 'pending';
-    // Keep the first paint stable, and reveal the content if the module cannot load.
-    window.setTimeout(() => {
-      if (root.dataset.pfHero === 'pending') root.dataset.pfHero = 'visible';
-    }, 1500);
-  })();
-</script>
-<section class="pf-hero" aria-label={`Diseño y desarrollo web de ${site.name}`} aria-roledescription="carrusel" data-portfolio-slider data-scene="identity">
-  <div class="pf-hero-ambient" aria-hidden="true"><div></div><div></div><svg viewBox="0 0 1440 850" preserveAspectRatio="xMidYMid slice"><path d="M640 -80C1150 20 400 450 980 910M830 -80C1360 120 600 400 1170 910M1080 -80C1560 130 830 580 1450 910" /></svg></div>
-  <div class="pf-scene-wipe" aria-hidden="true">{Array.from({ length: 5 }, () => <span></span>)}</div>
-  <div class="pf-hero-top"><h1 id="hero-title"><span class="pf-online-dot" aria-hidden="true"></span> {site.name} · Diseño y desarrollo web</h1><span>DESDE PERÚ. PARA EL SIGUIENTE PASO.</span></div>
-  <div class="pf-hero-grid">
-    <div class="pf-hero-content">
-      <div class="pf-slides" aria-live="off">
-        {slides.map((slide, index) => <div class="pf-slide" data-slide={index} data-theme-name={slide.theme} role="group" aria-roledescription="diapositiva" aria-label={`${index + 1} de 3: ${slide.name}`} hidden={index !== 0}><p class="pf-hero-eyebrow"><span aria-hidden="true"></span>{slide.label}</p><h2 class="pf-hero-title" aria-label={`${slide.first} ${slide.second} ${slide.accent}`}><span class="pf-title-line" aria-hidden="true">{Array.from(slide.first).map((letter) => <span class="pf-title-letter" data-space={letter === " " ? "true" : undefined}>{letter === " " ? "\u00a0" : letter}</span>)}</span><span class="pf-title-line" aria-hidden="true">{Array.from(slide.second).map((letter) => <span class="pf-title-letter" data-space={letter === " " ? "true" : undefined}>{letter === " " ? "\u00a0" : letter}</span>)}</span><em class="pf-title-type" aria-hidden="true">{Array.from(slide.accent).map((letter) => <span class="pf-type-letter" data-space={letter === " " ? "true" : undefined}>{letter === " " ? "\u00a0" : letter}</span>)}<span class="pf-type-caret"></span></em></h2><p class="pf-hero-description">{slide.copy}</p></div>)}
+<section class="studio-cover" aria-labelledby="hero-title">
+  <div class="cover-grid">
+    <div class="cover-copy">
+      <p class="cover-kicker"><i aria-hidden="true"></i> Estudio de diseño web <span>/</span> Perú</p>
+      <h1 id="hero-title">De visita<br /><em>a consulta.</em></h1>
+      <p class="cover-description">Diseñamos webs y catálogos para que tus clientes encuentren lo que buscan y te escriban por WhatsApp.</p>
+      <div class="cover-actions">
+        <a class="pf-button pf-button-primary" href={contactUrl} target="_blank" rel="noopener noreferrer">Cotizar mi web <span aria-hidden="true">↗</span></a>
+        <a class="cover-secondary" href="#proyectos">Ver proyectos <span aria-hidden="true">↓</span></a>
       </div>
-      <div class="pf-hero-actions"><a class="pf-button pf-button-primary" href={contactUrl} target="_blank" rel="noopener noreferrer">Hablemos de tu web <span aria-hidden="true">↗</span></a><a class="pf-hero-projects" href="#proyectos">Ver proyectos <span aria-hidden="true">↓</span></a></div>
+    </div>
 
-    </div>
-    <div class="pf-hero-art" aria-hidden="true"><span class="pf-art-wordmark">nubicore.</span>
-      <div class="pf-orbit" aria-hidden="true"><div class="pf-orbit-core"></div><span class="pf-orbit-line"></span><span class="pf-orbit-dot"></span></div>
-      <div class="pf-art-label" aria-hidden="true"><span>DE LA IDEA</span><span>↘</span><span>A LA EXPERIENCIA</span></div>
-      <div class="pf-art-stage pf-art-identity" data-art="identity">
-        <div class="pf-art-browser"><div class="pf-art-chrome"><span><i></i><i></i><i></i></span><span>nubicore / de la idea a la web</span><span>↗</span></div><div class="pf-art-screen"><div class="pf-art-nav"><span>{site.monogram}<span>.</span></span><span>DISEÑO &<br />DESARROLLO ↗</span></div><small>ESTRATEGIA. DISEÑO. CÓDIGO.</small><strong>Tu negocio.<br />Su siguiente<br /><em>paso.</em></strong><div class="pf-art-screen-bottom"><span>UNA WEB CON DIRECCIÓN ↗</span><span>01 — 03</span></div><div class="pf-art-sculpture" aria-hidden="true"><span></span><span></span><span></span></div></div></div>
-        <div class="pf-art-coffee"><img src="/images/senda/hero-coffee-thumb.webp" alt="" width="480" height="270" /><div><span>SENDA CAFÉ</span><span>UN CONCEPTO. SU PROPIO MUNDO. ↗</span></div></div>
-        <div class="pf-art-chip"><span class="pf-chip-symbol" aria-hidden="true">✳</span><span>PENSADO PARA TU NEGOCIO.<br /><strong>Construido para las personas.</strong></span></div>
+    <div class="cover-showcase" data-showcase>
+      <div class="archive-heading">
+        <h2>Muestrario <em>del estudio</em></h2>
+        <span aria-label="Selección actual" data-preview-count>01 / 03</span>
       </div>
-      <div class="pf-art-stage pf-art-strategy" data-art="strategy" hidden><div class="pf-plan-card"><div class="pf-plan-top"><span>01 / EL PUNTO DE PARTIDA</span><span>↘</span></div><h3>Una buena web<br />empieza <em>aquí.</em></h3><div class="pf-plan-question"><span>01</span> ¿Qué hace única a tu marca?</div><div class="pf-plan-question"><span>02</span> ¿A quién quieres llegar?</div><div class="pf-plan-question"><span>03</span> ¿Qué sigue después de visitar?</div><div class="pf-plan-bottom">ENTENDER → ORDENAR → DISEÑAR</div></div><div class="pf-plan-wireframe"><span>MAPA DE LA EXPERIENCIA</span><div class="pf-wire-line"></div><div class="pf-wire-title"></div><div class="pf-wire-text"></div><div class="pf-wire-text short"></div><div class="pf-wire-button"></div><div class="pf-wire-grid"><i></i><i></i><i></i></div></div></div>
-      <div class="pf-art-stage pf-art-development" data-art="development" hidden><div class="pf-dev-window"><div class="pf-art-chrome"><span><i></i><i></i><i></i></span><span>de la idea al navegador</span><span>↗</span></div><div class="pf-dev-copy"><small>CONSTRUIR CON INTENCIÓN</small><strong>Se ve bien.<br /><em>Se siente mejor.</em></strong><div class="pf-dev-lines"><span>&lt;experiencia&gt;</span><span>&nbsp;&nbsp;diseño + código + detalle</span><span>&lt;/experiencia&gt;</span></div><div class="pf-dev-tags"><span>ADAPTABLE</span><span>ACCESIBLE</span><span>CON IDENTIDAD</span></div></div></div><div class="pf-dev-phone"><div></div><small>DISEÑO QUE SE ADAPTA</small><strong>En cada<br /><em>pantalla.</em></strong><span>↓</span><i></i><i></i><i></i></div></div>
-      <span class="pf-art-coordinate" aria-hidden="true">NUBICORE / DISEÑO + DESARROLLO WEB</span>
+      <div class="archive-spread">
+        <div class="archive-index" role="group" aria-label="Elegir proyecto conceptual" data-preview-controls hidden>
+          {previews.map((project, index) => (
+            <button type="button" data-preview-button={index} aria-controls={`preview-${project.id}`} aria-pressed={index === 0}>
+              <img src={project.thumb} width="112" height="70" alt="" />
+              <span><small aria-hidden="true">0{index + 1}</small> {project.name}</span>
+            </button>
+          ))}
+        </div>
+        {previews.map((project, index) => (
+          <a class={`archive-plate plate-${project.id}`} id={`preview-${project.id}`} href={project.href} data-preview={index} hidden={index !== 0} aria-label={`Ver ${project.name}, ${project.label.toLowerCase()}. Proyecto conceptual.`}>
+            <img class="plate-photo" src={project.image} width={project.width} height={project.height} alt={project.alt} loading={index === 0 ? 'eager' : 'lazy'} fetchpriority={index === 0 ? 'high' : 'auto'} />
+            <span class="plate-stamp">NC / 00{index + 1} <i></i> {project.sector}</span>
+            <div class="plate-caption">
+              <span class="plate-class">Proyecto conceptual</span>
+              <strong>{project.name}</strong>
+              <div class="plate-baseline"><span>{project.label}</span><span class="plate-open">Ver caso <b aria-hidden="true">↗</b></span></div>
+            </div>
+          </a>
+        ))}
+      </div>
     </div>
   </div>
-  <div class="pf-hero-bottom">
-    <a class="pf-scroll-link" href="#proyectos"><span class="pf-scroll-mouse" aria-hidden="true"><i></i></span><span>DESLIZA PARA EXPLORAR <span aria-hidden="true">↓</span></span></a>
-    <div class="pf-slider-controls" aria-label="Controles de portada">
-      <span class="pf-slide-counter" aria-hidden="true"><strong data-slide-number>01</strong><span> / 03</span></span>
-      <div class="pf-slide-tabs">{slides.map((slide, index) => <button type="button" data-slide-to={index} aria-label={`Mostrar ${slide.name}`} aria-pressed={index === 0}><span class="pf-tab-number">0{index + 1}</span><span class="pf-tab-name">{slide.name}</span><span class="pf-tab-track" aria-hidden="true"><i></i></span></button>)}</div>
-      <div class="pf-slide-arrows"><button type="button" data-slide-prev aria-label="Diapositiva anterior">←</button><button type="button" data-slide-next aria-label="Diapositiva siguiente">→</button></div>
-      <button class="pf-slider-play" type="button" data-slide-play aria-label="Pausar cambio automático" title="Pausar cambio automático" aria-pressed="false"><span data-play-icon aria-hidden="true">Ⅱ</span><span class="pf-play-label" aria-hidden="true">Pausar</span></button>
-    </div>
+  <div class="cover-colophon">
+    <span><b aria-hidden="true">↳</b> {site.name} Estudio</span>
+    <span>Diseño <i>/</i> Desarrollo <i>/</i> Trato directo</span>
+    <a href="#servicios">Explorar servicios <span aria-hidden="true">↓</span></a>
   </div>
-  <p class="sr-only" role="status" data-slide-status></p>
 </section>

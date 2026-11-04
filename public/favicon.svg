@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <title>Nubicore</title>
-  <rect width="64" height="64" rx="14" fill="#131a16"/>
-  <path d="M18 45V19l28 26V19" fill="none" stroke="#ecf0e5" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M46 19v12" fill="none" stroke="#ddf77b" stroke-width="7" stroke-linecap="round"/>
+  <rect width="64" height="64" rx="14" fill="#102e32"/>
+  <path d="M18 45V19l28 26V19" fill="none" stroke="#f5f1e7" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M46 19v12" fill="none" stroke="#ffbd69" stroke-width="7" stroke-linecap="round"/>
 </svg>

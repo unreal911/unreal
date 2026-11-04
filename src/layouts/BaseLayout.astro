@@ -6,6 +6,7 @@ import '../styles/global.css';
 import '../styles/refinements.css';
 import '../styles/process.css';
 import '../styles/portfolio-shell.css';
+import '../styles/page-transitions.css';
 
 interface Props {
   title?: string;
@@ -15,6 +16,19 @@ interface Props {
 
 const { title = site.title, description = site.description, breadcrumbs = [] } = Astro.props;
 const contactUrl = createContactUrl();
+const onProjectPage = Astro.url.pathname.startsWith('/proyectos/');
+const navGroups = [
+  { id: 'proyectos', label: 'Proyectos', all: 'Ver todos los proyectos', links: [
+    ['Trama Mayorista', '/proyectos/trama-mayorista/'],
+    ['Senda Café', '/proyectos/senda-cafe/'],
+    ['Nodo PC', '/proyectos/nodo-pc/'],
+  ] },
+  { id: 'servicios', label: 'Servicios', all: 'Comparar servicios', links: [
+    ['Landing pages', '/#landing-pages'],
+    ['Webs corporativas', '/#webs-corporativas'],
+    ['Catálogos digitales', '/#catalogos-digitales'],
+  ] },
+];
 ---
 
 <!doctype html>
@@ -22,7 +36,7 @@ const contactUrl = createContactUrl();
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#101713" />
+    <meta name="theme-color" content="#102e32" />
     <SeoHead title={title} description={description} breadcrumbs={breadcrumbs} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="96x96" />
@@ -43,7 +57,7 @@ const contactUrl = createContactUrl();
           const isDark = root.dataset.theme === 'dark';
           const action = isDark ? 'Modo claro' : 'Modo oscuro';
           const toggle = document.getElementById('theme-toggle');
-          document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#101713' : '#f6f6ef');
+          document.querySelector('meta[name="theme-color"]')?.setAttribute('content', isDark ? '#102e32' : '#f5f1e7');
           if (!toggle) return;
           toggle.setAttribute('aria-pressed', String(isDark));
           toggle.setAttribute('aria-label', `Cambiar a ${action.toLowerCase()}`);
@@ -72,14 +86,21 @@ const contactUrl = createContactUrl();
     <div class="page-shell">
       <header class="site-header" id="top">
         <a class="wordmark" href="/" aria-label={`${site.name}, inicio`}>
-          <span class="wordmark-symbol" aria-hidden="true">{site.monogram}<span class="wordmark-dot">.</span></span>
-          <span class="wordmark-text" aria-hidden="true">nubi<br />core</span>
+          <img class="brand-signature on-dark" src="/images/nubicore-firma.svg" width="164" height="40" alt="" />
+          <img class="brand-signature on-light" src="/images/nubicore-firma-clara.svg" width="164" height="40" alt="" />
         </a>
         <nav class="site-nav" id="site-navigation" aria-label="Navegación principal">
-          <a href="/#proyectos">Proyectos</a>
-          <a href="/#proceso">Proceso</a>
-          <a href="/#servicios">Servicios</a>
-          <a href="/#sobre-mi">El estudio</a>
+          {navGroups.map((group) => (
+            <details class="nav-group" name="studio-navigation">
+              <summary data-nav-section={group.id} aria-current={onProjectPage && group.id === 'proyectos' ? 'location' : undefined}>{group.label}<i aria-hidden="true"></i></summary>
+              <div class="nav-panel">
+                <a class="nav-overview" href={`/#${group.id}`}>{group.all} <span aria-hidden="true">↓</span></a>
+                {group.links.map(([label, href]) => <a href={href} aria-current={Astro.url.pathname === href ? 'page' : undefined}>{label}<span aria-hidden="true">↗</span></a>)}
+              </div>
+            </details>
+          ))}
+          <a data-nav-section="proceso" href="/#proceso">Proceso</a>
+          <a data-nav-section="sobre-mi" href="/#sobre-mi">El estudio</a>
         </nav>
         <div class="header-actions">
           <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar a modo claro" aria-pressed="true" title="Cambiar a modo claro">
@@ -103,7 +124,7 @@ const contactUrl = createContactUrl();
           <span>DISPONIBLE PARA NUEVOS PROYECTOS <span class="status-dot" aria-hidden="true"></span></span>
         </div>
         <div class="footer-main">
-          <p>Tu próximo paso.<br /><em>Hagámoslo web.</em></p>
+          <p>¿Qué vendes?<br /><em>Cuéntanos.</em></p>
           <a class="footer-arrow" href={contactUrl} target="_blank" rel="noopener noreferrer" aria-label={`Escribir a ${site.name} por WhatsApp`}>↗</a>
         </div>
         <a class="footer-contact-link" href={contactUrl} target="_blank" rel="noopener noreferrer">Conversemos por WhatsApp <span aria-hidden="true">↗</span></a>
@@ -123,6 +144,7 @@ const contactUrl = createContactUrl();
     <script>
       import '../scripts/mobile-nav';
       import '../scripts/quick-contact';
+      import '../scripts/campaign-attribution';
     </script>
   </body>
 </html>

@@ -4,14 +4,14 @@ export const site = {
   founderName: 'Milton Blaise',
   monogram: 'n',
   role: 'Estudio de diseño y desarrollo web',
-  tagline: 'La web para el siguiente paso de tu negocio.',
+  tagline: 'De visita a consulta.',
   title: 'Diseño y desarrollo web en Perú | Nubicore',
   location: 'Perú · Disponible en remoto',
   whatsapp: 'https://wa.me/51980904787',
   whatsappLabel: '+51 980 904 787',
   phone: '+51980904787',
   description:
-    'Diseño y desarrollo web a medida para emprendimientos, mypes, pymes y empresas. Landing pages, webs corporativas y catálogos digitales desde Perú.',
+    'Estudio peruano de diseño y desarrollo web. Creamos landing pages, webs corporativas y catálogos para presentar tu oferta y recibir consultas por WhatsApp.',
   contactMessage: 'Hola, Nubicore. Quiero conversar sobre una web para mi negocio.',
 };
 
