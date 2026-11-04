@@ -67,7 +67,7 @@ const isHardware = slug === 'nodo-pc';
     </ol>
   </div>
 
-  <div class="cp-wireframe-stage" data-reveal>
+  <div class="cp-wireframe-stage" id="boceto" data-reveal>
     <div class="cp-wireframe-copy">
       <span class="cp-step">03 / BOCETO DE ESTRUCTURA</span>
       <h3>Primero ordeno<br /><em>el contenido.</em></h3>
@@ -78,14 +78,38 @@ const isHardware = slug === 'nodo-pc';
     </div>
 
     <figure class="cp-wireframe-figure">
-      <div class:list={['cp-wireframe', `cp-wireframe--${slug}`]} aria-hidden="true">
+      <div class:list={['cp-wireframe', `cp-wireframe--${slug}`, { 'cp-wf-cafe-frame': slug === 'senda-cafe' }]} aria-hidden="true">
         <div class="cp-wireframe-toolbar"><span class="cp-wireframe-dots"><i></i><i></i><i></i></span><span>boceto / {title.toLowerCase()}</span><span>↗</span></div>
         {slug === 'senda-cafe' && (
           <div class="cp-wf-cafe">
-            <div class="cp-wf-cafe-logo"><b></b><span></span><b></b></div>
-            <div class="cp-wf-cafe-nav"><i></i><i></i><i></i><i></i></div>
-            <div class="cp-wf-cafe-hero"><div><i></i><i></i><i></i><small></small></div><b></b></div>
-            <div class="cp-wf-cafe-cards"><i></i><i></i><i></i></div>
+            <div class="cp-wf-cafe-concept">Volver al portafolio <span>Proyecto de ejemplo</span></div>
+            <div class="cp-wf-cafe-hero">
+              <div class="cp-wf-cafe-header">
+                <strong>senda.</strong>
+                <div class="cp-wf-cafe-nav"><span>Esencia</span><span>Especialidades</span><span>La carta</span><span>El espacio</span><b>Una mesa para ti ↗</b></div>
+                <span class="cp-wf-cafe-menu">☰</span>
+              </div>
+              <span class="cp-wf-cafe-photo-label">Fotografía de fondo</span>
+              <div class="cp-wf-cafe-hero-copy">
+                <span>Café de especialidad · Alma peruana</span>
+                <strong>Las cosas buenas<br />toman <em>su tiempo.</em></strong>
+                <div class="cp-wf-cafe-actions"><b>Explora la carta ↗</b><span>El mundo Senda ↓</span></div>
+              </div>
+              <div class="cp-wf-cafe-hero-bottom"><span>Desliza y quédate un rato ↓</span><span>← 01 / 03 →</span></div>
+            </div>
+            <div class="cp-wf-cafe-promises"><span>Origen que se siente</span><span>Preparado con intención</span><span>El tiempo es tuyo</span></div>
+            <div class="cp-wf-cafe-story">
+              <div class="cp-wf-cafe-photo"><span>Fotos del café<br />y del espacio</span></div>
+              <div><span>Nuestra esencia</span><strong>Hay lugares que<br />se sienten.</strong><i></i><i></i></div>
+            </div>
+            <div class="cp-wf-cafe-specialties">
+              <strong>Encuentra tu favorito.</strong>
+              <div class="cp-wf-cafe-cards"><span><i></i>Espresso</span><span><i></i>Latte</span><span><i></i>Cold brew</span></div>
+            </div>
+            <div class="cp-wf-cafe-following">
+              <span>El recorrido continúa</span>
+              <ol><li>La carta</li><li>Origen del café</li><li>El espacio</li><li>Reserva</li><li>Ubicación y horarios</li></ol>
+            </div>
           </div>
         )}
         {slug === 'lume-beauty' && (

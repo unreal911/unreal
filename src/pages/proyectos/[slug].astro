@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectArtwork from '../../components/ProjectArtwork.astro';
 import CaseProcess from '../../components/CaseProcess.astro';
 import ResponsivePreview from '../../components/ResponsivePreview.astro';
+import '../../styles/case-overview.css';
 import { getProjects } from '../../lib/projects';
 import { getProjectPresentation } from '../../lib/project-presentation';
 import { createContactUrl, site, type Project } from '../../data/site';
@@ -100,14 +101,20 @@ const isHardware = project.slug === 'nodo-pc';
     </section>
 
     <section class="case-overview section-pad" id="descripcion" aria-labelledby="case-overview-heading">
-      <div class="case-overview-intro"><span class="section-index">(01 / EL PROYECTO)</span><h2 id="case-overview-heading" data-letters>Qué puedes<br /><em>encontrar aquí.</em></h2></div>
-      <div class="case-overview-copy" data-reveal>
-        <p>{presentation.description}</p>
-        <div class="case-facts">
-          <div><span>QUÉ INCLUYE</span><ul>{(presentation.features.length ? presentation.features : project.services).map((feature) => <li>{feature}</li>)}</ul></div>
-          <div><span>PARA VER EN</span><p>Computadora, tablet y celular.</p></div>
-          <div><span>{presentation.isExample ? 'EJEMPLO DE PORTAFOLIO' : 'AÑO'}</span><p>{presentation.isExample ? 'Creado para mostrar cómo podría funcionar una página para este tipo de negocio.' : project.year}</p></div>
-        </div>
+      <header class="case-overview-heading">
+        <div><span class="section-index">(01 / EL PROYECTO)</span><h2 id="case-overview-heading">Qué puedes<br /><em>encontrar aquí.</em></h2></div>
+        <p>{presentation.overview}</p>
+      </header>
+      <ol class="case-overview-features" aria-label={`Qué ofrece la página de ${project.title}`}>
+        {presentation.features.map((feature, index) => <li>
+          <span class="case-feature-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <h3>{feature.title}</h3>
+          {feature.description && <p>{feature.description}</p>}
+        </li>)}
+      </ol>
+      <div class="case-overview-footnote">
+        <p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="4" width="14" height="11" rx="1.5"/><path d="M5 19h8m-4-4v4"/><rect x="17" y="10" width="5" height="10" rx="1"/></svg>Para computadora, tablet y celular.</p>
+        <p>{presentation.isExample ? 'Proyecto de ejemplo para explorar y probar.' : `Realizado en ${project.year}.`}</p>
       </div>
     </section>
 

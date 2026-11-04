@@ -51,11 +51,11 @@ export const processBySlug = {
     },
     sitemap: ['Portada', 'Nuestra esencia', 'Favoritos', 'La carta', 'Origen y proceso', 'El espacio', 'Visítanos y reserva'],
     wireframe: {
-      idea: 'Un recorrido fotográfico que presenta el carácter de Senda y conecta sus bebidas, su origen y el espacio.',
+      idea: 'La portada abre con una fotografía de fondo, el mensaje de Senda y un acceso a la carta. Después, la página presenta el lugar y sus cafés.',
       decisions: [
-        'Abrir con una fotografía amplia y un acceso directo a la carta.',
-        'Presentar tres favoritos antes de la carta, que se puede filtrar por café, fríos y de la cocina.',
-        'Alternar historia, origen y fotografías del ambiente antes de mostrar horarios y una reserva de demostración.',
+        'Integrar la marca y el menú sobre la fotografía, con la carta y la reserva a mano.',
+        'Mostrar la esencia del lugar y tres especialidades antes de la carta por categorías.',
+        'Continuar con el origen del café y las fotos del espacio; cerrar con la reserva de ejemplo, la ubicación y los horarios.',
       ],
     },
     visual: {

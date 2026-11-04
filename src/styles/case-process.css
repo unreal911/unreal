@@ -194,21 +194,61 @@ html[data-theme='dark'] .case-process[data-project='nodo-pc'] { --cp-accent: #ff
 .cp-wireframe-dots i:first-child { background: var(--cp-accent); }
 
 /* Low fidelity diagrams follow each demo's page structure. */
-.cp-wf-cafe { min-height: 0; padding: 2.5% 3.5%; }
-.cp-wf-cafe-logo { height: 17%; display: flex; justify-content: space-between; align-items: center; }
-.cp-wf-cafe-logo span { width: 25%; height: 34%; background: var(--ink); opacity: .45; }
-.cp-wf-cafe-logo b { width: 14%; height: 9%; background: var(--line); }
-.cp-wf-cafe-nav { display: flex; justify-content: center; height: 8%; border-block: 1px solid var(--line); }
-.cp-wf-cafe-nav i { width: 15%; margin: 2.5% 2%; background: var(--line); }
-.cp-wf-cafe-hero { display: flex; justify-content: space-between; position: relative; height: 52%; padding: 7%; background: var(--cp-accent-soft); overflow: hidden; }
-.cp-wf-cafe-hero > div { z-index: 1; width: 44%; }
-.cp-wf-cafe-hero i { display: block; width: 85%; height: 8%; margin-bottom: 5%; background: var(--paper); opacity: .85; }
-.cp-wf-cafe-hero i:first-child { width: 48%; height: 5%; margin-bottom: 11%; }
-.cp-wf-cafe-hero i:nth-child(3) { width: 62%; }
-.cp-wf-cafe-hero small { display: block; width: 34%; height: 12%; margin-top: 16%; background: var(--cp-accent); }
-.cp-wf-cafe-hero > b { position: absolute; width: 38%; aspect-ratio: 1; right: 8%; top: 13%; border: 18px solid var(--paper); border-radius: 50%; box-shadow: 0 0 0 10px var(--cp-accent); opacity: .85; }
-.cp-wf-cafe-cards { display: flex; gap: 2%; margin-top: 3%; height: 16%; }
-.cp-wf-cafe-cards i { flex: 1; background: var(--line); opacity: .7; }
+.cp-wf-cafe-frame.cp-wireframe {
+  grid-template-rows: 33px auto;
+  aspect-ratio: auto;
+  min-height: 0;
+  container-type: inline-size;
+}
+.cp-wf-cafe { min-width: 0; font-size: 11px; line-height: 1.4; }
+.cp-wf-cafe-concept { display: flex; justify-content: space-between; gap: 12px; padding: 7px 14px; font-size: 9px; color: var(--muted); border-bottom: 1px solid var(--line); }
+.cp-wf-cafe-hero { position: relative; min-height: 210px; background: var(--cp-accent-soft); overflow: hidden; }
+.cp-wf-cafe-hero:before { content: ''; position: absolute; inset: 0; background: linear-gradient(147deg, transparent 49.8%, var(--line) 50%, transparent 50.2%), linear-gradient(33deg, transparent 49.8%, var(--line) 50%, transparent 50.2%); opacity: .65; }
+.cp-wf-cafe-header { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 14px; min-height: 41px; padding: 6px 4%; border-bottom: 1px solid var(--line); }
+.cp-wf-cafe-header > strong { font: 500 26px/1 Georgia, serif; letter-spacing: -.06em; }
+.cp-wf-cafe-nav { display: flex; align-items: center; gap: 12px; font-size: 9px; }
+.cp-wf-cafe-nav b { padding: 6px 8px; border: 1px solid var(--ink); font-size: 9px; font-weight: 600; }
+.cp-wf-cafe-menu { display: none; font-size: 19px; }
+.cp-wf-cafe-photo-label { position: absolute; right: 4%; top: 52px; font-size: 9px; color: var(--muted); }
+.cp-wf-cafe-hero-copy { position: relative; padding: 28px 6% 20px; }
+.cp-wf-cafe-hero-copy > span { font-size: 9px; }
+.cp-wf-cafe-hero-copy > strong { display: block; margin-top: 9px; font: 400 clamp(25px, 5cqw, 34px)/1.04 Georgia, serif; letter-spacing: -.04em; }
+.cp-wf-cafe-hero-copy > strong em { color: inherit; font-style: italic; }
+.cp-wf-cafe-actions { display: flex; align-items: center; gap: 18px; margin-top: 16px; font-size: 10px; }
+.cp-wf-cafe-actions > b { padding: 8px 10px; border: 1px solid var(--ink); background: var(--paper); font-size: 10px; font-weight: 600; }
+.cp-wf-cafe-hero-bottom { position: relative; display: flex; justify-content: space-between; gap: 12px; margin-inline: 6%; padding-block: 10px; border-top: 1px solid var(--line); font-size: 9px; }
+.cp-wf-cafe-promises { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 9px 4%; border-bottom: 1px solid var(--line); font-size: 10px; text-align: center; }
+.cp-wf-cafe-promises > span + span { border-left: 1px solid var(--line); padding-left: 8px; }
+.cp-wf-cafe-story { display: grid; grid-template-columns: .85fr 1fr; align-items: center; gap: 8%; padding: 16px 6%; }
+.cp-wf-cafe-photo { display: grid; place-items: center; min-height: 74px; padding: 10px; border: 1px solid var(--line); background: linear-gradient(145deg, transparent 49.7%, var(--line) 50%, transparent 50.3%); color: var(--muted); text-align: center; font-size: 10px; }
+.cp-wf-cafe-photo > span { padding: 4px; background: var(--paper); }
+.cp-wf-cafe-story > div:last-child > span { display: block; margin-bottom: 7px; font-size: 10px; color: var(--muted); }
+.cp-wf-cafe-story strong { display: block; font: 400 clamp(18px, 3.6cqw, 25px)/1.1 Georgia, serif; }
+.cp-wf-cafe-story i { display: block; width: 88%; height: 3px; margin-top: 12px; background: var(--line); }
+.cp-wf-cafe-story i:last-child { width: 63%; margin-top: 5px; }
+.cp-wf-cafe-specialties { padding: 14px 6%; border-top: 1px solid var(--line); background: var(--surface); }
+.cp-wf-cafe-specialties > strong { font: 400 19px/1.1 Georgia, serif; }
+.cp-wf-cafe-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 10px; }
+.cp-wf-cafe-cards > span { display: grid; gap: 6px; font-size: 10px; }
+.cp-wf-cafe-cards i { display: block; height: 40px; border: 1px solid var(--line); background: linear-gradient(145deg, transparent 49.7%, var(--line) 50%, transparent 50.3%); }
+.cp-wf-cafe-following { padding: 16px 6% 18px; border-top: 1px solid var(--line); }
+.cp-wf-cafe-following > span { color: var(--muted); font-size: 10px; }
+.cp-wf-cafe-following ol { display: flex; flex-wrap: wrap; gap: 7px 10px; margin: 10px 0 0; padding: 0; list-style: none; }
+.cp-wf-cafe-following li { display: flex; gap: 6px; align-items: baseline; font-size: 11px; }
+.cp-wf-cafe-following li + li:before { content: '→'; color: var(--muted); }
+@container (max-width: 520px) {
+  .cp-wf-cafe-nav { gap: 7px; }
+  .cp-wf-cafe-nav > span:nth-child(-n+2) { display: none; }
+}
+@container (max-width: 360px) {
+  .cp-wf-cafe-nav { display: none; }
+  .cp-wf-cafe-menu { display: block; }
+  .cp-wf-cafe-concept { font-size: 8px; }
+  .cp-wf-cafe-hero-copy { padding-top: 34px; }
+  .cp-wf-cafe-actions { gap: 10px; }
+  .cp-wf-cafe-promises { font-size: 9px; }
+  .cp-wf-cafe-hero-bottom { font-size: 8px; }
+}
 
 .cp-wf-beauty { min-height: 0; padding: 2.5% 3.5%; }
 .cp-wf-beauty-nav { display: flex; justify-content: space-between; align-items: center; height: 17%; }
