@@ -6,3 +6,4 @@ dist/
 .npm-cache/
 artifacts/
 /public/__portfolio-qa.html
+/marketing/
