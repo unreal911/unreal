@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { validateOrder, addOrderSelection, summarizeOrder, buildOrderText } from '../src/lib/trama-order.ts';
+import { validateOrder, addOrderSelection, summarizeOrder, buildOrderText, buildOrderWhatsAppUrl } from '../src/lib/trama-order.ts';
 
 const polo = (qty, color = 'Crudo', size = 'M') => ({ id: 'polo-esencial', color, size, qty });
 const camisa = (qty) => ({ id: 'camisa-lino', color: 'Arena', size: 'L', qty });
@@ -60,4 +60,35 @@ test('an empty or incomplete draft cannot be exported and non-multiple-of-six or
   assert.throws(() => buildOrderText([]), /mínimo/);
   assert.throws(() => buildOrderText([polo(5)]), /mínimo/);
   assert.match(buildOrderText([polo(7)]), /Cantidad: 7 prendas/);
+});
+
+test('WhatsApp prepares the approved recipient and preserves the complete 41-garment order', () => {
+  const order = [
+    { id: 'pantalon-relaxed', color: 'Arena', size: '28', qty: 6 },
+    { id: 'pantalon-relaxed', color: 'Negro', size: '28', qty: 30 },
+    { id: 'camisa-lino', color: 'Arena', size: 'S', qty: 2 },
+    { id: 'camisa-lino', color: 'Azul', size: 'S', qty: 2 },
+    { id: 'camisa-lino', color: 'Azul', size: 'M', qty: 1 },
+  ];
+  const url = new URL(buildOrderWhatsAppUrl(order));
+  const text = url.searchParams.get('text');
+  assert.equal(url.origin, 'https://wa.me');
+  assert.equal(url.pathname, '/51980904787');
+  assert.equal(text, buildOrderText(order));
+  assert.ok(text.startsWith('Hola, quiero estos productos:\n'));
+  assert.match(text, /PEDIDO DE DEMOSTRACIÓN/);
+  assert.match(text, /30 × Pantalón relaxed \| Negro \| Talla 28/);
+  assert.match(text, /Cantidad: 41 prendas/);
+  assert.ok(text.replaceAll('\u00a0', ' ').includes('Total referencial: S/ 1,900.80'));
+  assert.equal((text.match(/ × /g) || []).length, 5);
+  assert.match(text, /no confirma una compra/);
+});
+
+test('incomplete orders and incorrectly formatted store contacts cannot create a WhatsApp draft', () => {
+  assert.throws(() => buildOrderWhatsAppUrl([polo(5)]), /mínimo/);
+  assert.throws(() => buildOrderWhatsAppUrl([]), /mínimo/);
+  for (const number of ['', '+51980904787', '980904787 text', 'https://example.com', '5198?text=other']) {
+    assert.throws(() => buildOrderWhatsAppUrl([polo(6)], number), /WhatsApp de la tienda/);
+  }
+  assert.equal(new URL(buildOrderWhatsAppUrl([polo(6)], '51999999999')).pathname, '/51999999999');
 });

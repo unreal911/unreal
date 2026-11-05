@@ -3,6 +3,7 @@ import '../styles/demo-trama.css';
 import '../styles/trama-pages.css';
 import TramaProductPicker from '../components/TramaProductPicker.astro';
 import { createContactUrl, site } from '../data/site';
+import { tramaStoreContact } from '../data/trama';
 
 interface Props {
   title: string;
@@ -91,7 +92,11 @@ const navigation = [
       <div id="order-summary" hidden>
         <div class="order-tier-note" id="order-tier-note"></div>
         <dl class="order-totals"><div><dt>Subtotal</dt><dd id="order-subtotal">S/ 0.00</dd></div><div><dt>Descuento por volumen</dt><dd id="order-discount">S/ 0.00</dd></div><div class="order-grand-total"><dt>Total de muestra</dt><dd id="order-total">S/ 0.00</dd></div></dl>
-        <button type="button" id="order-copy" class="trama-button">Copiar resumen del pedido <span aria-hidden="true">↗</span></button><p class="order-copy-note">Guarda tu selección como texto. Los precios y productos son ilustrativos.</p>
+        <div class="order-actions">
+          <a id="order-whatsapp" class="trama-button" role="link" aria-disabled="true" tabindex="-1" target="_blank" rel="noopener noreferrer" aria-describedby="order-copy-note">Copiar y enviar por WhatsApp <span aria-hidden="true">↗</span></a>
+          <button type="button" id="order-copy" class="trama-button">Solo copiar resumen <span aria-hidden="true">⧉</span></button>
+        </div>
+        <p class="order-copy-note" id="order-copy-note">Se abrirá el WhatsApp de {tramaStoreContact.recipient} ({tramaStoreContact.whatsappLabel}) con tu pedido de demostración. Revisa el mensaje antes de enviarlo. Los precios y productos son ilustrativos.</p>
       </div>
       <p id="order-feedback" role="status" aria-live="polite"></p><label class="sr-only" for="order-export">Resumen del pedido para copiar manualmente</label><textarea id="order-export" readonly hidden></textarea>
     </dialog>

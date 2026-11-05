@@ -12,6 +12,13 @@ export interface TramaProduct {
   sizes: string[];
 }
 
+// Recipient approved for the Trama demonstration; replace here for a real store.
+export const tramaStoreContact = {
+  whatsappNumber: '51980904787',
+  whatsappLabel: '+51 980 904 787',
+  recipient: 'Nubicore',
+};
+
 export const products: TramaProduct[] = [
   {
     id: 'polo-esencial',

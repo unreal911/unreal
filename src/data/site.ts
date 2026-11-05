@@ -136,7 +136,7 @@ export const sampleProjects: Project[] = [
     approach:
       'Combinamos una dirección editorial en blanco y naranja, con detalles en carbón y temas claro y oscuro, filtros de catálogo y un selector de variantes. Cada modelo permite repartir cantidades por talla y color antes de añadir la selección; el precio se ajusta al volumen del pedido completo.',
     outcome:
-      'Una demo donde puedes filtrar prendas, combinar modelos, tallas y colores y ajustar cada variante por unidad. El mínimo es de seis prendas en el pedido completo para copiar su resumen. Los tramos de 6–23, 24–47 y 48 o más unidades permiten explorar los precios por volumen; el pedido es de demostración y no genera una compra real.',
+      'Una demo para filtrar prendas, combinar tallas y colores y preparar un pedido desde seis prendas. «Copiar y enviar por WhatsApp» copia el resumen con un saludo y abre el chat de Nubicore con el mensaje preparado. El visitante lo revisa y pulsa «Enviar» en WhatsApp. También puede copiarlo sin abrir el chat. Los precios por volumen son ilustrativos; no se envían mensajes automáticamente ni se realiza una compra.',
     services: ['Arquitectura de catálogo', 'Diseño de tienda', 'Desarrollo front-end'],
     palette: 'Blanco / Naranja / Carbón',
     artwork: 'fashion',

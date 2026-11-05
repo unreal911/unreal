@@ -1,4 +1,4 @@
-import { products, getDiscountRate, getUnitPrice, formatPrice } from '../data/trama.ts';
+import { products, getDiscountRate, getUnitPrice, formatPrice, tramaStoreContact } from '../data/trama.ts';
 
 export interface OrderLine {
   id: string;
@@ -68,10 +68,18 @@ export function buildOrderText(order: OrderLine[]): string {
     return `${line.qty} × ${product.name} | ${line.color} | Talla ${line.size} | ${formatPrice(price)} c/u | ${formatPrice(price * line.qty)}`;
   });
   return [
+    'Hola, quiero estos productos:', '',
     'TRAMA MAYORISTA · PEDIDO DE DEMOSTRACIÓN', '', ...lines, '',
     `Cantidad: ${quantity} prendas`, `Subtotal: ${formatPrice(subtotal)}`,
     `Descuento (${getDiscountRate(quantity) * 100}%): ${formatPrice(discount)}`,
     `Total referencial: ${formatPrice(total)}`, '',
     'Demo de catálogo. Este resumen no confirma una compra ni realiza un pago.',
   ].join('\n');
+}
+
+export function buildOrderWhatsAppUrl(order: OrderLine[], number = tramaStoreContact.whatsappNumber): string {
+  if (!/^[1-9]\d{7,14}$/.test(number)) throw new Error('Configura el WhatsApp de la tienda con código de país y solo dígitos.');
+  const url = new URL(`https://wa.me/${number}`);
+  url.searchParams.set('text', buildOrderText(order));
+  return url.href;
 }

@@ -1,5 +1,5 @@
 import { products, getUnitPrice, formatPrice } from '../data/trama';
-import { MIN_ORDER_QUANTITY, MAX_LINE_QUANTITY, validateOrder, addOrderSelection, summarizeOrder, buildOrderText, type OrderLine } from '../lib/trama-order';
+import { MIN_ORDER_QUANTITY, MAX_LINE_QUANTITY, validateOrder, addOrderSelection, summarizeOrder, buildOrderText, buildOrderWhatsAppUrl, type OrderLine } from '../lib/trama-order';
 
 const STORAGE_KEY = 'trama-mayorista-order-v1';
 const THEME_STORAGE_KEY = 'trama-theme-v1';
@@ -100,10 +100,12 @@ function initializeTrama() {
   const empty = document.querySelector<HTMLElement>('#order-empty');
   const summary = document.querySelector<HTMLElement>('#order-summary');
   const copyButton = document.querySelector<HTMLButtonElement>('#order-copy');
+  const whatsappLink = document.querySelector<HTMLAnchorElement>('#order-whatsapp');
   const exportArea = document.querySelector<HTMLTextAreaElement>('#order-export');
   const feedback = document.querySelector<HTMLElement>('#order-feedback');
   const toast = document.querySelector<HTMLElement>('#trama-toast');
   let order = readOrder();
+  let copyAttempt = 0;
   let toastTimeout: ReturnType<typeof setTimeout>;
 
   const announce = (message: string) => {
@@ -137,6 +139,13 @@ function initializeTrama() {
     if (empty) empty.hidden = order.length > 0;
     if (summary) summary.hidden = order.length === 0;
     if (copyButton) copyButton.disabled = quantity < MIN_ORDER_QUANTITY;
+    if (whatsappLink) {
+      const ready = quantity >= MIN_ORDER_QUANTITY;
+      whatsappLink.setAttribute('aria-disabled', String(!ready));
+      whatsappLink.tabIndex = ready ? 0 : -1;
+      if (ready) whatsappLink.href = buildOrderWhatsAppUrl(order);
+      else whatsappLink.removeAttribute('href');
+    }
     const values = { '#order-subtotal': formatPrice(subtotal), '#order-discount': `− ${formatPrice(discount)}`, '#order-total': formatPrice(total) };
     Object.entries(values).forEach(([selector, text]) => {
       const element = document.querySelector<HTMLElement>(selector);
@@ -196,6 +205,7 @@ function initializeTrama() {
   };
 
   const saveAndRender = () => {
+    copyAttempt += 1;
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(order)); } catch { /* The order remains usable when storage is unavailable. */ }
     if (feedback) feedback.textContent = '';
     if (exportArea) exportArea.hidden = true;
@@ -435,22 +445,42 @@ function initializeTrama() {
     if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
   });
 
-  copyButton?.addEventListener('click', async () => {
-    if (totals().quantity < MIN_ORDER_QUANTITY) return;
-    const text = buildOrderText(order);
+  const copyOrder = async (text: string, openingWhatsApp = false) => {
+    const attempt = ++copyAttempt;
     try {
       if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
       await navigator.clipboard.writeText(text);
-      if (feedback) feedback.textContent = 'Pedido copiado. Ya puedes pegar tu resumen.';
+      if (attempt !== copyAttempt) return;
+      if (feedback) feedback.textContent = openingWhatsApp
+        ? 'Pedido copiado. Revisa el mensaje en WhatsApp y pulsa Enviar cuando estés listo.'
+        : 'Pedido copiado. Ya puedes pegar tu resumen.';
     } catch {
+      if (attempt !== copyAttempt) return;
       if (exportArea) {
         exportArea.value = text;
         exportArea.hidden = false;
         exportArea.focus();
         exportArea.select();
       }
-      if (feedback) feedback.textContent = 'Selecciona y copia el resumen de tu pedido con Ctrl+C o mantén presionado para copiar.';
+      if (feedback) feedback.textContent = openingWhatsApp
+        ? 'WhatsApp incluye el pedido completo aunque no se haya podido copiar. También puedes seleccionar y copiar este resumen manualmente.'
+        : 'Selecciona y copia el resumen de tu pedido con Ctrl+C o mantén presionado para copiar.';
     }
+  };
+  copyButton?.addEventListener('click', () => {
+    if (totals().quantity < MIN_ORDER_QUANTITY) return;
+    void copyOrder(buildOrderText(order));
+  });
+  whatsappLink?.addEventListener('click', (event) => {
+    if (totals().quantity < MIN_ORDER_QUANTITY || !whatsappLink.hasAttribute('href')) {
+      event.preventDefault();
+      announce(`Completa un mínimo de ${MIN_ORDER_QUANTITY} prendas para compartir tu pedido.`);
+      return;
+    }
+    // Attribution runs in capture phase. Copy the same draft, including its reference.
+    const text = new URL(whatsappLink.href).searchParams.get('text') || buildOrderText(order);
+    // Let the native link open immediately; clipboard permissions must not block WhatsApp.
+    void copyOrder(text, true);
   });
 
   const menuToggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
