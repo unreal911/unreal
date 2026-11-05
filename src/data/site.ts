@@ -134,9 +134,9 @@ export const sampleProjects: Project[] = [
     challenge:
       'Comprar para un negocio requiere elegir prendas, comparar precios según la cantidad y entender el mínimo de compra. El reto era hacer visible esa información sin interrumpir la exploración del catálogo.',
     approach:
-      'Combinamos una dirección editorial en blanco y naranja, con detalles en carbón y temas claro y oscuro, filtros de catálogo y un pedido editable. Las prendas se agregan en bloques de seis unidades y el precio se ajusta al volumen total seleccionado.',
+      'Combinamos una dirección editorial en blanco y naranja, con detalles en carbón y temas claro y oscuro, filtros de catálogo y un selector de variantes. Cada modelo permite repartir cantidades por talla y color antes de añadir la selección; el precio se ajusta al volumen del pedido completo.',
     outcome:
-      'Una demo donde puedes filtrar prendas, preparar un pedido desde seis unidades, ajustar cantidades en bloques de seis y copiar su resumen. Los tramos de 6–23, 24–47 y 48 o más unidades permiten explorar los precios por volumen; el pedido es de demostración y no genera una compra real.',
+      'Una demo donde puedes filtrar prendas, combinar modelos, tallas y colores y ajustar cada variante por unidad. El mínimo es de seis prendas en el pedido completo para copiar su resumen. Los tramos de 6–23, 24–47 y 48 o más unidades permiten explorar los precios por volumen; el pedido es de demostración y no genera una compra real.',
     services: ['Arquitectura de catálogo', 'Diseño de tienda', 'Desarrollo front-end'],
     palette: 'Blanco / Naranja / Carbón',
     artwork: 'fashion',

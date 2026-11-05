@@ -57,13 +57,13 @@ const examples: Record<string, { category: string; shortCategory: string; descri
     category: 'Tienda de ropa al por mayor',
     shortCategory: 'Ropa al por mayor',
     seoTitle: 'Trama Mayorista: catálogo de ropa',
-    description: 'Una tienda de ejemplo para explorar prendas, comparar precios por volumen y preparar un pedido desde seis unidades.',
+    description: 'Una tienda de ejemplo para explorar prendas, combinar tallas y colores y preparar un pedido desde seis unidades en total.',
     seoDescription: `Catálogo conceptual de Trama Mayorista: prendas, precios por volumen y pedidos de muestra desde seis unidades. Un proyecto de ${site.name}.`,
     overview: 'Un recorrido pensado para elegir prendas y entender las condiciones de compra al por mayor.',
     features: [
       { title: 'Explorar las prendas', description: 'Un catálogo con fotografías y filtros por categoría para encontrar los modelos.' },
-      { title: 'Elegir las cantidades', description: 'La selección empieza en seis unidades y permite ver cómo cambia el precio según el volumen.' },
-      { title: 'Preparar el pedido', description: 'Un resumen editable reúne las prendas, cantidades y total, con una opción para copiarlo.' },
+      { title: 'Combinar tallas y colores', description: 'Elige un color e indica las cantidades por talla. Puedes reunir varias combinaciones antes de añadirlas al pedido.' },
+      { title: 'Preparar el pedido', description: 'Ajusta cada variante por unidad y revisa el precio por volumen. Desde seis prendas en total, puedes copiar el resumen.' },
     ],
   },
 };

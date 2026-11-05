@@ -1,6 +1,7 @@
 ---
 import '../styles/demo-trama.css';
 import '../styles/trama-pages.css';
+import TramaProductPicker from '../components/TramaProductPicker.astro';
 import { createContactUrl, site } from '../data/site';
 
 interface Props {
@@ -81,10 +82,11 @@ const navigation = [
       <div class="footer-bottom"><span>© {new Date().getFullYear()} Trama · Marca conceptual</span><p>Diseño y desarrollo por <a href={designerContact} target="_blank" rel="noopener noreferrer">{site.name} ↗</a></p><a href="/proyectos/trama-mayorista/">Volver al caso de estudio ↗</a></div>
     </footer>
 
+    <TramaProductPicker />
     <dialog id="order-dialog" aria-labelledby="order-title">
       <div class="order-heading"><div><p class="eyebrow">TU PRÓXIMA COLECCIÓN</p><h2 id="order-title">Mi pedido<span>.</span></h2></div><button type="button" id="close-order" aria-label="Cerrar mi pedido">×</button></div>
       <p class="order-demo-note">Pedido de demostración · No se realizan compras.</p>
-      <div id="order-empty"><span aria-hidden="true">✳</span><h3>Tu próxima colección empieza con una prenda.</h3><p>Explora el catálogo y añade tu primer pack de 6.</p><a class="text-link" href={`${home}coleccion/`}>Ir a la colección <span aria-hidden="true">↗</span></a></div>
+      <div id="order-empty"><span aria-hidden="true">✳</span><h3>Tu próxima colección empieza con una prenda.</h3><p>Explora el catálogo y elige cantidades por talla y color. El mínimo es de 6 prendas combinadas en todo el pedido.</p><a class="text-link" href={`${home}coleccion/`}>Ir a la colección <span aria-hidden="true">↗</span></a></div>
       <div id="order-items"></div>
       <div id="order-summary" hidden>
         <div class="order-tier-note" id="order-tier-note"></div>

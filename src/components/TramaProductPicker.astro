@@ -1,0 +1,55 @@
+---
+import '../styles/trama-product-picker.css';
+---
+
+<dialog id="product-dialog" aria-labelledby="product-picker-title" aria-describedby="product-picker-help">
+  <div class="picker-toolbar"><button type="button" id="close-product" class="picker-close" aria-label="Cerrar selección de tallas y colores">×</button></div>
+  <div class="picker-layout">
+    <figure class="picker-photo">
+      <img id="product-picker-image" src="/images/trama/polo-basico.jpg" alt="Prenda de referencia" width="800" height="1000" />
+      <figcaption>Foto referencial<span> · Los colores se eligen en la selección.</span></figcaption>
+    </figure>
+
+    <div class="picker-content">
+      <header class="picker-heading">
+        <p class="eyebrow" id="product-picker-label">LA COLECCIÓN</p>
+        <h2 id="product-picker-title">Elige tus cantidades.</h2>
+        <p id="product-picker-material"></p>
+      </header>
+
+      <div class="picker-pricing" aria-label="Precio por prenda según la cantidad total del pedido">
+        <div data-picker-tier="base"><small>6–23 prendas</small><strong data-picker-tier-price>S/ 0.00</strong><span>/ prenda</span></div>
+        <div data-picker-tier="24"><small>24–47 prendas</small><strong data-picker-tier-price>S/ 0.00</strong><span>10% de descuento</span></div>
+        <div data-picker-tier="48"><small>48+ prendas</small><strong data-picker-tier-price>S/ 0.00</strong><span>15% de descuento</span></div>
+      </div>
+      <p id="product-picker-help" class="picker-help">El mínimo es de <strong>6 prendas en todo el pedido.</strong> Combina modelos, tallas y colores. El precio por volumen se calcula con la cantidad total.</p>
+
+      <section class="picker-options" aria-labelledby="picker-colors-heading">
+        <h3 id="picker-colors-heading"><span>01</span> Elige un color</h3>
+        <div id="product-picker-colors" class="picker-colors" role="group" aria-labelledby="picker-colors-heading"></div>
+      </section>
+
+      <section class="picker-options" aria-labelledby="picker-sizes-heading">
+        <h3 id="picker-sizes-heading"><span>02</span> Cantidades en <b id="product-picker-current-color"></b></h3>
+        <p class="picker-option-note">Indica cuántas prendas necesitas de cada talla. Puedes cambiar de color y seguir sumando.</p>
+        <div class="picker-size-head" aria-hidden="true"><span>Talla</span><span>Cantidad</span><span>Precio c/u</span></div>
+        <div id="product-picker-sizes" class="picker-sizes"></div>
+      </section>
+
+      <section class="picker-selection" aria-labelledby="picker-selection-heading">
+        <div class="picker-selection-heading"><h3 id="picker-selection-heading">Tu selección de esta prenda</h3><button type="button" id="product-picker-clear">Limpiar</button></div>
+        <div id="product-picker-selected" class="picker-selected"></div>
+      </section>
+    </div>
+  </div>
+
+  <footer class="picker-footer">
+    <div class="picker-summary">
+      <p><strong id="product-picker-quantity">0</strong> prendas seleccionadas <span>· <b id="product-picker-unit-price">S/ 0.00</b> c/u</span></p>
+      <p id="product-picker-tier-note" class="picker-tier-note"></p>
+    </div>
+    <div class="picker-checkout"><div><span>Subtotal de esta selección</span><strong id="product-picker-total">S/ 0.00</strong></div><button type="button" id="product-picker-add" class="trama-button" disabled>Añadir al pedido <span aria-hidden="true">+</span></button></div>
+    <p id="product-picker-feedback" role="status" aria-live="polite"></p>
+    <p class="picker-demo-note">Demo conceptual · Precios ilustrativos. No se realiza una compra.</p>
+  </footer>
+</dialog>

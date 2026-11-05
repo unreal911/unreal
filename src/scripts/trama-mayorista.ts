@@ -1,35 +1,9 @@
-import { products, getDiscountRate, getUnitPrice, formatPrice } from '../data/trama';
-
-interface OrderLine {
-  id: string;
-  size: string;
-  color: string;
-  qty: number;
-}
+import { products, getUnitPrice, formatPrice } from '../data/trama';
+import { MIN_ORDER_QUANTITY, MAX_LINE_QUANTITY, validateOrder, addOrderSelection, summarizeOrder, buildOrderText, type OrderLine } from '../lib/trama-order';
 
 const STORAGE_KEY = 'trama-mayorista-order-v1';
 const THEME_STORAGE_KEY = 'trama-theme-v1';
-const PACK_SIZE = 6;
-const MAX_LINE_QUANTITY = 600;
-const MAX_ORDER_LINES = 100;
 const productById = new Map(products.map((product) => [product.id, product]));
-
-function validateOrder(value: unknown): OrderLine[] {
-  if (!Array.isArray(value)) return [];
-  const valid: OrderLine[] = [];
-  for (const item of value.slice(0, MAX_ORDER_LINES)) {
-    if (!item || typeof item !== 'object') continue;
-    const line = item as Record<string, unknown>;
-    if (typeof line.id !== 'string' || typeof line.size !== 'string' || typeof line.color !== 'string') continue;
-    const product = productById.get(line.id);
-    if (!product || !product.sizes.includes(line.size) || !product.colors.includes(line.color)) continue;
-    if (typeof line.qty !== 'number' || !Number.isInteger(line.qty) || line.qty < PACK_SIZE || line.qty > MAX_LINE_QUANTITY || line.qty % PACK_SIZE !== 0) continue;
-    const duplicate = valid.find((entry) => entry.id === line.id && entry.size === line.size && entry.color === line.color);
-    if (duplicate) duplicate.qty = Math.min(MAX_LINE_QUANTITY, duplicate.qty + line.qty);
-    else valid.push({ id: line.id, size: line.size, color: line.color, qty: line.qty });
-  }
-  return valid;
-}
 
 function readOrder(): OrderLine[] {
   try {
@@ -82,8 +56,7 @@ function initializeTrama() {
     const catalogEmpty = document.querySelector<HTMLElement>('#catalog-empty');
     const normalize = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es').trim();
     const getCardProduct = (card: HTMLElement) => {
-      const addButton = card.querySelector<HTMLButtonElement>('[data-add]');
-      return productById.get(card.dataset.product || '') || productById.get(addButton?.value || addButton?.dataset.id || '');
+      return productById.get(card.dataset.product || '');
     };
     const allowedCategories = new Set(['all', ...products.map((product) => product.category)]);
     const requestedCategory = new URLSearchParams(window.location.search).get('categoria') || 'all';
@@ -145,13 +118,7 @@ function initializeTrama() {
     }, 3500);
   };
 
-  const totalQuantity = () => order.reduce((sum, line) => sum + line.qty, 0);
-  const totals = () => {
-    const quantity = totalQuantity();
-    const subtotal = order.reduce((sum, line) => sum + productById.get(line.id)!.price * line.qty, 0);
-    const total = order.reduce((sum, line) => sum + getUnitPrice(productById.get(line.id)!.price, quantity) * line.qty, 0);
-    return { quantity, subtotal, total: Math.round(total * 100) / 100, discount: Math.round((subtotal - total) * 100) / 100 };
-  };
+  const totals = () => summarizeOrder(order);
 
   const createElement = <K extends keyof HTMLElementTagNameMap>(tag: K, className: string, text?: string) => {
     const element = document.createElement(tag);
@@ -169,7 +136,7 @@ function initializeTrama() {
     });
     if (empty) empty.hidden = order.length > 0;
     if (summary) summary.hidden = order.length === 0;
-    if (copyButton) copyButton.disabled = order.length === 0;
+    if (copyButton) copyButton.disabled = quantity < MIN_ORDER_QUANTITY;
     const values = { '#order-subtotal': formatPrice(subtotal), '#order-discount': `− ${formatPrice(discount)}`, '#order-total': formatPrice(total) };
     Object.entries(values).forEach(([selector, text]) => {
       const element = document.querySelector<HTMLElement>(selector);
@@ -177,7 +144,9 @@ function initializeTrama() {
     });
     const tierNote = document.querySelector<HTMLElement>('#order-tier-note');
     if (tierNote) {
-      tierNote.textContent = quantity >= 48
+      tierNote.textContent = quantity < MIN_ORDER_QUANTITY
+        ? `Agrega ${MIN_ORDER_QUANTITY - quantity} ${MIN_ORDER_QUANTITY - quantity === 1 ? 'prenda' : 'prendas'} para completar el mínimo de 6. Puedes combinar modelos, colores y tallas.`
+        : quantity >= 48
         ? 'Tienes 15% de descuento en todo tu pedido.'
         : quantity >= 24
           ? `Tienes 10% de descuento. Agrega ${48 - quantity} prendas para obtener 15%.`
@@ -202,15 +171,15 @@ function initializeTrama() {
       decrease.type = 'button';
       decrease.dataset.orderAction = 'decrease';
       decrease.dataset.orderIndex = String(index);
-      decrease.disabled = line.qty <= PACK_SIZE;
-      decrease.setAttribute('aria-label', `Quitar 6 unidades de ${product.name}, ${line.color}, talla ${line.size}`);
+      decrease.disabled = line.qty <= 1;
+      decrease.setAttribute('aria-label', `Quitar una unidad de ${product.name}, ${line.color}, talla ${line.size}`);
       const quantityLabel = createElement('span', '', `${line.qty} und.`);
       const increase = createElement('button', '', '+');
       increase.type = 'button';
       increase.dataset.orderAction = 'increase';
       increase.dataset.orderIndex = String(index);
       increase.disabled = line.qty >= MAX_LINE_QUANTITY;
-      increase.setAttribute('aria-label', `Agregar 6 unidades de ${product.name}, ${line.color}, talla ${line.size}`);
+      increase.setAttribute('aria-label', `Agregar una unidad de ${product.name}, ${line.color}, talla ${line.size}`);
       quantityControl.append(decrease, quantityLabel, increase);
       const remove = createElement('button', 'order-item-remove', 'Quitar');
       remove.type = 'button';
@@ -233,29 +202,201 @@ function initializeTrama() {
     renderOrder();
   };
 
+  const picker = document.querySelector<HTMLDialogElement>('#product-dialog');
+  const pickerColors = document.querySelector<HTMLElement>('#product-picker-colors');
+  const pickerSizes = document.querySelector<HTMLElement>('#product-picker-sizes');
+  const pickerSelected = document.querySelector<HTMLElement>('#product-picker-selected');
+  const pickerAdd = document.querySelector<HTMLButtonElement>('#product-picker-add');
+  const pickerClear = document.querySelector<HTMLButtonElement>('#product-picker-clear');
+  const pickerFeedback = document.querySelector<HTMLElement>('#product-picker-feedback');
+  let selectedProduct: typeof products[number] | undefined;
+  let selectedColor = '';
+  let draft: OrderLine[] = [];
+  let pickerTrigger: HTMLButtonElement | null = null;
+  const swatches: Record<string, string> = {
+    Crudo: '#e7dfce', Negro: '#292725', Oliva: '#717551', Arena: '#c8b697', Blanco: '#ffffff',
+    Azul: '#7594ae', Tierra: '#9e7052', Gris: '#a3a19c', 'Azul lavado': '#7a94ae', 'Índigo': '#384e70',
+  };
+  const pickerText = (id: string, value: string) => {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value;
+  };
+  const existingQuantity = (size: string) => order.find((line) => line.id === selectedProduct?.id && line.color === selectedColor && line.size === size)?.qty || 0;
+  const draftQuantity = (size: string) => draft.find((line) => line.color === selectedColor && line.size === size)?.qty || 0;
+
+  const updatePicker = () => {
+    if (!selectedProduct) return;
+    const quantity = draft.reduce((sum, line) => sum + line.qty, 0);
+    const combinedQuantity = totals().quantity + quantity;
+    const unitPrice = getUnitPrice(selectedProduct.price, combinedQuantity);
+    pickerText('product-picker-quantity', String(quantity));
+    pickerText('product-picker-unit-price', formatPrice(unitPrice));
+    pickerText('product-picker-total', formatPrice(Math.round(unitPrice * 100) * quantity / 100));
+    pickerText('product-picker-tier-note', combinedQuantity < MIN_ORDER_QUANTITY
+      ? `Con esta selección tendrás ${combinedQuantity} prendas en tu pedido. Faltan ${MIN_ORDER_QUANTITY - combinedQuantity} para el mínimo de 6; puedes añadir otros modelos.`
+      : `Con esta selección tendrás ${combinedQuantity} prendas en tu pedido. ${combinedQuantity >= 48 ? '15% de descuento' : combinedQuantity >= 24 ? '10% de descuento' : 'Precio mayorista base'} en todas las prendas.`);
+    document.querySelectorAll<HTMLElement>('[data-picker-tier]').forEach((tier) => {
+      const threshold = tier.dataset.pickerTier;
+      const price = tier.querySelector<HTMLElement>('[data-picker-tier-price]');
+      if (price) price.textContent = formatPrice(getUnitPrice(selectedProduct!.price, threshold === '48' ? 48 : threshold === '24' ? 24 : 6));
+      const active = combinedQuantity >= 48 ? '48' : combinedQuantity >= 24 ? '24' : 'base';
+      tier.classList.toggle('is-active', threshold === active);
+    });
+    pickerColors?.querySelectorAll<HTMLButtonElement>('[data-picker-color]').forEach((button) => {
+      const color = button.dataset.pickerColor!;
+      const count = draft.filter((line) => line.color === color).reduce((sum, line) => sum + line.qty, 0);
+      button.setAttribute('aria-pressed', String(color === selectedColor));
+      button.setAttribute('aria-label', `${color}, ${count} prendas seleccionadas`);
+      const badge = button.querySelector<HTMLElement>('.picker-color-count');
+      if (badge) { badge.textContent = String(count); badge.hidden = count === 0; }
+    });
+    pickerSizes?.querySelectorAll<HTMLElement>('[data-picker-size-row]').forEach((row) => {
+      const size = row.dataset.pickerSizeRow!;
+      const quantity = draftQuantity(size);
+      const remaining = MAX_LINE_QUANTITY - existingQuantity(size);
+      const input = row.querySelector<HTMLInputElement>('input')!;
+      input.max = String(remaining);
+      const decrease = row.querySelector<HTMLButtonElement>('[data-picker-step="-1"]')!;
+      const increase = row.querySelector<HTMLButtonElement>('[data-picker-step="1"]')!;
+      decrease.disabled = quantity <= 0;
+      increase.disabled = quantity >= remaining;
+      const price = row.querySelector<HTMLElement>('.picker-size-price');
+      if (price) price.textContent = formatPrice(unitPrice);
+    });
+    if (pickerSelected) {
+      const lines = draft.map((line) => createElement('p', 'picker-selected-line', `${line.color} · ${line.size} × ${line.qty}`));
+      pickerSelected.replaceChildren(...(lines.length ? lines : [createElement('p', 'picker-selected-empty', 'Todavía no elegiste cantidades.')]));
+    }
+    if (pickerAdd) pickerAdd.disabled = quantity === 0 || Boolean(pickerSizes?.querySelector('input:invalid'));
+    if (pickerClear) pickerClear.disabled = quantity === 0 && !pickerSizes?.querySelector('input:invalid');
+  };
+
+  const renderPickerSizes = () => {
+    if (!selectedProduct || !pickerSizes) return;
+    const rows = selectedProduct.sizes.map((size) => {
+      const row = createElement('div', 'picker-size-row');
+      row.dataset.pickerSizeRow = size;
+      const label = createElement('span', 'picker-size-label', size);
+      const price = createElement('span', 'picker-size-price');
+      const control = createElement('div', 'picker-quantity-control');
+      const decrease = createElement('button', '', '−');
+      decrease.type = 'button';
+      decrease.dataset.pickerStep = '-1';
+      decrease.setAttribute('aria-label', `Quitar una unidad, ${selectedColor}, talla ${size}`);
+      const input = createElement('input', '');
+      input.type = 'number';
+      input.inputMode = 'numeric';
+      input.min = '0';
+      input.step = '1';
+      input.value = String(draftQuantity(size));
+      input.setAttribute('aria-label', `Cantidad de ${selectedProduct!.name}, ${selectedColor}, talla ${size}`);
+      const increase = createElement('button', '', '+');
+      increase.type = 'button';
+      increase.dataset.pickerStep = '1';
+      increase.setAttribute('aria-label', `Agregar una unidad, ${selectedColor}, talla ${size}`);
+      control.append(decrease, input, increase);
+      row.append(label, control, price);
+      return row;
+    });
+    pickerSizes.replaceChildren(...rows);
+    pickerText('product-picker-current-color', selectedColor);
+    updatePicker();
+  };
+
+  const setDraftQuantity = (size: string, qty: number) => {
+    if (!selectedProduct) return;
+    const existing = draft.find((line) => line.color === selectedColor && line.size === size);
+    if (qty === 0) draft = draft.filter((line) => line !== existing);
+    else if (existing) existing.qty = qty;
+    else draft.push({ id: selectedProduct.id, color: selectedColor, size, qty });
+    if (pickerFeedback) pickerFeedback.textContent = '';
+    updatePicker();
+  };
+
   grid?.addEventListener('click', (event) => {
-    const button = event.target instanceof Element ? event.target.closest<HTMLButtonElement>('[data-add]') : null;
-    if (!button || !grid.contains(button)) return;
-    const product = productById.get(button.value || button.dataset.id || '');
-    const card = button.closest<HTMLElement>('[data-product]');
-    if (!product || !card) return;
-    const selectedSize = card.querySelector<HTMLSelectElement>('[data-size]')?.value;
-    const selectedColor = card.querySelector<HTMLSelectElement>('[data-color]')?.value;
-    const size = selectedSize && product.sizes.includes(selectedSize) ? selectedSize : product.sizes[0];
-    const color = selectedColor && product.colors.includes(selectedColor) ? selectedColor : product.colors[0];
-    const existing = order.find((line) => line.id === product.id && line.size === size && line.color === color);
-    if (existing && existing.qty >= MAX_LINE_QUANTITY) {
-      announce('Máximo de 600 unidades por combinación de talla y color.');
+    const button = event.target instanceof Element ? event.target.closest<HTMLButtonElement>('[data-select-product]') : null;
+    if (!button || !grid.contains(button) || !picker) return;
+    selectedProduct = productById.get(button.dataset.selectProduct || '');
+    if (!selectedProduct) return;
+    pickerTrigger = button;
+    selectedColor = selectedProduct.colors[0];
+    draft = [];
+    pickerText('product-picker-label', selectedProduct.label);
+    pickerText('product-picker-title', selectedProduct.name);
+    pickerText('product-picker-material', selectedProduct.material);
+    if (pickerFeedback) pickerFeedback.textContent = '';
+    const image = document.querySelector<HTMLImageElement>('#product-picker-image');
+    if (image) { image.src = selectedProduct.image; image.alt = `${selectedProduct.name}, fotografía referencial`; }
+    if (pickerColors) {
+      pickerColors.replaceChildren(...selectedProduct.colors.map((color) => {
+        const option = createElement('button', 'picker-color');
+        option.type = 'button';
+        option.dataset.pickerColor = color;
+        const swatch = createElement('span', 'picker-swatch');
+        swatch.style.setProperty('--swatch', swatches[color] || '#b4a291');
+        swatch.setAttribute('aria-hidden', 'true');
+        option.append(swatch, createElement('span', '', color), createElement('small', 'picker-color-count', '0'));
+        return option;
+      }));
+    }
+    renderPickerSizes();
+    picker.showModal();
+    picker.scrollTop = 0;
+  });
+
+  pickerColors?.addEventListener('click', (event) => {
+    const button = event.target instanceof Element ? event.target.closest<HTMLButtonElement>('[data-picker-color]') : null;
+    if (!button || !selectedProduct?.colors.includes(button.dataset.pickerColor || '')) return;
+    const invalid = pickerSizes?.querySelector<HTMLInputElement>('input:invalid');
+    if (invalid) { invalid.reportValidity(); invalid.focus(); return; }
+    selectedColor = button.dataset.pickerColor!;
+    renderPickerSizes();
+  });
+  pickerSizes?.addEventListener('input', (event) => {
+    const input = event.target;
+    if (!(input instanceof HTMLInputElement)) return;
+    const size = input.closest<HTMLElement>('[data-picker-size-row]')?.dataset.pickerSizeRow;
+    if (!size) return;
+    input.setCustomValidity('');
+    const qty = input.value === '' ? 0 : input.valueAsNumber;
+    if (input.validity.badInput || !Number.isInteger(qty) || qty < 0 || qty > MAX_LINE_QUANTITY - existingQuantity(size)) {
+      input.setCustomValidity(`Usa una cantidad entera entre 0 y ${MAX_LINE_QUANTITY - existingQuantity(size)}.`);
+      if (pickerFeedback) pickerFeedback.textContent = input.validationMessage;
+      updatePicker();
       return;
     }
-    if (existing) existing.qty += PACK_SIZE;
-    else if (order.length < MAX_ORDER_LINES) order.push({ id: product.id, size, color, qty: PACK_SIZE });
-    else {
-      announce('Tu pedido alcanzó el límite de combinaciones. Quita una para agregar otra.');
-      return;
+    setDraftQuantity(size, qty);
+  });
+  pickerSizes?.addEventListener('click', (event) => {
+    const button = event.target instanceof Element ? event.target.closest<HTMLButtonElement>('[data-picker-step]') : null;
+    const row = button?.closest<HTMLElement>('[data-picker-size-row]');
+    const size = row?.dataset.pickerSizeRow;
+    if (!button || !row || !size) return;
+    const qty = Math.max(0, Math.min(MAX_LINE_QUANTITY - existingQuantity(size), draftQuantity(size) + Number(button.dataset.pickerStep)));
+    const input = row.querySelector<HTMLInputElement>('input')!;
+    input.value = String(qty);
+    input.setCustomValidity('');
+    setDraftQuantity(size, qty);
+  });
+  pickerClear?.addEventListener('click', () => { draft = []; if (pickerFeedback) pickerFeedback.textContent = ''; renderPickerSizes(); });
+  pickerAdd?.addEventListener('click', () => {
+    if (!draft.length || pickerSizes?.querySelector('input:invalid')) return;
+    try {
+      order = addOrderSelection(order, draft);
+      const quantity = draft.reduce((sum, line) => sum + line.qty, 0);
+      saveAndRender();
+      picker?.close();
+      announce(`${quantity} ${quantity === 1 ? 'prenda' : 'prendas'} de ${selectedProduct!.name} ${quantity === 1 ? 'añadida' : 'añadidas'}. Revisa las tallas y colores en Mi pedido.`);
+    } catch (error) {
+      if (pickerFeedback) pickerFeedback.textContent = error instanceof Error ? error.message : 'No se pudo añadir la selección.';
     }
-    saveAndRender();
-    announce(`6 unidades de ${product.name} agregadas a tu pedido.`);
+  });
+  document.querySelector<HTMLButtonElement>('#close-product')?.addEventListener('click', () => picker?.close());
+  picker?.addEventListener('close', () => pickerTrigger?.focus());
+  picker?.addEventListener('click', (event) => {
+    if (event.target !== picker) return;
+    const bounds = picker.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) picker.close();
   });
 
   items?.addEventListener('click', (event) => {
@@ -265,8 +406,8 @@ function initializeTrama() {
     const line = order[index];
     if (!Number.isInteger(index) || !line) return;
     const action = button.dataset.orderAction;
-    if (action === 'increase' && line.qty < MAX_LINE_QUANTITY) line.qty += PACK_SIZE;
-    else if (action === 'decrease' && line.qty > PACK_SIZE) line.qty -= PACK_SIZE;
+    if (action === 'increase' && line.qty < MAX_LINE_QUANTITY) line.qty += 1;
+    else if (action === 'decrease' && line.qty > 1) line.qty -= 1;
     else if (action === 'remove') order.splice(index, 1);
     else return;
     saveAndRender();
@@ -295,24 +436,8 @@ function initializeTrama() {
   });
 
   copyButton?.addEventListener('click', async () => {
-    if (!order.length) return;
-    const { quantity, subtotal, total, discount } = totals();
-    const lines = order.map((line) => {
-      const product = productById.get(line.id)!;
-      return `${line.qty} × ${product.name} | ${line.color} | Talla ${line.size} | ${formatPrice(getUnitPrice(product.price, quantity))} c/u | ${formatPrice(getUnitPrice(product.price, quantity) * line.qty)}`;
-    });
-    const text = [
-      'TRAMA MAYORISTA · PEDIDO DE DEMOSTRACIÓN',
-      '',
-      ...lines,
-      '',
-      `Cantidad: ${quantity} prendas`,
-      `Subtotal: ${formatPrice(subtotal)}`,
-      `Descuento (${getDiscountRate(quantity) * 100}%): ${formatPrice(discount)}`,
-      `Total referencial: ${formatPrice(total)}`,
-      '',
-      'Demo de catálogo. Este resumen no confirma una compra ni realiza un pago.',
-    ].join('\n');
+    if (totals().quantity < MIN_ORDER_QUANTITY) return;
+    const text = buildOrderText(order);
     try {
       if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
       await navigator.clipboard.writeText(text);

@@ -7,7 +7,7 @@ const money = (value: number) => `S/ ${value.toFixed(2)}`;
 
 <TramaLayout
   title="La colección — Trama Mayorista"
-  description="Explora la colección de Trama Mayorista, filtra prendas y prepara tu pedido de demostración en packs de seis con tallas y colores a tu elección."
+  description="Explora la colección de Trama Mayorista y reparte las cantidades por talla y color. Prepara un pedido de demostración desde seis prendas combinadas."
   currentPage="coleccion"
 >
   <section class="trama-page-intro section-wrap" aria-labelledby="collection-page-title">
@@ -16,7 +16,7 @@ const money = (value: number) => `S/ ${value.toFixed(2)}`;
     </nav>
     <p class="eyebrow">LA COLECCIÓN / 01</p>
     <h1 id="collection-page-title">Prendas para tu próxima colección.</h1>
-    <p>Elige tus favoritos en packs de 6 prendas. Combina modelos, tallas y colores en tu pedido.</p>
+    <p>Elige una prenda y reparte las cantidades entre sus tallas y colores. Combina tus favoritos en un pedido desde 6 prendas.</p>
   </section>
 
   <section class="catalog section-wrap" id="coleccion" aria-labelledby="catalog-title">
@@ -41,23 +41,20 @@ const money = (value: number) => `S/ ${value.toFixed(2)}`;
     </div>
     <div class="product-grid" id="product-grid">
       {products.map((product, index) => <article class="product-card" data-product={product.id} data-category-value={product.category} data-name={product.name} data-id={product.id}>
-        <div class="product-image">
+        <button type="button" class="product-image" data-select-product={product.id} aria-label={`Elegir tallas y colores de ${product.name}`}>
           <img src={product.image} alt={`${product.name}, imagen de referencia de la colección`} width="800" height="1000" loading="lazy" />
           <span class:list={['product-tag', index === 0 && 'tag-green']}>{index === 0 ? 'EL BÁSICO PERFECTO' : index === 3 ? 'NUEVA SILUETA' : 'EVERYDAY COLLECTION'}</span>
           <span class="product-index">T / {String(index + 1).padStart(2, '0')}</span>
-        </div>
-        <div class="product-topline"><span>{product.label}</span><div class="color-dots" aria-hidden="true"><i></i><i></i><i></i></div></div>
-        <div class="product-title-row"><h3>{product.name}</h3><p>{money(product.price)}<small>/ prenda</small></p></div>
+        </button>
+        <div class="product-topline"><span>{product.label}</span><span>{product.colors.length} COLORES</span></div>
+        <div class="product-title-row"><h3><button type="button" class="product-title-button" data-select-product={product.id}>{product.name}</button></h3><p>{money(product.price)}<small>/ prenda · 6–23 und.</small></p></div>
         <p class="product-material">{product.material}</p>
-        <div class="product-options">
-          <label>Talla <select data-size aria-label={`Talla de ${product.name}`}>{product.sizes.map((size) => <option value={size}>{size}</option>)}</select></label>
-          <label>Color <select data-color aria-label={`Color de ${product.name}`}>{product.colors.map((color) => <option value={color}>{color}</option>)}</select></label>
-        </div>
-        <button class="add-product" type="button" data-add={product.id} value={product.id}>Añadir pack de 6 <span aria-hidden="true">+</span></button>
+        <p class="product-variant-note">Tallas {product.sizes.join(' · ')} · Cantidades a tu elección</p>
+        <button class="add-product" type="button" data-select-product={product.id}>Elegir tallas y colores <span aria-hidden="true">+</span></button>
       </article>)}
     </div>
     <div id="catalog-empty" class="catalog-empty" hidden><span aria-hidden="true">⌕</span><h3>No encontramos esa combinación.</h3><p>Prueba con otro nombre o cambia la categoría.</p></div>
-    <p class="catalog-note">Precios de muestra por prenda para pedidos de 6 a 23 unidades. Las fotos son referenciales; elige talla y color para armar tu selección.</p>
+    <p class="catalog-note">Precios de muestra por prenda para pedidos de 6 a 23 unidades. Desde 24 prendas se aplica un 10% de descuento; desde 48, un 15%. Puedes combinar modelos, tallas y colores. Las fotografías son referenciales.</p>
   </section>
 
   <section class="trama-next-section section-wrap" aria-labelledby="next-section-title">
