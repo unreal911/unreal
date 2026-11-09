@@ -7,9 +7,10 @@ interface Props {
   description: string;
   image?: string;
   breadcrumbs?: { name: string; path: string }[];
+  noindex?: boolean;
 }
 
-const { title, description, image = '/images/nubicore-social.png', breadcrumbs = [] } = Astro.props;
+const { title, description, image = '/images/nubicore-social.png', breadcrumbs = [], noindex = false } = Astro.props;
 const canonical = canonicalUrl(Astro.url.pathname, Astro.site);
 const socialImage = socialImageUrl(image, Astro.site);
 const homepage = Astro.site ? new URL('/', Astro.site).href : undefined;
@@ -73,7 +74,7 @@ const structuredData = {
 
 <title>{title}</title>
 <meta name="description" content={description} />
-<meta name="robots" content={Astro.site ? 'index,follow' : 'noindex,follow'} />
+<meta name="robots" content={Astro.site && !noindex ? 'index,follow' : 'noindex,follow'} />
 {canonical && <link rel="canonical" href={canonical} />}
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content={site.name} />

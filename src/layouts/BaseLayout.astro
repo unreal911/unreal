@@ -12,9 +12,10 @@ interface Props {
   title?: string;
   description?: string;
   breadcrumbs?: { name: string; path: string }[];
+  noindex?: boolean;
 }
 
-const { title = site.title, description = site.description, breadcrumbs = [] } = Astro.props;
+const { title = site.title, description = site.description, breadcrumbs = [], noindex = false } = Astro.props;
 const contactUrl = createContactUrl();
 const onProjectPage = Astro.url.pathname.startsWith('/proyectos/');
 const navGroups = [
@@ -37,7 +38,7 @@ const navGroups = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#102e32" />
-    <SeoHead title={title} description={description} breadcrumbs={breadcrumbs} />
+    <SeoHead title={title} description={description} breadcrumbs={breadcrumbs} noindex={noindex} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.png" type="image/png" sizes="96x96" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />

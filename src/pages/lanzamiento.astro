@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { createContactUrl } from '../data/site';
+import '../styles/portfolio-editorial.css';
+
+const price = 'S/ 170';
+const regularPrice = 'S/ 425';
+const services = [
+  {
+    id: 'catalogo',
+    name: 'Catálogo web',
+    description: 'Reúne hasta 20 productos en un enlace para que tus clientes los exploren y te consulten por WhatsApp.',
+    slug: 'trama-mayorista',
+    example: 'Trama Mayorista',
+    subject: 'el catálogo web de hasta 20 productos',
+  },
+  {
+    id: 'landing',
+    name: 'Landing page',
+    description: 'Presenta un producto, un servicio o una campaña en una página de hasta 4 secciones con un botón de WhatsApp.',
+    slug: 'lume-beauty',
+    example: 'Lumé Beauty',
+    subject: 'la landing page de hasta 4 secciones',
+  },
+];
+---
+
+<BaseLayout
+  title="Oferta de lanzamiento | Nubicore"
+  description="Oferta de lanzamiento de Nubicore: 60% de descuento en un catálogo web o una landing page. S/ 170 por proyecto, 5 cupos en total."
+  noindex
+>
+  <section class="folio-section" aria-labelledby="launch-heading">
+    <div class="folio-inner launch">
+      <header class="launch-intro">
+        <p class="folio-kicker"><span>Nubicore</span> Oferta de lanzamiento</p>
+        <h1 class="folio-title" id="launch-heading">Comparte tu negocio <em>en un solo enlace.</em></h1>
+        <p>Elige un catálogo para tus productos o una página para presentar tu oferta. Ambos formatos facilitan que tus clientes te escriban por WhatsApp.</p>
+        <p class="launch-price"><strong>{price}</strong> <span>por proyecto · Precio habitual <s>{regularPrice}</s> · 60% de descuento</span></p>
+        <p class="launch-availability">5 cupos en total del 9 al 15 de noviembre de 2026 o hasta agotarse.</p>
+      </header>
+
+      <div class="launch-options">
+        {services.map((service) => (
+          <article class="launch-option" id={service.id} aria-labelledby={`${service.id}-title`}>
+            <h2 id={`${service.id}-title`}>{service.name}</h2>
+            <p>{service.description}</p>
+            <a class="launch-demo" href={`/proyectos/${service.slug}/`}>
+              Ver demo conceptual de {service.example} <span aria-hidden="true">↗</span>
+            </a>
+            <a class="pf-button pf-button-primary" href={createContactUrl(`Hola, Nubicore. Me interesa ${service.subject} por ${price}. ¿Quedan cupos de lanzamiento?`)} target="_blank" rel="noopener noreferrer">
+              Consultar cupo de {service.name.toLowerCase()} <span aria-hidden="true">↗</span>
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <p class="launch-terms">Los cinco cupos se comparten entre ambos servicios. Confirma la disponibilidad por WhatsApp. El dominio y el alojamiento se cotizan aparte.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .launch { max-width: 1040px; }
+  .launch-intro { max-width: 780px; }
+  .launch-intro > p:not(.folio-kicker, .launch-price) {
+    max-width: 58ch;
+    margin: 20px 0;
+    color: var(--pf-muted);
+    line-height: 1.65;
+  }
+  .launch-price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 14px;
+    margin: 24px 0 0;
+    color: var(--pf-accent);
+  }
+  .launch-price strong {
+    color: var(--pf-text);
+    font: 700 clamp(36px, 6vw, 58px)/1.1 Manrope, sans-serif;
+    letter-spacing: -.055em;
+  }
+  .launch-intro > .launch-availability { margin: 8px 0 0; font-weight: 600; }
+  .launch-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-block: 32px 18px;
+  }
+  .launch-option {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: clamp(18px, 3vw, 30px);
+    border: 1px solid var(--pf-line);
+    border-radius: 8px;
+    background: var(--pf-surface);
+  }
+  .launch-option h2 {
+    margin: 0;
+    font: 700 clamp(23px, 3vw, 32px)/1.15 Manrope, sans-serif;
+    letter-spacing: -.035em;
+  }
+  .launch-option p, .launch-terms {
+    margin: 12px 0;
+    color: var(--pf-muted);
+    line-height: 1.6;
+  }
+  .launch-demo {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    min-height: 44px;
+    margin: auto 0 12px;
+    color: var(--pf-accent);
+    font-size: .875rem;
+    text-decoration: underline;
+    text-underline-offset: .22em;
+  }
+  .launch-option .pf-button { max-width: 100%; gap: 12px; }
+  .launch-terms { max-width: 75ch; font-size: .875rem; }
+  @media (max-width: 650px) {
+    .launch-options { grid-template-columns: minmax(0, 1fr); }
+    .launch-option .pf-button { width: 100%; }
+  }
+</style>
