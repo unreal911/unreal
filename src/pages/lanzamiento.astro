@@ -9,18 +9,20 @@ const services = [
   {
     id: 'catalogo',
     name: 'Catálogo web',
-    description: 'Reúne hasta 20 productos en un enlace para que tus clientes los exploren y te consulten por WhatsApp.',
+    description: 'Comparte hasta 20 productos en un enlace.',
     slug: 'trama-mayorista',
     example: 'Trama Mayorista',
-    subject: 'el catálogo web de hasta 20 productos',
+    subject: 'el catálogo web',
+    action: 'Quiero un catálogo',
   },
   {
     id: 'landing',
     name: 'Landing page',
-    description: 'Presenta un producto, un servicio o una campaña en una página de hasta 4 secciones con un botón de WhatsApp.',
+    description: 'Presenta un producto o servicio en hasta 4 secciones.',
     slug: 'lume-beauty',
     example: 'Lumé Beauty',
-    subject: 'la landing page de hasta 4 secciones',
+    subject: 'la landing page',
+    action: 'Quiero una landing',
   },
 ];
 ---
@@ -34,10 +36,10 @@ const services = [
     <div class="folio-inner launch">
       <header class="launch-intro">
         <p class="folio-kicker"><span>Nubicore</span> Oferta de lanzamiento</p>
-        <h1 class="folio-title" id="launch-heading">Comparte tu negocio <em>en un solo enlace.</em></h1>
-        <p>Elige un catálogo para tus productos o una página para presentar tu oferta. Ambos formatos facilitan que tus clientes te escriban por WhatsApp.</p>
-        <p class="launch-price"><strong>{price}</strong> <span>por proyecto · Precio habitual <s>{regularPrice}</s> · 60% de descuento</span></p>
-        <p class="launch-availability">5 cupos en total del 9 al 15 de noviembre de 2026 o hasta agotarse.</p>
+        <h1 class="folio-title" id="launch-heading">Catálogos web y <em>landing pages.</em></h1>
+        <p>Muestra lo que vendes y recibe consultas por WhatsApp.</p>
+        <p class="launch-price"><strong>{price}</strong> <span>por proyecto · <b>60% de descuento</b> · Precio habitual <s>{regularPrice}</s></span></p>
+        <p class="launch-availability">5 cupos en total · Del 9 al 15 de noviembre de 2026 o hasta agotarse.</p>
       </header>
 
       <div class="launch-options">
@@ -45,17 +47,17 @@ const services = [
           <article class="launch-option" id={service.id} aria-labelledby={`${service.id}-title`}>
             <h2 id={`${service.id}-title`}>{service.name}</h2>
             <p>{service.description}</p>
-            <a class="launch-demo" href={`/proyectos/${service.slug}/`}>
-              Ver demo conceptual de {service.example} <span aria-hidden="true">↗</span>
+            <a class="pf-button pf-button-primary" href={createContactUrl(`Hola, Nubicore. ¿Queda un cupo para ${service.subject} por ${price}?`)} target="_blank" rel="noopener noreferrer">
+              {service.action}<span class="sr-only"> por WhatsApp</span><span aria-hidden="true">↗</span>
             </a>
-            <a class="pf-button pf-button-primary" href={createContactUrl(`Hola, Nubicore. Me interesa ${service.subject} por ${price}. ¿Quedan cupos de lanzamiento?`)} target="_blank" rel="noopener noreferrer">
-              Consultar cupo de {service.name.toLowerCase()} <span aria-hidden="true">↗</span>
+            <a class="launch-demo" href={`/proyectos/${service.slug}/`}>
+              Ver demo de {service.example} <span aria-hidden="true">↗</span>
             </a>
           </article>
         ))}
       </div>
 
-      <p class="launch-terms">Los cinco cupos se comparten entre ambos servicios. Confirma la disponibilidad por WhatsApp. El dominio y el alojamiento se cotizan aparte.</p>
+      <p class="launch-terms">Dominio y alojamiento se cotizan aparte.</p>
     </div>
   </section>
 </BaseLayout>
@@ -113,13 +115,13 @@ const services = [
     gap: 8px;
     align-items: center;
     min-height: 44px;
-    margin: auto 0 12px;
+    margin-top: 4px;
     color: var(--pf-accent);
     font-size: .875rem;
     text-decoration: underline;
     text-underline-offset: .22em;
   }
-  .launch-option .pf-button { max-width: 100%; gap: 12px; }
+  .launch-option .pf-button { max-width: 100%; gap: 12px; margin-top: auto; }
   .launch-terms { max-width: 75ch; font-size: .875rem; }
   @media (max-width: 650px) {
     .launch-options { grid-template-columns: minmax(0, 1fr); }
