@@ -3,10 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { createContactUrl } from '../data/site';
 import '../styles/portfolio-editorial.css';
 
-const projectPrice = 170;
-const deposit = 50;
-const price = `S/ ${projectPrice}`;
-const balance = `S/ ${projectPrice - deposit}`;
+const price = 'S/ 170';
 const regularPrice = 'S/ 425';
 const services = [
   {
@@ -32,7 +29,7 @@ const services = [
 
 <BaseLayout
   title="Oferta de lanzamiento | Nubicore"
-  description={`Catálogo web o landing page por ${price}. Aparta uno de los 5 cupos con S/ ${deposit} de inicial.`}
+  description={`Catálogo web o landing page por ${price}. Pagas cuando tu web esté lista. Para las primeras 5 personas que contraten.`}
   noindex
 >
   <section class="folio-section" aria-labelledby="launch-heading">
@@ -42,8 +39,8 @@ const services = [
         <h1 class="folio-title" id="launch-heading">Catálogos web y <em>landing pages.</em></h1>
         <p>Muestra lo que vendes y recibe consultas por WhatsApp.</p>
         <p class="launch-price"><strong>{price}</strong> <span>por proyecto · <b>60% de descuento</b> · Precio habitual <s>{regularPrice}</s></span></p>
-        <p class="launch-deposit"><strong>Aparta tu cupo con S/ {deposit} y empezamos.</strong> Quedan {balance} de saldo.</p>
-        <p class="launch-availability">5 cupos en total · Del 9 al 15 de noviembre de 2026 o hasta agotarse.</p>
+        <p class="launch-payment"><strong>Pagas cuando tu web esté lista.</strong></p>
+        <p class="launch-availability">Para las primeras 5 personas que contraten. Del 9 al 15 de noviembre de 2026 o hasta agotar los cupos.</p>
       </header>
 
       <div class="launch-options">
@@ -88,8 +85,8 @@ const services = [
     font: 700 clamp(36px, 6vw, 58px)/1.1 Manrope, sans-serif;
     letter-spacing: -.055em;
   }
-  .launch-intro > .launch-deposit, .launch-intro > .launch-availability { margin: 8px 0 0; }
-  .launch-deposit strong { color: var(--pf-text); }
+  .launch-intro > .launch-payment, .launch-intro > .launch-availability { margin: 8px 0 0; }
+  .launch-payment strong { color: var(--pf-text); }
   .launch-availability { font-weight: 600; }
   .launch-options {
     display: grid;
