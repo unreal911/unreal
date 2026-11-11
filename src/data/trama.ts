@@ -9,6 +9,7 @@ export interface TramaProduct {
   image: string;
   price: number;
   colors: string[];
+  color_hexes?: Record<string, string>;
   sizes: string[];
 }
 

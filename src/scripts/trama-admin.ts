@@ -1,5 +1,6 @@
 import type { Session } from '@supabase/supabase-js';
 import { formatPrice, type TramaProduct } from '../data/trama';
+import { isTramaColorHex, tramaColorHex } from '../lib/trama-colors';
 import { createTramaClient } from '../lib/trama-supabase';
 
 type CatalogProduct = TramaProduct & { published: boolean };
@@ -25,6 +26,9 @@ const editorFields = editor.querySelector('fieldset')!;
 const category = editor.querySelector<HTMLSelectElement>('select[name="category"]')!;
 const photoFile = editor.querySelector<HTMLInputElement>('input[name="photo"]')!;
 const clearPhoto = document.querySelector<HTMLButtonElement>('#trama-photo-clear')!;
+const colorRows = document.querySelector<HTMLElement>('#trama-color-rows')!;
+const colorTemplate = document.querySelector<HTMLTemplateElement>('#trama-color-row-template')!;
+const addColor = document.querySelector<HTMLButtonElement>('#trama-color-add')!;
 const editorTitle = document.querySelector<HTMLElement>('#trama-editor-title')!;
 const editorStatus = document.querySelector<HTMLParagraphElement>('#trama-editor-status')!;
 const submit = editor.querySelector<HTMLButtonElement>('button[type="submit"]')!;
@@ -45,6 +49,79 @@ function input(name: string) {
 
 function variants(value: string) {
   return [...new Set(value.split(',').map((item) => item.trim()).filter(Boolean))];
+}
+
+function colorNameFields() {
+  return [...colorRows.querySelectorAll<HTMLInputElement>('[data-color-name]')];
+}
+
+function validateColorNames() {
+  const usedNames = new Set<string>();
+  for (const field of colorNameFields()) {
+    const name = field.value.trim();
+    const message = !name && field.value ? 'Escribe un nombre para el color.'
+      : usedNames.has(name) ? 'Este nombre de color ya está en la lista.'
+      : '';
+    field.setCustomValidity(message);
+    if (name) usedNames.add(name);
+  }
+}
+
+function refreshColorRows() {
+  const rows = colorRows.querySelectorAll<HTMLElement>('[data-color-row]');
+  rows.forEach((row, index) => {
+    row.setAttribute('aria-label', `Color ${index + 1}`);
+    const remove = row.querySelector<HTMLButtonElement>('[data-color-remove]')!;
+    remove.setAttribute('aria-label', `Quitar color ${index + 1}`);
+    remove.disabled = rows.length === 1;
+  });
+  validateColorNames();
+}
+
+function appendColorRow(name = '', initialHex = tramaColorHex(name)) {
+  const row = colorTemplate.content.firstElementChild!.cloneNode(true) as HTMLElement;
+  const nameField = row.querySelector<HTMLInputElement>('[data-color-name]')!;
+  const picker = row.querySelector<HTMLInputElement>('[data-color-picker]')!;
+  const hexField = row.querySelector<HTMLInputElement>('[data-color-hex]')!;
+  const remove = row.querySelector<HTMLButtonElement>('[data-color-remove]')!;
+  let automatic = !name;
+
+  function setHex(value: string) {
+    picker.value = value;
+    hexField.value = value.toUpperCase();
+    hexField.setCustomValidity('');
+  }
+
+  nameField.value = name;
+  setHex(initialHex);
+  nameField.addEventListener('input', () => {
+    if (automatic) setHex(tramaColorHex(nameField.value.trim()));
+    validateColorNames();
+  });
+  picker.addEventListener('input', () => {
+    automatic = false;
+    setHex(picker.value);
+  });
+  hexField.addEventListener('input', () => {
+    automatic = false;
+    const valid = isTramaColorHex(hexField.value);
+    hexField.setCustomValidity(valid || !hexField.value ? '' : 'Usa el formato #RRGGBB, como #A3B2C1.');
+    if (valid) picker.value = hexField.value;
+  });
+  remove.addEventListener('click', () => {
+    const nextRow = row.nextElementSibling ?? row.previousElementSibling;
+    row.remove();
+    refreshColorRows();
+    nextRow?.querySelector<HTMLInputElement>('[data-color-name]')?.focus();
+  });
+  colorRows.append(row);
+  return nameField;
+}
+
+function renderColorRows(names: string[] = [], hexes?: Record<string, string>) {
+  colorRows.replaceChildren();
+  for (const name of names.length ? names : ['']) appendColorRow(name, tramaColorHex(name, hexes));
+  refreshColorRows();
 }
 
 function validImage(value: string) {
@@ -98,6 +175,7 @@ function start() {
     draftId = null;
     editor.reset();
     updatePhotoFile();
+    renderColorRows();
     editorTitle.textContent = 'Nuevo producto';
     submit.textContent = 'Crear producto';
     cancel.hidden = true;
@@ -117,7 +195,7 @@ function start() {
     input('label').value = product.label;
     input('material').value = product.material;
     input('image').value = product.image;
-    input('colors').value = product.colors.join(', ');
+    renderColorRows(product.colors, product.color_hexes);
     input('sizes').value = product.sizes.join(', ');
     input('published').checked = product.published;
     input('name').focus();
@@ -155,7 +233,7 @@ function start() {
       const pageSize = 100;
       for (let offset = 0; ; offset += pageSize) {
         const { data, error } = await client!.from('trama_products')
-          .select('id,name,category,label,material,image,price,colors,sizes,published')
+          .select('id,name,category,label,material,image,price,colors,color_hexes,sizes,published')
           .order('sort_order').order('id').range(offset, offset + pageSize - 1);
         if (version !== inventoryVersion) return;
         if (error) throw error;
@@ -252,6 +330,11 @@ function start() {
     resetEditor();
     input('name').focus();
   });
+  addColor.addEventListener('click', () => {
+    const name = appendColorRow();
+    refreshColorRows();
+    name.focus();
+  });
   refresh.addEventListener('click', () => void loadProducts());
   photoFile.addEventListener('change', () => {
     updatePhotoFile();
@@ -266,6 +349,10 @@ function start() {
   editor.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (!adminId || editorFields.disabled) return;
+    validateColorNames();
+    if (!editor.reportValidity()) return;
+    const colors = colorNameFields().map((field) => field.value.trim());
+    const hexes = colorRows.querySelectorAll<HTMLInputElement>('[data-color-hex]');
     const photo = photoFile.files?.[0];
     const product = {
       name: input('name').value.trim(),
@@ -274,7 +361,8 @@ function start() {
       material: input('material').value.trim(),
       image: input('image').value.trim(),
       price: input('price').valueAsNumber,
-      colors: variants(input('colors').value),
+      colors,
+      color_hexes: Object.fromEntries(colors.map((name, index) => [name, hexes[index].value.toUpperCase()])),
       sizes: variants(input('sizes').value),
       published: input('published').checked,
     };

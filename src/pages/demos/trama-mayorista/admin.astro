@@ -75,11 +75,23 @@ const categories = [
                     <input name="image" inputmode="url" maxlength="2048" placeholder="https://" />
                   </label>
                 </div>
-                <div class="trama-admin-fields">
-                  <label>Colores <input name="colors" required maxlength="500" placeholder="Arena, Negro" /></label>
-                  <label>Tallas <input name="sizes" required maxlength="500" placeholder="S, M, L" /></label>
+                <div class="trama-admin-colors" role="group" aria-labelledby="trama-colors-title">
+                  <p id="trama-colors-title">Colores</p>
+                  <div class="trama-admin-color-rows" id="trama-color-rows"></div>
+                  <button class="trama-admin-button trama-admin-secondary" id="trama-color-add" type="button">Añadir color</button>
                 </div>
-                <p class="trama-admin-help">Separa los colores y las tallas con comas.</p>
+                <template id="trama-color-row-template">
+                  <div class="trama-admin-color-row" data-color-row role="group">
+                    <label class="trama-admin-color-name">Nombre del color <input data-color-name required placeholder="Ej. Arena" /></label>
+                    <label>Muestra <input data-color-picker type="color" /></label>
+                    <label>Hexadecimal
+                      <input data-color-hex required maxlength="7" pattern="#[0-9A-Fa-f]{6}" spellcheck="false" autocomplete="off" placeholder="#RRGGBB" />
+                    </label>
+                    <button class="trama-admin-button trama-admin-secondary" data-color-remove type="button">Quitar</button>
+                  </div>
+                </template>
+                <label>Tallas <input name="sizes" required maxlength="500" placeholder="S, M, L" aria-describedby="trama-sizes-help" /></label>
+                <p id="trama-sizes-help" class="trama-admin-help">Separa las tallas con comas.</p>
                 <label class="trama-admin-check"><input name="published" type="checkbox" checked /> Publicar en la colección</label>
                 <div class="trama-admin-actions">
                   <button class="trama-admin-button" type="submit">Crear producto</button>

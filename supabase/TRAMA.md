@@ -1,6 +1,6 @@
 # Panel de Trama Mayorista
 
-1. En el proyecto de Supabase para Trama, ejecuta [trama_products.sql](trama_products.sql) desde SQL Editor. Crea la tabla del catálogo, aplica sus permisos y carga los seis productos de muestra. Puedes volver a ejecutarlo y se respetarán las fichas existentes. Ejecuta también [trama_product_images.sql](trama_product_images.sql) para crear el bucket público de fotos y dar permiso de subida a las cuentas administradoras de Trama.
+1. En el proyecto de Supabase para Trama, ejecuta [trama_products.sql](trama_products.sql) desde SQL Editor. Crea la tabla del catálogo, aplica sus permisos y carga los seis productos de muestra. Puedes volver a ejecutarlo y se respetarán las fichas existentes. Ejecuta [trama_product_color_hexes.sql](trama_product_color_hexes.sql) para habilitar la selección de tonos y [trama_product_images.sql](trama_product_images.sql) para crear el bucket público de fotos y dar permiso de subida a las cuentas administradoras de Trama.
 2. En **Authentication → Users**, crea la cuenta con correo y contraseña, confirma el correo y copia su ID de usuario.
 3. En SQL Editor, sustituye el UUID de ejemplo por el ID de esa cuenta y ejecuta esta consulta. Si la cuenta ya tiene una sesión abierta, cierra sesión y vuelve a entrar para que el permiso se incluya en el token.
 
@@ -15,3 +15,5 @@
 5. Entra a `/demos/trama-mayorista/admin/` con la cuenta administradora. Al crear una ficha, puedes subir una foto JPEG, PNG o WebP de hasta 5 MiB, usar una URL HTTPS pública o indicar la ruta de una imagen existente bajo `/images/trama/`. Puedes guardar la ficha como borrador o publicarla. Las fotos subidas se pueden abrir con su URL pública.
 
 El navegador consulta las fichas publicadas en Supabase al abrir o recargar la colección. Los cambios que guardes desde el panel aparecen en la siguiente carga de la página. Las cuentas con el permiso de Trama pueden leer borradores y guardar cambios.
+
+Para editar los tonos, abre la ficha de un producto. En **Colores**, elige la muestra o escribe un código `#RRGGBB` para cada nombre. El catálogo muestra los tonos guardados cuando se vuelve a cargar.

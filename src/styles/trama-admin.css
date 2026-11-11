@@ -157,6 +157,48 @@
   justify-self: start;
 }
 
+.trama-admin-colors,
+.trama-admin-color-rows {
+  display: grid;
+  gap: 10px;
+}
+
+#trama-colors-title {
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.trama-admin-color-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 64px 100px auto;
+  align-items: end;
+  gap: 8px;
+}
+
+.trama-admin input[data-color-picker] {
+  height: 44px;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.trama-admin input[data-color-hex] {
+  padding-inline: 8px;
+  font-family: ui-monospace, monospace;
+}
+
+.trama-admin button[data-color-remove] {
+  min-height: 44px;
+  padding-inline: 8px;
+}
+
+.trama-admin button[data-color-remove]:disabled {
+  cursor: default;
+}
+
+#trama-color-add {
+  justify-self: start;
+}
+
 .trama-admin .trama-admin-check {
   display: flex;
   align-items: center;
@@ -302,6 +344,14 @@
 
   .trama-admin-fields {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .trama-admin-color-row {
+    grid-template-columns: 64px minmax(0, 1fr) auto;
+  }
+
+  .trama-admin-color-name {
+    grid-column: 1 / -1;
   }
 
   .trama-admin-product {

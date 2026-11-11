@@ -2,6 +2,7 @@ import { products, getUnitPrice, formatPrice, type TramaProduct } from '../data/
 import { MIN_ORDER_QUANTITY, MAX_LINE_QUANTITY, validateOrder, addOrderSelection, summarizeOrder, buildOrderText, buildOrderWhatsAppUrl, type OrderLine } from '../lib/trama-order';
 import { tramaSupabaseConfigured } from '../lib/trama-supabase';
 import { loadTramaCatalog } from '../lib/trama-catalog';
+import { tramaColorHex } from '../lib/trama-colors';
 
 const STORAGE_KEY = 'trama-mayorista-order-v1';
 const THEME_STORAGE_KEY = 'trama-theme-v1';
@@ -266,10 +267,6 @@ function initializeTrama() {
   let selectedColor = '';
   let draft: OrderLine[] = [];
   let pickerTrigger: HTMLButtonElement | null = null;
-  const swatches: Record<string, string> = {
-    Crudo: '#e7dfce', Negro: '#292725', Oliva: '#717551', Arena: '#c8b697', Blanco: '#ffffff',
-    Azul: '#7594ae', Tierra: '#9e7052', Gris: '#a3a19c', 'Azul lavado': '#7a94ae', 'Índigo': '#384e70',
-  };
   const pickerText = (id: string, value: string) => {
     const element = document.getElementById(id);
     if (element) element.textContent = value;
@@ -386,7 +383,7 @@ function initializeTrama() {
         option.type = 'button';
         option.dataset.pickerColor = color;
         const swatch = createElement('span', 'picker-swatch');
-        swatch.style.setProperty('--swatch', swatches[color] || '#b4a291');
+        swatch.style.setProperty('--swatch', tramaColorHex(color, selectedProduct?.color_hexes));
         swatch.setAttribute('aria-hidden', 'true');
         option.append(swatch, createElement('span', '', color), createElement('small', 'picker-color-count', '0'));
         return option;
