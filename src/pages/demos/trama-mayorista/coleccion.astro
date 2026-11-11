@@ -1,8 +1,11 @@
 ---
 import TramaLayout from '../../../layouts/TramaLayout.astro';
+import TramaCatalogCard from '../../../components/TramaCatalogCard.astro';
 import { products } from '../../../data/trama';
+import { tramaSupabaseConfigured } from '../../../lib/trama-supabase';
 
-const money = (value: number) => `S/ ${value.toFixed(2)}`;
+const initialProducts = tramaSupabaseConfigured ? [] : products;
+const count = initialProducts.length;
 ---
 
 <TramaLayout
@@ -23,7 +26,7 @@ const money = (value: number) => `S/ ${value.toFixed(2)}`;
     <h2 id="catalog-title" class="sr-only">Prendas disponibles</h2>
     <div class="catalog-tools">
       <div class="category-tabs" role="group" aria-label="Filtrar colección por categoría">
-        <button type="button" data-category="all" aria-pressed="true">Todo <span>06</span></button>
+        <button type="button" data-category="all" aria-pressed="true">Todo <span id="trama-catalog-total">{count ? String(count).padStart(2, '0') : ''}</span></button>
         <button type="button" data-category="polos" aria-pressed="false">Polos</button>
         <button type="button" data-category="camisas" aria-pressed="false">Camisas</button>
         <button type="button" data-category="abrigos" aria-pressed="false">Abrigos</button>
@@ -36,23 +39,13 @@ const money = (value: number) => `S/ ${value.toFixed(2)}`;
       </label>
     </div>
     <div class="catalog-meta">
-      <p id="result-count" role="status">6 prendas para tu selección</p>
+      <p id="result-count" role="status">{tramaSupabaseConfigured ? 'Cargando la colección…' : `${count} productos`}</p>
       <label>Ordenar por <select id="trama-sort"><option value="featured">Destacados</option><option value="price-asc">Menor precio</option><option value="price-desc">Mayor precio</option></select></label>
     </div>
-    <div class="product-grid" id="product-grid">
-      {products.map((product, index) => <article class="product-card" data-product={product.id} data-category-value={product.category} data-name={product.name} data-id={product.id}>
-        <button type="button" class="product-image" data-select-product={product.id} aria-label={`Elegir tallas y colores de ${product.name}`}>
-          <img src={product.image} alt={`${product.name}, imagen de referencia de la colección`} width="800" height="1000" loading="lazy" />
-          <span class:list={['product-tag', index === 0 && 'tag-green']}>{index === 0 ? 'EL BÁSICO PERFECTO' : index === 3 ? 'NUEVA SILUETA' : 'EVERYDAY COLLECTION'}</span>
-          <span class="product-index">T / {String(index + 1).padStart(2, '0')}</span>
-        </button>
-        <div class="product-topline"><span>{product.label}</span><span>{product.colors.length} COLORES</span></div>
-        <div class="product-title-row"><h3><button type="button" class="product-title-button" data-select-product={product.id}>{product.name}</button></h3><p>{money(product.price)}<small>/ prenda · 6–23 und.</small></p></div>
-        <p class="product-material">{product.material}</p>
-        <p class="product-variant-note">Tallas {product.sizes.join(' · ')} · Cantidades a tu elección</p>
-        <button class="add-product" type="button" data-select-product={product.id}>Elegir tallas y colores <span aria-hidden="true">+</span></button>
-      </article>)}
+    <div class="product-grid" id="product-grid" aria-busy={tramaSupabaseConfigured ? 'true' : undefined}>
+      {initialProducts.map((product, index) => <TramaCatalogCard product={product} index={index} />)}
     </div>
+    {tramaSupabaseConfigured && <template id="trama-card-template"><TramaCatalogCard product={products[0]} index={0} /></template>}
     <div id="catalog-empty" class="catalog-empty" hidden><span aria-hidden="true">⌕</span><h3>No encontramos esa combinación.</h3><p>Prueba con otro nombre o cambia la categoría.</p></div>
     <p class="catalog-note">Precios de muestra por prenda para pedidos de 6 a 23 unidades. Desde 24 prendas se aplica un 10% de descuento; desde 48, un 15%. Puedes combinar modelos, tallas y colores. Las fotografías son referenciales.</p>
   </section>

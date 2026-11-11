@@ -87,6 +87,7 @@ const navigation = [
     <dialog id="order-dialog" aria-labelledby="order-title">
       <div class="order-heading"><div><p class="eyebrow">TU PRÓXIMA COLECCIÓN</p><h2 id="order-title">Mi pedido<span>.</span></h2></div><button type="button" id="close-order" aria-label="Cerrar mi pedido">×</button></div>
       <p class="order-demo-note">Pedido de demostración · No se realizan compras.</p>
+      <p id="order-catalog-status" role="status" hidden></p>
       <div id="order-empty"><span aria-hidden="true">✳</span><h3>Tu próxima colección empieza con una prenda.</h3><p>Explora el catálogo y elige cantidades por talla y color. El mínimo es de 6 prendas combinadas en todo el pedido.</p><a class="text-link" href={`${home}coleccion/`}>Ir a la colección <span aria-hidden="true">↗</span></a></div>
       <div id="order-items"></div>
       <div id="order-summary" hidden>

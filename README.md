@@ -47,6 +47,8 @@ La base SEO incluye títulos, descripciones, tarjetas sociales y generación de 
 
 La clave `anon` solo puede leer filas publicadas mediante la política RLS del esquema. Nunca coloques una `service_role` key en este proyecto o en el navegador.
 
+Para conectar el catálogo de Trama y habilitar su panel de administración, sigue la [configuración de Trama Mayorista](supabase/TRAMA.md).
+
 ## Arquitectura
 
 Astro genera la portada, una ruta `/proyectos/[slug]/` por caso y las demos en `/demos/`. GSAP anima letras, tarjetas y secciones al hacer scroll. Con la preferencia de movimiento reducido, las animaciones se omiten. El tema claro/oscuro recuerda la preferencia del visitante. Supabase es opcional: sin credenciales, el sitio sigue funcionando con los datos locales.

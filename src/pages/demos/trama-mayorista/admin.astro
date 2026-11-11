@@ -1,0 +1,113 @@
+---
+import '../../../styles/demo-trama.css';
+import '../../../styles/trama-admin.css';
+
+const collectionUrl = '/demos/trama-mayorista/coleccion/';
+const categories = [
+  ['polos', 'Polos'],
+  ['camisas', 'Camisas'],
+  ['abrigos', 'Abrigos'],
+  ['pantalones', 'Pantalones'],
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet" />
+    <title>Administrar catálogo — Trama Mayorista</title>
+  </head>
+  <body class="trama-admin">
+    <header class="trama-admin-header">
+      <a class="trama-brand" href="/demos/trama-mayorista/" aria-label="Trama Mayorista, inicio">trama<span class="brand-mark" aria-hidden="true">✳</span><small>MAYORISTA</small></a>
+      <a class="trama-admin-link" href={collectionUrl}>Ver colección <span aria-hidden="true">↗</span></a>
+    </header>
+    <main class="trama-admin-main">
+      <section class="trama-admin-card trama-admin-auth" id="trama-admin-auth" aria-labelledby="trama-admin-auth-title">
+        <h1 id="trama-admin-auth-title">Administrar catálogo</h1>
+        <form id="trama-admin-login" method="post">
+          <fieldset disabled>
+            <label>Correo electrónico <input name="email" type="email" autocomplete="username" required /></label>
+            <label>Contraseña <input name="password" type="password" autocomplete="current-password" required /></label>
+            <button class="trama-admin-button" type="submit">Iniciar sesión</button>
+          </fieldset>
+        </form>
+        <button class="trama-admin-button trama-admin-secondary" type="button" data-trama-signout hidden>Cerrar sesión</button>
+        <p class="trama-admin-status" id="trama-auth-status" role="status">Comprobando sesión…</p>
+        <noscript>Activa JavaScript para iniciar sesión.</noscript>
+      </section>
+
+      <section id="trama-admin-panel" aria-labelledby="trama-admin-title" hidden>
+        <div class="trama-admin-intro">
+          <div><h1 id="trama-admin-title" tabindex="-1">Catálogo de productos</h1><p id="trama-admin-account"></p></div>
+          <button class="trama-admin-button trama-admin-secondary" type="button" data-trama-signout>Cerrar sesión</button>
+        </div>
+        <div class="trama-admin-grid">
+          <section class="trama-admin-card trama-admin-editor" aria-labelledby="trama-editor-title">
+            <h2 id="trama-editor-title">Nuevo producto</h2>
+            <form id="trama-product-form" method="post">
+              <fieldset disabled>
+                <label>Nombre <input name="name" required maxlength="120" /></label>
+                <div class="trama-admin-fields">
+                  <label>Categoría
+                    <select name="category" required>
+                      <option value="">Elige una categoría</option>
+                      {categories.map(([value, label]) => <option value={value}>{label}</option>)}
+                    </select>
+                  </label>
+                  <label>Precio por prenda (S/) <input name="price" type="number" inputmode="decimal" min="0.01" max="99999999.99" step="0.01" required /></label>
+                </div>
+                <label>Etiqueta de colección <input name="label" required maxlength="80" placeholder="Ej. Línea natural" /></label>
+                <label>Material y detalles <input name="material" required maxlength="240" placeholder="Ej. Lino · corte relajado" /></label>
+                <div class="trama-admin-photo">
+                  <label>Subir foto
+                    <input name="photo" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="trama-photo-help" />
+                  </label>
+                  <p id="trama-photo-help" class="trama-admin-help">JPG, PNG o WebP. Máximo 5 MB. El archivo que elijas reemplazará la foto al guardar.</p>
+                  <button class="trama-admin-button trama-admin-secondary" id="trama-photo-clear" type="button" hidden>Quitar archivo</button>
+                  <label>O pega la URL pública de la foto
+                    <input name="image" inputmode="url" maxlength="2048" placeholder="https://" />
+                  </label>
+                </div>
+                <div class="trama-admin-fields">
+                  <label>Colores <input name="colors" required maxlength="500" placeholder="Arena, Negro" /></label>
+                  <label>Tallas <input name="sizes" required maxlength="500" placeholder="S, M, L" /></label>
+                </div>
+                <p class="trama-admin-help">Separa los colores y las tallas con comas.</p>
+                <label class="trama-admin-check"><input name="published" type="checkbox" checked /> Publicar en la colección</label>
+                <div class="trama-admin-actions">
+                  <button class="trama-admin-button" type="submit">Crear producto</button>
+                  <button class="trama-admin-button trama-admin-secondary" id="trama-editor-cancel" type="button" hidden>Cancelar edición</button>
+                </div>
+              </fieldset>
+              <p class="trama-admin-status" id="trama-editor-status" role="status"></p>
+            </form>
+          </section>
+          <section class="trama-admin-card trama-admin-inventory" aria-labelledby="trama-inventory-title">
+            <div class="trama-admin-inventory-head">
+              <h2 id="trama-inventory-title">Productos guardados</h2>
+              <button class="trama-admin-button trama-admin-secondary" id="trama-inventory-refresh" type="button">Actualizar</button>
+            </div>
+            <p class="trama-admin-status" id="trama-inventory-status" role="status"></p>
+            <ul class="trama-admin-list" id="trama-inventory-list"></ul>
+            <template id="trama-inventory-row">
+              <li class="trama-admin-product">
+                <img alt="" width="56" height="64" loading="lazy" />
+                <div class="trama-admin-product-details"><strong data-name></strong><span data-details></span></div>
+                <span class="trama-admin-badge" data-publication></span>
+                <button class="trama-admin-button trama-admin-secondary" type="button" data-edit>Editar</button>
+              </li>
+            </template>
+          </section>
+        </div>
+      </section>
+    </main>
+    <script>import '../../../scripts/trama-admin';</script>
+  </body>
+</html>

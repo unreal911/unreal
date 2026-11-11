@@ -92,3 +92,16 @@ test('incomplete orders and incorrectly formatted store contacts cannot create a
   }
   assert.equal(new URL(buildOrderWhatsAppUrl([polo(6)], '51999999999')).pathname, '/51999999999');
 });
+
+test('uses newly published products and their current prices throughout the order', () => {
+  const product = { id: 'polo-nuevo', name: 'Polo nuevo', price: 28.5, colors: ['Ocre'], sizes: ['M'] };
+  const catalog = new Map([[product.id, product]]);
+  const selection = { id: product.id, color: 'Ocre', size: 'M', qty: 6 };
+  const order = addOrderSelection([], [selection], catalog);
+  assert.deepEqual(validateOrder([polo(6), selection], catalog), order);
+  assert.deepEqual(summarizeOrder(order, catalog), { quantity: 6, subtotal: 171, total: 171, discount: 0 });
+  const url = new URL(buildOrderWhatsAppUrl(order, undefined, catalog));
+  assert.match(url.searchParams.get('text'), /6 × Polo nuevo \| Ocre \| Talla M/);
+  catalog.delete(product.id);
+  assert.deepEqual(validateOrder(order, catalog), []);
+});

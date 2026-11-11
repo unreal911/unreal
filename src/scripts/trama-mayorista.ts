@@ -1,23 +1,49 @@
-import { products, getUnitPrice, formatPrice } from '../data/trama';
+import { products, getUnitPrice, formatPrice, type TramaProduct } from '../data/trama';
 import { MIN_ORDER_QUANTITY, MAX_LINE_QUANTITY, validateOrder, addOrderSelection, summarizeOrder, buildOrderText, buildOrderWhatsAppUrl, type OrderLine } from '../lib/trama-order';
+import { tramaSupabaseConfigured } from '../lib/trama-supabase';
+import { loadTramaCatalog } from '../lib/trama-catalog';
 
 const STORAGE_KEY = 'trama-mayorista-order-v1';
 const THEME_STORAGE_KEY = 'trama-theme-v1';
-const productById = new Map(products.map((product) => [product.id, product]));
-
-function readOrder(): OrderLine[] {
+function readSavedOrder(): unknown {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    return saved && saved.length <= 100_000 ? validateOrder(JSON.parse(saved)) : [];
+    return saved && saved.length <= 100_000 ? JSON.parse(saved) : [];
   } catch {
     return [];
   }
+}
+
+function createCatalogCard(template: HTMLTemplateElement, product: TramaProduct, index: number) {
+  const card = template.content.firstElementChild!.cloneNode(true) as HTMLElement;
+  card.dataset.product = product.id;
+  card.dataset.categoryValue = product.category;
+  card.querySelectorAll<HTMLButtonElement>('[data-select-product]').forEach((button) => {
+    button.dataset.selectProduct = product.id;
+  });
+  card.querySelector('.product-image')!.setAttribute('aria-label', `Elegir tallas y colores de ${product.name}`);
+  const image = card.querySelector('img')!;
+  image.src = product.image;
+  image.alt = `${product.name}, imagen de referencia de la colección`;
+  const tag = card.querySelector('.product-tag')!;
+  tag.classList.toggle('tag-green', index === 0);
+  tag.textContent = index === 0 ? 'EL BÁSICO PERFECTO' : index === 3 ? 'NUEVA SILUETA' : 'EVERYDAY COLLECTION';
+  card.querySelector('.product-index')!.textContent = `T / ${String(index + 1).padStart(2, '0')}`;
+  card.querySelector('[data-card-label]')!.textContent = product.label;
+  card.querySelector('[data-card-colors]')!.textContent = `${product.colors.length} ${product.colors.length === 1 ? 'COLOR' : 'COLORES'}`;
+  card.querySelector('.product-title-button')!.textContent = product.name;
+  card.querySelector('[data-card-price]')!.textContent = `S/ ${product.price.toFixed(2)}`;
+  card.querySelector('.product-material')!.textContent = product.material;
+  card.querySelector('.product-variant-note')!.textContent = `Tallas ${product.sizes.join(' · ')} · Cantidades a tu elección`;
+  return card;
 }
 
 function initializeTrama() {
   const root = document.body;
   if (root.dataset.tramaInitialized === 'true') return;
   root.dataset.tramaInitialized = 'true';
+  const initialProducts = tramaSupabaseConfigured ? [] : products;
+  const productById = new Map(initialProducts.map((product) => [product.id, product]));
 
   const themeRoot = document.documentElement;
   const themeButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-trama-theme-toggle]')];
@@ -47,22 +73,27 @@ function initializeTrama() {
   }));
 
   const grid = document.querySelector<HTMLElement>('#product-grid');
+  const results = document.querySelector<HTMLElement>('#result-count');
+  const savedOrder = readSavedOrder();
+  const needsCatalog = tramaSupabaseConfigured && (Boolean(grid) || (Array.isArray(savedOrder) && savedOrder.length > 0));
+  let catalogReady = !needsCatalog;
+  let applyCatalog: ((catalog: TramaProduct[]) => void) | undefined;
   if (grid) {
-    const cards = [...grid.querySelectorAll<HTMLElement>('[data-product]')];
+    let cards = [...grid.querySelectorAll<HTMLElement>('[data-product]')];
     const filters = [...document.querySelectorAll<HTMLButtonElement>('[data-category]')];
     const search = document.querySelector<HTMLInputElement>('#trama-search');
     const sort = document.querySelector<HTMLSelectElement>('#trama-sort');
-    const results = document.querySelector<HTMLElement>('#result-count');
     const catalogEmpty = document.querySelector<HTMLElement>('#catalog-empty');
     const normalize = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es').trim();
     const getCardProduct = (card: HTMLElement) => {
       return productById.get(card.dataset.product || '');
     };
-    const allowedCategories = new Set(['all', ...products.map((product) => product.category)]);
+    const allowedCategories = new Set(filters.map((button) => button.dataset.category));
     const requestedCategory = new URLSearchParams(window.location.search).get('categoria') || 'all';
     let category = allowedCategories.has(requestedCategory) ? requestedCategory : 'all';
 
     const updateCatalog = () => {
+      if (!catalogReady) return;
       const query = normalize(search?.value || '');
       const ordered = [...cards];
       if (sort?.value === 'price-asc') ordered.sort((a, b) => (getCardProduct(a)?.price || 0) - (getCardProduct(b)?.price || 0));
@@ -70,7 +101,7 @@ function initializeTrama() {
       let count = 0;
       ordered.forEach((card) => {
         const product = getCardProduct(card);
-        const searchable = normalize([card.dataset.name, product?.name, product?.material, product?.label, product?.category].filter(Boolean).join(' '));
+        const searchable = normalize([product?.name, product?.material, product?.label, product?.category].filter(Boolean).join(' '));
         const matchesCategory = category === 'all' || (card.dataset.categoryValue || product?.category) === category;
         const matchesSearch = query.split(/\s+/).every((word) => searchable.includes(word));
         card.hidden = !(matchesCategory && matchesSearch);
@@ -82,8 +113,8 @@ function initializeTrama() {
         button.setAttribute('aria-pressed', String(selected));
         button.classList.toggle('is-active', selected);
       });
-      if (results) results.textContent = `${count} ${count === 1 ? 'producto' : 'productos'}`;
-      if (catalogEmpty) catalogEmpty.hidden = count !== 0;
+      if (results) results.textContent = cards.length ? `${count} ${count === 1 ? 'producto' : 'productos'}` : 'Todavía no hay prendas publicadas.';
+      if (catalogEmpty) catalogEmpty.hidden = count !== 0 || cards.length === 0;
     };
     filters.forEach((button) => button.addEventListener('click', () => {
       const selectedCategory = button.dataset.category || 'all';
@@ -93,6 +124,17 @@ function initializeTrama() {
     search?.addEventListener('input', updateCatalog);
     sort?.addEventListener('change', updateCatalog);
     updateCatalog();
+
+    const template = document.querySelector<HTMLTemplateElement>('#trama-card-template');
+    const total = document.getElementById('trama-catalog-total');
+    applyCatalog = (catalog) => {
+      if (template) {
+        cards = catalog.map((product, index) => createCatalogCard(template, product, index));
+        grid.replaceChildren(...cards);
+      }
+      if (total) total.textContent = String(cards.length).padStart(2, '0');
+      updateCatalog();
+    };
   }
 
   const dialog = document.querySelector<HTMLDialogElement>('#order-dialog');
@@ -103,8 +145,9 @@ function initializeTrama() {
   const whatsappLink = document.querySelector<HTMLAnchorElement>('#order-whatsapp');
   const exportArea = document.querySelector<HTMLTextAreaElement>('#order-export');
   const feedback = document.querySelector<HTMLElement>('#order-feedback');
+  const orderCatalogStatus = document.getElementById('order-catalog-status');
   const toast = document.querySelector<HTMLElement>('#trama-toast');
-  let order = readOrder();
+  let order = validateOrder(savedOrder, productById);
   let copyAttempt = 0;
   let toastTimeout: ReturnType<typeof setTimeout>;
 
@@ -120,7 +163,7 @@ function initializeTrama() {
     }, 3500);
   };
 
-  const totals = () => summarizeOrder(order);
+  const totals = () => summarizeOrder(order, productById);
 
   const createElement = <K extends keyof HTMLElementTagNameMap>(tag: K, className: string, text?: string) => {
     const element = document.createElement(tag);
@@ -136,14 +179,14 @@ function initializeTrama() {
     document.querySelectorAll<HTMLButtonElement>('[data-open-order]').forEach((button) => {
       button.setAttribute('aria-label', `Ver pedido, ${quantity} ${quantity === 1 ? 'prenda' : 'prendas'}`);
     });
-    if (empty) empty.hidden = order.length > 0;
+    if (empty) empty.hidden = !catalogReady || order.length > 0;
     if (summary) summary.hidden = order.length === 0;
     if (copyButton) copyButton.disabled = quantity < MIN_ORDER_QUANTITY;
     if (whatsappLink) {
       const ready = quantity >= MIN_ORDER_QUANTITY;
       whatsappLink.setAttribute('aria-disabled', String(!ready));
       whatsappLink.tabIndex = ready ? 0 : -1;
-      if (ready) whatsappLink.href = buildOrderWhatsAppUrl(order);
+      if (ready) whatsappLink.href = buildOrderWhatsAppUrl(order, undefined, productById);
       else whatsappLink.removeAttribute('href');
     }
     const values = { '#order-subtotal': formatPrice(subtotal), '#order-discount': `− ${formatPrice(discount)}`, '#order-total': formatPrice(total) };
@@ -219,7 +262,7 @@ function initializeTrama() {
   const pickerAdd = document.querySelector<HTMLButtonElement>('#product-picker-add');
   const pickerClear = document.querySelector<HTMLButtonElement>('#product-picker-clear');
   const pickerFeedback = document.querySelector<HTMLElement>('#product-picker-feedback');
-  let selectedProduct: typeof products[number] | undefined;
+  let selectedProduct: TramaProduct | undefined;
   let selectedColor = '';
   let draft: OrderLine[] = [];
   let pickerTrigger: HTMLButtonElement | null = null;
@@ -392,7 +435,7 @@ function initializeTrama() {
   pickerAdd?.addEventListener('click', () => {
     if (!draft.length || pickerSizes?.querySelector('input:invalid')) return;
     try {
-      order = addOrderSelection(order, draft);
+      order = addOrderSelection(order, draft, productById);
       const quantity = draft.reduce((sum, line) => sum + line.qty, 0);
       saveAndRender();
       picker?.close();
@@ -469,7 +512,7 @@ function initializeTrama() {
   };
   copyButton?.addEventListener('click', () => {
     if (totals().quantity < MIN_ORDER_QUANTITY) return;
-    void copyOrder(buildOrderText(order));
+    void copyOrder(buildOrderText(order, productById));
   });
   whatsappLink?.addEventListener('click', (event) => {
     if (totals().quantity < MIN_ORDER_QUANTITY || !whatsappLink.hasAttribute('href')) {
@@ -478,7 +521,7 @@ function initializeTrama() {
       return;
     }
     // Attribution runs in capture phase. Copy the same draft, including its reference.
-    const text = new URL(whatsappLink.href).searchParams.get('text') || buildOrderText(order);
+    const text = new URL(whatsappLink.href).searchParams.get('text') || buildOrderText(order, productById);
     // Let the native link open immediately; clipboard permissions must not block WhatsApp.
     void copyOrder(text, true);
   });
@@ -508,6 +551,24 @@ function initializeTrama() {
     }, { passive: true });
   }
   renderOrder();
+  if (needsCatalog) {
+    if (orderCatalogStatus) {
+      orderCatalogStatus.hidden = false;
+      orderCatalogStatus.textContent = 'Cargando la colección…';
+    }
+    void loadTramaCatalog().then((catalog) => {
+      catalog.forEach((product) => productById.set(product.id, product));
+      catalogReady = true;
+      order = validateOrder(readSavedOrder(), productById);
+      if (orderCatalogStatus) orderCatalogStatus.hidden = true;
+      applyCatalog?.(catalog);
+      renderOrder();
+    }).catch(() => {
+      const message = 'No pudimos cargar la colección. Recarga la página para volver a intentar.';
+      if (results) results.textContent = message;
+      if (orderCatalogStatus) orderCatalogStatus.textContent = message;
+    }).finally(() => grid?.removeAttribute('aria-busy'));
+  }
 }
 
 initializeTrama();
